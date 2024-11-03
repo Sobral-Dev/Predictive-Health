@@ -1,0 +1,8 @@
+@import './base.css';
+
+#app {
+  display: grid;
+  grid-template-columns: 22% 1fr;
+  margin-right: 1%;
+  margin-bottom: 8vh;
+}

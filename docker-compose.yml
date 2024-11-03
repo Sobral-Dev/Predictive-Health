@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  db:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: postgres-PatientSystem
+    environment:
+      POSTGRES_DB: PatientSystem
+      POSTGRES_USER: postgre
+      POSTGRES_PASSWORD: 853211
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: always
+
+volumes:
+  postgres_data:
