@@ -35,9 +35,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, watch, ComponentPublicInstance } from 'vue';
 import axios from 'axios';
-import { useRouter } from 'vue-router';
+import { useRouter, RouteLocationNormalized, NavigationGuardNext} from 'vue-router';
+import globalData from '../globalData'
 
 export default defineComponent({
   name: 'Login',
@@ -65,6 +66,12 @@ export default defineComponent({
         // Save the JWT token in local storage
         localStorage.setItem('token', response.data.access_token);
 
+        // Save response data for succeed login in a global variable
+        globalData.user_id = response.data.user_id;
+        globalData.user_role = response.data.user_role;
+        globalData.user_name = response.data.user_name;
+        globalData.isAuthenticated = true;
+
         // Navigate to the appropriate page based on user role
         this.navigateToDashboard(response.data.user_role);
       } catch (err) {
@@ -81,6 +88,7 @@ export default defineComponent({
       }
     },
   },
+  
 });
 </script>
 

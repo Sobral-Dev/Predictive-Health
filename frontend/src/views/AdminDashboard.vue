@@ -26,9 +26,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, watch, ComponentPublicInstance } from 'vue';
 import axios from 'axios';
-import { useRouter } from 'vue-router';
+import { useRouter, RouteLocationNormalized, NavigationGuardNext} from 'vue-router';
+import eventBus from '../eventBus';
 
 export default defineComponent({
   name: 'AdminDashboard',
@@ -38,6 +39,42 @@ export default defineComponent({
       totalPatients: 0,
     };
   },
+
+    setup() {
+      const router = useRouter();
+      return { router };
+  },
+
+  mounted() {
+    this.fetchDashboardData();
+
+     watch(
+      () => eventBus.usersUpdated, (newValue) => {
+        if (newValue) {
+           this.fetchDashboardData();
+          eventBus.usersUpdated = false;
+        }
+      }
+    );
+
+    watch(() => eventBus.patientsUpdated, (newValue) => {
+      if (newValue) {
+        this.fetchDashboardData();
+        eventBus.patientsUpdated = false; 
+      }
+    });
+  },
+
+  beforeRouteEnter(
+    to: RouteLocationNormalized,
+    from: RouteLocationNormalized,
+    next: NavigationGuardNext) {
+    
+      next((vm) => {
+        (vm as ComponentPublicInstance & { fetchDashboardData: () => void }).fetchDashboardData();
+      });
+  },
+
   methods: {
     async fetchDashboardData() {
       try {
@@ -59,18 +96,16 @@ export default defineComponent({
       }
     },
     goToUsersManagement() {
-      this.$router.push({ name: 'UsersManagement' });
+      this.router.push({ name: 'UsersManagement' });
     },
     goToPatientsManagement() {
-      this.$router.push({ name: 'ShowPatients' });
+      this.router.push({ name: 'ShowPatients' });
     },
     goToAuditLogs() {
-      this.$router.push({ name: 'AuditLogs' });
+      this.router.push({ name: 'AuditLogs' });
     },
   },
-  mounted() {
-    this.fetchDashboardData();
-  },
+
 });
 </script>
 

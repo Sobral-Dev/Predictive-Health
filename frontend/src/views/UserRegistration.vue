@@ -56,8 +56,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, watch, ComponentPublicInstance } from 'vue';
 import axios from 'axios';
+import { useRouter, RouteLocationNormalized, NavigationGuardNext} from 'vue-router';
+import eventBus from '../eventBus'
 
 export default defineComponent({
   name: 'UserRegistration',
@@ -73,6 +75,7 @@ export default defineComponent({
       error: '',
     };
   },
+
   methods: {
     async registerUser() {
       try {
@@ -94,6 +97,7 @@ export default defineComponent({
         this.message = response.data.message || 'User registered successfully.';
         this.error = '';
         this.resetForm();
+        eventBus.usersUpdated = true;
       } catch (err) {
         this.error = err.response?.data.error || 'Failed to register user.';
         this.message = '';
@@ -106,6 +110,7 @@ export default defineComponent({
       this.form.role = 'admin';
     },
   },
+  
 });
 </script>
 

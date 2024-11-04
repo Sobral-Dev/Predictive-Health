@@ -73,8 +73,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, watch, ComponentPublicInstance } from 'vue';
 import axios from 'axios';
+import { useRouter, RouteLocationNormalized, NavigationGuardNext} from 'vue-router';
+import eventBus from '../eventBus'
 
 export default defineComponent({
   name: 'UsersManagement',
@@ -97,6 +99,21 @@ export default defineComponent({
       message: '',
     };
   },
+
+  mounted() {
+    this.fetchUsers();
+
+    watch(
+      () => eventBus.usersUpdated, 
+      (newValue) => {
+        if (newValue) {
+          this.fetchUsers();
+          eventBus.usersUpdated = false;
+        }
+      }
+    );
+  },
+
   methods: {
     async fetchUsers() {
       try {
@@ -124,7 +141,7 @@ export default defineComponent({
         this.message = response.data.message || 'User updated successfully.';
         this.error = '';
         this.isEditing = false;
-        this.fetchUsers(); // Refresh the users list after update
+        eventBus.usersUpdated = true;
       } catch (err) {
         this.error = err.response?.data.error || 'Failed to update user.';
         this.message = '';
@@ -137,7 +154,7 @@ export default defineComponent({
             Authorization: `Bearer ${localStorage.getItem('token')}`,
           },
         });
-        this.fetchUsers(); // Refresh the users list after deletion
+        eventBus.usersUpdated = true;
       } catch (err) {
         this.error = err.response?.data.error || 'Failed to delete user.';
       }
@@ -147,9 +164,17 @@ export default defineComponent({
       this.selectedUser = { id: 0, name: '', email: '', role: '' };
     },
   },
-  mounted() {
-    this.fetchUsers();
+
+  beforeRouteEnter(
+    to: RouteLocationNormalized,
+    from: RouteLocationNormalized,
+    next: NavigationGuardNext) {
+    
+      next((vm) => {
+        (vm as ComponentPublicInstance & { fetchUsers: () => void }).fetchUsers();
+      });
   },
+
 });
 </script>
 

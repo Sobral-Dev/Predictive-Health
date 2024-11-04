@@ -95,19 +95,21 @@
         height="50px"
         /> 
         Consent Update</RouterLink>
-      <RouterLink to="/">
+      <a @click="logout()" style="cursor: pointer;">
         <img
         src="../assets/icons/login.png"
         class="icon_img"
         height="50px"
         /> 
-        Login</RouterLink>
+        Logout</a>
     </nav>
   </div>
 </template>
 
 <script lang="ts">
-import { RouterLink } from 'vue-router'
+import { RouterLink } from 'vue-router';
+import globalData from '../globalData'
+import { useRouter } from 'vue-router';
 
 export default {
   data() {
@@ -116,11 +118,27 @@ export default {
     }
   },
 
+  setup() {
+    const router = useRouter();
+    return { router };
+  },
+
   methods: {
     changeAnimationDelay() {
       this.animationDelay = true
-    }
-  }
+    },
+
+    logout() {
+      globalData.user_id = null;
+      globalData.user_role = '';
+      globalData.user_name = '';
+      globalData.isAuthenticated = false;
+
+      this.router.push({ name: 'Login' });
+    },
+
+  },
+
 }
 </script>
 

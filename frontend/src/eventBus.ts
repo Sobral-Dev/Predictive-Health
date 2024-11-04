@@ -1,5 +1,13 @@
-import mitt from 'mitt'
+import { reactive } from 'vue';
 
-const eventBus = mitt()
+interface EventBus {
+  usersUpdated: boolean;
+  patientsUpdated: boolean;
+}
+
+const eventBus: EventBus = reactive({
+  usersUpdated: false,
+  patientsUpdated: false,
+});
 
 export default eventBus

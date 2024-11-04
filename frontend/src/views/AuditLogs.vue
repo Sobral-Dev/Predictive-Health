@@ -26,8 +26,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, watch, ComponentPublicInstance } from 'vue';
 import axios from 'axios';
+import { useRouter, RouteLocationNormalized, NavigationGuardNext} from 'vue-router';
 
 export default defineComponent({
   name: 'AuditLogs',
@@ -41,6 +42,11 @@ export default defineComponent({
       }>,
     };
   },
+
+  mounted() {
+    this.fetchAuditLogs();
+  },
+
   methods: {
     async fetchAuditLogs() {
       try {
@@ -55,9 +61,17 @@ export default defineComponent({
       }
     },
   },
-  mounted() {
-    this.fetchAuditLogs();
+
+  beforeRouteEnter(
+    to: RouteLocationNormalized,
+    from: RouteLocationNormalized,
+    next: NavigationGuardNext) {
+    
+      next((vm) => {
+        (vm as ComponentPublicInstance & { fetchAuditLogs: () => void }).fetchAuditLogs();
+      });
   },
+
 });
 </script>
 

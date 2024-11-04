@@ -3,9 +3,10 @@
     <h1 class="page-title">Update Consent</h1>
 
     <section class="consent-section">
+      <p>Current State: <p>{{ current_consent }}</p></p> 
       <form @submit.prevent="updateConsent">
         <div class="form-group">
-          <label for="consent-status">Consent Status</label>
+          <label for="consent-status">Switch to:</label>
           <select id="consent-status" v-model="consentStatus" class="form-control" required>
             <option value="true">Given</option>
             <option value="false">Revoked</option>
@@ -22,8 +23,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, watch, ComponentPublicInstance } from 'vue';
 import axios from 'axios';
+import { useRouter, RouteLocationNormalized, NavigationGuardNext} from 'vue-router';
+import globalData from '../globalData'
 
 export default defineComponent({
   name: 'ConsentUpdate',
@@ -32,13 +35,19 @@ export default defineComponent({
       consentStatus: 'true',
       message: '',
       error: '',
+      current_consent: '',
     };
   },
+
+  mounted() {
+    this.getConsentStatus();
+  },
+
   methods: {
     async updateConsent() {
       try {
         const response = await axios.post(
-          `http://localhost:5000/patients/consent/${this.$route.params.id}`,
+          `http://localhost:5000/patients/consent/${globalData.user_id}`,
           {
             consent_status: this.consentStatus === 'true',
           },
@@ -48,6 +57,7 @@ export default defineComponent({
             },
           }
         );
+        this.getConsentStatus();
         this.message = response.data.message || 'Consent updated successfully.';
         this.error = '';
       } catch (err) {
@@ -55,10 +65,37 @@ export default defineComponent({
         this.message = '';
       }
     },
+
+    async getConsentStatus() {
+      try {
+        const response = await axios.get(
+          `http://localhost:5000/patients/consent/current/${globalData.user_id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
+          }
+        );
+
+        this.current_consent = response.data.current_consent;
+
+      } catch (err) {
+        this.error = err.response?.data.error || 'Failed to get current state of consent.';
+        this.message = '';
+      }
+    },
   },
-  mounted() {
-    // Opção para carregar o estado atual do consentimento (se necessário no futuro)
+
+  beforeRouteEnter(
+    to: RouteLocationNormalized,
+    from: RouteLocationNormalized,
+    next: NavigationGuardNext) {
+    
+      next((vm) => {
+        (vm as ComponentPublicInstance & { getConsentStatus: () => void }).getConsentStatus();
+      });
   },
+
 });
 </script>
 

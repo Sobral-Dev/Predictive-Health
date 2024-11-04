@@ -296,3 +296,2009 @@ werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on 
 2024-11-03 19:08:50,599  * Restarting with watchdog (windowsapi)
 2024-11-03 19:08:52,250  * Debugger is active!
 2024-11-03 19:08:52,265  * Debugger PIN: 371-600-436
+2024-11-04 09:39:00,105 [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-11-04 09:39:00,108 [33mPress CTRL+C to quit[0m
+2024-11-04 09:39:00,130  * Restarting with watchdog (windowsapi)
+2024-11-04 09:39:02,164  * Debugger is active!
+2024-11-04 09:39:02,173  * Debugger PIN: 371-600-436
+2024-11-04 11:18:46,427  * Detected change in 'c:\\Users\\felip\\OneDrive\\Documentos\\FATEC\\Predictive-Health\\backend\\auth.py', reloading
+2024-11-04 11:18:46,901  * Restarting with watchdog (windowsapi)
+2024-11-04 11:18:48,750  * Debugger is active!
+2024-11-04 11:18:48,750  * Debugger PIN: 371-600-436
+2024-11-04 11:24:40,510  * Detected change in 'C:\\Users\\felip\\AppData\\Roaming\\Python\\Python312\\site-packages\\flask_mail\\__init__.py', reloading
+2024-11-04 11:24:40,547  * Detected change in 'C:\\Users\\felip\\AppData\\Roaming\\Python\\Python312\\site-packages\\flask_bcrypt.py', reloading
+2024-11-04 11:24:40,570  * Detected change in 'c:\\Users\\felip\\OneDrive\\Documentos\\FATEC\\Predictive-Health\\backend\\config.py', reloading
+2024-11-04 11:24:40,570  * Detected change in 'C:\\Users\\felip\\AppData\\Roaming\\Python\\Python312\\site-packages\\flask_sqlalchemy\\__init__.py', reloading
+2024-11-04 11:24:40,586  * Detected change in 'C:\\Users\\felip\\AppData\\Roaming\\Python\\Python312\\site-packages\\flask_sqlalchemy\\extension.py', reloading
+2024-11-04 11:24:40,637  * Detected change in 'C:\\Users\\felip\\AppData\\Roaming\\Python\\Python312\\site-packages\\sqlalchemy\\__init__.py', reloading
+2024-11-04 11:24:40,825  * Restarting with watchdog (windowsapi)
+2024-11-04 11:24:42,952  * Debugger is active!
+2024-11-04 11:24:42,956  * Debugger PIN: 371-600-436
+2024-11-04 11:28:10,306  * Detected change in 'C:\\Users\\felip\\AppData\\Roaming\\Python\\Python312\\site-packages\\sqlalchemy\\orm\\scoping.py', reloading
+2024-11-04 11:28:11,426  * Restarting with watchdog (windowsapi)
+2024-11-04 11:28:13,231  * Debugger is active!
+2024-11-04 11:28:13,231  * Debugger PIN: 371-600-436
+2024-11-04 11:31:54,789  * Detected change in 'c:\\Users\\felip\\OneDrive\\Documentos\\FATEC\\Predictive-Health\\backend\\schemas.py', reloading
+2024-11-04 11:31:54,791  * Detected change in 'C:\\Users\\felip\\AppData\\Roaming\\Python\\Python312\\site-packages\\marshmallow\\__init__.py', reloading
+2024-11-04 11:31:54,796  * Detected change in 'C:\\Users\\felip\\AppData\\Roaming\\Python\\Python312\\site-packages\\marshmallow\\schema.py', reloading
+2024-11-04 11:31:55,868  * Restarting with watchdog (windowsapi)
+2024-11-04 11:31:57,572  * Debugger is active!
+2024-11-04 11:31:57,578  * Debugger PIN: 371-600-436
+2024-11-04 11:32:09,320  * Detected change in 'C:\\Users\\felip\\AppData\\Roaming\\Python\\Python312\\site-packages\\sqlalchemy\\orm\\session.py', reloading
+2024-11-04 11:32:09,385  * Detected change in 'C:\\Users\\felip\\AppData\\Roaming\\Python\\Python312\\site-packages\\flask_sqlalchemy\\session.py', reloading
+2024-11-04 11:32:10,002  * Restarting with watchdog (windowsapi)
+2024-11-04 11:32:11,722  * Debugger is active!
+2024-11-04 11:32:11,729  * Debugger PIN: 371-600-436
+2024-11-04 11:32:39,292  * Detected change in 'c:\\Users\\felip\\OneDrive\\Documentos\\FATEC\\Predictive-Health\\backend\\app.py', reloading
+2024-11-04 11:32:39,299  * Detected change in 'c:\\Users\\felip\\OneDrive\\Documentos\\FATEC\\Predictive-Health\\backend\\app.py', reloading
+2024-11-04 11:32:39,545  * Restarting with watchdog (windowsapi)
+2024-11-04 11:32:41,112  * Debugger is active!
+2024-11-04 11:32:41,121  * Debugger PIN: 371-600-436
+2024-11-04 11:32:41,651  * Detected change in 'c:\\Users\\felip\\OneDrive\\Documentos\\FATEC\\Predictive-Health\\backend\\app.py', reloading
+2024-11-04 11:32:41,651  * Detected change in 'c:\\Users\\felip\\OneDrive\\Documentos\\FATEC\\Predictive-Health\\backend\\app.py', reloading
+2024-11-04 11:32:42,342  * Restarting with watchdog (windowsapi)
+2024-11-04 11:32:44,041  * Debugger is active!
+2024-11-04 11:32:44,041  * Debugger PIN: 371-600-436
+2024-11-04 11:38:14,151  * Detected change in 'c:\\Users\\felip\\OneDrive\\Documentos\\FATEC\\Predictive-Health\\backend\\app.py', reloading
+2024-11-04 11:38:14,154  * Detected change in 'c:\\Users\\felip\\OneDrive\\Documentos\\FATEC\\Predictive-Health\\backend\\app.py', reloading
+2024-11-04 11:38:14,700  * Restarting with watchdog (windowsapi)
+2024-11-04 11:38:16,828  * Debugger is active!
+2024-11-04 11:38:16,834  * Debugger PIN: 371-600-436
+2024-11-04 11:39:30,089  * Detected change in 'C:\\Users\\felip\\AppData\\Roaming\\Python\\Python312\\site-packages\\flask\\globals.py', reloading
+2024-11-04 11:39:30,097  * Detected change in 'C:\\Users\\felip\\AppData\\Roaming\\Python\\Python312\\site-packages\\werkzeug\\wrappers\\request.py', reloading
+2024-11-04 11:39:30,609  * Restarting with watchdog (windowsapi)
+2024-11-04 11:39:32,159  * Debugger is active!
+2024-11-04 11:39:32,167  * Debugger PIN: 371-600-436
+2024-11-04 11:39:40,659  * Detected change in 'c:\\Users\\felip\\OneDrive\\Documentos\\FATEC\\Predictive-Health\\backend\\app.py', reloading
+2024-11-04 11:39:40,667  * Detected change in 'c:\\Users\\felip\\OneDrive\\Documentos\\FATEC\\Predictive-Health\\backend\\app.py', reloading
+2024-11-04 11:39:40,668  * Detected change in 'c:\\Users\\felip\\OneDrive\\Documentos\\FATEC\\Predictive-Health\\backend\\app.py', reloading
+2024-11-04 11:39:40,669  * Detected change in 'c:\\Users\\felip\\OneDrive\\Documentos\\FATEC\\Predictive-Health\\backend\\app.py', reloading
+2024-11-04 11:39:41,583  * Restarting with watchdog (windowsapi)
+2024-11-04 11:39:43,400  * Debugger is active!
+2024-11-04 11:39:43,408  * Debugger PIN: 371-600-436
+2024-11-04 11:40:13,929  * Detected change in 'c:\\Users\\felip\\OneDrive\\Documentos\\FATEC\\Predictive-Health\\backend\\app.py', reloading
+2024-11-04 11:40:13,929  * Detected change in 'c:\\Users\\felip\\OneDrive\\Documentos\\FATEC\\Predictive-Health\\backend\\app.py', reloading
+2024-11-04 11:40:13,929  * Detected change in 'c:\\Users\\felip\\OneDrive\\Documentos\\FATEC\\Predictive-Health\\backend\\app.py', reloading
+2024-11-04 11:40:14,242  * Restarting with watchdog (windowsapi)
+2024-11-04 11:40:15,671  * Debugger is active!
+2024-11-04 11:40:15,677  * Debugger PIN: 371-600-436
+2024-11-04 11:40:15,869  * Detected change in 'c:\\Users\\felip\\OneDrive\\Documentos\\FATEC\\Predictive-Health\\backend\\app.py', reloading
+2024-11-04 11:40:15,869  * Detected change in 'c:\\Users\\felip\\OneDrive\\Documentos\\FATEC\\Predictive-Health\\backend\\app.py', reloading
+2024-11-04 11:40:16,927  * Restarting with watchdog (windowsapi)
+2024-11-04 11:40:18,539  * Debugger is active!
+2024-11-04 11:40:18,544  * Debugger PIN: 371-600-436
+2024-11-04 11:44:07,197 [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-11-04 11:44:07,197 [33mPress CTRL+C to quit[0m
+2024-11-04 11:44:07,217  * Restarting with watchdog (windowsapi)
+2024-11-04 11:44:09,117  * Debugger is active!
+2024-11-04 11:44:09,127  * Debugger PIN: 371-600-436
+2024-11-04 11:44:27,578  * Detected change in 'C:\\Python312\\Lib\\unittest\\__init__.py', reloading
+2024-11-04 11:44:27,602  * Detected change in 'C:\\Python312\\Lib\\unittest\\result.py', reloading
+2024-11-04 11:44:27,617  * Detected change in 'C:\\Python312\\Lib\\unittest\\util.py', reloading
+2024-11-04 11:44:27,650  * Detected change in 'C:\\Python312\\Lib\\unittest\\case.py', reloading
+2024-11-04 11:44:27,665  * Detected change in 'C:\\Python312\\Lib\\unittest\\suite.py', reloading
+2024-11-04 11:44:27,687  * Detected change in 'C:\\Python312\\Lib\\unittest\\loader.py', reloading
+2024-11-04 11:44:27,701  * Detected change in 'C:\\Python312\\Lib\\unittest\\main.py', reloading
+2024-11-04 11:44:27,879  * Restarting with watchdog (windowsapi)
+2024-11-04 11:44:29,901  * Debugger is active!
+2024-11-04 11:44:29,907  * Debugger PIN: 371-600-436
+2024-11-04 11:44:30,387  * Detected change in 'C:\\Python312\\Lib\\fileinput.py', reloading
+2024-11-04 11:44:30,608  * Detected change in 'C:\\Python312\\Lib\\unittest\\runner.py', reloading
+2024-11-04 11:44:30,617  * Detected change in 'C:\\Python312\\Lib\\unittest\\signals.py', reloading
+2024-11-04 11:44:31,220  * Restarting with watchdog (windowsapi)
+2024-11-04 11:44:33,379  * Debugger is active!
+2024-11-04 11:44:33,387  * Debugger PIN: 371-600-436
+2024-11-04 11:44:39,067  * Detected change in 'C:\\Python312\\Lib\\_strptime.py', reloading
+2024-11-04 11:44:40,074  * Restarting with watchdog (windowsapi)
+2024-11-04 11:44:41,987  * Debugger is active!
+2024-11-04 11:44:41,987  * Debugger PIN: 371-600-436
+2024-11-04 11:44:44,262  * Detected change in 'C:\\Python312\\Lib\\ctypes\\util.py', reloading
+2024-11-04 11:44:45,648  * Restarting with watchdog (windowsapi)
+2024-11-04 11:44:47,617  * Debugger is active!
+2024-11-04 11:44:47,619  * Debugger PIN: 371-600-436
+2024-11-04 11:44:51,748  * Detected change in 'C:\\Python312\\Lib\\encodings\\latin_1.py', reloading
+2024-11-04 11:44:52,703  * Restarting with watchdog (windowsapi)
+2024-11-04 11:44:54,597  * Debugger is active!
+2024-11-04 11:44:54,606  * Debugger PIN: 371-600-436
+2024-11-04 11:44:57,817 All predictive models loaded successfully
+2024-11-04 11:44:57,826 127.0.0.1 - - [04/Nov/2024 11:44:57] "OPTIONS /login HTTP/1.1" 200 -
+2024-11-04 11:44:58,326 127.0.0.1 - - [04/Nov/2024 11:44:58] "POST /login HTTP/1.1" 200 -
+2024-11-04 11:44:58,558 127.0.0.1 - - [04/Nov/2024 11:44:58] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 11:44:58,578 127.0.0.1 - - [04/Nov/2024 11:44:58] "GET /users HTTP/1.1" 200 -
+2024-11-04 11:44:58,594 127.0.0.1 - - [04/Nov/2024 11:44:58] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 11:44:58,610 127.0.0.1 - - [04/Nov/2024 11:44:58] "GET /patients HTTP/1.1" 200 -
+2024-11-04 11:45:20,898 127.0.0.1 - - [04/Nov/2024 11:45:20] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 11:45:20,917 127.0.0.1 - - [04/Nov/2024 11:45:20] "GET /users HTTP/1.1" 200 -
+2024-11-04 11:45:32,407 127.0.0.1 - - [04/Nov/2024 11:45:32] "OPTIONS /users/1 HTTP/1.1" 200 -
+2024-11-04 11:45:32,428 127.0.0.1 - - [04/Nov/2024 11:45:32] "PUT /users/1 HTTP/1.1" 200 -
+2024-11-04 11:45:32,439 127.0.0.1 - - [04/Nov/2024 11:45:32] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 11:45:32,461 127.0.0.1 - - [04/Nov/2024 11:45:32] "GET /users HTTP/1.1" 200 -
+2024-11-04 11:45:54,809 127.0.0.1 - - [04/Nov/2024 11:45:54] "OPTIONS /login HTTP/1.1" 200 -
+2024-11-04 11:45:54,826 127.0.0.1 - - [04/Nov/2024 11:45:54] "[31m[1mPOST /login HTTP/1.1[0m" 401 -
+2024-11-04 11:45:58,678 127.0.0.1 - - [04/Nov/2024 11:45:58] "POST /login HTTP/1.1" 200 -
+2024-11-04 11:45:58,937 127.0.0.1 - - [04/Nov/2024 11:45:58] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 11:45:58,957 127.0.0.1 - - [04/Nov/2024 11:45:58] "GET /users HTTP/1.1" 200 -
+2024-11-04 11:45:58,969 127.0.0.1 - - [04/Nov/2024 11:45:58] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 11:45:58,987 127.0.0.1 - - [04/Nov/2024 11:45:58] "GET /patients HTTP/1.1" 200 -
+2024-11-04 11:46:00,598 127.0.0.1 - - [04/Nov/2024 11:46:00] "GET /users HTTP/1.1" 200 -
+2024-11-04 11:46:05,678 127.0.0.1 - - [04/Nov/2024 11:46:05] "OPTIONS /users/1 HTTP/1.1" 200 -
+2024-11-04 11:46:05,697 127.0.0.1 - - [04/Nov/2024 11:46:05] "PUT /users/1 HTTP/1.1" 200 -
+2024-11-04 11:46:05,711 127.0.0.1 - - [04/Nov/2024 11:46:05] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 11:46:05,727 127.0.0.1 - - [04/Nov/2024 11:46:05] "GET /users HTTP/1.1" 200 -
+2024-11-04 11:46:16,507 127.0.0.1 - - [04/Nov/2024 11:46:16] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 11:46:16,518 127.0.0.1 - - [04/Nov/2024 11:46:16] "GET /users HTTP/1.1" 200 -
+2024-11-04 11:46:16,549 127.0.0.1 - - [04/Nov/2024 11:46:16] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 11:46:16,568 127.0.0.1 - - [04/Nov/2024 11:46:16] "GET /patients HTTP/1.1" 200 -
+2024-11-04 11:46:18,169 127.0.0.1 - - [04/Nov/2024 11:46:18] "GET /patients HTTP/1.1" 200 -
+2024-11-04 11:46:27,384 127.0.0.1 - - [04/Nov/2024 11:46:27] "OPTIONS /patients/16 HTTP/1.1" 200 -
+2024-11-04 11:46:27,417 127.0.0.1 - - [04/Nov/2024 11:46:27] "DELETE /patients/16 HTTP/1.1" 200 -
+2024-11-04 11:46:27,425 127.0.0.1 - - [04/Nov/2024 11:46:27] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 11:46:27,445 127.0.0.1 - - [04/Nov/2024 11:46:27] "GET /patients HTTP/1.1" 200 -
+2024-11-04 11:48:02,075 127.0.0.1 - - [04/Nov/2024 11:48:02] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 11:48:02,095 127.0.0.1 - - [04/Nov/2024 11:48:02] "GET /users HTTP/1.1" 200 -
+2024-11-04 11:48:02,113 127.0.0.1 - - [04/Nov/2024 11:48:02] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 11:48:02,135 127.0.0.1 - - [04/Nov/2024 11:48:02] "GET /patients HTTP/1.1" 200 -
+2024-11-04 11:48:03,815 127.0.0.1 - - [04/Nov/2024 11:48:03] "GET /users HTTP/1.1" 200 -
+2024-11-04 11:48:07,740 127.0.0.1 - - [04/Nov/2024 11:48:07] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 11:48:07,757 127.0.0.1 - - [04/Nov/2024 11:48:07] "GET /users HTTP/1.1" 200 -
+2024-11-04 11:48:07,765 127.0.0.1 - - [04/Nov/2024 11:48:07] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 11:48:07,785 127.0.0.1 - - [04/Nov/2024 11:48:07] "GET /patients HTTP/1.1" 200 -
+2024-11-04 11:48:09,317 127.0.0.1 - - [04/Nov/2024 11:48:09] "GET /patients HTTP/1.1" 200 -
+2024-11-04 11:48:15,524 127.0.0.1 - - [04/Nov/2024 11:48:15] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 11:48:15,543 127.0.0.1 - - [04/Nov/2024 11:48:15] "GET /users HTTP/1.1" 200 -
+2024-11-04 11:48:15,555 127.0.0.1 - - [04/Nov/2024 11:48:15] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 11:48:15,567 127.0.0.1 - - [04/Nov/2024 11:48:15] "GET /patients HTTP/1.1" 200 -
+2024-11-04 11:48:16,654 127.0.0.1 - - [04/Nov/2024 11:48:16] "OPTIONS /audit-log HTTP/1.1" 200 -
+2024-11-04 11:48:16,674 127.0.0.1 - - [04/Nov/2024 11:48:16] "GET /audit-log HTTP/1.1" 200 -
+2024-11-04 11:48:20,854 127.0.0.1 - - [04/Nov/2024 11:48:20] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 11:48:20,865 127.0.0.1 - - [04/Nov/2024 11:48:20] "GET /users HTTP/1.1" 200 -
+2024-11-04 11:48:20,874 127.0.0.1 - - [04/Nov/2024 11:48:20] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 11:48:20,894 127.0.0.1 - - [04/Nov/2024 11:48:20] "GET /patients HTTP/1.1" 200 -
+2024-11-04 11:48:35,550 127.0.0.1 - - [04/Nov/2024 11:48:35] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 11:48:35,853 127.0.0.1 - - [04/Nov/2024 11:48:35] "GET /users HTTP/1.1" 200 -
+2024-11-04 11:48:35,867 127.0.0.1 - - [04/Nov/2024 11:48:35] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 11:48:35,902 127.0.0.1 - - [04/Nov/2024 11:48:35] "GET /patients HTTP/1.1" 200 -
+2024-11-04 11:48:38,145 127.0.0.1 - - [04/Nov/2024 11:48:38] "GET /patients HTTP/1.1" 200 -
+2024-11-04 11:48:42,523 127.0.0.1 - - [04/Nov/2024 11:48:42] "OPTIONS /patients/11 HTTP/1.1" 200 -
+2024-11-04 11:48:42,553 127.0.0.1 - - [04/Nov/2024 11:48:42] "DELETE /patients/11 HTTP/1.1" 200 -
+2024-11-04 11:48:42,554 127.0.0.1 - - [04/Nov/2024 11:48:42] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 11:48:42,568 127.0.0.1 - - [04/Nov/2024 11:48:42] "GET /patients HTTP/1.1" 200 -
+2024-11-04 11:48:47,145 127.0.0.1 - - [04/Nov/2024 11:48:47] "GET /patients HTTP/1.1" 200 -
+2024-11-04 11:48:53,207 127.0.0.1 - - [04/Nov/2024 11:48:53] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 11:48:53,225 127.0.0.1 - - [04/Nov/2024 11:48:53] "GET /users HTTP/1.1" 200 -
+2024-11-04 11:48:53,244 127.0.0.1 - - [04/Nov/2024 11:48:53] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 11:48:53,263 127.0.0.1 - - [04/Nov/2024 11:48:53] "GET /patients HTTP/1.1" 200 -
+2024-11-04 11:48:57,305 127.0.0.1 - - [04/Nov/2024 11:48:57] "GET /users HTTP/1.1" 200 -
+2024-11-04 11:48:57,620 127.0.0.1 - - [04/Nov/2024 11:48:57] "GET /patients HTTP/1.1" 200 -
+2024-11-04 11:50:37,534 Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+Traceback (most recent call last):
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 854, in dispatch_request
+    self.raise_routing_exception(req)
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 463, in raise_routing_exception
+    raise request.routing_exception  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask\ctx.py", line 362, in match_request
+    result = self.url_adapter.match(return_rule=True)  # type: ignore
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\werkzeug\routing\map.py", line 629, in match
+    raise NotFound() from None
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+2024-11-04 11:50:37,534  * Detected change in 'C:\\Users\\felip\\AppData\\Roaming\\Python\\Python312\\site-packages\\flask\\app.py', reloading
+2024-11-04 11:50:37,575 127.0.0.1 - - [04/Nov/2024 11:50:37] "[35m[1mOPTIONS /patients/:id HTTP/1.1[0m" 500 -
+2024-11-04 11:50:37,915  * Restarting with watchdog (windowsapi)
+2024-11-04 11:50:39,523  * Debugger is active!
+2024-11-04 11:50:39,526  * Debugger PIN: 371-600-436
+2024-11-04 11:50:52,597 All predictive models loaded successfully
+2024-11-04 11:50:52,598 127.0.0.1 - - [04/Nov/2024 11:50:52] "OPTIONS /patients/1 HTTP/1.1" 200 -
+2024-11-04 11:50:52,650 127.0.0.1 - - [04/Nov/2024 11:50:52] "GET /patients/1 HTTP/1.1" 200 -
+2024-11-04 11:52:17,396 127.0.0.1 - - [04/Nov/2024 11:52:17] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 11:52:17,407 127.0.0.1 - - [04/Nov/2024 11:52:17] "GET /patients HTTP/1.1" 200 -
+2024-11-04 11:53:20,357 Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+Traceback (most recent call last):
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 854, in dispatch_request
+    self.raise_routing_exception(req)
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 463, in raise_routing_exception
+    raise request.routing_exception  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask\ctx.py", line 362, in match_request
+    result = self.url_adapter.match(return_rule=True)  # type: ignore
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\werkzeug\routing\map.py", line 629, in match
+    raise NotFound() from None
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+2024-11-04 11:53:20,357 127.0.0.1 - - [04/Nov/2024 11:53:20] "[35m[1mOPTIONS /patients/:id HTTP/1.1[0m" 500 -
+2024-11-04 11:53:23,205 Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+Traceback (most recent call last):
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 854, in dispatch_request
+    self.raise_routing_exception(req)
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 463, in raise_routing_exception
+    raise request.routing_exception  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask\ctx.py", line 362, in match_request
+    result = self.url_adapter.match(return_rule=True)  # type: ignore
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\werkzeug\routing\map.py", line 629, in match
+    raise NotFound() from None
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+2024-11-04 11:53:23,205 127.0.0.1 - - [04/Nov/2024 11:53:23] "[35m[1mOPTIONS /patients/:id HTTP/1.1[0m" 500 -
+2024-11-04 11:55:06,237 Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+Traceback (most recent call last):
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 854, in dispatch_request
+    self.raise_routing_exception(req)
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 463, in raise_routing_exception
+    raise request.routing_exception  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask\ctx.py", line 362, in match_request
+    result = self.url_adapter.match(return_rule=True)  # type: ignore
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\werkzeug\routing\map.py", line 629, in match
+    raise NotFound() from None
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+2024-11-04 11:55:06,237 127.0.0.1 - - [04/Nov/2024 11:55:06] "[35m[1mOPTIONS /patients/:id HTTP/1.1[0m" 500 -
+2024-11-04 11:55:12,445 127.0.0.1 - - [04/Nov/2024 11:55:12] "OPTIONS /patients/1 HTTP/1.1" 200 -
+2024-11-04 11:55:12,471 127.0.0.1 - - [04/Nov/2024 11:55:12] "GET /patients/1 HTTP/1.1" 200 -
+2024-11-04 12:00:19,028 127.0.0.1 - - [04/Nov/2024 12:00:19] "OPTIONS /patients/export/1?format=json HTTP/1.1" 200 -
+2024-11-04 12:00:19,049 127.0.0.1 - - [04/Nov/2024 12:00:19] "GET /patients/export/1?format=json HTTP/1.1" 200 -
+2024-11-04 12:00:38,560 127.0.0.1 - - [04/Nov/2024 12:00:38] "OPTIONS /patients/export/1?format=csv HTTP/1.1" 200 -
+2024-11-04 12:00:38,583 127.0.0.1 - - [04/Nov/2024 12:00:38] "GET /patients/export/1?format=csv HTTP/1.1" 200 -
+2024-11-04 12:03:19,138 127.0.0.1 - - [04/Nov/2024 12:03:19] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 12:03:19,164 127.0.0.1 - - [04/Nov/2024 12:03:19] "[35m[1mPOST /patients HTTP/1.1[0m" 201 -
+2024-11-04 12:03:26,876 127.0.0.1 - - [04/Nov/2024 12:03:26] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 12:03:26,917 127.0.0.1 - - [04/Nov/2024 12:03:26] "GET /patients HTTP/1.1" 200 -
+2024-11-04 12:03:36,845 127.0.0.1 - - [04/Nov/2024 12:03:36] "OPTIONS /patients/21 HTTP/1.1" 200 -
+2024-11-04 12:03:36,868 127.0.0.1 - - [04/Nov/2024 12:03:36] "DELETE /patients/21 HTTP/1.1" 200 -
+2024-11-04 12:03:36,876 127.0.0.1 - - [04/Nov/2024 12:03:36] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 12:03:36,888 127.0.0.1 - - [04/Nov/2024 12:03:36] "GET /patients HTTP/1.1" 200 -
+2024-11-04 12:03:49,875 127.0.0.1 - - [04/Nov/2024 12:03:49] "OPTIONS /user/me HTTP/1.1" 200 -
+2024-11-04 12:03:49,889 127.0.0.1 - - [04/Nov/2024 12:03:49] "GET /user/me HTTP/1.1" 200 -
+2024-11-04 12:04:09,219 127.0.0.1 - - [04/Nov/2024 12:04:09] "OPTIONS /user/me HTTP/1.1" 200 -
+2024-11-04 12:04:09,234 127.0.0.1 - - [04/Nov/2024 12:04:09] "GET /user/me HTTP/1.1" 200 -
+2024-11-04 12:04:13,149 127.0.0.1 - - [04/Nov/2024 12:04:13] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 12:04:13,166 127.0.0.1 - - [04/Nov/2024 12:04:13] "GET /users HTTP/1.1" 200 -
+2024-11-04 12:04:49,447 127.0.0.1 - - [04/Nov/2024 12:04:49] "OPTIONS /register HTTP/1.1" 200 -
+2024-11-04 12:04:49,817 127.0.0.1 - - [04/Nov/2024 12:04:49] "[35m[1mPOST /register HTTP/1.1[0m" 201 -
+2024-11-04 12:04:54,667 127.0.0.1 - - [04/Nov/2024 12:04:54] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 12:04:54,681 127.0.0.1 - - [04/Nov/2024 12:04:54] "GET /users HTTP/1.1" 200 -
+2024-11-04 12:04:54,697 127.0.0.1 - - [04/Nov/2024 12:04:54] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 12:04:54,730 127.0.0.1 - - [04/Nov/2024 12:04:54] "GET /patients HTTP/1.1" 200 -
+2024-11-04 12:04:58,399 127.0.0.1 - - [04/Nov/2024 12:04:58] "GET /users HTTP/1.1" 200 -
+2024-11-04 12:05:00,918 127.0.0.1 - - [04/Nov/2024 12:05:00] "OPTIONS /users/2 HTTP/1.1" 200 -
+2024-11-04 12:05:00,940 Error: (psycopg2.errors.NotNullViolation) null value in column "email" of relation "Users" violates not-null constraint
+DETAIL:  Failing row contains (2, Deleted User, null, null, deleted, f, null, 2024-11-04 15:04:49.458208).
+
+[SQL: UPDATE "Users" SET name=%(name)s, email=%(email)s, password=%(password)s, role=%(role)s WHERE "Users".id = %(Users_id)s]
+[parameters: {'name': 'Deleted User', 'email': None, 'password': None, 'role': 'deleted', 'Users_id': 2}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+Traceback (most recent call last):
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.NotNullViolation: null value in column "email" of relation "Users" violates not-null constraint
+DETAIL:  Failing row contains (2, Deleted User, null, null, deleted, f, null, 2024-11-04 15:04:49.458208).
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask_jwt_extended\view_decorators.py", line 170, in decorator
+    return current_app.ensure_sync(fn)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\felip\OneDrive\Documentos\FATEC\Predictive-Health\backend\auth.py", line 23, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\felip\OneDrive\Documentos\FATEC\Predictive-Health\backend\app.py", line 537, in delete_user
+    db.session.commit()
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\scoping.py", line 597, in commit
+    return self._proxied.commit()
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\session.py", line 2028, in commit
+    trans.commit(_to_root=True)
+  File "<string>", line 2, in commit
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\session.py", line 1313, in commit
+    self._prepare_impl()
+  File "<string>", line 2, in _prepare_impl
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\session.py", line 1288, in _prepare_impl
+    self.session.flush()
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\session.py", line 4352, in flush
+    self._flush(objects)
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\session.py", line 4487, in _flush
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\util\langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\session.py", line 4448, in _flush
+    flush_context.execute()
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\unitofwork.py", line 466, in execute
+    rec.execute(self)
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\persistence.py", line 85, in save_obj
+    _emit_update_statements(
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\persistence.py", line 912, in _emit_update_statements
+    c = connection.execute(
+        ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 1418, in execute
+    return meth(
+           ^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\sql\elements.py", line 515, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 1640, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 2355, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.IntegrityError: (psycopg2.errors.NotNullViolation) null value in column "email" of relation "Users" violates not-null constraint
+DETAIL:  Failing row contains (2, Deleted User, null, null, deleted, f, null, 2024-11-04 15:04:49.458208).
+
+[SQL: UPDATE "Users" SET name=%(name)s, email=%(email)s, password=%(password)s, role=%(role)s WHERE "Users".id = %(Users_id)s]
+[parameters: {'name': 'Deleted User', 'email': None, 'password': None, 'role': 'deleted', 'Users_id': 2}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2024-11-04 12:05:00,960  * Detected change in 'C:\\Users\\felip\\AppData\\Roaming\\Python\\Python312\\site-packages\\sqlalchemy\\orm\\state_changes.py', reloading
+2024-11-04 12:05:01,014 127.0.0.1 - - [04/Nov/2024 12:05:01] "[35m[1mDELETE /users/2 HTTP/1.1[0m" 500 -
+2024-11-04 12:05:01,015  * Detected change in 'C:\\Users\\felip\\AppData\\Roaming\\Python\\Python312\\site-packages\\sqlalchemy\\orm\\unitofwork.py', reloading
+2024-11-04 12:05:01,016  * Detected change in 'C:\\Users\\felip\\AppData\\Roaming\\Python\\Python312\\site-packages\\sqlalchemy\\orm\\persistence.py', reloading
+2024-11-04 12:05:01,017  * Detected change in 'C:\\Users\\felip\\AppData\\Roaming\\Python\\Python312\\site-packages\\sqlalchemy\\engine\\base.py', reloading
+2024-11-04 12:05:01,017  * Detected change in 'C:\\Users\\felip\\AppData\\Roaming\\Python\\Python312\\site-packages\\sqlalchemy\\sql\\elements.py', reloading
+2024-11-04 12:05:01,017  * Detected change in 'C:\\Users\\felip\\AppData\\Roaming\\Python\\Python312\\site-packages\\sqlalchemy\\engine\\default.py', reloading
+2024-11-04 12:05:02,206  * Restarting with watchdog (windowsapi)
+2024-11-04 12:05:04,091  * Debugger is active!
+2024-11-04 12:05:04,096  * Debugger PIN: 371-600-436
+2024-11-04 12:05:10,814 All predictive models loaded successfully
+2024-11-04 12:05:10,816 127.0.0.1 - - [04/Nov/2024 12:05:10] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 12:05:10,864 127.0.0.1 - - [04/Nov/2024 12:05:10] "GET /users HTTP/1.1" 200 -
+2024-11-04 12:05:18,067 127.0.0.1 - - [04/Nov/2024 12:05:18] "OPTIONS /users/2 HTTP/1.1" 200 -
+2024-11-04 12:05:18,101 127.0.0.1 - - [04/Nov/2024 12:05:18] "PUT /users/2 HTTP/1.1" 200 -
+2024-11-04 12:05:18,111 127.0.0.1 - - [04/Nov/2024 12:05:18] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 12:05:18,130 127.0.0.1 - - [04/Nov/2024 12:05:18] "GET /users HTTP/1.1" 200 -
+2024-11-04 12:05:23,277 127.0.0.1 - - [04/Nov/2024 12:05:23] "OPTIONS /users/2 HTTP/1.1" 200 -
+2024-11-04 12:05:23,307 127.0.0.1 - - [04/Nov/2024 12:05:23] "PUT /users/2 HTTP/1.1" 200 -
+2024-11-04 12:05:23,336 127.0.0.1 - - [04/Nov/2024 12:05:23] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 12:05:23,351 127.0.0.1 - - [04/Nov/2024 12:05:23] "GET /users HTTP/1.1" 200 -
+2024-11-04 12:05:24,736 Error: (psycopg2.errors.NotNullViolation) null value in column "email" of relation "Users" violates not-null constraint
+DETAIL:  Failing row contains (2, Deleted User, null, null, deleted, f, null, 2024-11-04 15:04:49.458208).
+
+[SQL: UPDATE "Users" SET name=%(name)s, email=%(email)s, password=%(password)s, role=%(role)s WHERE "Users".id = %(Users_id)s]
+[parameters: {'name': 'Deleted User', 'email': None, 'password': None, 'role': 'deleted', 'Users_id': 2}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+Traceback (most recent call last):
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.NotNullViolation: null value in column "email" of relation "Users" violates not-null constraint
+DETAIL:  Failing row contains (2, Deleted User, null, null, deleted, f, null, 2024-11-04 15:04:49.458208).
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask_jwt_extended\view_decorators.py", line 170, in decorator
+    return current_app.ensure_sync(fn)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\felip\OneDrive\Documentos\FATEC\Predictive-Health\backend\auth.py", line 23, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\felip\OneDrive\Documentos\FATEC\Predictive-Health\backend\app.py", line 537, in delete_user
+    db.session.commit()
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\scoping.py", line 597, in commit
+    return self._proxied.commit()
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\session.py", line 2028, in commit
+    trans.commit(_to_root=True)
+  File "<string>", line 2, in commit
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\session.py", line 1313, in commit
+    self._prepare_impl()
+  File "<string>", line 2, in _prepare_impl
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\session.py", line 1288, in _prepare_impl
+    self.session.flush()
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\session.py", line 4352, in flush
+    self._flush(objects)
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\session.py", line 4487, in _flush
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\util\langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\session.py", line 4448, in _flush
+    flush_context.execute()
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\unitofwork.py", line 466, in execute
+    rec.execute(self)
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\persistence.py", line 85, in save_obj
+    _emit_update_statements(
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\persistence.py", line 912, in _emit_update_statements
+    c = connection.execute(
+        ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 1418, in execute
+    return meth(
+           ^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\sql\elements.py", line 515, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 1640, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 2355, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.IntegrityError: (psycopg2.errors.NotNullViolation) null value in column "email" of relation "Users" violates not-null constraint
+DETAIL:  Failing row contains (2, Deleted User, null, null, deleted, f, null, 2024-11-04 15:04:49.458208).
+
+[SQL: UPDATE "Users" SET name=%(name)s, email=%(email)s, password=%(password)s, role=%(role)s WHERE "Users".id = %(Users_id)s]
+[parameters: {'name': 'Deleted User', 'email': None, 'password': None, 'role': 'deleted', 'Users_id': 2}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2024-11-04 12:05:24,753 127.0.0.1 - - [04/Nov/2024 12:05:24] "[35m[1mDELETE /users/2 HTTP/1.1[0m" 500 -
+2024-11-04 12:06:49,334 127.0.0.1 - - [04/Nov/2024 12:06:49] "OPTIONS /register HTTP/1.1" 200 -
+2024-11-04 12:06:49,666 127.0.0.1 - - [04/Nov/2024 12:06:49] "[35m[1mPOST /register HTTP/1.1[0m" 201 -
+2024-11-04 12:07:18,146 127.0.0.1 - - [04/Nov/2024 12:07:18] "OPTIONS /register HTTP/1.1" 200 -
+2024-11-04 12:07:18,485 127.0.0.1 - - [04/Nov/2024 12:07:18] "[35m[1mPOST /register HTTP/1.1[0m" 201 -
+2024-11-04 12:07:25,037 127.0.0.1 - - [04/Nov/2024 12:07:25] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 12:07:25,049 127.0.0.1 - - [04/Nov/2024 12:07:25] "GET /users HTTP/1.1" 200 -
+2024-11-04 12:07:25,067 127.0.0.1 - - [04/Nov/2024 12:07:25] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 12:07:25,083 127.0.0.1 - - [04/Nov/2024 12:07:25] "GET /patients HTTP/1.1" 200 -
+2024-11-04 12:07:26,588 127.0.0.1 - - [04/Nov/2024 12:07:26] "GET /users HTTP/1.1" 200 -
+2024-11-04 12:07:29,086 127.0.0.1 - - [04/Nov/2024 12:07:29] "OPTIONS /users/2 HTTP/1.1" 200 -
+2024-11-04 12:07:29,100 Error: (psycopg2.errors.NotNullViolation) null value in column "email" of relation "Users" violates not-null constraint
+DETAIL:  Failing row contains (2, Deleted User, null, null, deleted, f, null, 2024-11-04 15:04:49.458208).
+
+[SQL: UPDATE "Users" SET name=%(name)s, email=%(email)s, password=%(password)s, role=%(role)s WHERE "Users".id = %(Users_id)s]
+[parameters: {'name': 'Deleted User', 'email': None, 'password': None, 'role': 'deleted', 'Users_id': 2}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+Traceback (most recent call last):
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.NotNullViolation: null value in column "email" of relation "Users" violates not-null constraint
+DETAIL:  Failing row contains (2, Deleted User, null, null, deleted, f, null, 2024-11-04 15:04:49.458208).
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask_jwt_extended\view_decorators.py", line 170, in decorator
+    return current_app.ensure_sync(fn)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\felip\OneDrive\Documentos\FATEC\Predictive-Health\backend\auth.py", line 23, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\felip\OneDrive\Documentos\FATEC\Predictive-Health\backend\app.py", line 537, in delete_user
+    db.session.commit()
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\scoping.py", line 597, in commit
+    return self._proxied.commit()
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\session.py", line 2028, in commit
+    trans.commit(_to_root=True)
+  File "<string>", line 2, in commit
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\session.py", line 1313, in commit
+    self._prepare_impl()
+  File "<string>", line 2, in _prepare_impl
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\session.py", line 1288, in _prepare_impl
+    self.session.flush()
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\session.py", line 4352, in flush
+    self._flush(objects)
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\session.py", line 4487, in _flush
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\util\langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\session.py", line 4448, in _flush
+    flush_context.execute()
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\unitofwork.py", line 466, in execute
+    rec.execute(self)
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\persistence.py", line 85, in save_obj
+    _emit_update_statements(
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\persistence.py", line 912, in _emit_update_statements
+    c = connection.execute(
+        ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 1418, in execute
+    return meth(
+           ^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\sql\elements.py", line 515, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 1640, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 2355, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.IntegrityError: (psycopg2.errors.NotNullViolation) null value in column "email" of relation "Users" violates not-null constraint
+DETAIL:  Failing row contains (2, Deleted User, null, null, deleted, f, null, 2024-11-04 15:04:49.458208).
+
+[SQL: UPDATE "Users" SET name=%(name)s, email=%(email)s, password=%(password)s, role=%(role)s WHERE "Users".id = %(Users_id)s]
+[parameters: {'name': 'Deleted User', 'email': None, 'password': None, 'role': 'deleted', 'Users_id': 2}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2024-11-04 12:07:29,104 127.0.0.1 - - [04/Nov/2024 12:07:29] "[35m[1mDELETE /users/2 HTTP/1.1[0m" 500 -
+2024-11-04 12:07:31,056 127.0.0.1 - - [04/Nov/2024 12:07:31] "OPTIONS /users/3 HTTP/1.1" 200 -
+2024-11-04 12:07:31,076 Error: (psycopg2.errors.NotNullViolation) null value in column "email" of relation "Users" violates not-null constraint
+DETAIL:  Failing row contains (3, Deleted User, null, null, deleted, f, null, 2024-11-04 15:06:49.340716).
+
+[SQL: UPDATE "Users" SET name=%(name)s, email=%(email)s, password=%(password)s, role=%(role)s WHERE "Users".id = %(Users_id)s]
+[parameters: {'name': 'Deleted User', 'email': None, 'password': None, 'role': 'deleted', 'Users_id': 3}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+Traceback (most recent call last):
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.NotNullViolation: null value in column "email" of relation "Users" violates not-null constraint
+DETAIL:  Failing row contains (3, Deleted User, null, null, deleted, f, null, 2024-11-04 15:06:49.340716).
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask_jwt_extended\view_decorators.py", line 170, in decorator
+    return current_app.ensure_sync(fn)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\felip\OneDrive\Documentos\FATEC\Predictive-Health\backend\auth.py", line 23, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\felip\OneDrive\Documentos\FATEC\Predictive-Health\backend\app.py", line 537, in delete_user
+    db.session.commit()
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\scoping.py", line 597, in commit
+    return self._proxied.commit()
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\session.py", line 2028, in commit
+    trans.commit(_to_root=True)
+  File "<string>", line 2, in commit
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\session.py", line 1313, in commit
+    self._prepare_impl()
+  File "<string>", line 2, in _prepare_impl
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\session.py", line 1288, in _prepare_impl
+    self.session.flush()
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\session.py", line 4352, in flush
+    self._flush(objects)
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\session.py", line 4487, in _flush
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\util\langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\session.py", line 4448, in _flush
+    flush_context.execute()
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\unitofwork.py", line 466, in execute
+    rec.execute(self)
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\persistence.py", line 85, in save_obj
+    _emit_update_statements(
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\persistence.py", line 912, in _emit_update_statements
+    c = connection.execute(
+        ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 1418, in execute
+    return meth(
+           ^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\sql\elements.py", line 515, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 1640, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 2355, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.IntegrityError: (psycopg2.errors.NotNullViolation) null value in column "email" of relation "Users" violates not-null constraint
+DETAIL:  Failing row contains (3, Deleted User, null, null, deleted, f, null, 2024-11-04 15:06:49.340716).
+
+[SQL: UPDATE "Users" SET name=%(name)s, email=%(email)s, password=%(password)s, role=%(role)s WHERE "Users".id = %(Users_id)s]
+[parameters: {'name': 'Deleted User', 'email': None, 'password': None, 'role': 'deleted', 'Users_id': 3}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2024-11-04 12:07:31,077 127.0.0.1 - - [04/Nov/2024 12:07:31] "[35m[1mDELETE /users/3 HTTP/1.1[0m" 500 -
+2024-11-04 12:07:34,507 127.0.0.1 - - [04/Nov/2024 12:07:34] "OPTIONS /users/4 HTTP/1.1" 200 -
+2024-11-04 12:07:34,522 Error: (psycopg2.errors.NotNullViolation) null value in column "email" of relation "Users" violates not-null constraint
+DETAIL:  Failing row contains (4, Deleted User, null, null, deleted, f, null, 2024-11-04 15:07:18.159294).
+
+[SQL: UPDATE "Users" SET name=%(name)s, email=%(email)s, password=%(password)s, role=%(role)s WHERE "Users".id = %(Users_id)s]
+[parameters: {'name': 'Deleted User', 'email': None, 'password': None, 'role': 'deleted', 'Users_id': 4}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+Traceback (most recent call last):
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.NotNullViolation: null value in column "email" of relation "Users" violates not-null constraint
+DETAIL:  Failing row contains (4, Deleted User, null, null, deleted, f, null, 2024-11-04 15:07:18.159294).
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask_jwt_extended\view_decorators.py", line 170, in decorator
+    return current_app.ensure_sync(fn)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\felip\OneDrive\Documentos\FATEC\Predictive-Health\backend\auth.py", line 23, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\felip\OneDrive\Documentos\FATEC\Predictive-Health\backend\app.py", line 537, in delete_user
+    db.session.commit()
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\scoping.py", line 597, in commit
+    return self._proxied.commit()
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\session.py", line 2028, in commit
+    trans.commit(_to_root=True)
+  File "<string>", line 2, in commit
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\session.py", line 1313, in commit
+    self._prepare_impl()
+  File "<string>", line 2, in _prepare_impl
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\session.py", line 1288, in _prepare_impl
+    self.session.flush()
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\session.py", line 4352, in flush
+    self._flush(objects)
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\session.py", line 4487, in _flush
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\util\langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\session.py", line 4448, in _flush
+    flush_context.execute()
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\unitofwork.py", line 466, in execute
+    rec.execute(self)
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\persistence.py", line 85, in save_obj
+    _emit_update_statements(
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\persistence.py", line 912, in _emit_update_statements
+    c = connection.execute(
+        ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 1418, in execute
+    return meth(
+           ^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\sql\elements.py", line 515, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 1640, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 2355, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.IntegrityError: (psycopg2.errors.NotNullViolation) null value in column "email" of relation "Users" violates not-null constraint
+DETAIL:  Failing row contains (4, Deleted User, null, null, deleted, f, null, 2024-11-04 15:07:18.159294).
+
+[SQL: UPDATE "Users" SET name=%(name)s, email=%(email)s, password=%(password)s, role=%(role)s WHERE "Users".id = %(Users_id)s]
+[parameters: {'name': 'Deleted User', 'email': None, 'password': None, 'role': 'deleted', 'Users_id': 4}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2024-11-04 12:07:34,526 127.0.0.1 - - [04/Nov/2024 12:07:34] "[35m[1mDELETE /users/4 HTTP/1.1[0m" 500 -
+2024-11-04 12:07:38,604 127.0.0.1 - - [04/Nov/2024 12:07:38] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 12:07:38,633 127.0.0.1 - - [04/Nov/2024 12:07:38] "GET /users HTTP/1.1" 200 -
+2024-11-04 12:07:40,663 127.0.0.1 - - [04/Nov/2024 12:07:40] "OPTIONS /users/3 HTTP/1.1" 200 -
+2024-11-04 12:07:40,679 Error: (psycopg2.errors.NotNullViolation) null value in column "email" of relation "Users" violates not-null constraint
+DETAIL:  Failing row contains (3, Deleted User, null, null, deleted, f, null, 2024-11-04 15:06:49.340716).
+
+[SQL: UPDATE "Users" SET name=%(name)s, email=%(email)s, password=%(password)s, role=%(role)s WHERE "Users".id = %(Users_id)s]
+[parameters: {'name': 'Deleted User', 'email': None, 'password': None, 'role': 'deleted', 'Users_id': 3}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+Traceback (most recent call last):
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.NotNullViolation: null value in column "email" of relation "Users" violates not-null constraint
+DETAIL:  Failing row contains (3, Deleted User, null, null, deleted, f, null, 2024-11-04 15:06:49.340716).
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask_jwt_extended\view_decorators.py", line 170, in decorator
+    return current_app.ensure_sync(fn)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\felip\OneDrive\Documentos\FATEC\Predictive-Health\backend\auth.py", line 23, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\felip\OneDrive\Documentos\FATEC\Predictive-Health\backend\app.py", line 537, in delete_user
+    db.session.commit()
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\scoping.py", line 597, in commit
+    return self._proxied.commit()
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\session.py", line 2028, in commit
+    trans.commit(_to_root=True)
+  File "<string>", line 2, in commit
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\session.py", line 1313, in commit
+    self._prepare_impl()
+  File "<string>", line 2, in _prepare_impl
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\session.py", line 1288, in _prepare_impl
+    self.session.flush()
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\session.py", line 4352, in flush
+    self._flush(objects)
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\session.py", line 4487, in _flush
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\util\langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\session.py", line 4448, in _flush
+    flush_context.execute()
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\unitofwork.py", line 466, in execute
+    rec.execute(self)
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\persistence.py", line 85, in save_obj
+    _emit_update_statements(
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\persistence.py", line 912, in _emit_update_statements
+    c = connection.execute(
+        ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 1418, in execute
+    return meth(
+           ^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\sql\elements.py", line 515, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 1640, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 2355, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.IntegrityError: (psycopg2.errors.NotNullViolation) null value in column "email" of relation "Users" violates not-null constraint
+DETAIL:  Failing row contains (3, Deleted User, null, null, deleted, f, null, 2024-11-04 15:06:49.340716).
+
+[SQL: UPDATE "Users" SET name=%(name)s, email=%(email)s, password=%(password)s, role=%(role)s WHERE "Users".id = %(Users_id)s]
+[parameters: {'name': 'Deleted User', 'email': None, 'password': None, 'role': 'deleted', 'Users_id': 3}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2024-11-04 12:07:40,682 127.0.0.1 - - [04/Nov/2024 12:07:40] "[35m[1mDELETE /users/3 HTTP/1.1[0m" 500 -
+2024-11-04 12:07:41,520 127.0.0.1 - - [04/Nov/2024 12:07:41] "OPTIONS /users/4 HTTP/1.1" 200 -
+2024-11-04 12:07:41,536 Error: (psycopg2.errors.NotNullViolation) null value in column "email" of relation "Users" violates not-null constraint
+DETAIL:  Failing row contains (4, Deleted User, null, null, deleted, f, null, 2024-11-04 15:07:18.159294).
+
+[SQL: UPDATE "Users" SET name=%(name)s, email=%(email)s, password=%(password)s, role=%(role)s WHERE "Users".id = %(Users_id)s]
+[parameters: {'name': 'Deleted User', 'email': None, 'password': None, 'role': 'deleted', 'Users_id': 4}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+Traceback (most recent call last):
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.NotNullViolation: null value in column "email" of relation "Users" violates not-null constraint
+DETAIL:  Failing row contains (4, Deleted User, null, null, deleted, f, null, 2024-11-04 15:07:18.159294).
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask_jwt_extended\view_decorators.py", line 170, in decorator
+    return current_app.ensure_sync(fn)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\felip\OneDrive\Documentos\FATEC\Predictive-Health\backend\auth.py", line 23, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\felip\OneDrive\Documentos\FATEC\Predictive-Health\backend\app.py", line 537, in delete_user
+    db.session.commit()
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\scoping.py", line 597, in commit
+    return self._proxied.commit()
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\session.py", line 2028, in commit
+    trans.commit(_to_root=True)
+  File "<string>", line 2, in commit
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\session.py", line 1313, in commit
+    self._prepare_impl()
+  File "<string>", line 2, in _prepare_impl
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\session.py", line 1288, in _prepare_impl
+    self.session.flush()
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\session.py", line 4352, in flush
+    self._flush(objects)
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\session.py", line 4487, in _flush
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\util\langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\session.py", line 4448, in _flush
+    flush_context.execute()
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\unitofwork.py", line 466, in execute
+    rec.execute(self)
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\persistence.py", line 85, in save_obj
+    _emit_update_statements(
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\persistence.py", line 912, in _emit_update_statements
+    c = connection.execute(
+        ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 1418, in execute
+    return meth(
+           ^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\sql\elements.py", line 515, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 1640, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 2355, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.IntegrityError: (psycopg2.errors.NotNullViolation) null value in column "email" of relation "Users" violates not-null constraint
+DETAIL:  Failing row contains (4, Deleted User, null, null, deleted, f, null, 2024-11-04 15:07:18.159294).
+
+[SQL: UPDATE "Users" SET name=%(name)s, email=%(email)s, password=%(password)s, role=%(role)s WHERE "Users".id = %(Users_id)s]
+[parameters: {'name': 'Deleted User', 'email': None, 'password': None, 'role': 'deleted', 'Users_id': 4}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2024-11-04 12:07:41,541 127.0.0.1 - - [04/Nov/2024 12:07:41] "[35m[1mDELETE /users/4 HTTP/1.1[0m" 500 -
+2024-11-04 12:08:51,798 127.0.0.1 - - [04/Nov/2024 12:08:51] "OPTIONS /user/change-password HTTP/1.1" 200 -
+2024-11-04 12:08:52,086 127.0.0.1 - - [04/Nov/2024 12:08:52] "[31m[1mPUT /user/change-password HTTP/1.1[0m" 401 -
+2024-11-04 12:08:57,751 127.0.0.1 - - [04/Nov/2024 12:08:57] "OPTIONS /user/change-password HTTP/1.1" 200 -
+2024-11-04 12:08:58,333 127.0.0.1 - - [04/Nov/2024 12:08:58] "PUT /user/change-password HTTP/1.1" 200 -
+2024-11-04 12:09:07,068 127.0.0.1 - - [04/Nov/2024 12:09:07] "OPTIONS /login HTTP/1.1" 200 -
+2024-11-04 12:09:07,347 127.0.0.1 - - [04/Nov/2024 12:09:07] "[31m[1mPOST /login HTTP/1.1[0m" 401 -
+2024-11-04 12:09:11,446 127.0.0.1 - - [04/Nov/2024 12:09:11] "POST /login HTTP/1.1" 200 -
+2024-11-04 12:09:11,686 127.0.0.1 - - [04/Nov/2024 12:09:11] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 12:09:11,699 127.0.0.1 - - [04/Nov/2024 12:09:11] "GET /users HTTP/1.1" 200 -
+2024-11-04 12:09:11,706 127.0.0.1 - - [04/Nov/2024 12:09:11] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 12:09:11,725 127.0.0.1 - - [04/Nov/2024 12:09:11] "GET /patients HTTP/1.1" 200 -
+2024-11-04 12:09:35,338 127.0.0.1 - - [04/Nov/2024 12:09:35] "OPTIONS /user/change-password HTTP/1.1" 200 -
+2024-11-04 12:09:35,897 127.0.0.1 - - [04/Nov/2024 12:09:35] "PUT /user/change-password HTTP/1.1" 200 -
+2024-11-04 12:09:44,998 Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+Traceback (most recent call last):
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 854, in dispatch_request
+    self.raise_routing_exception(req)
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 463, in raise_routing_exception
+    raise request.routing_exception  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask\ctx.py", line 362, in match_request
+    result = self.url_adapter.match(return_rule=True)  # type: ignore
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\werkzeug\routing\map.py", line 629, in match
+    raise NotFound() from None
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+2024-11-04 12:09:44,998 127.0.0.1 - - [04/Nov/2024 12:09:44] "[35m[1mOPTIONS /patients/consent/:id HTTP/1.1[0m" 500 -
+2024-11-04 12:09:47,796 Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+Traceback (most recent call last):
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 854, in dispatch_request
+    self.raise_routing_exception(req)
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 463, in raise_routing_exception
+    raise request.routing_exception  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask\ctx.py", line 362, in match_request
+    result = self.url_adapter.match(return_rule=True)  # type: ignore
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\werkzeug\routing\map.py", line 629, in match
+    raise NotFound() from None
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+2024-11-04 12:09:47,796 127.0.0.1 - - [04/Nov/2024 12:09:47] "[35m[1mOPTIONS /patients/consent/:id HTTP/1.1[0m" 500 -
+2024-11-04 12:09:48,476 Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+Traceback (most recent call last):
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 854, in dispatch_request
+    self.raise_routing_exception(req)
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 463, in raise_routing_exception
+    raise request.routing_exception  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask\ctx.py", line 362, in match_request
+    result = self.url_adapter.match(return_rule=True)  # type: ignore
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\werkzeug\routing\map.py", line 629, in match
+    raise NotFound() from None
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+2024-11-04 12:09:48,478 127.0.0.1 - - [04/Nov/2024 12:09:48] "[35m[1mOPTIONS /patients/consent/:id HTTP/1.1[0m" 500 -
+2024-11-04 12:10:55,138 127.0.0.1 - - [04/Nov/2024 12:10:55] "OPTIONS /predict/diabetes HTTP/1.1" 200 -
+2024-11-04 12:10:55,169  * Detected change in 'C:\\Users\\felip\\AppData\\Roaming\\Python\\Python312\\site-packages\\sklearn\\base.py', reloading
+2024-11-04 12:10:55,169 Error: X has 3 features, but RandomForestClassifier is expecting 17 features as input.
+Traceback (most recent call last):
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask_jwt_extended\view_decorators.py", line 170, in decorator
+    return current_app.ensure_sync(fn)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\felip\OneDrive\Documentos\FATEC\Predictive-Health\backend\auth.py", line 23, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\felip\OneDrive\Documentos\FATEC\Predictive-Health\backend\app.py", line 361, in predict_diabetes
+    prediction = diabetes_model.predict(input_data)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sklearn\ensemble\_forest.py", line 904, in predict
+    proba = self.predict_proba(X)
+            ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sklearn\ensemble\_forest.py", line 946, in predict_proba
+    X = self._validate_X_predict(X)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sklearn\ensemble\_forest.py", line 641, in _validate_X_predict
+    X = self._validate_data(
+        ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sklearn\base.py", line 654, in _validate_data
+    self._check_n_features(X, reset=reset)
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sklearn\base.py", line 443, in _check_n_features
+    raise ValueError(
+ValueError: X has 3 features, but RandomForestClassifier is expecting 17 features as input.
+2024-11-04 12:10:55,190  * Detected change in 'C:\\Users\\felip\\AppData\\Roaming\\Python\\Python312\\site-packages\\sklearn\\ensemble\\_forest.py', reloading
+2024-11-04 12:10:55,192 127.0.0.1 - - [04/Nov/2024 12:10:55] "[35m[1mPOST /predict/diabetes HTTP/1.1[0m" 500 -
+2024-11-04 12:10:55,648  * Restarting with watchdog (windowsapi)
+2024-11-04 12:10:57,155  * Debugger is active!
+2024-11-04 12:10:57,155  * Debugger PIN: 371-600-436
+2024-11-04 12:10:58,964 All predictive models loaded successfully
+2024-11-04 12:10:59,011 Error: X has 3 features, but RandomForestClassifier is expecting 17 features as input.
+Traceback (most recent call last):
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask_jwt_extended\view_decorators.py", line 170, in decorator
+    return current_app.ensure_sync(fn)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\felip\OneDrive\Documentos\FATEC\Predictive-Health\backend\auth.py", line 23, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\felip\OneDrive\Documentos\FATEC\Predictive-Health\backend\app.py", line 361, in predict_diabetes
+    prediction = diabetes_model.predict(input_data)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sklearn\ensemble\_forest.py", line 904, in predict
+    proba = self.predict_proba(X)
+            ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sklearn\ensemble\_forest.py", line 946, in predict_proba
+    X = self._validate_X_predict(X)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sklearn\ensemble\_forest.py", line 641, in _validate_X_predict
+    X = self._validate_data(
+        ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sklearn\base.py", line 654, in _validate_data
+    self._check_n_features(X, reset=reset)
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sklearn\base.py", line 443, in _check_n_features
+    raise ValueError(
+ValueError: X has 3 features, but RandomForestClassifier is expecting 17 features as input.
+2024-11-04 12:10:59,011 127.0.0.1 - - [04/Nov/2024 12:10:59] "[35m[1mPOST /predict/diabetes HTTP/1.1[0m" 500 -
+2024-11-04 12:11:00,746 127.0.0.1 - - [04/Nov/2024 12:11:00] "OPTIONS /predict/hypertension HTTP/1.1" 200 -
+2024-11-04 12:11:00,755 127.0.0.1 - - [04/Nov/2024 12:11:00] "[31m[1mPOST /predict/hypertension HTTP/1.1[0m" 400 -
+2024-11-04 12:11:06,303 127.0.0.1 - - [04/Nov/2024 12:11:06] "OPTIONS /predict/stroke HTTP/1.1" 200 -
+2024-11-04 12:11:06,303 127.0.0.1 - - [04/Nov/2024 12:11:06] "[31m[1mPOST /predict/stroke HTTP/1.1[0m" 400 -
+2024-11-04 12:11:06,759 127.0.0.1 - - [04/Nov/2024 12:11:06] "[31m[1mPOST /predict/stroke HTTP/1.1[0m" 400 -
+2024-11-04 12:27:28,982 127.0.0.1 - - [04/Nov/2024 12:27:28] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 12:27:29,009 127.0.0.1 - - [04/Nov/2024 12:27:29] "GET /patients HTTP/1.1" 200 -
+2024-11-04 12:27:31,362 127.0.0.1 - - [04/Nov/2024 12:27:31] "OPTIONS /patients/1 HTTP/1.1" 200 -
+2024-11-04 12:27:31,394 127.0.0.1 - - [04/Nov/2024 12:27:31] "GET /patients/1 HTTP/1.1" 200 -
+2024-11-04 12:33:26,237 127.0.0.1 - - [04/Nov/2024 12:33:26] "OPTIONS /patients/1 HTTP/1.1" 200 -
+2024-11-04 12:33:26,258 127.0.0.1 - - [04/Nov/2024 12:33:26] "GET /patients/1 HTTP/1.1" 200 -
+2024-11-04 12:33:29,339 127.0.0.1 - - [04/Nov/2024 12:33:29] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 12:33:29,361 127.0.0.1 - - [04/Nov/2024 12:33:29] "GET /patients HTTP/1.1" 200 -
+2024-11-04 12:33:31,592 127.0.0.1 - - [04/Nov/2024 12:33:31] "OPTIONS /patients/1 HTTP/1.1" 200 -
+2024-11-04 12:33:31,607 127.0.0.1 - - [04/Nov/2024 12:33:31] "GET /patients/1 HTTP/1.1" 200 -
+2024-11-04 12:33:32,763 127.0.0.1 - - [04/Nov/2024 12:33:32] "GET /patients HTTP/1.1" 200 -
+2024-11-04 12:35:05,757 127.0.0.1 - - [04/Nov/2024 12:35:05] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 12:35:05,777 127.0.0.1 - - [04/Nov/2024 12:35:05] "GET /users HTTP/1.1" 200 -
+2024-11-04 12:35:05,797 127.0.0.1 - - [04/Nov/2024 12:35:05] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 12:35:05,809 127.0.0.1 - - [04/Nov/2024 12:35:05] "GET /patients HTTP/1.1" 200 -
+2024-11-04 12:35:07,109 127.0.0.1 - - [04/Nov/2024 12:35:07] "GET /users HTTP/1.1" 200 -
+2024-11-04 12:35:08,867 127.0.0.1 - - [04/Nov/2024 12:35:08] "GET /users HTTP/1.1" 200 -
+2024-11-04 12:35:08,887 127.0.0.1 - - [04/Nov/2024 12:35:08] "GET /patients HTTP/1.1" 200 -
+2024-11-04 12:35:10,043 127.0.0.1 - - [04/Nov/2024 12:35:10] "GET /patients HTTP/1.1" 200 -
+2024-11-04 12:35:12,919 127.0.0.1 - - [04/Nov/2024 12:35:12] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 12:35:12,936 127.0.0.1 - - [04/Nov/2024 12:35:12] "GET /users HTTP/1.1" 200 -
+2024-11-04 12:35:12,946 127.0.0.1 - - [04/Nov/2024 12:35:12] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 12:35:12,959 127.0.0.1 - - [04/Nov/2024 12:35:12] "GET /patients HTTP/1.1" 200 -
+2024-11-04 12:35:13,760 127.0.0.1 - - [04/Nov/2024 12:35:13] "OPTIONS /audit-log HTTP/1.1" 200 -
+2024-11-04 12:35:13,777 127.0.0.1 - - [04/Nov/2024 12:35:13] "GET /audit-log HTTP/1.1" 200 -
+2024-11-04 12:35:14,825 127.0.0.1 - - [04/Nov/2024 12:35:14] "GET /users HTTP/1.1" 200 -
+2024-11-04 12:35:14,840 127.0.0.1 - - [04/Nov/2024 12:35:14] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:18:30,579 127.0.0.1 - - [04/Nov/2024 13:18:30] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 13:18:30,759 127.0.0.1 - - [04/Nov/2024 13:18:30] "[31m[1mGET /users HTTP/1.1[0m" 401 -
+2024-11-04 13:18:34,579 127.0.0.1 - - [04/Nov/2024 13:18:34] "[31m[1mGET /users HTTP/1.1[0m" 401 -
+2024-11-04 13:18:53,825 [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-11-04 13:18:53,825 [33mPress CTRL+C to quit[0m
+2024-11-04 13:18:53,845  * Restarting with watchdog (windowsapi)
+2024-11-04 13:18:55,234  * Debugger is active!
+2024-11-04 13:18:55,238  * Debugger PIN: 371-600-436
+2024-11-04 13:19:08,206  * Detected change in 'C:\\Python312\\Lib\\unittest\\__init__.py', reloading
+2024-11-04 13:19:08,213  * Detected change in 'C:\\Python312\\Lib\\unittest\\result.py', reloading
+2024-11-04 13:19:08,218  * Detected change in 'C:\\Python312\\Lib\\unittest\\util.py', reloading
+2024-11-04 13:19:08,240  * Detected change in 'C:\\Python312\\Lib\\unittest\\case.py', reloading
+2024-11-04 13:19:08,247  * Detected change in 'C:\\Python312\\Lib\\unittest\\suite.py', reloading
+2024-11-04 13:19:08,255  * Detected change in 'C:\\Python312\\Lib\\unittest\\loader.py', reloading
+2024-11-04 13:19:08,261  * Detected change in 'C:\\Python312\\Lib\\unittest\\main.py', reloading
+2024-11-04 13:19:08,266  * Detected change in 'C:\\Python312\\Lib\\unittest\\runner.py', reloading
+2024-11-04 13:19:08,269  * Detected change in 'C:\\Python312\\Lib\\unittest\\signals.py', reloading
+2024-11-04 13:19:08,292  * Detected change in 'C:\\Python312\\Lib\\fileinput.py', reloading
+2024-11-04 13:19:08,708  * Restarting with watchdog (windowsapi)
+2024-11-04 13:19:10,263  * Debugger is active!
+2024-11-04 13:19:10,268  * Debugger PIN: 371-600-436
+2024-11-04 13:19:11,515  * Detected change in 'C:\\Python312\\Lib\\_strptime.py', reloading
+2024-11-04 13:19:12,118  * Detected change in 'C:\\Python312\\Lib\\ctypes\\util.py', reloading
+2024-11-04 13:19:12,515  * Detected change in 'C:\\Python312\\Lib\\encodings\\latin_1.py', reloading
+2024-11-04 13:19:12,833  * Restarting with watchdog (windowsapi)
+2024-11-04 13:19:14,443  * Debugger is active!
+2024-11-04 13:19:14,444  * Debugger PIN: 371-600-436
+2024-11-04 13:19:16,407 All predictive models loaded successfully
+2024-11-04 13:19:16,407 127.0.0.1 - - [04/Nov/2024 13:19:16] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 13:19:16,423 127.0.0.1 - - [04/Nov/2024 13:19:16] "[31m[1mGET /users HTTP/1.1[0m" 401 -
+2024-11-04 13:19:16,476 All predictive models loaded successfully
+2024-11-04 13:19:16,476 127.0.0.1 - - [04/Nov/2024 13:19:16] "OPTIONS /login HTTP/1.1" 200 -
+2024-11-04 13:19:16,863 127.0.0.1 - - [04/Nov/2024 13:19:16] "POST /login HTTP/1.1" 200 -
+2024-11-04 13:19:17,146 127.0.0.1 - - [04/Nov/2024 13:19:17] "GET /users HTTP/1.1" 200 -
+2024-11-04 13:19:17,162 127.0.0.1 - - [04/Nov/2024 13:19:17] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 13:19:17,177 127.0.0.1 - - [04/Nov/2024 13:19:17] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:19:19,603 127.0.0.1 - - [04/Nov/2024 13:19:19] "GET /users HTTP/1.1" 200 -
+2024-11-04 13:19:23,596 127.0.0.1 - - [04/Nov/2024 13:19:23] "OPTIONS /users/3 HTTP/1.1" 200 -
+2024-11-04 13:19:23,611 Error: (psycopg2.errors.NotNullViolation) null value in column "email" of relation "Users" violates not-null constraint
+DETAIL:  Failing row contains (3, Deleted User, null, null, deleted, f, null, 2024-11-04 15:06:49.340716).
+
+[SQL: UPDATE "Users" SET name=%(name)s, email=%(email)s, password=%(password)s, role=%(role)s WHERE "Users".id = %(Users_id)s]
+[parameters: {'name': 'Deleted User', 'email': None, 'password': None, 'role': 'deleted', 'Users_id': 3}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+Traceback (most recent call last):
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.NotNullViolation: null value in column "email" of relation "Users" violates not-null constraint
+DETAIL:  Failing row contains (3, Deleted User, null, null, deleted, f, null, 2024-11-04 15:06:49.340716).
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask_jwt_extended\view_decorators.py", line 170, in decorator
+    return current_app.ensure_sync(fn)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\felip\OneDrive\Documentos\FATEC\Predictive-Health\backend\auth.py", line 23, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\felip\OneDrive\Documentos\FATEC\Predictive-Health\backend\app.py", line 537, in delete_user
+    db.session.commit()
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\scoping.py", line 597, in commit
+    return self._proxied.commit()
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\session.py", line 2028, in commit
+    trans.commit(_to_root=True)
+  File "<string>", line 2, in commit
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\session.py", line 1313, in commit
+    self._prepare_impl()
+  File "<string>", line 2, in _prepare_impl
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\session.py", line 1288, in _prepare_impl
+    self.session.flush()
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\session.py", line 4352, in flush
+    self._flush(objects)
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\session.py", line 4487, in _flush
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\util\langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\session.py", line 4448, in _flush
+    flush_context.execute()
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\unitofwork.py", line 466, in execute
+    rec.execute(self)
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\persistence.py", line 85, in save_obj
+    _emit_update_statements(
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\persistence.py", line 912, in _emit_update_statements
+    c = connection.execute(
+        ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 1418, in execute
+    return meth(
+           ^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\sql\elements.py", line 515, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 1640, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 2355, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.IntegrityError: (psycopg2.errors.NotNullViolation) null value in column "email" of relation "Users" violates not-null constraint
+DETAIL:  Failing row contains (3, Deleted User, null, null, deleted, f, null, 2024-11-04 15:06:49.340716).
+
+[SQL: UPDATE "Users" SET name=%(name)s, email=%(email)s, password=%(password)s, role=%(role)s WHERE "Users".id = %(Users_id)s]
+[parameters: {'name': 'Deleted User', 'email': None, 'password': None, 'role': 'deleted', 'Users_id': 3}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2024-11-04 13:19:23,611  * Detected change in 'C:\\Users\\felip\\AppData\\Roaming\\Python\\Python312\\site-packages\\flask\\app.py', reloading
+2024-11-04 13:19:23,627 127.0.0.1 - - [04/Nov/2024 13:19:23] "[35m[1mDELETE /users/3 HTTP/1.1[0m" 500 -
+2024-11-04 13:19:23,627  * Detected change in 'C:\\Users\\felip\\AppData\\Roaming\\Python\\Python312\\site-packages\\flask_jwt_extended\\view_decorators.py', reloading
+2024-11-04 13:19:23,627  * Detected change in 'c:\\Users\\felip\\OneDrive\\Documentos\\FATEC\\Predictive-Health\\backend\\auth.py', reloading
+2024-11-04 13:19:23,627  * Detected change in 'C:\\Users\\felip\\AppData\\Roaming\\Python\\Python312\\site-packages\\sqlalchemy\\orm\\scoping.py', reloading
+2024-11-04 13:19:23,627  * Detected change in 'C:\\Users\\felip\\AppData\\Roaming\\Python\\Python312\\site-packages\\sqlalchemy\\orm\\session.py', reloading
+2024-11-04 13:19:23,627  * Detected change in 'C:\\Users\\felip\\AppData\\Roaming\\Python\\Python312\\site-packages\\sqlalchemy\\orm\\state_changes.py', reloading
+2024-11-04 13:19:23,627  * Detected change in 'C:\\Users\\felip\\AppData\\Roaming\\Python\\Python312\\site-packages\\sqlalchemy\\util\\langhelpers.py', reloading
+2024-11-04 13:19:23,627  * Detected change in 'C:\\Users\\felip\\AppData\\Roaming\\Python\\Python312\\site-packages\\sqlalchemy\\orm\\unitofwork.py', reloading
+2024-11-04 13:19:23,627  * Detected change in 'C:\\Users\\felip\\AppData\\Roaming\\Python\\Python312\\site-packages\\sqlalchemy\\orm\\persistence.py', reloading
+2024-11-04 13:19:23,627  * Detected change in 'C:\\Users\\felip\\AppData\\Roaming\\Python\\Python312\\site-packages\\sqlalchemy\\engine\\base.py', reloading
+2024-11-04 13:19:23,627  * Detected change in 'C:\\Users\\felip\\AppData\\Roaming\\Python\\Python312\\site-packages\\sqlalchemy\\sql\\elements.py', reloading
+2024-11-04 13:19:23,627  * Detected change in 'C:\\Users\\felip\\AppData\\Roaming\\Python\\Python312\\site-packages\\sqlalchemy\\engine\\default.py', reloading
+2024-11-04 13:19:24,368  * Restarting with watchdog (windowsapi)
+2024-11-04 13:19:25,828  * Debugger is active!
+2024-11-04 13:19:25,843  * Debugger PIN: 371-600-436
+2024-11-04 13:19:28,469 All predictive models loaded successfully
+2024-11-04 13:19:28,469 127.0.0.1 - - [04/Nov/2024 13:19:28] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 13:19:28,531 127.0.0.1 - - [04/Nov/2024 13:19:28] "GET /users HTTP/1.1" 200 -
+2024-11-04 13:19:28,547 All predictive models loaded successfully
+2024-11-04 13:19:28,547 127.0.0.1 - - [04/Nov/2024 13:19:28] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 13:19:28,547 127.0.0.1 - - [04/Nov/2024 13:19:28] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 13:19:28,563 127.0.0.1 - - [04/Nov/2024 13:19:28] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:19:28,579 127.0.0.1 - - [04/Nov/2024 13:19:28] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:19:31,017 127.0.0.1 - - [04/Nov/2024 13:19:31] "OPTIONS /patients/1 HTTP/1.1" 200 -
+2024-11-04 13:19:31,032 127.0.0.1 - - [04/Nov/2024 13:19:31] "GET /patients/1 HTTP/1.1" 200 -
+2024-11-04 13:19:32,557 127.0.0.1 - - [04/Nov/2024 13:19:32] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:19:35,483 127.0.0.1 - - [04/Nov/2024 13:19:35] "DELETE /patients/1 HTTP/1.1" 200 -
+2024-11-04 13:19:35,501 127.0.0.1 - - [04/Nov/2024 13:19:35] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 13:19:35,515 127.0.0.1 - - [04/Nov/2024 13:19:35] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:19:41,745 127.0.0.1 - - [04/Nov/2024 13:19:41] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 13:19:41,762 127.0.0.1 - - [04/Nov/2024 13:19:41] "GET /users HTTP/1.1" 200 -
+2024-11-04 13:19:41,777 127.0.0.1 - - [04/Nov/2024 13:19:41] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 13:19:41,793 127.0.0.1 - - [04/Nov/2024 13:19:41] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:19:45,104 127.0.0.1 - - [04/Nov/2024 13:19:45] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:19:48,840 127.0.0.1 - - [04/Nov/2024 13:19:48] "OPTIONS /patients/2 HTTP/1.1" 200 -
+2024-11-04 13:19:48,871 127.0.0.1 - - [04/Nov/2024 13:19:48] "DELETE /patients/2 HTTP/1.1" 200 -
+2024-11-04 13:19:48,871 127.0.0.1 - - [04/Nov/2024 13:19:48] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 13:19:48,887 127.0.0.1 - - [04/Nov/2024 13:19:48] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:19:51,024 127.0.0.1 - - [04/Nov/2024 13:19:51] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 13:19:51,033 127.0.0.1 - - [04/Nov/2024 13:19:51] "GET /users HTTP/1.1" 200 -
+2024-11-04 13:19:51,056 127.0.0.1 - - [04/Nov/2024 13:19:51] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:19:55,243 127.0.0.1 - - [04/Nov/2024 13:19:55] "GET /users HTTP/1.1" 200 -
+2024-11-04 13:19:55,695 127.0.0.1 - - [04/Nov/2024 13:19:55] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 13:19:55,717 127.0.0.1 - - [04/Nov/2024 13:19:55] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:23:39,486 127.0.0.1 - - [04/Nov/2024 13:23:39] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 13:23:39,505 127.0.0.1 - - [04/Nov/2024 13:23:39] "GET /users HTTP/1.1" 200 -
+2024-11-04 13:23:39,516 127.0.0.1 - - [04/Nov/2024 13:23:39] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 13:23:39,531 127.0.0.1 - - [04/Nov/2024 13:23:39] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:23:44,330 127.0.0.1 - - [04/Nov/2024 13:23:44] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:23:46,910 127.0.0.1 - - [04/Nov/2024 13:23:46] "OPTIONS /patients/3 HTTP/1.1" 200 -
+2024-11-04 13:23:46,941 127.0.0.1 - - [04/Nov/2024 13:23:46] "DELETE /patients/3 HTTP/1.1" 200 -
+2024-11-04 13:23:46,941 127.0.0.1 - - [04/Nov/2024 13:23:46] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 13:23:46,959 127.0.0.1 - - [04/Nov/2024 13:23:46] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:23:48,673 127.0.0.1 - - [04/Nov/2024 13:23:48] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 13:23:48,688 127.0.0.1 - - [04/Nov/2024 13:23:48] "GET /users HTTP/1.1" 200 -
+2024-11-04 13:23:48,704 127.0.0.1 - - [04/Nov/2024 13:23:48] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:23:53,464 127.0.0.1 - - [04/Nov/2024 13:23:53] "GET /users HTTP/1.1" 200 -
+2024-11-04 13:23:53,920 127.0.0.1 - - [04/Nov/2024 13:23:53] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 13:23:54,127 127.0.0.1 - - [04/Nov/2024 13:23:54] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:29:55,811 127.0.0.1 - - [04/Nov/2024 13:29:55] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 13:29:55,828 127.0.0.1 - - [04/Nov/2024 13:29:55] "GET /users HTTP/1.1" 200 -
+2024-11-04 13:29:55,840 127.0.0.1 - - [04/Nov/2024 13:29:55] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 13:29:55,856 127.0.0.1 - - [04/Nov/2024 13:29:55] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:30:21,650 127.0.0.1 - - [04/Nov/2024 13:30:21] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 13:30:21,667 127.0.0.1 - - [04/Nov/2024 13:30:21] "GET /users HTTP/1.1" 200 -
+2024-11-04 13:30:21,677 127.0.0.1 - - [04/Nov/2024 13:30:21] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 13:30:21,688 127.0.0.1 - - [04/Nov/2024 13:30:21] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:30:32,245 127.0.0.1 - - [04/Nov/2024 13:30:32] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 13:30:32,540 127.0.0.1 - - [04/Nov/2024 13:30:32] "GET /users HTTP/1.1" 200 -
+2024-11-04 13:30:32,552 127.0.0.1 - - [04/Nov/2024 13:30:32] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 13:30:32,570 127.0.0.1 - - [04/Nov/2024 13:30:32] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:30:35,751 127.0.0.1 - - [04/Nov/2024 13:30:35] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:30:37,394 127.0.0.1 - - [04/Nov/2024 13:30:37] "OPTIONS /patients/4 HTTP/1.1" 200 -
+2024-11-04 13:30:37,426 127.0.0.1 - - [04/Nov/2024 13:30:37] "DELETE /patients/4 HTTP/1.1" 200 -
+2024-11-04 13:30:37,441 127.0.0.1 - - [04/Nov/2024 13:30:37] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:30:39,145 127.0.0.1 - - [04/Nov/2024 13:30:39] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 13:30:39,161 127.0.0.1 - - [04/Nov/2024 13:30:39] "GET /users HTTP/1.1" 200 -
+2024-11-04 13:30:39,177 127.0.0.1 - - [04/Nov/2024 13:30:39] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 13:30:39,193 127.0.0.1 - - [04/Nov/2024 13:30:39] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:30:43,316 127.0.0.1 - - [04/Nov/2024 13:30:43] "GET /users HTTP/1.1" 200 -
+2024-11-04 13:30:43,634 127.0.0.1 - - [04/Nov/2024 13:30:43] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:32:36,911 127.0.0.1 - - [04/Nov/2024 13:32:36] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 13:32:36,933 127.0.0.1 - - [04/Nov/2024 13:32:36] "GET /users HTTP/1.1" 200 -
+2024-11-04 13:32:36,945 127.0.0.1 - - [04/Nov/2024 13:32:36] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 13:32:36,967 127.0.0.1 - - [04/Nov/2024 13:32:36] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:34:03,540 127.0.0.1 - - [04/Nov/2024 13:34:03] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 13:34:03,560 127.0.0.1 - - [04/Nov/2024 13:34:03] "GET /users HTTP/1.1" 200 -
+2024-11-04 13:34:03,570 127.0.0.1 - - [04/Nov/2024 13:34:03] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 13:34:03,570 127.0.0.1 - - [04/Nov/2024 13:34:03] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:34:27,043 127.0.0.1 - - [04/Nov/2024 13:34:27] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 13:34:27,053 127.0.0.1 - - [04/Nov/2024 13:34:27] "GET /users HTTP/1.1" 200 -
+2024-11-04 13:34:27,053 127.0.0.1 - - [04/Nov/2024 13:34:27] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 13:34:27,068 127.0.0.1 - - [04/Nov/2024 13:34:27] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:35:42,359 127.0.0.1 - - [04/Nov/2024 13:35:42] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 13:35:42,378 127.0.0.1 - - [04/Nov/2024 13:35:42] "GET /users HTTP/1.1" 200 -
+2024-11-04 13:35:42,388 127.0.0.1 - - [04/Nov/2024 13:35:42] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 13:35:42,401 127.0.0.1 - - [04/Nov/2024 13:35:42] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:35:56,288 127.0.0.1 - - [04/Nov/2024 13:35:56] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 13:35:56,290 127.0.0.1 - - [04/Nov/2024 13:35:56] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 13:35:56,526 127.0.0.1 - - [04/Nov/2024 13:35:56] "GET /users HTTP/1.1" 200 -
+2024-11-04 13:35:56,787 127.0.0.1 - - [04/Nov/2024 13:35:56] "GET /users HTTP/1.1" 200 -
+2024-11-04 13:35:56,810 127.0.0.1 - - [04/Nov/2024 13:35:56] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 13:35:56,836 127.0.0.1 - - [04/Nov/2024 13:35:56] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 13:35:56,874 127.0.0.1 - - [04/Nov/2024 13:35:56] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:35:56,889 127.0.0.1 - - [04/Nov/2024 13:35:56] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:35:58,853 127.0.0.1 - - [04/Nov/2024 13:35:58] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:36:00,666 127.0.0.1 - - [04/Nov/2024 13:36:00] "OPTIONS /patients/5 HTTP/1.1" 200 -
+2024-11-04 13:36:00,689 127.0.0.1 - - [04/Nov/2024 13:36:00] "DELETE /patients/5 HTTP/1.1" 200 -
+2024-11-04 13:36:00,706 127.0.0.1 - - [04/Nov/2024 13:36:00] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:36:02,156 127.0.0.1 - - [04/Nov/2024 13:36:02] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 13:36:02,156 127.0.0.1 - - [04/Nov/2024 13:36:02] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 13:36:02,172 127.0.0.1 - - [04/Nov/2024 13:36:02] "GET /users HTTP/1.1" 200 -
+2024-11-04 13:36:02,172 127.0.0.1 - - [04/Nov/2024 13:36:02] "GET /users HTTP/1.1" 200 -
+2024-11-04 13:36:02,189 127.0.0.1 - - [04/Nov/2024 13:36:02] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 13:36:02,189 127.0.0.1 - - [04/Nov/2024 13:36:02] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 13:36:02,204 127.0.0.1 - - [04/Nov/2024 13:36:02] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:36:02,204 127.0.0.1 - - [04/Nov/2024 13:36:02] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:36:06,307 127.0.0.1 - - [04/Nov/2024 13:36:06] "GET /users HTTP/1.1" 200 -
+2024-11-04 13:36:06,308 127.0.0.1 - - [04/Nov/2024 13:36:06] "GET /users HTTP/1.1" 200 -
+2024-11-04 13:36:06,348 127.0.0.1 - - [04/Nov/2024 13:36:06] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:36:06,749 127.0.0.1 - - [04/Nov/2024 13:36:06] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:37:36,748 127.0.0.1 - - [04/Nov/2024 13:37:36] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 13:37:36,762 127.0.0.1 - - [04/Nov/2024 13:37:36] "GET /users HTTP/1.1" 200 -
+2024-11-04 13:37:36,778 127.0.0.1 - - [04/Nov/2024 13:37:36] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 13:37:36,802 127.0.0.1 - - [04/Nov/2024 13:37:36] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:39:26,087 127.0.0.1 - - [04/Nov/2024 13:39:26] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 13:39:26,104 127.0.0.1 - - [04/Nov/2024 13:39:26] "GET /users HTTP/1.1" 200 -
+2024-11-04 13:39:26,115 127.0.0.1 - - [04/Nov/2024 13:39:26] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 13:39:26,132 127.0.0.1 - - [04/Nov/2024 13:39:26] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:40:10,008 127.0.0.1 - - [04/Nov/2024 13:40:10] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 13:40:10,027 127.0.0.1 - - [04/Nov/2024 13:40:10] "GET /users HTTP/1.1" 200 -
+2024-11-04 13:40:10,284 127.0.0.1 - - [04/Nov/2024 13:40:10] "GET /users HTTP/1.1" 200 -
+2024-11-04 13:40:10,293 127.0.0.1 - - [04/Nov/2024 13:40:10] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 13:40:10,301 127.0.0.1 - - [04/Nov/2024 13:40:10] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 13:40:10,327 127.0.0.1 - - [04/Nov/2024 13:40:10] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:40:10,332 127.0.0.1 - - [04/Nov/2024 13:40:10] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:40:12,260 127.0.0.1 - - [04/Nov/2024 13:40:12] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:40:14,554 127.0.0.1 - - [04/Nov/2024 13:40:14] "OPTIONS /patients/6 HTTP/1.1" 200 -
+2024-11-04 13:40:14,577 127.0.0.1 - - [04/Nov/2024 13:40:14] "DELETE /patients/6 HTTP/1.1" 200 -
+2024-11-04 13:40:14,593 127.0.0.1 - - [04/Nov/2024 13:40:14] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:40:15,710 127.0.0.1 - - [04/Nov/2024 13:40:15] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 13:40:15,710 127.0.0.1 - - [04/Nov/2024 13:40:15] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 13:40:15,727 127.0.0.1 - - [04/Nov/2024 13:40:15] "GET /users HTTP/1.1" 200 -
+2024-11-04 13:40:15,727 127.0.0.1 - - [04/Nov/2024 13:40:15] "GET /users HTTP/1.1" 200 -
+2024-11-04 13:40:15,742 127.0.0.1 - - [04/Nov/2024 13:40:15] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 13:40:15,742 127.0.0.1 - - [04/Nov/2024 13:40:15] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 13:40:15,757 127.0.0.1 - - [04/Nov/2024 13:40:15] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:40:15,757 127.0.0.1 - - [04/Nov/2024 13:40:15] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:40:17,496 127.0.0.1 - - [04/Nov/2024 13:40:17] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:40:20,119 127.0.0.1 - - [04/Nov/2024 13:40:20] "GET /users HTTP/1.1" 200 -
+2024-11-04 13:40:20,119 127.0.0.1 - - [04/Nov/2024 13:40:20] "GET /users HTTP/1.1" 200 -
+2024-11-04 13:40:20,150 127.0.0.1 - - [04/Nov/2024 13:40:20] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:40:20,150 127.0.0.1 - - [04/Nov/2024 13:40:20] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:40:23,790 127.0.0.1 - - [04/Nov/2024 13:40:23] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 13:40:23,793 127.0.0.1 - - [04/Nov/2024 13:40:23] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 13:40:24,057 127.0.0.1 - - [04/Nov/2024 13:40:24] "GET /users HTTP/1.1" 200 -
+2024-11-04 13:40:24,082 127.0.0.1 - - [04/Nov/2024 13:40:24] "GET /users HTTP/1.1" 200 -
+2024-11-04 13:40:24,096 127.0.0.1 - - [04/Nov/2024 13:40:24] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 13:40:24,112 127.0.0.1 - - [04/Nov/2024 13:40:24] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:40:24,145 127.0.0.1 - - [04/Nov/2024 13:40:24] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:41:10,061 127.0.0.1 - - [04/Nov/2024 13:41:10] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 13:41:10,078 127.0.0.1 - - [04/Nov/2024 13:41:10] "GET /users HTTP/1.1" 200 -
+2024-11-04 13:41:10,088 127.0.0.1 - - [04/Nov/2024 13:41:10] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 13:41:10,101 127.0.0.1 - - [04/Nov/2024 13:41:10] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:43:17,026 127.0.0.1 - - [04/Nov/2024 13:43:17] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 13:43:17,030 127.0.0.1 - - [04/Nov/2024 13:43:17] "GET /users HTTP/1.1" 200 -
+2024-11-04 13:43:17,054 127.0.0.1 - - [04/Nov/2024 13:43:17] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 13:43:17,069 127.0.0.1 - - [04/Nov/2024 13:43:17] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:44:50,662 127.0.0.1 - - [04/Nov/2024 13:44:50] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 13:44:50,684 127.0.0.1 - - [04/Nov/2024 13:44:50] "GET /users HTTP/1.1" 200 -
+2024-11-04 13:44:50,700 127.0.0.1 - - [04/Nov/2024 13:44:50] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 13:44:50,718 127.0.0.1 - - [04/Nov/2024 13:44:50] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:44:53,463 127.0.0.1 - - [04/Nov/2024 13:44:53] "GET /users HTTP/1.1" 200 -
+2024-11-04 13:44:53,475 127.0.0.1 - - [04/Nov/2024 13:44:53] "GET /users HTTP/1.1" 200 -
+2024-11-04 13:44:53,875 127.0.0.1 - - [04/Nov/2024 13:44:53] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:44:53,950 127.0.0.1 - - [04/Nov/2024 13:44:53] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:44:55,675 127.0.0.1 - - [04/Nov/2024 13:44:55] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:44:57,149 127.0.0.1 - - [04/Nov/2024 13:44:57] "OPTIONS /patients/7 HTTP/1.1" 200 -
+2024-11-04 13:44:57,174 127.0.0.1 - - [04/Nov/2024 13:44:57] "DELETE /patients/7 HTTP/1.1" 200 -
+2024-11-04 13:44:57,183 127.0.0.1 - - [04/Nov/2024 13:44:57] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 13:44:57,197 127.0.0.1 - - [04/Nov/2024 13:44:57] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:44:58,966 127.0.0.1 - - [04/Nov/2024 13:44:58] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 13:44:58,966 127.0.0.1 - - [04/Nov/2024 13:44:58] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 13:44:58,982 127.0.0.1 - - [04/Nov/2024 13:44:58] "GET /users HTTP/1.1" 200 -
+2024-11-04 13:44:58,998 127.0.0.1 - - [04/Nov/2024 13:44:58] "GET /users HTTP/1.1" 200 -
+2024-11-04 13:44:59,014 127.0.0.1 - - [04/Nov/2024 13:44:59] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:44:59,014 127.0.0.1 - - [04/Nov/2024 13:44:59] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:45:03,481 127.0.0.1 - - [04/Nov/2024 13:45:03] "GET /users HTTP/1.1" 200 -
+2024-11-04 13:45:03,488 127.0.0.1 - - [04/Nov/2024 13:45:03] "GET /users HTTP/1.1" 200 -
+2024-11-04 13:45:03,981 127.0.0.1 - - [04/Nov/2024 13:45:03] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 13:45:03,987 127.0.0.1 - - [04/Nov/2024 13:45:03] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 13:45:04,013 127.0.0.1 - - [04/Nov/2024 13:45:04] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:45:04,025 127.0.0.1 - - [04/Nov/2024 13:45:04] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:45:05,620 127.0.0.1 - - [04/Nov/2024 13:45:05] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:45:13,547 127.0.0.1 - - [04/Nov/2024 13:45:13] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 13:45:13,552 127.0.0.1 - - [04/Nov/2024 13:45:13] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 13:45:13,576 127.0.0.1 - - [04/Nov/2024 13:45:13] "GET /users HTTP/1.1" 200 -
+2024-11-04 13:45:13,579 127.0.0.1 - - [04/Nov/2024 13:45:13] "GET /users HTTP/1.1" 200 -
+2024-11-04 13:45:13,605 127.0.0.1 - - [04/Nov/2024 13:45:13] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 13:45:13,607 127.0.0.1 - - [04/Nov/2024 13:45:13] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 13:45:13,641 127.0.0.1 - - [04/Nov/2024 13:45:13] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:45:13,642 127.0.0.1 - - [04/Nov/2024 13:45:13] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:47:17,114 127.0.0.1 - - [04/Nov/2024 13:47:17] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 13:47:17,132 127.0.0.1 - - [04/Nov/2024 13:47:17] "GET /users HTTP/1.1" 200 -
+2024-11-04 13:47:17,146 127.0.0.1 - - [04/Nov/2024 13:47:17] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 13:47:17,162 127.0.0.1 - - [04/Nov/2024 13:47:17] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:49:00,888 127.0.0.1 - - [04/Nov/2024 13:49:00] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 13:49:00,909 127.0.0.1 - - [04/Nov/2024 13:49:00] "GET /users HTTP/1.1" 200 -
+2024-11-04 13:49:00,918 127.0.0.1 - - [04/Nov/2024 13:49:00] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 13:49:00,932 127.0.0.1 - - [04/Nov/2024 13:49:00] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:49:22,269 127.0.0.1 - - [04/Nov/2024 13:49:22] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 13:49:22,272 127.0.0.1 - - [04/Nov/2024 13:49:22] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 13:49:22,552 127.0.0.1 - - [04/Nov/2024 13:49:22] "GET /users HTTP/1.1" 200 -
+2024-11-04 13:49:22,577 127.0.0.1 - - [04/Nov/2024 13:49:22] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 13:49:22,586 127.0.0.1 - - [04/Nov/2024 13:49:22] "GET /users HTTP/1.1" 200 -
+2024-11-04 13:49:22,609 127.0.0.1 - - [04/Nov/2024 13:49:22] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:49:22,631 127.0.0.1 - - [04/Nov/2024 13:49:22] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:49:27,468 127.0.0.1 - - [04/Nov/2024 13:49:27] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:49:29,001 127.0.0.1 - - [04/Nov/2024 13:49:29] "OPTIONS /patients/8 HTTP/1.1" 200 -
+2024-11-04 13:49:29,017 127.0.0.1 - - [04/Nov/2024 13:49:29] "DELETE /patients/8 HTTP/1.1" 200 -
+2024-11-04 13:49:29,032 127.0.0.1 - - [04/Nov/2024 13:49:29] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 13:49:29,048 127.0.0.1 - - [04/Nov/2024 13:49:29] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:49:30,451 127.0.0.1 - - [04/Nov/2024 13:49:30] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 13:49:30,451 127.0.0.1 - - [04/Nov/2024 13:49:30] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 13:49:30,466 127.0.0.1 - - [04/Nov/2024 13:49:30] "GET /users HTTP/1.1" 200 -
+2024-11-04 13:49:30,466 127.0.0.1 - - [04/Nov/2024 13:49:30] "GET /users HTTP/1.1" 200 -
+2024-11-04 13:49:30,482 127.0.0.1 - - [04/Nov/2024 13:49:30] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:49:30,482 127.0.0.1 - - [04/Nov/2024 13:49:30] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:51:06,222 127.0.0.1 - - [04/Nov/2024 13:51:06] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 13:51:06,231 127.0.0.1 - - [04/Nov/2024 13:51:06] "GET /users HTTP/1.1" 200 -
+2024-11-04 13:51:06,247 127.0.0.1 - - [04/Nov/2024 13:51:06] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 13:51:06,263 127.0.0.1 - - [04/Nov/2024 13:51:06] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:51:22,401 127.0.0.1 - - [04/Nov/2024 13:51:22] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 13:51:22,417 127.0.0.1 - - [04/Nov/2024 13:51:22] "GET /users HTTP/1.1" 200 -
+2024-11-04 13:51:22,434 127.0.0.1 - - [04/Nov/2024 13:51:22] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 13:51:22,451 127.0.0.1 - - [04/Nov/2024 13:51:22] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:51:41,650 127.0.0.1 - - [04/Nov/2024 13:51:41] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 13:51:41,661 127.0.0.1 - - [04/Nov/2024 13:51:41] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 13:51:41,883 127.0.0.1 - - [04/Nov/2024 13:51:41] "GET /users HTTP/1.1" 200 -
+2024-11-04 13:51:41,956 127.0.0.1 - - [04/Nov/2024 13:51:41] "GET /users HTTP/1.1" 200 -
+2024-11-04 13:51:41,973 127.0.0.1 - - [04/Nov/2024 13:51:41] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 13:51:41,976 127.0.0.1 - - [04/Nov/2024 13:51:41] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 13:51:41,998 127.0.0.1 - - [04/Nov/2024 13:51:41] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:51:42,003 127.0.0.1 - - [04/Nov/2024 13:51:42] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:51:43,980 127.0.0.1 - - [04/Nov/2024 13:51:43] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:51:45,673 127.0.0.1 - - [04/Nov/2024 13:51:45] "OPTIONS /patients/9 HTTP/1.1" 200 -
+2024-11-04 13:51:45,695 127.0.0.1 - - [04/Nov/2024 13:51:45] "DELETE /patients/9 HTTP/1.1" 200 -
+2024-11-04 13:51:45,711 127.0.0.1 - - [04/Nov/2024 13:51:45] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:51:46,918 127.0.0.1 - - [04/Nov/2024 13:51:46] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 13:51:46,918 127.0.0.1 - - [04/Nov/2024 13:51:46] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 13:51:46,934 127.0.0.1 - - [04/Nov/2024 13:51:46] "GET /users HTTP/1.1" 200 -
+2024-11-04 13:51:46,934 127.0.0.1 - - [04/Nov/2024 13:51:46] "GET /users HTTP/1.1" 200 -
+2024-11-04 13:51:46,949 127.0.0.1 - - [04/Nov/2024 13:51:46] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:51:46,949 127.0.0.1 - - [04/Nov/2024 13:51:46] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:51:52,475 127.0.0.1 - - [04/Nov/2024 13:51:52] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 13:51:52,478 127.0.0.1 - - [04/Nov/2024 13:51:52] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 13:51:52,497 127.0.0.1 - - [04/Nov/2024 13:51:52] "GET /users HTTP/1.1" 200 -
+2024-11-04 13:51:52,692 127.0.0.1 - - [04/Nov/2024 13:51:52] "GET /users HTTP/1.1" 200 -
+2024-11-04 13:51:52,785 127.0.0.1 - - [04/Nov/2024 13:51:52] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 13:51:52,788 127.0.0.1 - - [04/Nov/2024 13:51:52] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 13:51:52,806 127.0.0.1 - - [04/Nov/2024 13:51:52] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:51:52,811 127.0.0.1 - - [04/Nov/2024 13:51:52] "GET /patients HTTP/1.1" 200 -
+2024-11-04 13:52:47,280  * Detected change in 'c:\\Users\\felip\\OneDrive\\Documentos\\FATEC\\Predictive-Health\\backend\\app.py', reloading
+2024-11-04 13:52:47,283  * Detected change in 'c:\\Users\\felip\\OneDrive\\Documentos\\FATEC\\Predictive-Health\\backend\\app.py', reloading
+2024-11-04 13:52:48,273  * Restarting with watchdog (windowsapi)
+2024-11-04 13:52:49,837  * Debugger is active!
+2024-11-04 13:52:49,840  * Debugger PIN: 371-600-436
+2024-11-04 13:58:56,070  * Detected change in 'c:\\Users\\felip\\OneDrive\\Documentos\\FATEC\\Predictive-Health\\backend\\app.py', reloading
+2024-11-04 13:58:56,070  * Detected change in 'c:\\Users\\felip\\OneDrive\\Documentos\\FATEC\\Predictive-Health\\backend\\app.py', reloading
+2024-11-04 13:58:57,090  * Restarting with watchdog (windowsapi)
+2024-11-04 13:58:58,587  * Debugger is active!
+2024-11-04 13:58:58,587  * Debugger PIN: 371-600-436
+2024-11-04 13:59:00,524  * Detected change in 'c:\\Users\\felip\\OneDrive\\Documentos\\FATEC\\Predictive-Health\\backend\\app.py', reloading
+2024-11-04 13:59:00,524  * Detected change in 'c:\\Users\\felip\\OneDrive\\Documentos\\FATEC\\Predictive-Health\\backend\\app.py', reloading
+2024-11-04 13:59:00,792  * Restarting with watchdog (windowsapi)
+2024-11-04 13:59:02,178  * Debugger is active!
+2024-11-04 13:59:02,178  * Debugger PIN: 371-600-436
+2024-11-04 14:00:53,252  * Detected change in 'c:\\Users\\felip\\OneDrive\\Documentos\\FATEC\\Predictive-Health\\backend\\app.py', reloading
+2024-11-04 14:00:53,252  * Detected change in 'c:\\Users\\felip\\OneDrive\\Documentos\\FATEC\\Predictive-Health\\backend\\app.py', reloading
+2024-11-04 14:00:53,252  * Detected change in 'c:\\Users\\felip\\OneDrive\\Documentos\\FATEC\\Predictive-Health\\backend\\app.py', reloading
+2024-11-04 14:00:53,708  * Restarting with watchdog (windowsapi)
+2024-11-04 14:00:55,584  * Debugger is active!
+2024-11-04 14:00:55,584  * Debugger PIN: 371-600-436
+2024-11-04 14:01:03,117 [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-11-04 14:01:03,118 [33mPress CTRL+C to quit[0m
+2024-11-04 14:01:03,134  * Restarting with watchdog (windowsapi)
+2024-11-04 14:01:05,273  * Debugger is active!
+2024-11-04 14:01:05,273  * Debugger PIN: 371-600-436
+2024-11-04 14:01:38,343  * Detected change in 'c:\\Users\\felip\\OneDrive\\Documentos\\FATEC\\Predictive-Health\\backend\\app.py', reloading
+2024-11-04 14:01:39,311  * Restarting with watchdog (windowsapi)
+2024-11-04 14:01:40,779  * Debugger is active!
+2024-11-04 14:01:40,779  * Debugger PIN: 371-600-436
+2024-11-04 14:04:22,288 All predictive models loaded successfully
+2024-11-04 14:04:22,288 127.0.0.1 - - [04/Nov/2024 14:04:22] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 14:04:22,570 127.0.0.1 - - [04/Nov/2024 14:04:22] "GET /users HTTP/1.1" 200 -
+2024-11-04 14:04:22,570 127.0.0.1 - - [04/Nov/2024 14:04:22] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 14:04:22,596 127.0.0.1 - - [04/Nov/2024 14:04:22] "GET /patients HTTP/1.1" 200 -
+2024-11-04 14:04:24,442 127.0.0.1 - - [04/Nov/2024 14:04:24] "GET /users HTTP/1.1" 200 -
+2024-11-04 14:04:24,463 127.0.0.1 - - [04/Nov/2024 14:04:24] "GET /users HTTP/1.1" 200 -
+2024-11-04 14:04:24,837 127.0.0.1 - - [04/Nov/2024 14:04:24] "GET /patients HTTP/1.1" 200 -
+2024-11-04 14:04:24,842 127.0.0.1 - - [04/Nov/2024 14:04:24] "GET /patients HTTP/1.1" 200 -
+2024-11-04 14:04:38,910 127.0.0.1 - - [04/Nov/2024 14:04:38] "OPTIONS /login HTTP/1.1" 200 -
+2024-11-04 14:04:39,179 127.0.0.1 - - [04/Nov/2024 14:04:39] "POST /login HTTP/1.1" 200 -
+2024-11-04 14:04:39,399 127.0.0.1 - - [04/Nov/2024 14:04:39] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 14:04:39,399 127.0.0.1 - - [04/Nov/2024 14:04:39] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 14:04:39,420 127.0.0.1 - - [04/Nov/2024 14:04:39] "GET /users HTTP/1.1" 200 -
+2024-11-04 14:04:39,420 127.0.0.1 - - [04/Nov/2024 14:04:39] "GET /users HTTP/1.1" 200 -
+2024-11-04 14:04:39,431 127.0.0.1 - - [04/Nov/2024 14:04:39] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 14:04:39,431 127.0.0.1 - - [04/Nov/2024 14:04:39] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 14:04:39,447 127.0.0.1 - - [04/Nov/2024 14:04:39] "GET /patients HTTP/1.1" 200 -
+2024-11-04 14:04:39,447 127.0.0.1 - - [04/Nov/2024 14:04:39] "GET /patients HTTP/1.1" 200 -
+2024-11-04 14:04:44,508 127.0.0.1 - - [04/Nov/2024 14:04:44] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 14:04:44,524 127.0.0.1 - - [04/Nov/2024 14:04:44] "GET /patients HTTP/1.1" 200 -
+2024-11-04 14:04:46,812 127.0.0.1 - - [04/Nov/2024 14:04:46] "OPTIONS /patients/10 HTTP/1.1" 200 -
+2024-11-04 14:04:46,839 127.0.0.1 - - [04/Nov/2024 14:04:46] "DELETE /patients/10 HTTP/1.1" 200 -
+2024-11-04 14:04:46,860 127.0.0.1 - - [04/Nov/2024 14:04:46] "GET /patients HTTP/1.1" 200 -
+2024-11-04 14:04:49,642 127.0.0.1 - - [04/Nov/2024 14:04:49] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 14:04:49,642 127.0.0.1 - - [04/Nov/2024 14:04:49] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 14:04:49,673 127.0.0.1 - - [04/Nov/2024 14:04:49] "GET /users HTTP/1.1" 200 -
+2024-11-04 14:04:49,673 127.0.0.1 - - [04/Nov/2024 14:04:49] "GET /users HTTP/1.1" 200 -
+2024-11-04 14:04:49,673 127.0.0.1 - - [04/Nov/2024 14:04:49] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 14:04:49,673 127.0.0.1 - - [04/Nov/2024 14:04:49] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 14:04:49,689 127.0.0.1 - - [04/Nov/2024 14:04:49] "GET /patients HTTP/1.1" 200 -
+2024-11-04 14:04:49,705 127.0.0.1 - - [04/Nov/2024 14:04:49] "GET /patients HTTP/1.1" 200 -
+2024-11-04 14:04:53,848 127.0.0.1 - - [04/Nov/2024 14:04:53] "GET /users HTTP/1.1" 200 -
+2024-11-04 14:04:53,851 127.0.0.1 - - [04/Nov/2024 14:04:53] "GET /users HTTP/1.1" 200 -
+2024-11-04 14:04:54,145 127.0.0.1 - - [04/Nov/2024 14:04:54] "GET /patients HTTP/1.1" 200 -
+2024-11-04 14:04:54,151 127.0.0.1 - - [04/Nov/2024 14:04:54] "GET /patients HTTP/1.1" 200 -
+2024-11-04 14:05:00,194 127.0.0.1 - - [04/Nov/2024 14:05:00] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 14:05:00,224 127.0.0.1 - - [04/Nov/2024 14:05:00] "GET /users HTTP/1.1" 200 -
+2024-11-04 14:05:02,156 127.0.0.1 - - [04/Nov/2024 14:05:02] "OPTIONS /users/3 HTTP/1.1" 200 -
+2024-11-04 14:05:02,181 Error: (psycopg2.errors.NotNullViolation) null value in column "email" of relation "Users" violates not-null constraint
+DETAIL:  Failing row contains (3, Deleted User, null, null, deleted, f, null, 2024-11-04 15:06:49.340716).
+
+[SQL: UPDATE "Users" SET name=%(name)s, email=%(email)s, password=%(password)s, role=%(role)s WHERE "Users".id = %(Users_id)s]
+[parameters: {'name': 'Deleted User', 'email': None, 'password': None, 'role': 'deleted', 'Users_id': 3}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+Traceback (most recent call last):
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.NotNullViolation: null value in column "email" of relation "Users" violates not-null constraint
+DETAIL:  Failing row contains (3, Deleted User, null, null, deleted, f, null, 2024-11-04 15:06:49.340716).
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask_jwt_extended\view_decorators.py", line 170, in decorator
+    return current_app.ensure_sync(fn)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\felip\OneDrive\Documentos\FATEC\Predictive-Health\backend\auth.py", line 23, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\felip\OneDrive\Documentos\FATEC\Predictive-Health\backend\app.py", line 537, in delete_user
+    db.session.commit()
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\scoping.py", line 597, in commit
+    return self._proxied.commit()
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\session.py", line 2028, in commit
+    trans.commit(_to_root=True)
+  File "<string>", line 2, in commit
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\session.py", line 1313, in commit
+    self._prepare_impl()
+  File "<string>", line 2, in _prepare_impl
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\session.py", line 1288, in _prepare_impl
+    self.session.flush()
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\session.py", line 4352, in flush
+    self._flush(objects)
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\session.py", line 4487, in _flush
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\util\langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\session.py", line 4448, in _flush
+    flush_context.execute()
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\unitofwork.py", line 466, in execute
+    rec.execute(self)
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\persistence.py", line 85, in save_obj
+    _emit_update_statements(
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\orm\persistence.py", line 912, in _emit_update_statements
+    c = connection.execute(
+        ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 1418, in execute
+    return meth(
+           ^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\sql\elements.py", line 515, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 1640, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 2355, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.IntegrityError: (psycopg2.errors.NotNullViolation) null value in column "email" of relation "Users" violates not-null constraint
+DETAIL:  Failing row contains (3, Deleted User, null, null, deleted, f, null, 2024-11-04 15:06:49.340716).
+
+[SQL: UPDATE "Users" SET name=%(name)s, email=%(email)s, password=%(password)s, role=%(role)s WHERE "Users".id = %(Users_id)s]
+[parameters: {'name': 'Deleted User', 'email': None, 'password': None, 'role': 'deleted', 'Users_id': 3}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2024-11-04 14:05:02,193 127.0.0.1 - - [04/Nov/2024 14:05:02] "[35m[1mDELETE /users/3 HTTP/1.1[0m" 500 -
+2024-11-04 14:05:03,976 127.0.0.1 - - [04/Nov/2024 14:05:03] "GET /users HTTP/1.1" 200 -
+2024-11-04 14:05:03,976 127.0.0.1 - - [04/Nov/2024 14:05:03] "GET /users HTTP/1.1" 200 -
+2024-11-04 14:05:04,007 127.0.0.1 - - [04/Nov/2024 14:05:04] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 14:05:04,007 127.0.0.1 - - [04/Nov/2024 14:05:04] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 14:05:04,038 127.0.0.1 - - [04/Nov/2024 14:05:04] "GET /patients HTTP/1.1" 200 -
+2024-11-04 14:05:04,038 127.0.0.1 - - [04/Nov/2024 14:05:04] "GET /patients HTTP/1.1" 200 -
+2024-11-04 14:05:43,071 127.0.0.1 - - [04/Nov/2024 14:05:43] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 14:05:43,076 127.0.0.1 - - [04/Nov/2024 14:05:43] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 14:05:43,131 127.0.0.1 - - [04/Nov/2024 14:05:43] "GET /users HTTP/1.1" 200 -
+2024-11-04 14:05:43,133 127.0.0.1 - - [04/Nov/2024 14:05:43] "GET /users HTTP/1.1" 200 -
+2024-11-04 14:05:43,703 127.0.0.1 - - [04/Nov/2024 14:05:43] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 14:05:43,705 127.0.0.1 - - [04/Nov/2024 14:05:43] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 14:05:43,730 127.0.0.1 - - [04/Nov/2024 14:05:43] "GET /patients HTTP/1.1" 200 -
+2024-11-04 14:05:43,731 127.0.0.1 - - [04/Nov/2024 14:05:43] "GET /patients HTTP/1.1" 200 -
+2024-11-04 14:05:56,805 127.0.0.1 - - [04/Nov/2024 14:05:56] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 14:05:56,852 127.0.0.1 - - [04/Nov/2024 14:05:56] "GET /patients HTTP/1.1" 200 -
+2024-11-04 14:06:02,257 127.0.0.1 - - [04/Nov/2024 14:06:02] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 14:06:02,257 127.0.0.1 - - [04/Nov/2024 14:06:02] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 14:06:02,351 127.0.0.1 - - [04/Nov/2024 14:06:02] "GET /users HTTP/1.1" 200 -
+2024-11-04 14:06:02,351 127.0.0.1 - - [04/Nov/2024 14:06:02] "GET /users HTTP/1.1" 200 -
+2024-11-04 14:06:02,524 127.0.0.1 - - [04/Nov/2024 14:06:02] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 14:06:02,524 127.0.0.1 - - [04/Nov/2024 14:06:02] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 14:06:02,633 127.0.0.1 - - [04/Nov/2024 14:06:02] "GET /patients HTTP/1.1" 200 -
+2024-11-04 14:06:02,633 127.0.0.1 - - [04/Nov/2024 14:06:02] "GET /patients HTTP/1.1" 200 -
+2024-11-04 14:19:56,348  * Detected change in 'c:\\Users\\felip\\OneDrive\\Documentos\\FATEC\\Predictive-Health\\backend\\app.py', reloading
+2024-11-04 14:19:56,363  * Detected change in 'c:\\Users\\felip\\OneDrive\\Documentos\\FATEC\\Predictive-Health\\backend\\app.py', reloading
+2024-11-04 14:19:56,363  * Detected change in 'c:\\Users\\felip\\OneDrive\\Documentos\\FATEC\\Predictive-Health\\backend\\app.py', reloading
+2024-11-04 14:19:56,363  * Detected change in 'c:\\Users\\felip\\OneDrive\\Documentos\\FATEC\\Predictive-Health\\backend\\app.py', reloading
+2024-11-04 14:19:57,187  * Restarting with watchdog (windowsapi)
+2024-11-04 14:19:58,803  * Debugger is active!
+2024-11-04 14:19:58,803  * Debugger PIN: 371-600-436
+2024-11-04 14:20:08,429  * Detected change in 'C:\\Python312\\Lib\\unittest\\__init__.py', reloading
+2024-11-04 14:20:08,430  * Detected change in 'C:\\Python312\\Lib\\unittest\\result.py', reloading
+2024-11-04 14:20:08,431  * Detected change in 'C:\\Python312\\Lib\\unittest\\util.py', reloading
+2024-11-04 14:20:08,432  * Detected change in 'C:\\Python312\\Lib\\unittest\\case.py', reloading
+2024-11-04 14:20:08,433  * Detected change in 'C:\\Python312\\Lib\\unittest\\suite.py', reloading
+2024-11-04 14:20:08,434  * Detected change in 'C:\\Python312\\Lib\\unittest\\loader.py', reloading
+2024-11-04 14:20:08,434  * Detected change in 'C:\\Python312\\Lib\\unittest\\main.py', reloading
+2024-11-04 14:20:08,435  * Detected change in 'C:\\Python312\\Lib\\unittest\\runner.py', reloading
+2024-11-04 14:20:08,436  * Detected change in 'C:\\Python312\\Lib\\unittest\\signals.py', reloading
+2024-11-04 14:20:08,438  * Detected change in 'C:\\Python312\\Lib\\fileinput.py', reloading
+2024-11-04 14:20:09,287  * Restarting with watchdog (windowsapi)
+2024-11-04 14:20:10,748  * Debugger is active!
+2024-11-04 14:20:10,753  * Debugger PIN: 371-600-436
+2024-11-04 14:20:11,931  * Detected change in 'C:\\Python312\\Lib\\_strptime.py', reloading
+2024-11-04 14:20:12,538  * Detected change in 'C:\\Python312\\Lib\\ctypes\\util.py', reloading
+2024-11-04 14:20:12,943  * Detected change in 'C:\\Python312\\Lib\\encodings\\latin_1.py', reloading
+2024-11-04 14:20:22,943 [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-11-04 14:20:22,943 [33mPress CTRL+C to quit[0m
+2024-11-04 14:20:22,959  * Restarting with watchdog (windowsapi)
+2024-11-04 14:20:24,758  * Debugger is active!
+2024-11-04 14:20:24,758  * Debugger PIN: 371-600-436
+2024-11-04 14:20:43,049 All predictive models loaded successfully
+2024-11-04 14:20:43,050 127.0.0.1 - - [04/Nov/2024 14:20:43] "OPTIONS /login HTTP/1.1" 200 -
+2024-11-04 14:20:43,443 127.0.0.1 - - [04/Nov/2024 14:20:43] "POST /login HTTP/1.1" 200 -
+2024-11-04 14:20:43,821 127.0.0.1 - - [04/Nov/2024 14:20:43] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 14:20:43,821 127.0.0.1 - - [04/Nov/2024 14:20:43] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 14:20:43,900 127.0.0.1 - - [04/Nov/2024 14:20:43] "GET /users HTTP/1.1" 200 -
+2024-11-04 14:20:43,915 127.0.0.1 - - [04/Nov/2024 14:20:43] "GET /users HTTP/1.1" 200 -
+2024-11-04 14:20:43,931 127.0.0.1 - - [04/Nov/2024 14:20:43] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 14:20:43,963 127.0.0.1 - - [04/Nov/2024 14:20:43] "GET /patients HTTP/1.1" 200 -
+2024-11-04 14:20:43,963 127.0.0.1 - - [04/Nov/2024 14:20:43] "GET /patients HTTP/1.1" 200 -
+2024-11-04 14:20:46,686 127.0.0.1 - - [04/Nov/2024 14:20:46] "GET /patients HTTP/1.1" 200 -
+2024-11-04 14:20:48,436 127.0.0.1 - - [04/Nov/2024 14:20:48] "OPTIONS /patients/12 HTTP/1.1" 200 -
+2024-11-04 14:20:48,468 127.0.0.1 - - [04/Nov/2024 14:20:48] "DELETE /patients/12 HTTP/1.1" 200 -
+2024-11-04 14:20:48,489 127.0.0.1 - - [04/Nov/2024 14:20:48] "GET /patients HTTP/1.1" 200 -
+2024-11-04 14:20:49,875 127.0.0.1 - - [04/Nov/2024 14:20:49] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 14:20:49,875 127.0.0.1 - - [04/Nov/2024 14:20:49] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 14:20:49,892 127.0.0.1 - - [04/Nov/2024 14:20:49] "GET /users HTTP/1.1" 200 -
+2024-11-04 14:20:49,907 127.0.0.1 - - [04/Nov/2024 14:20:49] "GET /users HTTP/1.1" 200 -
+2024-11-04 14:20:49,969 127.0.0.1 - - [04/Nov/2024 14:20:49] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 14:20:49,969 127.0.0.1 - - [04/Nov/2024 14:20:49] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 14:20:49,985 127.0.0.1 - - [04/Nov/2024 14:20:49] "GET /patients HTTP/1.1" 200 -
+2024-11-04 14:20:49,992 127.0.0.1 - - [04/Nov/2024 14:20:49] "GET /patients HTTP/1.1" 200 -
+2024-11-04 14:37:22,438 127.0.0.1 - - [04/Nov/2024 14:37:22] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 14:37:22,481 127.0.0.1 - - [04/Nov/2024 14:37:22] "GET /users HTTP/1.1" 200 -
+2024-11-04 14:37:22,502 127.0.0.1 - - [04/Nov/2024 14:37:22] "GET /users HTTP/1.1" 200 -
+2024-11-04 14:37:22,865 127.0.0.1 - - [04/Nov/2024 14:37:22] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 14:37:22,869 127.0.0.1 - - [04/Nov/2024 14:37:22] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 14:37:23,095 127.0.0.1 - - [04/Nov/2024 14:37:23] "GET /patients HTTP/1.1" 200 -
+2024-11-04 14:37:23,096 127.0.0.1 - - [04/Nov/2024 14:37:23] "GET /patients HTTP/1.1" 200 -
+2024-11-04 14:37:26,604 127.0.0.1 - - [04/Nov/2024 14:37:26] "GET /patients HTTP/1.1" 200 -
+2024-11-04 14:37:26,612 127.0.0.1 - - [04/Nov/2024 14:37:26] "GET /patients HTTP/1.1" 200 -
+2024-11-04 14:37:30,720 127.0.0.1 - - [04/Nov/2024 14:37:30] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 14:37:30,721 127.0.0.1 - - [04/Nov/2024 14:37:30] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 14:37:30,740 127.0.0.1 - - [04/Nov/2024 14:37:30] "GET /users HTTP/1.1" 200 -
+2024-11-04 14:37:30,740 127.0.0.1 - - [04/Nov/2024 14:37:30] "GET /users HTTP/1.1" 200 -
+2024-11-04 14:37:30,763 127.0.0.1 - - [04/Nov/2024 14:37:30] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 14:37:30,763 127.0.0.1 - - [04/Nov/2024 14:37:30] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 14:37:30,783 127.0.0.1 - - [04/Nov/2024 14:37:30] "GET /patients HTTP/1.1" 200 -
+2024-11-04 14:37:30,791 127.0.0.1 - - [04/Nov/2024 14:37:30] "GET /patients HTTP/1.1" 200 -
+2024-11-04 14:37:37,531 127.0.0.1 - - [04/Nov/2024 14:37:37] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 14:37:37,536 127.0.0.1 - - [04/Nov/2024 14:37:37] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 14:37:37,552 127.0.0.1 - - [04/Nov/2024 14:37:37] "GET /patients HTTP/1.1" 200 -
+2024-11-04 14:37:37,571 127.0.0.1 - - [04/Nov/2024 14:37:37] "GET /patients HTTP/1.1" 200 -
+2024-11-04 14:37:41,812 127.0.0.1 - - [04/Nov/2024 14:37:41] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 14:37:41,812 127.0.0.1 - - [04/Nov/2024 14:37:41] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 14:37:41,832 127.0.0.1 - - [04/Nov/2024 14:37:41] "GET /users HTTP/1.1" 200 -
+2024-11-04 14:37:41,832 127.0.0.1 - - [04/Nov/2024 14:37:41] "GET /users HTTP/1.1" 200 -
+2024-11-04 14:37:41,852 127.0.0.1 - - [04/Nov/2024 14:37:41] "GET /patients HTTP/1.1" 200 -
+2024-11-04 14:37:41,861 127.0.0.1 - - [04/Nov/2024 14:37:41] "GET /patients HTTP/1.1" 200 -
+2024-11-04 14:43:00,246  * Detected change in 'C:\\Users\\felip\\AppData\\Roaming\\Python\\Python312\\site-packages\\joblib\\__init__.py', reloading
+2024-11-04 14:43:00,249  * Detected change in 'C:\\Users\\felip\\AppData\\Roaming\\Python\\Python312\\site-packages\\joblib\\numpy_pickle.py', reloading
+2024-11-04 14:43:00,275  * Detected change in 'C:\\Users\\felip\\AppData\\Roaming\\Python\\Python312\\site-packages\\joblib\\numpy_pickle_compat.py', reloading
+2024-11-04 14:43:00,275  * Detected change in 'C:\\Users\\felip\\AppData\\Roaming\\Python\\Python312\\site-packages\\joblib\\numpy_pickle_utils.py', reloading
+2024-11-04 14:43:01,496  * Restarting with watchdog (windowsapi)
+2024-11-04 14:43:03,186  * Debugger is active!
+2024-11-04 14:43:03,190  * Debugger PIN: 371-600-436
+2024-11-04 14:48:52,343  * Detected change in 'c:\\Users\\felip\\OneDrive\\Documentos\\FATEC\\Predictive-Health\\backend\\app.py', reloading
+2024-11-04 14:48:52,345  * Detected change in 'c:\\Users\\felip\\OneDrive\\Documentos\\FATEC\\Predictive-Health\\backend\\app.py', reloading
+2024-11-04 14:48:52,347  * Detected change in 'c:\\Users\\felip\\OneDrive\\Documentos\\FATEC\\Predictive-Health\\backend\\app.py', reloading
+2024-11-04 14:48:53,397  * Restarting with watchdog (windowsapi)
+2024-11-04 14:48:55,210  * Debugger is active!
+2024-11-04 14:48:55,214  * Debugger PIN: 371-600-436
+2024-11-04 14:49:02,292 All predictive models loaded successfully
+2024-11-04 14:49:02,292 Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+Traceback (most recent call last):
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 854, in dispatch_request
+    self.raise_routing_exception(req)
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 463, in raise_routing_exception
+    raise request.routing_exception  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask\ctx.py", line 362, in match_request
+    result = self.url_adapter.match(return_rule=True)  # type: ignore
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\werkzeug\routing\map.py", line 629, in match
+    raise NotFound() from None
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+2024-11-04 14:49:02,292  * Detected change in 'C:\\Users\\felip\\AppData\\Roaming\\Python\\Python312\\site-packages\\flask\\app.py', reloading
+2024-11-04 14:49:02,292 127.0.0.1 - - [04/Nov/2024 14:49:02] "[35m[1mOPTIONS /patients/consent/:id HTTP/1.1[0m" 500 -
+2024-11-04 14:49:02,301  * Detected change in 'C:\\Users\\felip\\AppData\\Roaming\\Python\\Python312\\site-packages\\flask\\ctx.py', reloading
+2024-11-04 14:49:02,302  * Detected change in 'C:\\Users\\felip\\AppData\\Roaming\\Python\\Python312\\site-packages\\werkzeug\\routing\\map.py', reloading
+2024-11-04 14:49:02,792  * Restarting with watchdog (windowsapi)
+2024-11-04 14:49:04,223  * Debugger is active!
+2024-11-04 14:49:04,223  * Debugger PIN: 371-600-436
+2024-11-04 14:49:32,410 All predictive models loaded successfully
+2024-11-04 14:49:32,411 Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+Traceback (most recent call last):
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 854, in dispatch_request
+    self.raise_routing_exception(req)
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 463, in raise_routing_exception
+    raise request.routing_exception  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask\ctx.py", line 362, in match_request
+    result = self.url_adapter.match(return_rule=True)  # type: ignore
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\werkzeug\routing\map.py", line 629, in match
+    raise NotFound() from None
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+2024-11-04 14:49:32,412 127.0.0.1 - - [04/Nov/2024 14:49:32] "[35m[1mOPTIONS /patients/consent/:id HTTP/1.1[0m" 500 -
+2024-11-04 14:49:51,694 127.0.0.1 - - [04/Nov/2024 14:49:51] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 14:49:51,703 127.0.0.1 - - [04/Nov/2024 14:49:51] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 14:49:51,826 127.0.0.1 - - [04/Nov/2024 14:49:51] "GET /patients HTTP/1.1" 200 -
+2024-11-04 14:49:51,826 127.0.0.1 - - [04/Nov/2024 14:49:51] "GET /patients HTTP/1.1" 200 -
+2024-11-04 14:49:59,302 Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+Traceback (most recent call last):
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 854, in dispatch_request
+    self.raise_routing_exception(req)
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 463, in raise_routing_exception
+    raise request.routing_exception  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask\ctx.py", line 362, in match_request
+    result = self.url_adapter.match(return_rule=True)  # type: ignore
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\werkzeug\routing\map.py", line 629, in match
+    raise NotFound() from None
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+2024-11-04 14:49:59,304 127.0.0.1 - - [04/Nov/2024 14:49:59] "[35m[1mOPTIONS /patients/consent/:id HTTP/1.1[0m" 500 -
+2024-11-04 14:50:02,362 Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+Traceback (most recent call last):
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 854, in dispatch_request
+    self.raise_routing_exception(req)
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 463, in raise_routing_exception
+    raise request.routing_exception  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask\ctx.py", line 362, in match_request
+    result = self.url_adapter.match(return_rule=True)  # type: ignore
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\werkzeug\routing\map.py", line 629, in match
+    raise NotFound() from None
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+2024-11-04 14:50:02,362 127.0.0.1 - - [04/Nov/2024 14:50:02] "[35m[1mOPTIONS /patients/consent/:id HTTP/1.1[0m" 500 -
+2024-11-04 15:40:20,241  * Detected change in 'C:\\Python312\\Lib\\email\\__init__.py', reloading
+2024-11-04 15:40:21,271  * Restarting with watchdog (windowsapi)
+2024-11-04 15:40:24,519  * Debugger is active!
+2024-11-04 15:40:24,519  * Debugger PIN: 371-600-436
+2024-11-04 15:54:18,165  * Detected change in 'C:\\Python312\\Lib\\unittest\\__init__.py', reloading
+2024-11-04 15:54:18,183  * Detected change in 'C:\\Python312\\Lib\\unittest\\result.py', reloading
+2024-11-04 15:54:18,196  * Detected change in 'C:\\Python312\\Lib\\unittest\\util.py', reloading
+2024-11-04 15:54:18,212  * Detected change in 'C:\\Python312\\Lib\\unittest\\case.py', reloading
+2024-11-04 15:54:18,228  * Detected change in 'C:\\Python312\\Lib\\unittest\\suite.py', reloading
+2024-11-04 15:54:18,244  * Detected change in 'C:\\Python312\\Lib\\unittest\\loader.py', reloading
+2024-11-04 15:54:18,259  * Detected change in 'C:\\Python312\\Lib\\unittest\\main.py', reloading
+2024-11-04 15:54:18,275  * Detected change in 'C:\\Python312\\Lib\\unittest\\runner.py', reloading
+2024-11-04 15:54:18,275  * Detected change in 'C:\\Python312\\Lib\\unittest\\signals.py', reloading
+2024-11-04 15:54:18,307  * Detected change in 'C:\\Python312\\Lib\\fileinput.py', reloading
+2024-11-04 15:54:19,127  * Restarting with watchdog (windowsapi)
+2024-11-04 15:54:20,936  * Debugger is active!
+2024-11-04 15:54:20,951  * Debugger PIN: 371-600-436
+2024-11-04 15:54:25,193  * Detected change in 'C:\\Python312\\Lib\\_strptime.py', reloading
+2024-11-04 15:54:25,438  * Restarting with watchdog (windowsapi)
+2024-11-04 15:54:27,058  * Debugger is active!
+2024-11-04 15:54:27,058  * Debugger PIN: 371-600-436
+2024-11-04 15:54:29,360  * Detected change in 'C:\\Python312\\Lib\\ctypes\\util.py', reloading
+2024-11-04 15:54:30,573  * Restarting with watchdog (windowsapi)
+2024-11-04 15:54:32,257  * Debugger is active!
+2024-11-04 15:54:32,273  * Debugger PIN: 371-600-436
+2024-11-04 15:54:34,997  * Detected change in 'C:\\Python312\\Lib\\encodings\\latin_1.py', reloading
+2024-11-04 15:54:35,554 All predictive models loaded successfully
+2024-11-04 15:54:35,558 All predictive models loaded successfully
+2024-11-04 15:54:35,560 127.0.0.1 - - [04/Nov/2024 15:54:35] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 15:54:35,560 127.0.0.1 - - [04/Nov/2024 15:54:35] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 15:54:36,048  * Restarting with watchdog (windowsapi)
+2024-11-04 15:54:37,909  * Debugger is active!
+2024-11-04 15:54:37,916  * Debugger PIN: 371-600-436
+2024-11-04 15:55:46,134 All predictive models loaded successfully
+2024-11-04 15:55:46,134 127.0.0.1 - - [04/Nov/2024 15:55:46] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 15:55:46,166 127.0.0.1 - - [04/Nov/2024 15:55:46] "[31m[1mGET /users HTTP/1.1[0m" 401 -
+2024-11-04 15:55:46,181 All predictive models loaded successfully
+2024-11-04 15:55:46,181 127.0.0.1 - - [04/Nov/2024 15:55:46] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 15:55:46,228 127.0.0.1 - - [04/Nov/2024 15:55:46] "[31m[1mGET /users HTTP/1.1[0m" 401 -
+2024-11-04 15:55:47,109 127.0.0.1 - - [04/Nov/2024 15:55:47] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 15:55:47,109 127.0.0.1 - - [04/Nov/2024 15:55:47] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 15:55:47,284 127.0.0.1 - - [04/Nov/2024 15:55:47] "[31m[1mGET /patients HTTP/1.1[0m" 401 -
+2024-11-04 15:55:47,284 127.0.0.1 - - [04/Nov/2024 15:55:47] "[31m[1mGET /patients HTTP/1.1[0m" 401 -
+2024-11-04 15:57:31,244 127.0.0.1 - - [04/Nov/2024 15:57:31] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 15:57:31,244 127.0.0.1 - - [04/Nov/2024 15:57:31] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 15:57:31,275 127.0.0.1 - - [04/Nov/2024 15:57:31] "[31m[1mGET /patients HTTP/1.1[0m" 401 -
+2024-11-04 15:57:31,275 127.0.0.1 - - [04/Nov/2024 15:57:31] "[31m[1mGET /patients HTTP/1.1[0m" 401 -
+2024-11-04 15:58:35,416 [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-11-04 15:58:35,416 [33mPress CTRL+C to quit[0m
+2024-11-04 15:58:35,423  * Restarting with watchdog (windowsapi)
+2024-11-04 15:58:37,076  * Debugger is active!
+2024-11-04 15:58:37,076  * Debugger PIN: 371-600-436
+2024-11-04 16:00:35,901 All predictive models loaded successfully
+2024-11-04 16:00:35,901 127.0.0.1 - - [04/Nov/2024 16:00:35] "OPTIONS /login HTTP/1.1" 200 -
+2024-11-04 16:00:36,231 127.0.0.1 - - [04/Nov/2024 16:00:36] "POST /login HTTP/1.1" 200 -
+2024-11-04 16:00:36,482 127.0.0.1 - - [04/Nov/2024 16:00:36] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 16:00:36,482 127.0.0.1 - - [04/Nov/2024 16:00:36] "OPTIONS /users HTTP/1.1" 200 -
+2024-11-04 16:00:36,498 127.0.0.1 - - [04/Nov/2024 16:00:36] "GET /users HTTP/1.1" 200 -
+2024-11-04 16:00:36,523 127.0.0.1 - - [04/Nov/2024 16:00:36] "GET /users HTTP/1.1" 200 -
+2024-11-04 16:00:36,534 127.0.0.1 - - [04/Nov/2024 16:00:36] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 16:00:36,560 127.0.0.1 - - [04/Nov/2024 16:00:36] "OPTIONS /patients HTTP/1.1" 200 -
+2024-11-04 16:00:36,576 127.0.0.1 - - [04/Nov/2024 16:00:36] "GET /patients HTTP/1.1" 200 -
+2024-11-04 16:00:36,592 127.0.0.1 - - [04/Nov/2024 16:00:36] "GET /patients HTTP/1.1" 200 -
+2024-11-04 16:00:42,446 127.0.0.1 - - [04/Nov/2024 16:00:42] "OPTIONS /patients/consent/1 HTTP/1.1" 200 -
+2024-11-04 16:00:42,477 127.0.0.1 - - [04/Nov/2024 16:00:42] "POST /patients/consent/1 HTTP/1.1" 200 -
+2024-11-04 16:00:46,348 127.0.0.1 - - [04/Nov/2024 16:00:46] "POST /patients/consent/1 HTTP/1.1" 200 -
+2024-11-04 16:00:48,745 127.0.0.1 - - [04/Nov/2024 16:00:48] "OPTIONS /patients/consent/1 HTTP/1.1" 200 -
+2024-11-04 16:00:48,777 127.0.0.1 - - [04/Nov/2024 16:00:48] "POST /patients/consent/1 HTTP/1.1" 200 -
+2024-11-04 16:08:52,804 Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+Traceback (most recent call last):
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 854, in dispatch_request
+    self.raise_routing_exception(req)
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 463, in raise_routing_exception
+    raise request.routing_exception  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask\ctx.py", line 362, in match_request
+    result = self.url_adapter.match(return_rule=True)  # type: ignore
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\werkzeug\routing\map.py", line 629, in match
+    raise NotFound() from None
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+2024-11-04 16:08:52,826  * Detected change in 'C:\\Users\\felip\\AppData\\Roaming\\Python\\Python312\\site-packages\\flask\\app.py', reloading
+2024-11-04 16:08:52,858 127.0.0.1 - - [04/Nov/2024 16:08:52] "[35m[1mOPTIONS /patients/consent/current/1 HTTP/1.1[0m" 500 -
+2024-11-04 16:08:52,858  * Detected change in 'C:\\Users\\felip\\AppData\\Roaming\\Python\\Python312\\site-packages\\flask\\ctx.py', reloading
+2024-11-04 16:08:52,858  * Detected change in 'C:\\Users\\felip\\AppData\\Roaming\\Python\\Python312\\site-packages\\werkzeug\\routing\\map.py', reloading
+2024-11-04 16:08:53,405  * Restarting with watchdog (windowsapi)
+2024-11-04 16:08:54,829  * Debugger is active!
+2024-11-04 16:08:54,833  * Debugger PIN: 371-600-436
+2024-11-04 16:11:01,722 All predictive models loaded successfully
+2024-11-04 16:11:01,722 Error: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+Traceback (most recent call last):
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 854, in dispatch_request
+    self.raise_routing_exception(req)
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask\app.py", line 463, in raise_routing_exception
+    raise request.routing_exception  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\flask\ctx.py", line 362, in match_request
+    result = self.url_adapter.match(return_rule=True)  # type: ignore
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\felip\AppData\Roaming\Python\Python312\site-packages\werkzeug\routing\map.py", line 629, in match
+    raise NotFound() from None
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+2024-11-04 16:11:01,725 127.0.0.1 - - [04/Nov/2024 16:11:01] "[35m[1mOPTIONS /patients/consent/current/1 HTTP/1.1[0m" 500 -

@@ -35,9 +35,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, watch, ComponentPublicInstance } from 'vue';
 import axios from 'axios';
-import { useRouter } from 'vue-router';
+import { useRouter, RouteLocationNormalized, NavigationGuardNext} from 'vue-router';
+import eventBus from '../eventBus'
 
 export default defineComponent({
   name: 'ShowPatients',
@@ -53,6 +54,26 @@ export default defineComponent({
       error: '',
     };
   },
+
+  setup() {
+      const router = useRouter();
+      return { router };
+  },
+
+  mounted() {
+    this.fetchPatients();
+
+    watch(
+      () => eventBus.patientsUpdated, 
+      (newValue) => {
+        if (newValue) {
+          this.fetchPatients();
+          eventBus.patientsUpdated = false;
+        }
+      }
+    );
+  },
+
   methods: {
     async fetchPatients() {
       try {
@@ -67,8 +88,7 @@ export default defineComponent({
       }
     },
     viewPatientDetails(patientId: number) {
-      const router = useRouter();
-      router.push({ name: 'PatientDetails', params: { id: patientId } });
+      this.router.push({ name: 'PatientDetails', params: { id: patientId } });
     },
     async deletePatient(patientId: number) {
       try {
@@ -77,15 +97,23 @@ export default defineComponent({
             Authorization: `Bearer ${localStorage.getItem('token')}`,
           },
         });
-        this.fetchPatients(); // Refresh the patients list after deletion
+         eventBus.patientsUpdated = true;
       } catch (err) {
         this.error = err.response?.data.error || 'Failed to delete patient.';
       }
     },
   },
-  mounted() {
-    this.fetchPatients();
+
+  beforeRouteEnter(
+    to: RouteLocationNormalized,
+    from: RouteLocationNormalized,
+    next: NavigationGuardNext) {
+    
+      next((vm) => {
+        (vm as ComponentPublicInstance & { fetchPatients: () => void }).fetchPatients();
+      });
   },
+
 });
 </script>
 

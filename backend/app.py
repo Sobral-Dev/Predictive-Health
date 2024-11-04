@@ -481,13 +481,17 @@ def update_patient_consent(id):
     add_audit_log("Patient consent status updated", get_jwt_identity())
     return jsonify({"message": "Consent status updated successfully"}), 200
 
-# Endpoint 20.1: Obter Todos os Pacientes
+# Endpoint 20: Obter Todos os Pacientes
 @app.route('/patients', methods=['GET'])
 @jwt_required()
 @role_required(['admin', 'medico'])
 def get_all_patients():
     from models import Patient
-    patients = Patient.query.all()
+    patients = Patient.query.filter(
+        (Patient.medical_conditions != "Removed") &
+        (Patient.name != "Anonymous") &
+        (Patient.age.isnot(None))
+    ).all()
     patient_list = []
     for patient in patients:
         patient_data = {
@@ -501,13 +505,13 @@ def get_all_patients():
         patient_list.append(patient_data)
     return jsonify(patient_list), 200
 
-# Endpoint 20.2: Obter Todos os Usuários
+# Endpoint 21: Obter Todos os Usuários
 @app.route('/users', methods=['GET'])
 @jwt_required()
 @role_required(['admin'])
 def get_all_users():
     from models import User
-    users = User.query.all()
+    users = User.query.filter(User.role != 'deleted').all()
     users_list = []
     for user in users:
         user_data = {
@@ -519,7 +523,7 @@ def get_all_users():
         users_list.append(user_data)
     return jsonify(users_list), 200
 
-# Endpoint 21: Deletar Usuário
+# Endpoint 22: Deletar Usuário
 @app.route('/users/<int:id>', methods=['DELETE'])
 @jwt_required()
 @role_required(['admin'])
@@ -538,6 +542,54 @@ def delete_user(id):
     
     add_audit_log("User anonymized", get_jwt_identity())
     return jsonify({"message": "User anonymized successfully"}), 200
+
+# Endpoint 23: Trocar Senha do Usuário Autenticado
+@app.route('/user/change-password', methods=['PUT'])
+@jwt_required()
+def change_password():
+    from models import User
+    user_id = get_jwt_identity()
+    data = request.get_json()
+
+    old_password = data.get("old_password")
+    new_password = data.get("new_password")
+
+    if not old_password or not new_password:
+        return jsonify({"error": "Old password and new password are required"}), 400
+
+    user = User.query.get(user_id)
+    if not user or not bcrypt.check_password_hash(user.password, old_password):
+        return jsonify({"error": "Old password is incorrect"}), 401
+
+    hashed_new_password = bcrypt.generate_password_hash(new_password).decode('utf-8')
+    user.password = hashed_new_password
+    db.session.commit()
+
+    add_audit_log("User password changed", user_id)
+    return jsonify({"message": "Password changed successfully"}), 200
+
+# Endpoint 24: Atualizar Informações de Usuário
+@app.route('/users/<int:id>', methods=['PUT'])
+@jwt_required()
+@role_required(['admin'])
+def update_user(id):
+    from models import User
+    data = request.get_json()
+
+    user = User.query.get(id)
+    if not user:
+        return jsonify({"error": "User not found"}), 404
+
+    if "name" in data:
+        user.name = data['name']
+    if "email" in data:
+        user.email = data['email']
+    if "role" in data:
+        user.role = data['role']
+
+    db.session.commit()
+    add_audit_log("User data updated", get_jwt_identity())
+    return jsonify({"message": "User updated successfully"}), 200
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -16,8 +16,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, watch, ComponentPublicInstance } from 'vue';
 import axios from 'axios';
+import { useRouter, RouteLocationNormalized, NavigationGuardNext} from 'vue-router';
 
 export default defineComponent({
   name: 'PersonalDataExport',
@@ -26,6 +27,7 @@ export default defineComponent({
       error: '',
     };
   },
+
   methods: {
     async exportData(format: string) {
       try {
@@ -51,6 +53,7 @@ export default defineComponent({
       }
     },
   },
+  
 });
 </script>
 

@@ -57,8 +57,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, watch, ComponentPublicInstance } from 'vue';
 import axios from 'axios';
+import { useRouter, RouteLocationNormalized, NavigationGuardNext} from 'vue-router';
 
 export default defineComponent({
   name: 'UserProfile',
@@ -74,6 +75,11 @@ export default defineComponent({
       message: '',
     };
   },
+
+  mounted() {
+    this.fetchUserProfile();
+  },
+
   methods: {
     async fetchUserProfile() {
       try {
@@ -110,9 +116,17 @@ export default defineComponent({
       this.fetchUserProfile();
     },
   },
-  mounted() {
-    this.fetchUserProfile();
+
+  beforeRouteEnter(
+    to: RouteLocationNormalized,
+    from: RouteLocationNormalized,
+    next: NavigationGuardNext) {
+    
+      next((vm) => {
+        (vm as ComponentPublicInstance & { fetchUserProfile: () => void }).fetchUserProfile();
+      });
   },
+
 });
 </script>
 

@@ -31,9 +31,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, watch, ComponentPublicInstance } from 'vue';
 import axios from 'axios';
-import { useRouter } from 'vue-router';
+import { useRouter, RouteLocationNormalized, NavigationGuardNext} from 'vue-router';
+import eventBus from '../eventBus'
 
 export default defineComponent({
   name: 'PatientDetails',
@@ -48,6 +49,26 @@ export default defineComponent({
       error: '',
     };
   },
+
+    setup() {
+      const router = useRouter();
+      return { router };
+  },
+
+  mounted() {
+    this.fetchPatientDetails();
+
+     watch(
+      () => eventBus.patientsUpdated, 
+      (newValue) => {
+        if (newValue) {
+          this.fetchPatientDetails();
+          eventBus.patientsUpdated = false;
+        }
+      }
+    );
+  },
+
   methods: {
     async fetchPatientDetails() {
       try {
@@ -62,13 +83,20 @@ export default defineComponent({
       }
     },
     goBack() {
-      const router = useRouter();
-      router.push({ name: 'ShowPatients' });
+      this.router.push({ name: 'ShowPatients' });
     },
   },
-  mounted() {
-    this.fetchPatientDetails();
+
+    beforeRouteEnter(
+    to: RouteLocationNormalized,
+    from: RouteLocationNormalized,
+    next: NavigationGuardNext) {
+    
+      next((vm) => {
+        (vm as ComponentPublicInstance & { fetchPatientDetails: () => void }).fetchPatientDetails();
+      });
   },
+
 });
 </script>
 

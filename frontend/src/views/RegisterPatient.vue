@@ -54,8 +54,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, watch, ComponentPublicInstance } from 'vue';
 import axios from 'axios';
+import { useRouter, RouteLocationNormalized, NavigationGuardNext} from 'vue-router';
+import eventBus from '../eventBus'
 
 export default defineComponent({
   name: 'RegisterPatient',
@@ -71,6 +73,7 @@ export default defineComponent({
       error: '',
     };
   },
+
   methods: {
     async registerPatient() {
       try {
@@ -92,6 +95,7 @@ export default defineComponent({
         this.message = response.data.message || 'Patient registered successfully.';
         this.error = '';
         this.resetForm();
+        eventBus.patientsUpdated = true;
       } catch (err) {
         this.error = err.response?.data.error || 'Failed to register patient.';
         this.message = '';
@@ -104,6 +108,7 @@ export default defineComponent({
       this.form.consent_status = 'true';
     },
   },
+  
 });
 </script>
 

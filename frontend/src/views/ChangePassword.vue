@@ -47,8 +47,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, watch, ComponentPublicInstance } from 'vue';
 import axios from 'axios';
+import { useRouter, RouteLocationNormalized, NavigationGuardNext} from 'vue-router';
 
 export default defineComponent({
   name: 'ChangePassword',
@@ -61,6 +62,7 @@ export default defineComponent({
       error: '',
     };
   },
+
   methods: {
     async changePassword() {
       if (this.newPassword !== this.confirmPassword) {
@@ -70,7 +72,7 @@ export default defineComponent({
 
       try {
         const response = await axios.put(
-          'http://localhost:5000/user/me',
+          'http://localhost:5000/user/change-password',
           {
             old_password: this.oldPassword,
             new_password: this.newPassword,
@@ -89,6 +91,7 @@ export default defineComponent({
       }
     },
   },
+  
 });
 </script>
 
