@@ -5,6 +5,7 @@ class UserSchema(Schema):
     email = fields.Email(required=True)
     password = fields.Str(required=True, validate=validate.Length(min=6))
     role = fields.Str(required=True, validate=validate.OneOf(["admin", "medico", "paciente"]))
+    cpf = fields.Int(required=True, validate=validate.Length(max=11))
 
 class ConsentSchema(Schema):
     consent_status = fields.Boolean(required=True)

@@ -50,6 +50,13 @@ const routes: Array<RouteRecordRaw> = [
     props: true,
   },
   {
+    path: '/initial-consent/:id',
+    name: 'InitialConsent',
+    component: ConsentUpdate,
+    meta: { requiresAuth: true },
+    props: true,
+  },
+  {
     path: '/health-prediction',
     name: 'HealthPrediction',
     component: HealthPrediction,

@@ -3,7 +3,18 @@
     <h1 class="page-title">Update Consent</h1>
 
     <section class="consent-section">
-      <p>Current State: <p>{{ current_consent }}</p></p> 
+
+      <p v-if="$route.name === 'ConsentUpdate'">Current State: 
+        <b :style="current_consent === true ? 'color: blue;' : 'color: red;' ">
+        {{ error === '' ? current_consent === true ? 'Given' : 'Revoked'  : `You haven't got a patient history yet` }}
+        </b>
+      </p>
+
+      <p v-else class="initial-consent">
+        We respect your privacy, so we need your consent for your data to be used to make health predictions. <br> 
+        <b>Don't worry, you can change your consent status at any time and deleting your account will automatically anonymize your personal information.</b>
+      </p> 
+
       <form @submit.prevent="updateConsent">
         <div class="form-group">
           <label for="consent-status">Switch to:</label>
@@ -17,7 +28,7 @@
       </form>
 
       <p v-if="message" class="message">{{ message }}</p>
-      <p v-if="error" class="error">{{ error }}</p>
+      <p v-if="error && error !== 'No Patient'" class="error">{{ error }}</p>
     </section>
   </div>
 </template>
@@ -35,8 +46,13 @@ export default defineComponent({
       consentStatus: 'true',
       message: '',
       error: '',
-      current_consent: '',
+      current_consent: ''
     };
+  },
+
+  setup() {
+    const router = useRouter();
+    return { router };
   },
 
   mounted() {
@@ -44,62 +60,112 @@ export default defineComponent({
   },
 
   methods: {
+    
     async updateConsent() {
-      try {
-        const response = await axios.post(
-          `http://localhost:5000/patients/consent/${globalData.user_id}`,
-          {
-            consent_status: this.consentStatus === 'true',
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem('token')}`,
+
+      if (this.$route.name !== 'ConsentUpdate') {
+        
+        return this.initialConsent();
+      
+      } else {
+
+        try {
+          const response = await axios.post(
+            `http://localhost:5000/update-consent`,
+            {
+              consent_status: this.consentStatus === 'true',
             },
-          }
-        );
-        this.getConsentStatus();
-        this.message = response.data.message || 'Consent updated successfully.';
-        this.error = '';
-      } catch (err) {
-        this.error = err.response?.data.error || 'Failed to update consent.';
-        this.message = '';
-      }
+            {
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+              },
+            }
+          );
+          this.getConsentStatus();
+          this.message = response.data.message || 'Consent updated successfully.';
+          this.error = '';
+        } catch (err) {
+          this.error = err.response?.data.error || 'Failed to update consent.';
+          this.message = '';
+        }
+
+      };
+
     },
 
     async getConsentStatus() {
-      try {
-        const response = await axios.get(
-          `http://localhost:5000/patients/consent/current/${globalData.user_id}`,
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem('token')}`,
-            },
-          }
-        );
 
-        this.current_consent = response.data.current_consent;
+      if (this.$route.name === 'ConsentUpdate') {
+        
+        try {
+          const response = await axios.get(
+            `http://localhost:5000/patients/consent/current`,
+            {
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+              },
+            }
+          );
 
-      } catch (err) {
-        this.error = err.response?.data.error || 'Failed to get current state of consent.';
-        this.message = '';
-      }
+          this.current_consent = response.data.current_consent;
+
+        } catch (err) {
+          this.error = 'No Patient';
+        }
+
+      };
     },
-  },
 
-  beforeRouteEnter(
-    to: RouteLocationNormalized,
-    from: RouteLocationNormalized,
-    next: NavigationGuardNext) {
-    
-      next((vm) => {
-        (vm as ComponentPublicInstance & { getConsentStatus: () => void }).getConsentStatus();
-      });
+    async initialConsent() {
+        try {
+          const response = await axios.post(
+            `http://localhost:5000/consent-initial`,
+            {
+              consent_status: this.consentStatus === 'true',
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+              },
+            }
+          );
+          this.message = response.data.message || 'Consent updated successfully.';
+          this.error = '';
+          globalData.user_consent = this.consentStatus === 'true';
+          this.router.push({ name: 'UpdateConsent' })
+        } catch (err) {
+          this.error = err.response?.data.error || 'Failed to update consent.';
+          this.message = '';
+        }
+    },
+
+    beforeRouteEnter(
+      to: RouteLocationNormalized,
+      from: RouteLocationNormalized,
+      next: NavigationGuardNext) {
+      
+        next((vm) => {
+          (vm as ComponentPublicInstance & { getConsentStatus: () => void }).getConsentStatus();
+        });
+
+    },
+
   },
 
 });
 </script>
 
 <style scoped>
+@import '../assets/css/base.css';
+
+.initial-consent {
+  color: var(--azul-contraste);
+}
+
+.initial-consent b {
+  color: var(--azul-vibrante);
+}
+
 .consent-update {
   /* Estilos da página de atualização de consentimento */
 }

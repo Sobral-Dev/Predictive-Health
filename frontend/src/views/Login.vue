@@ -38,7 +38,8 @@
 import { defineComponent, watch, ComponentPublicInstance } from 'vue';
 import axios from 'axios';
 import { useRouter, RouteLocationNormalized, NavigationGuardNext} from 'vue-router';
-import globalData from '../globalData'
+import globalData from '../globalData';
+import eventBus from '../eventBus';
 
 export default defineComponent({
   name: 'Login',
@@ -46,7 +47,7 @@ export default defineComponent({
     return {
       email: '',
       password: '',
-      error: '',
+      error: ''
     };
   },
 
@@ -71,20 +72,27 @@ export default defineComponent({
         globalData.user_role = response.data.user_role;
         globalData.user_name = response.data.user_name;
         globalData.isAuthenticated = true;
+        globalData.user_consent = response.data.consent_status
 
         // Navigate to the appropriate page based on user role
-        this.navigateToDashboard(response.data.user_role);
+        this.navigateToDashboard(response.data.user_role, response.data.consent_status, response.data.user_id);
       } catch (err) {
         this.error = err.response?.data.error || err;
       }
     },
-    navigateToDashboard(role: string) {
+
+    navigateToDashboard(role: string, consent_status: string | null, id: number) {
+
+      if (consent_status === null) {
+        return this.router.push(`/initial-consent/${id}`);
+      } 
+
       if (role === 'admin') {
-        this.router.push({ name: 'AdminDashboard' });
+        return this.router.push({ name: 'AdminDashboard' });
       } else if (role === 'medico') {
-        this.router.push({ name: 'ShowPatients' });
+        return this.router.push({ name: 'ShowPatients' });
       } else {
-        this.router.push({ name: 'UserProfile' });
+        return this.router.push({ name: 'UserProfile' });
       }
     },
   },

@@ -5,6 +5,7 @@ interface UserData {
   user_role: string;
   user_name: string;
   isAuthenticated: boolean;
+  user_consent: boolean | null;
 }
 
 const globalData = reactive<UserData>({
@@ -12,6 +13,7 @@ const globalData = reactive<UserData>({
   user_role: '',
   user_name: '',
   isAuthenticated: false,
+  user_consent: null
 });
 
 export default globalData;

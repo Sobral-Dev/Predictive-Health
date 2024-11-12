@@ -5,6 +5,7 @@ from datetime import timedelta
 from flask_mail import Mail, Message
 from flask_cors import CORS
 from flask_migrate import Migrate
+from sqlalchemy.exc import IntegrityError
 import uuid
 import logging
 import joblib
@@ -46,15 +47,15 @@ def load_models():
     global diabetes_model, hypertension_model, stroke_model
     if not first_request_executed:
         try:
-            diabetes_model = joblib.load(r'./models/diabetes_model.pkl')
+            diabetes_model = joblib.load(r'C:\Users\felip\OneDrive\Documentos\FATEC\Predictive-Health\models\diabetes_model.pkl')
         except Exception as e:
             print(f"Erro ao carregar o modelo de Diabetes: {e}")
         try:
-            hypertension_model = joblib.load(r'./models/hypertension_model.pkl')
+            hypertension_model = joblib.load(r'C:\Users\felip\OneDrive\Documentos\FATEC\Predictive-Health\models\hypertension_model.pkl')
         except Exception as e:
             print(f"Erro ao carregar o modelo de Hipertensão: {e}")
         try:
-            stroke_model = joblib.load(r'./models/stroke_model.pkl')
+            stroke_model = joblib.load(r'C:\Users\felip\OneDrive\Documentos\FATEC\Predictive-Health\models\stroke_model.pkl')
         except Exception as e:
             print(f"Erro ao carregar o modelo de AVC: {e}")
         first_request_executed = True
@@ -85,22 +86,36 @@ def home():
 def register():
     from models import User
     from schemas import UserSchema
+
     data = request.get_json()
     user_schema = UserSchema()
     errors = user_schema.validate(data)
+
     if errors:
         return jsonify(errors), 400
 
     hashed_password = bcrypt.generate_password_hash(data['password']).decode('utf-8')
-    new_user = User(
-        name=data['name'],
-        email=data['email'],
-        password=hashed_password,
-        role=data['role']
-    )
-    db.session.add(new_user)
-    db.session.commit()
-    add_audit_log("User registered", new_user.id)
+    
+    try:
+        new_user = User(
+            name=data['name'],
+            email=data['email'],
+            password=hashed_password,
+            role=data['role'],
+            cpf=data['cpf']
+        )
+        db.session.add(new_user)
+        db.session.commit()
+        add_audit_log("User registered", new_user.id)
+
+    except IntegrityError as e:
+        db.session.rollback() 
+        
+        if 'duplicate key value violates unique constraint' in str(e.orig):
+            return jsonify({"error": "CPF already registered"}), 409
+        
+        return jsonify({"error": "Database integrity error"}), 500
+    
     return jsonify({"message": "User registered successfully", "user_id": new_user.id}), 201
 
 # Endpoint 2: Solicitar Consentimento Inicial
@@ -108,21 +123,39 @@ def register():
 @jwt_required()
 def consent_initial():
     from models import User
+    from models import Patient
     from schemas import ConsentSchema
+
     user_id = get_jwt_identity()
     data = request.get_json()
     consent_schema = ConsentSchema()
     errors = consent_schema.validate(data)
+
     if errors:
         return jsonify(errors), 400
 
-    user = User.query.get(user_id)
-    if not user:
-        return jsonify({"error": "User not found"}), 404
+    try:
+        user = User.query.get(user_id)
+        if not user:
+            return jsonify({"error": "User not found"}), 404
 
-    user.consent_status = data['consent_status']
-    db.session.commit()
-    add_audit_log("Consent updated", user_id)
+        user.consent_status = data['consent_status']
+        db.session.commit()
+        add_audit_log("Consent User updated", user_id)
+
+        try:
+            patient = Patient.query.filter_by(cpf=user.cpf).first()
+            if not patient:
+                pass
+            patient.consent_status = data['consent_status']
+            db.session.commit()
+            add_audit_log("Consent Patient updated", user_id)
+        except:
+            pass
+    
+    except Exception as e: 
+        return jsonify({"message": f"Error when trying to update consent status: {e}"}), 400
+
     return jsonify({"message": "Consent updated successfully"}), 200
 
 # Endpoint 3: Login de Usuário
@@ -135,7 +168,8 @@ def login():
 
     access_token = create_access_token(identity=user.id, expires_delta=timedelta(hours=1))
     add_audit_log("User logged in", user.id)
-    return jsonify({"access_token": access_token, "user_name": user.name, "user_id": user.id, "user_role": user.role}), 200
+
+    return jsonify({"access_token": access_token, "user_name": user.name, "user_id": user.id, "user_role": user.role, "consent_status": user.consent_status}), 200
 
 # Endpoint 4: Logout de Usuário
 @app.route('/logout', methods=['POST'])
@@ -145,6 +179,7 @@ def logout():
     revoke_token(jti)
     user_id = get_jwt_identity()
     add_audit_log("User logged out", user_id)
+
     return jsonify({"message": "Logged out successfully"}), 200
 
 # Endpoint 5: Visualizar Dados Pessoais
@@ -152,6 +187,7 @@ def logout():
 @jwt_required()
 def get_user_data():
     from models import User
+
     user_id = get_jwt_identity()
     user = User.query.get(user_id)
     if not user:
@@ -181,11 +217,20 @@ def update_user_data():
     if "name" in data:
         user.name = data['name']
     if "email" in data:
-        # Adicionar verificação de duplicidade de e-mail se necessário
         user.email = data['email']
 
-    db.session.commit()
-    add_audit_log("User data updated", user_id)
+    try:
+        db.session.commit()
+        add_audit_log("User data updated", user_id)
+
+    except IntegrityError as e:
+        db.session.rollback() 
+
+        if 'duplicate key value violates unique constraint' in str(e.orig):
+            return jsonify({"error": "Email already registered"}), 409
+        
+        return jsonify({"error": "Database integrity error"}), 500
+    
     return jsonify({"message": "User data updated successfully"}), 200
 
 # Endpoint 7: Exportar Dados Pessoais
@@ -193,6 +238,7 @@ def update_user_data():
 @jwt_required()
 def export_user_data():
     from models import User
+
     user_id = get_jwt_identity()
     user = User.query.get(user_id)
 
@@ -207,7 +253,7 @@ def export_user_data():
         "consent_status": user.consent_status,
         "created_at": user.created_at
     }
-    # Retornando dados em formato JSON como exemplo; pode ser exportado para CSV se necessário
+    
     return jsonify(export_data), 200
 
 # Endpoint 8: Solicitar Redefinição de Senha
@@ -217,11 +263,11 @@ def password_reset_request():
     data = request.get_json()
     email = data.get("email")
     user = User.query.filter_by(email=email).first()
+    
     if not user:
         return jsonify({"error": "Email not found"}), 404
 
     reset_token = str(uuid.uuid4())
-    # Salvar o token no banco de dados associado ao usuário (exemplo simplificado)
     user.reset_token = reset_token
     db.session.commit()
 
@@ -247,7 +293,7 @@ def password_reset():
 
     hashed_password = bcrypt.generate_password_hash(new_password).decode('utf-8')
     user.password = hashed_password
-    user.reset_token = None  # Invalida o token após o uso
+    user.reset_token = None  
     db.session.commit()
 
     return jsonify({"message": "Password updated successfully"}), 200
@@ -258,24 +304,36 @@ def password_reset():
 @role_required(['admin', 'medico'])
 def create_patient():
     from models import Patient
+    
     data = request.get_json()
     
-    if not data.get("name") or not data.get("age") or not data.get("medical_conditions"):
+    if not data.get("name") or not data.get("age") or not data.get("medical_conditions") or not data.get("cpf"):
         return jsonify({"error": "Missing required fields"}), 400
 
     consent_status = data.get("consent_status")
     if consent_status is None:
         return jsonify({"error": "Consent status is required"}), 400
 
-    new_patient = Patient(
-        name=data['name'],
-        age=data['age'],
-        medical_conditions=data['medical_conditions'],
-        consent_status=consent_status
-    )
-    db.session.add(new_patient)
-    db.session.commit()
-    add_audit_log("Patient created", get_jwt_identity())
+    try:
+        new_patient = Patient(
+            name=data['name'],
+            age=data['age'],
+            medical_conditions=data['medical_conditions'],
+            consent_status=consent_status,
+            cpf=data['cpf']
+        )
+        db.session.add(new_patient)
+        db.session.commit()
+        add_audit_log("Patient created", get_jwt_identity())
+    
+    except IntegrityError as e:
+        db.session.rollback()  
+   
+        if 'duplicate key value violates unique constraint' in str(e.orig):
+            return jsonify({"error": "CPF already registered"}), 409
+    
+        return jsonify({"error": "Database integrity error"}), 500
+
     return jsonify({"message": "Patient created successfully", "patient_id": new_patient.id}), 201
 
 # Endpoint 11: Obter Dados do Paciente
@@ -327,6 +385,7 @@ def update_patient(id):
 @role_required(['admin'])
 def delete_patient(id):
     from models import Patient
+
     patient = Patient.query.get(id)
     if not patient:
         return jsonify({"error": "Patient not found"}), 404
@@ -336,6 +395,7 @@ def delete_patient(id):
     patient.age = None
     patient.medical_conditions = "Removed"
     patient.consent_status = False
+    patient.cpf = "Anonymous"
 
     db.session.commit()
     add_audit_log("Patient data anonymized", get_jwt_identity())
@@ -344,7 +404,7 @@ def delete_patient(id):
 # Endpoint 14: Predição de Diabetes
 @app.route('/predict/diabetes', methods=['POST'])
 @jwt_required()
-@role_required(['admin', 'medico'])
+@role_required(['admin', 'medico', 'paciente'])
 def predict_diabetes():
     data = request.get_json()
 
@@ -370,7 +430,7 @@ def predict_diabetes():
 # Endpoint 15: Predição de Hipertensão
 @app.route('/predict/hypertension', methods=['POST'])
 @jwt_required()
-@role_required(['admin', 'medico'])
+@role_required(['admin', 'medico', 'paciente'])
 def predict_hypertension():
     data = request.get_json()
 
@@ -396,7 +456,7 @@ def predict_hypertension():
 # Endpoint 16: Predição de AVC
 @app.route('/predict/stroke', methods=['POST'])
 @jwt_required()
-@role_required(['admin', 'medico'])
+@role_required(['admin', 'medico', 'paciente'])
 def predict_stroke():
     data = request.get_json()
 
@@ -438,12 +498,20 @@ def get_audit_log():
     return jsonify(log_list), 200
 
 # Endpoint 18: Exportar Dados de um Paciente
-@app.route('/patients/export/<int:id>', methods=['GET'])
+@app.route('/patients/export/<int:id>/<string:role>', methods=['GET'])
 @jwt_required()
-@role_required(['admin', 'medico'])
-def export_patient_data(id):
+@role_required(['admin', 'medico', 'paciente'])
+def export_patient_data(id, role):
     from models import Patient
-    patient = Patient.query.get(id)
+    from models import User
+
+    if role != 'paciente':
+        patient = Patient.query.get(id)
+
+    else:
+        user = User.query.get(id)
+        patient = Patient.query.filter_by(cpf=user.cpf).first()
+
     if not patient:
         return jsonify({"error": "Patient not found"}), 404
 
@@ -460,26 +528,57 @@ def export_patient_data(id):
         "created_at": patient.created_at
     }
     add_audit_log("Patient data exported", get_jwt_identity())
+
     return jsonify(export_data), 200
 
-# Endpoint 19: Atualizar Consentimento de Paciente
-@app.route('/patients/consent/<int:id>', methods=['POST'])
+# Endpoint 19: Atualizar Consentimento Usuário/Paciente
+@app.route('/update-consent', methods=['POST'])
 @jwt_required()
-@role_required(['admin', 'medico'])
-def update_patient_consent(id):
+def update_consent():
+
     from models import Patient
+    from models import User
+    
+    user_id = get_jwt_identity()
     data = request.get_json()
-    patient = Patient.query.get(id)
-    if not patient:
-        return jsonify({"error": "Patient not found"}), 404
 
     if 'consent_status' not in data:
         return jsonify({"error": "Consent status is required"}), 400
 
-    patient.consent_status = data['consent_status']
-    db.session.commit()
-    add_audit_log("Patient consent status updated", get_jwt_identity())
-    return jsonify({"message": "Consent status updated successfully"}), 200
+    user_consent = None
+    try:
+        user = User.query.get(user_id)
+        
+        if not user:
+            return jsonify({"error": "User not found"}), 404
+        
+        user.consent_status = data['consent_status']
+        db.session.commit()
+        add_audit_log("User consent status updated", get_jwt_identity())
+
+        user_consent = 'User Consent update successfully'
+
+    except Exception as e:
+        return jsonify({"error": f"An error ocurred when trying update User consent status: {e}"}), 400
+    
+    patient_consent = None
+    try:
+        patient = Patient.query.filter_by(cpf=user.cpf).first()
+    
+        if not patient:
+            add_audit_log("User without Patient history", get_jwt_identity())
+        
+        patient.consent_status = data['consent_status']
+        db.session.commit()
+        add_audit_log("Patient consent status updated", get_jwt_identity())
+
+        patient_consent = 'Patient Consent update successfully'
+
+    except Exception as e:
+        patient_consent = f"An error ocurred when trying update Patient consent status: {e}"    
+
+    return jsonify({"message": "Consent status updated successfully", 
+                    "user_consent": user_consent, "patient_consent": patient_consent}), 200
 
 # Endpoint 20: Obter Todos os Pacientes
 @app.route('/patients', methods=['GET'])
@@ -511,7 +610,7 @@ def get_all_patients():
 @role_required(['admin'])
 def get_all_users():
     from models import User
-    users = User.query.filter(User.role != 'deleted').all()
+    users = User.query.filter(User.role != 'Deleted User').all()
     users_list = []
     for user in users:
         user_data = {
@@ -529,15 +628,18 @@ def get_all_users():
 @role_required(['admin'])
 def delete_user(id):
     from models import User
+
     user = User.query.get(id)
     if not user:
         return jsonify({"error": "User not found"}), 404
 
     # Exclusão lógica: Anonimizar o usuário
+    user.id = id
     user.name = "Deleted User"
-    user.email = None
-    user.password = None
-    user.role = "deleted"
+    user.email = "Deleted User"
+    user.password = "Deleted User"
+    user.role = "Deleted User"
+    user.cpf = "Deleted User"
     db.session.commit()
     
     add_audit_log("User anonymized", get_jwt_identity())
@@ -548,6 +650,7 @@ def delete_user(id):
 @jwt_required()
 def change_password():
     from models import User
+
     user_id = get_jwt_identity()
     data = request.get_json()
 
@@ -590,6 +693,30 @@ def update_user(id):
     db.session.commit()
     add_audit_log("User data updated", get_jwt_identity())
     return jsonify({"message": "User updated successfully"}), 200
+
+# Endpoint 25: Obter o estado atual de Consentimento do Usuário Logado
+@app.route('/patients/consent/current', methods=['GET'])
+@jwt_required()
+def get_current_consent():
+
+    from models import Patient
+    from models import User
+
+    user_id = get_jwt_identity()
+
+    user = User.query.get(user_id)
+
+    if user.role != 'paciente':
+        patient = Patient.query.filter_by(cpf=user.cpf).first()
+
+        add_audit_log("Current patient consent status obtained", get_jwt_identity())
+        return jsonify({"consent_status": patient.consent_status}), 200
+
+    else:
+        patient = Patient.query.filter_by(cpf=user.cpf).first()
+        if not patient:
+            return jsonify({"error": "Patient not found"}), 404     
+
 
 if __name__ == '__main__':
     app.run(debug=True)

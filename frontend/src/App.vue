@@ -1,17 +1,13 @@
 <script lang="ts">
 import { RouterView } from 'vue-router'
-import Sidebar from './components/Sidebar.vue'
-import { defineComponent } from 'vue'
-import eventBus from './eventBus'
+import { defineComponent, watch, ComponentPublicInstance } from 'vue';
+import Sidebar from './components/Sidebar.vue';
 
 export default defineComponent({
   name: 'App',
   data() {
     return {
     }
-  },
-
-  created() {
   },
 
   components: {

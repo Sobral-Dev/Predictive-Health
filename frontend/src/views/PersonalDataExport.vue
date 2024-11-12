@@ -19,6 +19,7 @@
 import { defineComponent, watch, ComponentPublicInstance } from 'vue';
 import axios from 'axios';
 import { useRouter, RouteLocationNormalized, NavigationGuardNext} from 'vue-router';
+import globalData from '../globalData';
 
 export default defineComponent({
   name: 'PersonalDataExport',
@@ -31,7 +32,9 @@ export default defineComponent({
   methods: {
     async exportData(format: string) {
       try {
-        const response = await axios.get(`http://localhost:5000/patients/export/${this.$route.params.id}?format=${format}`, {
+
+        const response = await axios.get(`http://localhost:5000/patients/export/
+          ${globalData.user_role === 'paciente' ? `${globalData.user_id}?format=${format}/${globalData.user_role}` : `${this.$route.params.id}?format=${format}/${globalData.user_role}`}`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`,
           },
