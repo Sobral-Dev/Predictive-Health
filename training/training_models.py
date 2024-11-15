@@ -1,132 +1,58 @@
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, confusion_matrix
-from sklearn.impute import SimpleImputer
 from sklearn.model_selection import train_test_split
 import pandas as pd
 import joblib
 
-# Recarregar o dataset de diabetes
-diabetes_data = pd.read_csv(r'./health-predictive-dataset/diabetes_data.csv')
+# --- Modelo de Diabetes ---
+# Carregar o dataset de diabetes
+diabetes_data = pd.read_csv('../health-predictive-dataset/diabetes_data.csv')
 
-# Separação das features (X) e do alvo (y)
-X = diabetes_data.drop(columns=['Diabetes'])
-y = diabetes_data['Diabetes']
+# Seleção das features e do alvo para diabetes
+X_diabetes = diabetes_data[['Age', 'BMI', 'HighChol', 'HighBP', 'PhysActivity', 'GenHlth', 'Smoker']]
+y_diabetes = diabetes_data['Diabetes']
 
-# Divisão em dados de treino e teste
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+# Divisão em treino e teste
+X_train_d, X_test_d, y_train_d, y_test_d = train_test_split(X_diabetes, y_diabetes, test_size=0.2, random_state=42)
 
-# Treinamento do modelo Random Forest com os melhores hiperparâmetros encontrados
-best_model_random = RandomForestClassifier(
-    n_estimators=50,
-    min_samples_split=5,
-    min_samples_leaf=1,
-    max_features='sqrt',
-    max_depth=10,
-    random_state=42
-)
+# Treinamento
+model_diabetes = RandomForestClassifier(n_estimators=50, min_samples_split=5, min_samples_leaf=1, max_features='sqrt', max_depth=10, random_state=42)
+model_diabetes.fit(X_train_d, y_train_d)
 
-# Ajuste do modelo com os dados de treino
-best_model_random.fit(X_train, y_train)
+# Avaliação
+y_pred_d = model_diabetes.predict(X_test_d)
+print("Acurácia Diabetes:", accuracy_score(y_test_d, y_pred_d))
+print("Matriz de Confusão Diabetes:\n", confusion_matrix(y_test_d, y_pred_d))
 
-# Predição nos dados de teste
-y_pred_best_random = best_model_random.predict(X_test)
+# --- Modelo de Hipertensão ---
+hypertension_data = pd.read_csv('../health-predictive-dataset/hypertension_data.csv')
+X_hypertension = hypertension_data[['age', 'trestbps', 'chol', 'thalach', 'exang', 'oldpeak', 'cp']]
+y_hypertension = hypertension_data['target']
 
-# Avaliação do modelo otimizado
-best_accuracy_random = accuracy_score(y_test, y_pred_best_random)
-best_conf_matrix_random = confusion_matrix(y_test, y_pred_best_random)
+X_train_h, X_test_h, y_train_h, y_test_h = train_test_split(X_hypertension, y_hypertension, test_size=0.2, random_state=42)
 
-# Resultados
-print(f"Acurácia do Melhor Modelo: {best_accuracy_random}")
-print(f"Matriz de Confusão do Melhor Modelo:\n{best_conf_matrix_random}")
+model_hypertension = RandomForestClassifier(n_estimators=50, min_samples_split=5, min_samples_leaf=2, max_features='sqrt', max_depth=None, random_state=42)
+model_hypertension.fit(X_train_h, y_train_h)
 
-# Carregar o dataset de hipertensão
-hypertension_data = pd.read_csv(r'./health-predictive-dataset/hypertension_data.csv')
+y_pred_h = model_hypertension.predict(X_test_h)
+print("Acurácia Hipertensão:", accuracy_score(y_test_h, y_pred_h))
+print("Matriz de Confusão Hipertensão:\n", confusion_matrix(y_test_h, y_pred_h))
 
-# Tratar valores nulos na coluna 'sex' com a moda
-hypertension_data['sex'].fillna(hypertension_data['sex'].mode()[0], inplace=True)
-
-# Separação das features (X) e do alvo (y)
-X_hyper = hypertension_data.drop(columns=['target'])
-y_hyper = hypertension_data['target']
-
-# Divisão em dados de treino e teste
-X_train_hyper, X_test_hyper, y_train_hyper, y_test_hyper = train_test_split(X_hyper, y_hyper, test_size=0.2, random_state=42)
-
-# Treinamento do modelo Random Forest com os melhores hiperparâmetros encontrados
-best_model_hyper = RandomForestClassifier(
-    n_estimators=50,
-    min_samples_split=5,
-    min_samples_leaf=2,
-    max_features='sqrt',
-    max_depth=None,
-    random_state=42
-)
-
-# Ajuste do modelo com os dados de treino
-best_model_hyper.fit(X_train_hyper, y_train_hyper)
-
-# Predição nos dados de teste
-y_pred_best_hyper = best_model_hyper.predict(X_test_hyper)
-
-# Avaliação do modelo otimizado
-best_accuracy_hyper = accuracy_score(y_test_hyper, y_pred_best_hyper)
-best_conf_matrix_hyper = confusion_matrix(y_test_hyper, y_pred_best_hyper)
-
-# Resultados
-print(f"Acurácia do Melhor Modelo: {best_accuracy_hyper}")
-print(f"Matriz de Confusão do Melhor Modelo:\n{best_conf_matrix_hyper}")
-
-# Carregar o dataset de AVC
-stroke_data = pd.read_csv(r'./health-predictive-dataset/stroke_data.csv')
-
-# Imputação de valores faltantes usando a média para colunas numéricas
-imputer = SimpleImputer(strategy='mean')
-X_stroke = stroke_data.drop(columns=['stroke'])  # Ajuste 'stroke' para o nome correto da coluna de alvo em seu dataset
-X_stroke = imputer.fit_transform(X_stroke)
-
-# Separação do alvo (y)
+# --- Modelo de AVC ---
+stroke_data = pd.read_csv('../health-predictive-dataset/stroke_data.csv')
+X_stroke = stroke_data[['age', 'hypertension', 'heart_disease', 'avg_glucose_level', 'bmi', 'smoking_status', 'ever_married']]
 y_stroke = stroke_data['stroke']
 
-# Divisão em dados de treino e teste
-X_train_stroke, X_test_stroke, y_train_stroke, y_test_stroke = train_test_split(X_stroke, y_stroke, test_size=0.2, random_state=42)
+X_train_s, X_test_s, y_train_s, y_test_s = train_test_split(X_stroke, y_stroke, test_size=0.2, random_state=42)
 
-# Treinamento do modelo Random Forest com os melhores hiperparâmetros encontrados
-best_model_stroke = RandomForestClassifier(
-    n_estimators=100,
-    min_samples_split=2,
-    min_samples_leaf=1,
-    max_features='sqrt',
-    max_depth=None,
-    random_state=42
-)
+model_stroke = RandomForestClassifier(n_estimators=100, min_samples_split=2, min_samples_leaf=1, max_features='sqrt', max_depth=None, random_state=42)
+model_stroke.fit(X_train_s, y_train_s)
 
-# Ajuste do modelo com os dados de treino
-best_model_stroke.fit(X_train_stroke, y_train_stroke)
+y_pred_s = model_stroke.predict(X_test_s)
+print("Acurácia AVC:", accuracy_score(y_test_s, y_pred_s))
+print("Matriz de Confusão AVC:\n", confusion_matrix(y_test_s, y_pred_s))
 
-# Predição nos dados de teste
-y_pred_best_stroke = best_model_stroke.predict(X_test_stroke)
-
-# Avaliação do modelo otimizado
-best_accuracy_stroke = accuracy_score(y_test_stroke, y_pred_best_stroke)
-best_conf_matrix_stroke = confusion_matrix(y_test_stroke, y_pred_best_stroke)
-
-# Resultados
-print(f"Acurácia do Melhor Modelo: {best_accuracy_stroke}")
-print(f"Matriz de Confusão do Melhor Modelo:\n{best_conf_matrix_stroke}")
-
-# Caminho para salvar os modelos
-model_path_diabetes = r'./models/diabetes_model.pkl'
-model_path_hypertension = r'./models/hypertension_model.pkl'
-model_path_stroke = r'./models/stroke_model.pkl'
-
-# Salvando o modelo de Diabetes
-joblib.dump(best_model_random, model_path_diabetes)
-print(f"Modelo de Diabetes salvo em: {model_path_diabetes}")
-
-# Salvando o modelo de Hipertensão
-joblib.dump(best_model_hyper, model_path_hypertension)
-print(f"Modelo de Hipertensão salvo em: {model_path_hypertension}")
-
-# Salvando o modelo de AVC
-joblib.dump(best_model_stroke, model_path_stroke)
-print(f"Modelo de AVC salvo em: {model_path_stroke}")
+# Salvando os modelos treinados
+joblib.dump(model_diabetes, '../models/diabetes_model.pkl')
+joblib.dump(model_hypertension, '../models/hypertension_model.pkl')
+joblib.dump(model_stroke, '../models/stroke_model.pkl')

@@ -17,6 +17,15 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgre:853211@localhost:5
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['JWT_SECRET_KEY'] = 'super-secret-key'
 
+# Configuração de email usando Mailtrap
+app.config['MAIL_SERVER']= 'sandbox.smtp.mailtrap.io'
+app.config['MAIL_PORT'] = 2525
+app.config['MAIL_USERNAME'] = 'd572e6ff412340'
+app.config['MAIL_PASSWORD'] = '73e2c3d1fc80cf'
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USE_SSL'] = False
+app.config['MAIL_DEFAULT_SENDER'] = 'predictive-health@noreply.com'
+
 # Inicializando o CORS
 CORS(app)
 
@@ -80,50 +89,44 @@ def home():
     return "Welcome to the Health Predictive System!"
 
 # Endpoint 1: Registro de Usuário
-@app.route('/register', methods=['POST'])
-@jwt_required()
-@role_required(['admin'])
-def register():
-    from models import User
-    from schemas import UserSchema
+@app.route('/register_user', methods=['POST'])
+def register_user():
+
+    from models import User, Patient
 
     data = request.get_json()
-    user_schema = UserSchema()
-    errors = user_schema.validate(data)
 
-    if errors:
-        return jsonify(errors), 400
+    new_user = User(
+        name=data['name'],
+        email=data['email'],
+        password=bcrypt.generate_password_hash(data['password']),
+        role=data['role'],
+        cpf=data['cpf']
+    )
 
-    hashed_password = bcrypt.generate_password_hash(data['password']).decode('utf-8')
-    
+    # Verifica se há um paciente com o mesmo CPF
+    existing_patient = Patient.query.filter_by(cpf=data['cpf']).first()
+    if existing_patient:
+        new_user.has_patient_history = True
+
     try:
-        new_user = User(
-            name=data['name'],
-            email=data['email'],
-            password=hashed_password,
-            role=data['role'],
-            cpf=data['cpf']
-        )
         db.session.add(new_user)
         db.session.commit()
-        add_audit_log("User registered", new_user.id)
-
+        return jsonify({"message": "User registered successfully"}), 201
+    
     except IntegrityError as e:
-        db.session.rollback() 
-        
+        db.session.rollback()
         if 'duplicate key value violates unique constraint' in str(e.orig):
             return jsonify({"error": "CPF already registered"}), 409
         
-        return jsonify({"error": "Database integrity error"}), 500
-    
-    return jsonify({"message": "User registered successfully", "user_id": new_user.id}), 201
+        return jsonify({"error": "Database error"}), 500
+
 
 # Endpoint 2: Solicitar Consentimento Inicial
 @app.route('/consent-initial', methods=['POST'])
 @jwt_required()
 def consent_initial():
-    from models import User
-    from models import Patient
+    from models import User, Patient
     from schemas import ConsentSchema
 
     user_id = get_jwt_identity()
@@ -161,6 +164,7 @@ def consent_initial():
 # Endpoint 3: Login de Usuário
 @app.route('/login', methods=['POST'])
 def login():
+
     data = request.get_json()
     user = validate_login(data['email'], data['password'])
     if not user:
@@ -169,7 +173,14 @@ def login():
     access_token = create_access_token(identity=user.id, expires_delta=timedelta(hours=1))
     add_audit_log("User logged in", user.id)
 
-    return jsonify({"access_token": access_token, "user_name": user.name, "user_id": user.id, "user_role": user.role, "consent_status": user.consent_status}), 200
+    return jsonify({
+        "access_token": access_token,
+        "user_name": user.name,
+        "user_id": user.id,
+        "user_role": user.role,
+        "consent_status": user.consent_status,
+        "has_patient_history": user.has_patient_history
+    }), 200
 
 # Endpoint 4: Logout de Usuário
 @app.route('/logout', methods=['POST'])
@@ -198,7 +209,9 @@ def get_user_data():
         "name": user.name,
         "email": user.email,
         "role": user.role,
-        "consent_status": user.consent_status
+        "consent_status": user.consent_status,
+        "has_patient_history": user.has_patient_history,
+        "created_at": user.created_at
     }
     return jsonify(user_data), 200
 
@@ -260,6 +273,7 @@ def export_user_data():
 @app.route('/password-reset-request', methods=['POST'])
 def password_reset_request():
     from models import User
+
     data = request.get_json()
     email = data.get("email")
     user = User.query.filter_by(email=email).first()
@@ -271,8 +285,8 @@ def password_reset_request():
     user.reset_token = reset_token
     db.session.commit()
 
-    # Enviar email com o link de redefinição
-    msg = Message("Password Reset Request", sender="no-reply@example.com", recipients=[user.email])
+    # Enviar email com o link de redefinição usando Mailtrap
+    msg = Message("Password Reset Request", recipients=[user.email])
     msg.body = f"To reset your password, use the following token: {reset_token}"
     mail.send(msg)
 
@@ -282,10 +296,19 @@ def password_reset_request():
 @app.route('/password-reset', methods=['POST'])
 def password_reset():
     from models import User
+
     data = request.get_json()
-    email = data.get("email")
+
     reset_token = data.get("reset_token")
     new_password = data.get("new_password")
+
+    user_id = data.get("user_id")
+
+    user = User.query.filter_by(id=user_id).first()
+    if not user:
+        return jsonify({"error": "Invalid token or email"}), 400
+    
+    email = user.email
 
     user = User.query.filter_by(email=email, reset_token=reset_token).first()
     if not user:
@@ -298,43 +321,40 @@ def password_reset():
 
     return jsonify({"message": "Password updated successfully"}), 200
 
-# Endpoint 10: Criar Paciente
-@app.route('/patients', methods=['POST'])
+# Endpoint 10: Registro de Paciente
+@app.route('/register_patient', methods=['POST'])
 @jwt_required()
 @role_required(['admin', 'medico'])
-def create_patient():
-    from models import Patient
-    
-    data = request.get_json()
-    
-    if not data.get("name") or not data.get("age") or not data.get("medical_conditions") or not data.get("cpf"):
-        return jsonify({"error": "Missing required fields"}), 400
+def register_patient():
 
-    consent_status = data.get("consent_status")
-    if consent_status is None:
-        return jsonify({"error": "Consent status is required"}), 400
+    from models import User, Patient
+
+    data = request.get_json()
+    new_patient = Patient(
+        name=data['name'],
+        age=data['age'],
+        medical_conditions=data['medical_conditions'],
+        consent_status=data['consent_status'],
+        cpf=data['cpf']
+    )
+
+    # Verifica se há um usuário com o mesmo CPF e define `has_patient_history`
+    existing_user = User.query.filter_by(cpf=data['cpf']).first()
+    if existing_user:
+        existing_user.has_patient_history = True
 
     try:
-        new_patient = Patient(
-            name=data['name'],
-            age=data['age'],
-            medical_conditions=data['medical_conditions'],
-            consent_status=consent_status,
-            cpf=data['cpf']
-        )
         db.session.add(new_patient)
         db.session.commit()
-        add_audit_log("Patient created", get_jwt_identity())
+
+        return jsonify({"message": "Patient registered successfully"}), 201
     
     except IntegrityError as e:
-        db.session.rollback()  
-   
+        db.session.rollback()
         if 'duplicate key value violates unique constraint' in str(e.orig):
             return jsonify({"error": "CPF already registered"}), 409
-    
-        return jsonify({"error": "Database integrity error"}), 500
-
-    return jsonify({"message": "Patient created successfully", "patient_id": new_patient.id}), 201
+        
+        return jsonify({"error": "Database error"}), 500
 
 # Endpoint 11: Obter Dados do Paciente
 @app.route('/patients/<int:id>', methods=['GET'])
@@ -351,7 +371,9 @@ def get_patient(id):
         "name": patient.name,
         "age": patient.age,
         "medical_conditions": patient.medical_conditions,
-        "consent_status": patient.consent_status
+        "consent_status": patient.consent_status,
+        "created_at": patient.created_at,
+        "has_patient_history": True
     }
     return jsonify(patient_data), 200
 
@@ -406,79 +428,81 @@ def delete_patient(id):
 @jwt_required()
 @role_required(['admin', 'medico', 'paciente'])
 def predict_diabetes():
+
     data = request.get_json()
 
-    # Verificar se todos os campos necessários estão presentes
-    required_fields = ['age', 'bmi', 'glucose_level']
-    if not all(field in data for field in required_fields):
-        return jsonify({"error": "Missing required fields"}), 400
+    # Features essenciais para o modelo de diabetes
+    required_fields = ['Age', 'BMI', 'HighChol', 'HighBP', 'PhysActivity', 'GenHlth', 'Smoker']
+    missing_fields = [field for field in required_fields if field not in data]
 
-    if not data.get("consent_status"):
-        return jsonify({"error": "User consent is required for prediction"}), 403
+    if missing_fields:
+        return jsonify({"error": "Might Required Fields not totally provided: " + ", ".join(missing_fields)}), 400
 
-    # Preparar os dados para a predição
-    input_data = [[data['age'], data['bmi'], data['glucose_level']]]
-    prediction = diabetes_model.predict(input_data)
-    probability = diabetes_model.predict_proba(input_data)[0][1]
-
-    add_audit_log("Diabetes prediction made", get_jwt_identity())
-    return jsonify({
-        "prediction": int(prediction[0]),
-        "probability": round(probability, 2)
-    }), 200
+    # Preparar os dados de entrada para o modelo
+    input_data = [[data[field] for field in required_fields]]
+    
+    try:
+        prediction = diabetes_model.predict(input_data)
+        probability = diabetes_model.predict_proba(input_data)[0][1]
+        add_audit_log("Diabetes prediction made", get_jwt_identity())
+        return jsonify({
+            "prediction": int(prediction[0]),
+            "probability": round(probability, 2)
+        }), 200
+    
+    except Exception as e:
+        return jsonify({"error": f"An Error occured when trying predict Diabetes: {str(e)}"}), 500
 
 # Endpoint 15: Predição de Hipertensão
 @app.route('/predict/hypertension', methods=['POST'])
 @jwt_required()
 @role_required(['admin', 'medico', 'paciente'])
 def predict_hypertension():
+
     data = request.get_json()
 
-    # Verificar se todos os campos necessários estão presentes
-    required_fields = ['age', 'blood_pressure', 'cholesterol']
-    if not all(field in data for field in required_fields):
-        return jsonify({"error": "Missing required fields"}), 400
+    required_fields = ['age', 'trestbps', 'chol', 'thalach', 'exang', 'oldpeak', 'cp']
+    missing_fields = [field for field in required_fields if field not in data]
 
-    if not data.get("consent_status"):
-        return jsonify({"error": "User consent is required for prediction"}), 403
+    if missing_fields:
+        return jsonify({"error": "Might Required Fields not totally provided: " + ", ".join(missing_fields)}), 400
 
-    # Preparar os dados para a predição
-    input_data = [[data['age'], data['blood_pressure'], data['cholesterol']]]
-    prediction = hypertension_model.predict(input_data)
-    probability = hypertension_model.predict_proba(input_data)[0][1]
+    input_data = [[data[field] for field in required_fields]]
 
-    add_audit_log("Hypertension prediction made", get_jwt_identity())
-    return jsonify({
-        "prediction": int(prediction[0]),
-        "probability": round(probability, 2)
-    }), 200
+    try:
+        prediction = hypertension_model.predict(input_data)
+        probability = hypertension_model.predict_proba(input_data)[0][1]
+        add_audit_log("Hypertension prediction made", get_jwt_identity())
+        return jsonify({"prediction": int(prediction[0]), "probability": round(probability, 2)}), 200
+    
+    except Exception as e:
+        return jsonify({"error": f"An Error occured when trying predict Hypertension: {str(e)}"}), 500
 
 # Endpoint 16: Predição de AVC
 @app.route('/predict/stroke', methods=['POST'])
 @jwt_required()
 @role_required(['admin', 'medico', 'paciente'])
 def predict_stroke():
+
     data = request.get_json()
 
-    # Verificar se todos os campos necessários estão presentes
-    required_fields = ['age', 'smoking_status', 'bmi']
-    if not all(field in data for field in required_fields):
-        return jsonify({"error": "Missing required fields"}), 400
+    required_fields = ['age', 'hypertension', 'heart_disease', 'avg_glucose_level', 'bmi', 'smoking_status', 'ever_married']
+    missing_fields = [field for field in required_fields if field not in data]
 
-    if not data.get("consent_status"):
-        return jsonify({"error": "User consent is required for prediction"}), 403
+    if missing_fields:
+        return jsonify({"error": "Might Required Fields not totally provided: " + ", ".join(missing_fields)}), 400
 
-    # Preparar os dados para a predição
-    input_data = [[data['age'], data['smoking_status'], data['bmi']]]
-    prediction = stroke_model.predict(input_data)
-    probability = stroke_model.predict_proba(input_data)[0][1]
+    input_data = [[data[field] for field in required_fields]]
 
-    add_audit_log("Stroke prediction made", get_jwt_identity())
-    return jsonify({
-        "prediction": int(prediction[0]),
-        "probability": round(probability, 2)
-    }), 200
-
+    try:
+        prediction = stroke_model.predict(input_data)
+        probability = stroke_model.predict_proba(input_data)[0][1]
+        add_audit_log("Stroke prediction made", get_jwt_identity())
+        return jsonify({"prediction": int(prediction[0]), "probability": round(probability, 2)}), 200
+    
+    except Exception as e:
+        return jsonify({"error": f"An Error occured when trying predict Stroke: {str(e)}"}), 500
+    
 # Endpoint 17: Visualizar Logs de Auditoria
 @app.route('/audit-log', methods=['GET'])
 @jwt_required()
@@ -599,6 +623,7 @@ def get_all_patients():
             "age": patient.age,
             "medical_conditions": patient.medical_conditions,
             "consent_status": patient.consent_status,
+            "has_patient_history": True,  
             "created_at": patient.created_at
         }
         patient_list.append(patient_data)
@@ -617,7 +642,10 @@ def get_all_users():
             "id": user.id,
             "name": user.name,
             "role": user.role,
-            "email": user.email
+            "email": user.email,
+            "has_patient_history": user.has_patient_history,
+            "consent_status": user.consent_status,
+            "created_at": user.created_at,
         }
         users_list.append(user_data)
     return jsonify(users_list), 200
@@ -709,14 +737,89 @@ def get_current_consent():
     if user.role != 'paciente':
         patient = Patient.query.filter_by(cpf=user.cpf).first()
 
-        add_audit_log("Current patient consent status obtained", get_jwt_identity())
-        return jsonify({"consent_status": patient.consent_status}), 200
-
     else:
         patient = Patient.query.filter_by(cpf=user.cpf).first()
         if not patient:
-            return jsonify({"error": "Patient not found"}), 404     
+            return jsonify({"error": "Patient not found"}), 404
 
+    add_audit_log("Current patient consent status obtained", get_jwt_identity())
+    return jsonify({"consent_status": patient.consent_status}), 200     
+
+# Endpoint 26: Cadastrar uma associação médico/paciente
+@app.route('/doctor-patient', methods=['POST'])
+@jwt_required()
+@role_required(['admin', 'medico'])
+def associate_doctor_patient():
+
+    from models import DoctorPatient
+
+    data = request.get_json()
+    medico_id = data.get("medico_id")
+    paciente_id = data.get("paciente_id")
+    
+    nova_associacao = DoctorPatient(medico_id=medico_id, paciente_id=paciente_id)
+    db.session.add(nova_associacao)
+    db.session.commit()
+    return jsonify({"message": "Médico associado ao paciente com sucesso."}), 201
+
+# Endpoint 27: Listar Pacientes de um Médico
+@app.route('/doctor/<int:doctor_id>/patients', methods=['GET'])
+@jwt_required()
+@role_required(['admin', 'medico'])
+def findAll_doctor_patients(doctor_id):
+    
+    from models import DoctorPatient, Patient
+    
+    patients = db.session.query(Patient).join(DoctorPatient).filter(DoctorPatient.doctor_id == doctor_id).all()
+    
+    return jsonify([patients.to_dict() for patient in patients])
+
+# Endpoint 28: Listar Médicos de um Paciente
+@app.route('/patient/<int:patient_id>/doctors', methods=['GET'])
+@jwt_required()
+@role_required(['admin', 'medico'])
+def listar_medicos_paciente(patient_id):
+
+    from models import DoctorPatient, User
+
+    doctors = db.session.query(User).join(DoctorPatient).filter(DoctorPatient.patient_id == patient_id).all()
+    
+    return jsonify([doctors.to_dict() for doctor in doctors])
+
+# Endpoint 29: Salvar Predição
+@app.route('/save-prediction', methods=['POST'])
+@jwt_required()
+def save_prediction():
+
+    from models import PredictionData
+
+    data = request.get_json()
+    user_id = get_jwt_identity()
+    prediction_type = data.get("prediction_type")
+    input_data = data.get("input_data")
+    prediction_result = data.get("prediction_result")
+    
+    new_prediction = PredictionData(
+        user_id=user_id,
+        prediction_type=prediction_type,
+        input_data=input_data,
+        prediction_result=prediction_result
+    )
+    db.session.add(new_prediction)
+    db.session.commit()
+
+    return jsonify({"message": "Prediction Succesfully Saved"}), 201
+
+# Endpoint 30: Listar histórico de Predição de Usuário
+@app.route('/user/<int:user_id>/predictions', methods=['GET'])
+@jwt_required()
+def listar_predicoes_usuario(user_id):
+
+    from models import PredictionData
+
+    predictions = PredictionData.query.filter_by(user_id=user_id).all()
+    
+    return jsonify([predictions.to_dict() for prediction in predictions])
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -11,6 +11,7 @@
             <th>Age</th>
             <th>Medical Conditions</th>
             <th>Consent Status</th>
+            <th>Created At</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -21,6 +22,7 @@
             <td>{{ patient.age }}</td>
             <td>{{ patient.medical_conditions }}</td>
             <td>{{ patient.consent_status ? 'Given' : 'Revoked' }}</td>
+            <td>{{ patient.created_at }}</td>
             <td>
               <button @click="viewPatientDetails(patient.id)" class="action-button">View</button>
               <button @click="deletePatient(patient.id)" class="action-button">Delete</button>
@@ -38,7 +40,8 @@
 import { defineComponent, watch, ComponentPublicInstance } from 'vue';
 import axios from 'axios';
 import { useRouter, RouteLocationNormalized, NavigationGuardNext} from 'vue-router';
-import eventBus from '../eventBus'
+import eventBus from '../eventBus';
+import globalData from '../globalData';
 
 export default defineComponent({
   name: 'ShowPatients',
@@ -50,14 +53,26 @@ export default defineComponent({
         age: number;
         medical_conditions: string;
         consent_status: boolean;
+        has_patient_history: boolean;
+        created_at: Date;
       }>,
       error: '',
+      gd: globalData,
     };
   },
 
   setup() {
       const router = useRouter();
       return { router };
+  },
+
+  created() {
+    watch(
+      () => globalData.user_consent,
+      (newConsent) => {
+        this.gd.user_consent = newConsent;
+      }
+    );
   },
 
   mounted() {
@@ -77,12 +92,22 @@ export default defineComponent({
   methods: {
     async fetchPatients() {
       try {
-        const response = await axios.get('http://localhost:5000/patients', {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
-          },
-        });
-        this.patients = response.data;
+
+        if (globalData.user_role === 'admin') {
+          const response = await axios.get('http://localhost:5000/patients', {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
+          });
+          this.patients = response.data;
+        } else if (globalData.user_role === 'medico') {
+          const response = await axios.get(`http://localhost:5000/doctor/${globalData.user_id}/patients`, {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
+          });
+          this.patients = response.data;
+        }
       } catch (err) {
         this.error = err.response?.data.error || 'Failed to fetch patients list.';
       }

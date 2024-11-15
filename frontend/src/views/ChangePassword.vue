@@ -37,6 +37,17 @@
           />
         </div>
 
+        <div class="form-group">
+          <label for="reset-token">Enter the Reset Token Received</label>
+          <input 
+            type="text" 
+            id="reset-token" 
+            v-model="resetToken" 
+            required 
+            class="form-control"
+          />
+        </div>
+
         <button type="submit" class="submit-button">Change Password</button>
       </form>
 
@@ -50,6 +61,7 @@
 import { defineComponent, watch, ComponentPublicInstance } from 'vue';
 import axios from 'axios';
 import { useRouter, RouteLocationNormalized, NavigationGuardNext} from 'vue-router';
+import globalData from '../globalData';
 
 export default defineComponent({
   name: 'ChangePassword',
@@ -58,9 +70,20 @@ export default defineComponent({
       oldPassword: '',
       newPassword: '',
       confirmPassword: '',
+      resetToken: '',
       message: '',
       error: '',
+      gd: globalData,
     };
+  },
+
+  created() {
+    watch(
+      () => globalData.user_consent,
+      (newConsent) => {
+        this.gd.user_consent = newConsent;
+      }
+    );
   },
 
   methods: {
@@ -74,7 +97,8 @@ export default defineComponent({
         const response = await axios.put(
           'http://localhost:5000/user/change-password',
           {
-            old_password: this.oldPassword,
+            user_id: globalData.user_id,
+            reset_token: this.resetToken,
             new_password: this.newPassword,
           },
           {

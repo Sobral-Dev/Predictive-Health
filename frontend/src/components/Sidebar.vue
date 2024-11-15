@@ -8,21 +8,21 @@
     </div>
 
     <nav class="links">
-      <RouterLink to="/dashboard">
+      <RouterLink to="/dashboard" v-if="this.gd.user_role === 'admin' && this.gd.user_id !== null">
       <img
         src="../assets/icons/dashboard.png"
         class="icon_img"
         height="50px"
       />  
       Dashboard</RouterLink>
-      <RouterLink to="/audit-logs">
+      <RouterLink to="/audit-logs" v-if="this.gd.user_role === 'admin' && this.gd.user_id !== null">
         <img
         src="../assets/icons/audit-logs.png"
         class="icon_img"
         height="50px"
         /> 
         Audit Logs</RouterLink>
-      <RouterLink to="/health-prediction">
+      <RouterLink to="/health-prediction" v-if="this.gd.user_id !== null">
         <img
         src="../assets/icons/health-prediction.png"
         class="icon_img"
@@ -30,14 +30,14 @@
         style="margin-left: 2px; margin-right: 2px;"
         /> 
         Predictions</RouterLink>
-      <RouterLink to="/patients/:id">
+      <RouterLink to="/patients/:id" v-if="this.gd.user_id !== null">
         <img
         src="../assets/icons/patient-details.png"
         class="icon_img"
         height="50px"
         > 
         Your Details</RouterLink>
-      <RouterLink to="/export-data/:id">
+      <RouterLink to="/export-data/:id" v-if=" this.gd.user_id !== null">
         <img
         src="../assets/icons/personal-data-export.png"
         class="icon_img"
@@ -45,14 +45,14 @@
         style="margin-left: 5px; margin-right: 4px;"
         /> 
         Personal Data</RouterLink>
-      <RouterLink to="/register-patient">
+      <RouterLink to="/register-patient" v-if="(this.gd.user_role === 'admin' || this.gd.user_role === 'medico') && this.gd.user_id !== null">
         <img
         src="../assets/icons/register-patient.png"
         class="icon_img"
         height="50px"
         /> 
         Register Patient</RouterLink>
-      <RouterLink to="/patients">
+      <RouterLink to="/patients" v-if="(this.gd.user_role === 'admin' || this.gd.user_role === 'medico') && this.gd.user_id !== null">
         <img
         src="../assets/icons/show-patients.png"
         class="icon_img"
@@ -60,42 +60,42 @@
         style="margin-right: 4px;"
         /> 
         Patients</RouterLink>
-      <RouterLink to="/profile">
+      <RouterLink to="/profile" v-if="this.gd.user_id !== null">
         <img
         src="../assets/icons/profile.png"
         class="icon_img"
         height="50px"
         /> 
         User Profile</RouterLink>
-      <RouterLink to="/manage-users">
+      <RouterLink to="/manage-users" v-if="this.gd.user_role === 'admin' && this.gd.user_id !== null">
         <img
         src="../assets/icons/manage-users.png"
         class="icon_img"
         height="50px"
         /> 
         Manage Users</RouterLink>
-      <RouterLink to="/register-user">
+      <RouterLink to="/register-user" v-if="this.gd.user_role === 'admin' && this.gd.user_id !== null">
         <img
         src="../assets/icons/register-patient.png"
         class="icon_img"
         height="50px"
         /> 
         Register User</RouterLink>
-      <RouterLink to="/change-password">
+      <RouterLink to="/change-password" v-if=" this.gd.user_id !== null">
         <img
         src="../assets/icons/change-password.png"
         class="icon_img"
         height="50px"
         /> 
         Password</RouterLink>
-      <RouterLink to="/consent-update/:id">
+      <RouterLink to="/consent-update/:id" v-if="this.gd.user_id !== null">
         <img
         src="../assets/icons/consent-update.png"
         class="icon_img"
         height="50px"
         /> 
         Consent Update</RouterLink>
-      <a @click="logout()" style="cursor: pointer;">
+      <a @click="logout()" style="cursor: pointer;" v-if="this.gd.user_id !== null">
         <img
         src="../assets/icons/login.png"
         class="icon_img"
@@ -110,17 +110,28 @@
 import { RouterLink } from 'vue-router';
 import globalData from '../globalData'
 import { useRouter } from 'vue-router';
+import { watch } from 'vue';
 
 export default {
   data() {
     return {
-      animationDelay: false
+      animationDelay: false,
+      gd: globalData,
     }
   },
 
   setup() {
     const router = useRouter();
     return { router };
+  },
+
+  created() {
+    watch(
+      () => globalData.user_role,
+      (newRole) => {
+        this.gd.user_role = newRole;
+      }
+    );
   },
 
   methods: {
@@ -130,9 +141,11 @@ export default {
 
     logout() {
       globalData.user_id = null;
-      globalData.user_role = '';
-      globalData.user_name = '';
+      globalData.user_role = null;
+      globalData.user_name = null;
       globalData.isAuthenticated = false;
+      globalData.user_consent = null;
+      globalData.has_patient_history = null;
 
       this.router.push({ name: 'Login' });
     },
@@ -150,14 +163,13 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   gap: 2rem;
   top: 0;
   left: 0;
   width: calc(100vw - 80vw);
   height: 100vh;
   background-color: var(--azul-acizentado-0-5);
-  padding-top: 1.5%;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), 
               0 5px 4px rgba(39, 174, 96, 0.85);
   overflow-y: auto;
@@ -177,7 +189,7 @@ export default {
 .logo {
   display: absolute;
   background-color: transparent;
-  height: 100%;
+  height: auto;
   width: auto;
   font-size: 2rem;
   font-weight: 600;

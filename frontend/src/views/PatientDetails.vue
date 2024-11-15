@@ -4,28 +4,48 @@
 
     <section class="details-section" v-if="patient">
       <div class="detail-item">
-        <label>Name:</label>
+        <label>Name: </label>
         <span>{{ patient.name }}</span>
       </div>
 
       <div class="detail-item">
-        <label>Age:</label>
+        <label>Age: </label>
         <span>{{ patient.age }}</span>
       </div>
 
       <div class="detail-item">
-        <label>Medical Conditions:</label>
+        <label>Medical Conditions: </label>
         <span>{{ patient.medical_conditions }}</span>
       </div>
 
       <div class="detail-item">
-        <label>Consent Status:</label>
+        <label>Consent Status: </label>
         <span>{{ patient.consent_status ? 'Given' : 'Revoked' }}</span>
       </div>
 
+      <div class="profile-item">
+        <label>With Patient History: </label>
+        <span>
+          {{
+            patient.has_patient_history === true
+              ? 'Yes'
+              : patient.has_patient_history === false
+              ? 'No'
+              : "Hasn't got a patient history yet"
+          }}
+        </span>
+      </div>
+
+      <div class="profile-item">
+        <label>Created At: </label>
+        <span>
+          {{ patient.created_at }}
+        </span>
+      </div>       
+
       <button @click="goBack" class="back-button">Back to Patients List</button>
     </section>
-
+    
     <p v-if="error" class="error">{{ error }}</p>
   </div>
 </template>
@@ -34,7 +54,8 @@
 import { defineComponent, watch, ComponentPublicInstance } from 'vue';
 import axios from 'axios';
 import { useRouter, RouteLocationNormalized, NavigationGuardNext} from 'vue-router';
-import eventBus from '../eventBus'
+import eventBus from '../eventBus';
+import globalData from '../globalData';
 
 export default defineComponent({
   name: 'PatientDetails',
@@ -45,14 +66,26 @@ export default defineComponent({
         age: number;
         medical_conditions: string;
         consent_status: boolean;
+        has_patient_history: boolean;
+        created_at: Date;
       } | null,
       error: '',
+      gd: globalData,
     };
   },
 
     setup() {
       const router = useRouter();
       return { router };
+  },
+
+  created() {
+    watch(
+      () => globalData.user_consent,
+      (newConsent) => {
+        this.gd.user_consent = newConsent;
+      }
+    );
   },
 
   mounted() {

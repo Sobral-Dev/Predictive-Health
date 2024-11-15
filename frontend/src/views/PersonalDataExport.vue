@@ -26,7 +26,17 @@ export default defineComponent({
   data() {
     return {
       error: '',
+      gd: globalData,
     };
+  },
+
+  created() {
+    watch(
+      () => globalData.user_consent,
+      (newConsent) => {
+        this.gd.user_consent = newConsent;
+      }
+    );
   },
 
   methods: {

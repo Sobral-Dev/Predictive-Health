@@ -46,6 +46,19 @@
           </select>
         </div>
 
+        <div class="form-group">
+          <label for="cpf">CPF</label>
+          <input 
+            type="text" 
+            id="cpf" 
+            v-model="form.cpf" 
+            required
+            @input="formatCPF"
+            placeholder="000.000.000-00" 
+            class="form-control"
+          />
+        </div>
+
         <button type="submit" class="submit-button">Register User</button>
       </form>
 
@@ -59,7 +72,8 @@
 import { defineComponent, watch, ComponentPublicInstance } from 'vue';
 import axios from 'axios';
 import { useRouter, RouteLocationNormalized, NavigationGuardNext} from 'vue-router';
-import eventBus from '../eventBus'
+import eventBus from '../eventBus';
+import globalData from '../globalData';
 
 export default defineComponent({
   name: 'UserRegistration',
@@ -70,22 +84,34 @@ export default defineComponent({
         email: '',
         password: '',
         role: 'admin',
+        cpf: '',
       },
       message: '',
       error: '',
+      gd: globalData,
     };
+  },
+
+  created() {
+    watch(
+      () => globalData.user_consent,
+      (newConsent) => {
+        this.gd.user_consent = newConsent;
+      }
+    );
   },
 
   methods: {
     async registerUser() {
       try {
         const response = await axios.post(
-          'http://localhost:5000/register',
+          'http://localhost:5000/register_user',
           {
             name: this.form.name,
             email: this.form.email,
             password: this.form.password,
             role: this.form.role,
+            cpf: this.form.cpf.replace(/\D/g, '')
           },
           {
             headers: {
@@ -108,8 +134,25 @@ export default defineComponent({
       this.form.email = '';
       this.form.password = '';
       this.form.role = 'admin';
+      this.form.cpf = '';
     },
   },
+
+    formatCPF() {
+      // Remove qualquer caractere que não seja número
+      this.form.cpf = this.form.cpf.replace(/\D/g, '');
+      
+      // Aplica a máscara do CPF manualmente
+      if (this.form.cpf.length <= 3) {
+        this.form.cpf = this.form.cpf.replace(/(\d{3})/, '$1');
+      } else if (this.form.cpf.length <= 6) {
+        this.form.cpf = this.form.cpf.replace(/(\d{3})(\d{1,3})/, '$1.$2');
+      } else if (this.form.cpf.length <= 9) {
+        this.form.cpf = this.form.cpf.replace(/(\d{3})(\d{3})(\d{1,3})/, '$1.$2.$3');
+      } else {
+        this.form.cpf = this.form.cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{1,2})/, '$1.$2.$3-$4');
+      }
+    },
   
 });
 </script>

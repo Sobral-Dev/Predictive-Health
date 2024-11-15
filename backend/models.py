@@ -1,5 +1,5 @@
 from config import db
-from sqlalchemy import Column, Integer, String, Boolean, Text, TIMESTAMP, ForeignKey
+from sqlalchemy import Column, Integer, String, Boolean, Text, TIMESTAMP, ForeignKey, JSON
 from sqlalchemy.sql import func
 from sqlalchemy.orm import relationship
 
@@ -14,6 +14,7 @@ class User(db.Model):
     reset_token = Column(String(120))
     created_at = Column(TIMESTAMP, server_default=func.now())
     cpf = Column(String(11), unique=True, nullable=False)
+    has_patient_history = Column(Boolean, default=False)
 
 class Patient(db.Model):
     __tablename__ = 'Patient'
@@ -31,10 +32,29 @@ class AuditLog(db.Model):
     user_id = Column(Integer, ForeignKey('Users.id', ondelete='CASCADE'), nullable=False)
     action = Column(String(255), nullable=False)
     timestamp = Column(TIMESTAMP, server_default=func.now())
-    user = relationship('User')
+    user = relationship('Users')
 
 class RevokedToken(db.Model):
     __tablename__ = 'RevokedToken'
     id = Column(Integer, primary_key=True)
     jti = Column(String(120), nullable=False)
     created_at = Column(TIMESTAMP, server_default=func.now())
+
+
+class Doctorpatient(db.model):
+    __tablename__ = 'DoctorPatient'
+    id = Column(Integer, primary_key=True)
+    doctor_id = Column(Integer, ForeignKey('Users.id', ondelete='CASCADE'), nullable=False)
+    patient_id = Column(Integer, ForeignKey('Patient.id', ondelete='CASCADE'), nullable=False)
+    doctor = relationship('Users')
+    patient = relationship('Patient')
+
+class PredictionData(db.model):
+    __tablename__ = 'PredictionData'
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey('Users.id', ondelete='CASCADE'), nullable=False)
+    prediction_type = Column(String(20), nullable=False)
+    input_data = Column(JSON, nullable=False)
+    prediction_result = Column(JSON, nullable=False)
+    timestamp = Column(TIMESTAMP, server_default=func.now())
+    user = relationship('Users')

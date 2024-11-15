@@ -18,6 +18,39 @@
         <span>{{ user.role }}</span>
       </div>
 
+      <div class="profile-item">
+        <label>Consent Status:</label>
+        <span>
+          {{
+            user.consent_status === true
+              ? 'Given'
+              : user.consent_status === false
+              ? 'Revoked'
+              : "Hasn't got a patient history yet"
+          }}
+        </span>
+      </div>
+
+      <div class="profile-item">
+        <label>With Patient History:</label>
+        <span>
+          {{
+            user.has_patient_history === true
+              ? 'Yes'
+              : user.has_patient_history === false
+              ? 'No'
+              : "Hasn't got a patient history yet"
+          }}
+        </span>
+      </div>
+
+      <div class="profile-item">
+        <label>Created At:</label>
+        <span>
+          {{ user.created_at }}
+        </span>
+      </div>      
+
       <button @click="editProfile" class="edit-button">Edit Profile</button>
     </section>
 
@@ -60,6 +93,7 @@
 import { defineComponent, watch, ComponentPublicInstance } from 'vue';
 import axios from 'axios';
 import { useRouter, RouteLocationNormalized, NavigationGuardNext} from 'vue-router';
+import globalData from '../globalData';
 
 export default defineComponent({
   name: 'UserProfile',
@@ -69,15 +103,28 @@ export default defineComponent({
         name: '',
         email: '',
         role: '',
+        consent_status: null,
+        has_patient_history: null,
+        created_at: Date,
       },
       isEditing: false,
       error: '',
       message: '',
+      gd: globalData,
     };
   },
 
   mounted() {
     this.fetchUserProfile();
+  },
+
+  created() {
+    watch(
+      () => globalData.user_consent,
+      (newConsent) => {
+        this.gd.user_consent = newConsent;
+      }
+    );
   },
 
   methods: {

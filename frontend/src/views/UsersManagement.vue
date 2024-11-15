@@ -10,6 +10,8 @@
             <th>Name</th>
             <th>Email</th>
             <th>Role</th>
+            <th>Consent Status</th>
+            <th>Created At</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -19,6 +21,16 @@
             <td>{{ user.name }}</td>
             <td>{{ user.email }}</td>
             <td>{{ user.role }}</td>
+            <td>
+              {{
+                user.consent_status === true
+                  ? 'Given'
+                  : user.consent_status === false
+                  ? 'Revoked'
+                  : "Hasn't got a patient history yet"
+              }}
+            </td>
+            <td>{{ user.created_at }}</td>
             <td>
               <button @click="editUser(user)" class="action-button">Edit</button>
               <button @click="deleteUser(user.id)" class="action-button">Delete</button>
@@ -76,7 +88,8 @@
 import { defineComponent, watch, ComponentPublicInstance } from 'vue';
 import axios from 'axios';
 import { useRouter, RouteLocationNormalized, NavigationGuardNext} from 'vue-router';
-import eventBus from '../eventBus'
+import eventBus from '../eventBus';
+import globalData from '../globalData';
 
 export default defineComponent({
   name: 'UsersManagement',
@@ -87,6 +100,9 @@ export default defineComponent({
         name: string;
         email: string;
         role: string;
+        has_patient_history: boolean;
+        consent_status: boolean,
+        created_at: Date,
       }>,
       selectedUser: {
         id: 0,
@@ -97,7 +113,17 @@ export default defineComponent({
       isEditing: false,
       error: '',
       message: '',
+      gd: globalData,
     };
+  },
+
+  created() {
+    watch(
+      () => globalData.user_consent,
+      (newConsent) => {
+        this.gd.user_consent = newConsent;
+      }
+    );
   },
 
   mounted() {

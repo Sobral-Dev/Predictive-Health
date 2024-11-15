@@ -5,8 +5,8 @@
     <section class="consent-section">
 
       <p v-if="$route.name === 'ConsentUpdate'">Current State: 
-        <b :style="current_consent === true ? 'color: blue;' : 'color: red;' ">
-        {{ error === '' ? current_consent === true ? 'Given' : 'Revoked'  : `You haven't got a patient history yet` }}
+        <b :style="this.gd.user_consent ? 'color: blue;' : 'color: red;' ">
+        {{ this.gd.user_consent ? 'Given' : 'Revoked' }}
         </b>
       </p>
 
@@ -19,6 +19,7 @@
         <div class="form-group">
           <label for="consent-status">Switch to:</label>
           <select id="consent-status" v-model="consentStatus" class="form-control" required>
+            <option value="null" disabled>Choose one...</option>
             <option value="true">Given</option>
             <option value="false">Revoked</option>
           </select>
@@ -43,11 +44,21 @@ export default defineComponent({
   name: 'ConsentUpdate',
   data() {
     return {
-      consentStatus: 'true',
+      consentStatus: null,
       message: '',
       error: '',
-      current_consent: ''
+      gd: globalData,
     };
+  },
+
+  created() {
+    watch(
+      () => globalData.user_consent,
+      (newConsent) => {
+        this.gd.user_consent = newConsent;
+        globalData.user_consent = newConsent;
+      }
+    );
   },
 
   setup() {
@@ -81,6 +92,8 @@ export default defineComponent({
               },
             }
           );
+          this.gd.user_consent = this.consentStatus === 'true';
+          globalData.user_consent = this.consentStatus === 'true';
           this.getConsentStatus();
           this.message = response.data.message || 'Consent updated successfully.';
           this.error = '';
@@ -132,9 +145,9 @@ export default defineComponent({
           this.message = response.data.message || 'Consent updated successfully.';
           this.error = '';
           globalData.user_consent = this.consentStatus === 'true';
-          this.router.push({ name: 'UpdateConsent' })
+          this.router.push(`/consent-update/${globalData.user_id}`)
         } catch (err) {
-          this.error = err.response?.data.error || 'Failed to update consent.';
+          this.error = err.response?.data.error || `Failed to update consent: ${err}`;
           this.message = '';
         }
     },

@@ -3,7 +3,7 @@
     <h1 class="page-title">Login</h1>
 
     <section class="login-section">
-      <form @submit.prevent="loginUser">
+      <form v-if="!emailSender" @submit.prevent="loginUser">
         <div class="form-group">
           <label for="email">Email</label>
           <input 
@@ -29,6 +29,25 @@
         <button type="submit" class="submit-button">Login</button>
       </form>
 
+      <form v-if="emailSender" @submit.prevent="this.requestPasswordReset">
+        <div class="form-group">
+            <label for="password">Your Email</label>
+            <input 
+              type="password" 
+              id="password" 
+              v-model="emailToResetPassword" 
+              required 
+              class="form-control"
+            />
+          </div>
+
+          <button type="submit" class="submit-button">Submit</button>
+          <button class="submit-button" @click="this.emailSender = false; this.emailToResetPassword = '';">Return</button>
+      </form>
+      
+      <button v-if="!emailSender" @click="this.emailSender = true;" class="submit-button">Forgot Password</button>
+
+      <p v-if="message" class="message">{{ message }}</p>
       <p v-if="error" class="error">{{ error }}</p>
     </section>
   </div>
@@ -47,13 +66,26 @@ export default defineComponent({
     return {
       email: '',
       password: '',
-      error: ''
+      error: '',
+      message: '',
+      emailToResetPassword: '',
+      gd: globalData,
+      emailSender: false,
     };
   },
 
   setup() {
     const router = useRouter();
     return { router };
+  },
+
+  created() {
+    watch(
+      () => globalData.user_consent,
+      (newConsent) => {
+        this.gd.user_consent = newConsent;
+      }
+    );
   },
 
   methods: {
@@ -73,6 +105,7 @@ export default defineComponent({
         globalData.user_name = response.data.user_name;
         globalData.isAuthenticated = true;
         globalData.user_consent = response.data.consent_status
+        globalData.has_patient_history = response.data.has_patient_history
 
         // Navigate to the appropriate page based on user role
         this.navigateToDashboard(response.data.user_role, response.data.consent_status, response.data.user_id);
@@ -96,6 +129,17 @@ export default defineComponent({
       }
     },
   },
+
+  async requestPasswordReset() {
+      try {
+        const response = await axios.post('http://localhost:5000/password-reset-request', { email: this.emailToResetPassword });
+        this.emailSender = false;
+        this.emailToResetPassword = '';
+        this.message = response.data.message;
+      } catch (error) {
+        this.message = error.response?.data.error || 'Error during password reset request';
+      }
+    },
   
 });
 </script>

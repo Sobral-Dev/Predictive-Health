@@ -2,12 +2,24 @@
 import { RouterView } from 'vue-router'
 import { defineComponent, watch, ComponentPublicInstance } from 'vue';
 import Sidebar from './components/Sidebar.vue';
+import globalData from './globalData';
 
 export default defineComponent({
   name: 'App',
+  
   data() {
     return {
+      gd: globalData,
     }
+  },
+
+  created() {
+    watch(
+      () => globalData.user_role,
+      (newRole) => {
+        this.gd.user_role = newRole;
+      }
+    );
   },
 
   components: {
