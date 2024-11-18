@@ -19,7 +19,7 @@
           <tr v-for="patient in patients" :key="patient.id">
             <td>{{ patient.id }}</td>
             <td>{{ patient.name }}</td>
-            <td>{{ patient.age }}</td>
+            <td>{{ patient.birth_date }}</td>
             <td>{{ patient.medical_conditions }}</td>
             <td>{{ patient.consent_status ? 'Given' : 'Revoked' }}</td>
             <td>{{ patient.created_at }}</td>
@@ -50,7 +50,7 @@ export default defineComponent({
       patients: [] as Array<{
         id: number;
         name: string;
-        age: number;
+        birth_date: number;
         medical_conditions: string;
         consent_status: boolean;
         has_patient_history: boolean;

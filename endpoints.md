@@ -105,15 +105,3 @@
 - **Objetivo**: Anonimizar ou excluir logicamente um usuário específico.
 - **Justificativa**: Atende ao direito de exclusão ou anonimização de dados conforme a LGPD, garantindo a proteção da privacidade do usuário.
 
----
-
-# Justificativa Geral dos Endpoints
-
-Os **21 endpoints** cobrem todas as funcionalidades necessárias para:
-
-- **Gerenciamento de usuários**: Criação, autenticação, recuperação de senha, atualização e anonimização.
-- **Gerenciamento de pacientes**: Criação, atualização, visualização, anonimização e exportação de dados.
-- **Controle de predições de saúde**: Predições de diabetes, hipertensão e AVC para suporte à tomada de decisões.
-- **Conformidade com a LGPD**: Controle de consentimento, direito de correção, exclusão, portabilidade de dados e transparência por meio de auditoria.
-
-Cada endpoint foi projetado para atender aos requisitos de segurança, controle de acesso e conformidade com a LGPD, além de fornecer suporte às funcionalidades essenciais do sistema.

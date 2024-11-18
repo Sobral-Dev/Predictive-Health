@@ -16,9 +16,9 @@
         </div>
 
         <div class="form-group">
-          <label for="age">Age</label>
+          <label for="age">Birth Date</label>
           <input 
-            type="number" 
+            type="date" 
             id="age" 
             v-model="form.age" 
             required 
@@ -106,7 +106,7 @@ export default defineComponent({
           'http://localhost:5000/register_patient',
           {
             name: this.form.name,
-            age: this.form.age,
+            birth_date: this.form.age,
             medical_conditions: this.form.medical_conditions,
             consent_status: this.form.consent_status === 'true',
             cpf: this.form.cpf.replace(/\D/g, '')

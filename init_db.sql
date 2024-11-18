@@ -25,7 +25,8 @@ CREATE TABLE "Patient" (
     medical_conditions TEXT,
     consent_status BOOLEAN DEFAULT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    cpf VARCHAR(11) UNIQUE NOT NULL
+    cpf VARCHAR(11) UNIQUE NOT NULL,
+    birth_date DATE NOT NULL
 );
 
 -- Criação da Tabela de Logs de Auditoria
@@ -50,43 +51,33 @@ CREATE TABLE "DoctorPatient" (
     doctor_id INT NOT NULL,
     patient_id INT NOT NULL,
     FOREIGN KEY (doctor_id) REFERENCES "Users" (id) ON DELETE CASCADE,
-    FOREIGN KEY (patient_id) REFERENCES "Patient" (id) ON DELETE CASCADE
-);
-
--- Criação da Tabela de Dados de Predição
-CREATE TABLE "PredictionData" (
-    id SERIAL PRIMARY KEY,
-    user_id INT NOT NULL,
-    prediction_type VARCHAR(20) NOT NULL CHECK (prediction_type IN ('diabetes', 'hypertension', 'stroke')),
-    input_data JSONB NOT NULL,
-    prediction_result JSONB NOT NULL,
-    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES "Users" (id) ON DELETE CASCADE
+    FOREIGN KEY (patient_id) REFERENCES "Patient" (id) ON DELETE CASCADE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Inserir Registros na Tabela Patient
-INSERT INTO "Patient" (name, age, medical_conditions, consent_status, created_at, cpf)
+INSERT INTO "Patient" (name, age, medical_conditions, consent_status, created_at, cpf, birth_date)
 VALUES 
-('Alice Oliveira', 45, 'Diabetes', TRUE, CURRENT_TIMESTAMP, '85732914277'),
-('Bruno Silva', 50, 'Hipertensão', FALSE, CURRENT_TIMESTAMP, '41101217103'),
-('Carlos Sousa', 60, 'Diabetes e Hipertensão', TRUE, CURRENT_TIMESTAMP, '46662505226'),
-('Daniela Costa', 35, 'Hipertensão', TRUE, CURRENT_TIMESTAMP, '55868755197'),
-('Eduardo Nascimento', 40, 'Diabetes', FALSE, CURRENT_TIMESTAMP, '85291586524'),
-('Fernanda Lima', 55, 'AVC', TRUE, CURRENT_TIMESTAMP, '80888964366'),
-('Gustavo Almeida', 30, 'Diabetes', TRUE, CURRENT_TIMESTAMP, '03701224536'),
-('Helena Rocha', 48, 'Hipertensão', FALSE, CURRENT_TIMESTAMP, '11111365300'),
-('Igor Fernandes', 52, 'Diabetes e AVC', TRUE, CURRENT_TIMESTAMP, '14683194775'),
-('Jéssica Ribeiro', 47, 'Hipertensão', TRUE, CURRENT_TIMESTAMP, '05316461819'),
-('Kleber Martins', 36, 'Diabetes', FALSE, CURRENT_TIMESTAMP, '49403035005'),
-('Larissa Pereira', 39, 'AVC', TRUE, CURRENT_TIMESTAMP, '67847354047'),
-('Maurício Carvalho', 41, 'Diabetes e Hipertensão', TRUE, CURRENT_TIMESTAMP, '51399815059'),
-('Natália Batista', 58, 'Hipertensão', FALSE, CURRENT_TIMESTAMP, '78544754074'),
-('Otávio Farias', 33, 'Diabetes', TRUE, CURRENT_TIMESTAMP, '50763847003'),
-('Priscila Moreira', 59, 'AVC', TRUE, CURRENT_TIMESTAMP, '48470862014'),
-('Renato Gomes', 42, 'Hipertensão', FALSE, CURRENT_TIMESTAMP, '65665323071'),
-('Sabrina Barros', 37, 'Diabetes e AVC', TRUE, CURRENT_TIMESTAMP, '20432901000'),
-('Tiago Mendes', 34, 'AVC', FALSE, CURRENT_TIMESTAMP, '68105071088'),
-('Vanessa Cunha', 62, 'Diabetes e Hipertensão', TRUE, CURRENT_TIMESTAMP, '67250876040');
+('Alice Oliveira', 45, 'Diabetes', TRUE, CURRENT_TIMESTAMP, '85732914277', '1985-03-12'),
+('Bruno Silva', 50, 'Hipertensão', FALSE, CURRENT_TIMESTAMP, '41101217103', '1978-05-21'),
+('Carlos Sousa', 60, 'Diabetes e Hipertensão', TRUE, CURRENT_TIMESTAMP, '46662505226', '1990-07-15'),
+('Daniela Costa', 35, 'Hipertensão', TRUE, CURRENT_TIMESTAMP, '55868755197', '1965-11-20'),
+('Eduardo Nascimento', 40, 'Diabetes', FALSE, CURRENT_TIMESTAMP, '85291586524', '2000-02-28'),
+('Fernanda Lima', 55, 'AVC', TRUE, CURRENT_TIMESTAMP, '80888964366', '1982-09-05'),
+('Gustavo Almeida', 30, 'Diabetes', TRUE, CURRENT_TIMESTAMP, '03701224536', '1956-01-10'),
+('Helena Rocha', 48, 'Hipertensão', FALSE, CURRENT_TIMESTAMP, '11111365300', '1995-12-15'),
+('Igor Fernandes', 52, 'Diabetes e AVC', TRUE, CURRENT_TIMESTAMP, '14683194775', '1969-06-25'),
+('Jéssica Ribeiro', 47, 'Hipertensão', TRUE, CURRENT_TIMESTAMP, '05316461819', '1988-04-14'),
+('Kleber Martins', 36, 'Diabetes', FALSE, CURRENT_TIMESTAMP, '49403035005', '1945-08-30'),
+('Larissa Pereira', 39, 'AVC', TRUE, CURRENT_TIMESTAMP, '67847354047', '1974-03-19'),
+('Maurício Carvalho', 41, 'Diabetes e Hipertensão', TRUE, CURRENT_TIMESTAMP, '51399815059', '2005-11-09'),
+('Natália Batista', 58, 'Hipertensão', FALSE, CURRENT_TIMESTAMP, '78544754074', '1992-10-21'),
+('Otávio Farias', 33, 'Diabetes', TRUE, CURRENT_TIMESTAMP, '50763847003', '1980-01-03'),
+('Priscila Moreira', 59, 'AVC', TRUE, CURRENT_TIMESTAMP, '48470862014', '1950-05-13'),
+('Renato Gomes', 42, 'Hipertensão', FALSE, CURRENT_TIMESTAMP, '65665323071', '1998-08-07'),
+('Sabrina Barros', 37, 'Diabetes e AVC', TRUE, CURRENT_TIMESTAMP, '20432901000', '1963-09-30'),
+('Tiago Mendes', 34, 'AVC', FALSE, CURRENT_TIMESTAMP, '68105071088', '2003-12-05'),
+('Vanessa Cunha', 62, 'Diabetes e Hipertensão', TRUE, CURRENT_TIMESTAMP, '67250876040', '1948-02-16');
 
 -- Inserindo um usuário administrador padrão
 INSERT INTO "Users" (name, email, password, role, cpf)

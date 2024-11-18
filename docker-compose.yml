@@ -1,11 +1,11 @@
 version: '3.8'
 
 services:
-  db:
+  postgres:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: postgres-PatientSystem
+    container_name: postgres_predictHealth
     environment:
       POSTGRES_DB: PatientSystem
       POSTGRES_USER: postgre
@@ -16,5 +16,14 @@ services:
       - postgres_data:/var/lib/postgresql/data
     restart: always
 
+  mongodb:
+    image: mongo
+    container_name: mongodb_predictHealth
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
 volumes:
   postgres_data:
+  mongo_data:

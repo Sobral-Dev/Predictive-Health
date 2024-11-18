@@ -1,0 +1,15 @@
+flask 
+marshmallow
+pydantic
+flask_bcrypt
+flask_cors
+flask_sqlalchemy 
+flask_migrate 
+flask_jwt_extended 
+flask_mail 
+pymongo 
+psycopg2-binary
+pandas
+scikit-learn
+joblib
+sqlalchemy

@@ -1,5 +1,5 @@
 from config import db
-from sqlalchemy import Column, Integer, String, Boolean, Text, TIMESTAMP, ForeignKey, JSON
+from sqlalchemy import Column, Integer, String, Boolean, Text, TIMESTAMP, ForeignKey, DATE
 from sqlalchemy.sql import func
 from sqlalchemy.orm import relationship
 
@@ -25,6 +25,7 @@ class Patient(db.Model):
     consent_status = Column(Boolean, default=None)
     created_at = Column(TIMESTAMP, server_default=func.now())
     cpf = Column(String(11), unique=True, nullable=False)
+    birth_date = Column(DATE, nullable=False)
 
 class AuditLog(db.Model):
     __tablename__ = 'AuditLog'
@@ -40,21 +41,11 @@ class RevokedToken(db.Model):
     jti = Column(String(120), nullable=False)
     created_at = Column(TIMESTAMP, server_default=func.now())
 
-
-class Doctorpatient(db.model):
+class Doctorpatient(db.Model):
     __tablename__ = 'DoctorPatient'
     id = Column(Integer, primary_key=True)
     doctor_id = Column(Integer, ForeignKey('Users.id', ondelete='CASCADE'), nullable=False)
     patient_id = Column(Integer, ForeignKey('Patient.id', ondelete='CASCADE'), nullable=False)
     doctor = relationship('Users')
     patient = relationship('Patient')
-
-class PredictionData(db.model):
-    __tablename__ = 'PredictionData'
-    id = Column(Integer, primary_key=True)
-    user_id = Column(Integer, ForeignKey('Users.id', ondelete='CASCADE'), nullable=False)
-    prediction_type = Column(String(20), nullable=False)
-    input_data = Column(JSON, nullable=False)
-    prediction_result = Column(JSON, nullable=False)
-    timestamp = Column(TIMESTAMP, server_default=func.now())
-    user = relationship('Users')
+    created_at = Column(TIMESTAMP, server_default=func.now())

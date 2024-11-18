@@ -10,7 +10,7 @@
 
       <div class="detail-item">
         <label>Age: </label>
-        <span>{{ patient.age }}</span>
+        <span>{{ patient.birth_date }}</span>
       </div>
 
       <div class="detail-item">
@@ -43,9 +43,11 @@
         </span>
       </div>       
 
+      <button v-if="this.gd.user_role === 'medico'" @click="requestAssociation(this.$router.params.id)">Request association with <b>{{ patient.name }}</b></button>
       <button @click="goBack" class="back-button">Back to Patients List</button>
     </section>
     
+    <p v-if="message" class="message">{{ message }}</p>
     <p v-if="error" class="error">{{ error }}</p>
   </div>
 </template>
@@ -63,13 +65,14 @@ export default defineComponent({
     return {
       patient: null as {
         name: string;
-        age: number;
+        birth_date: number;
         medical_conditions: string;
         consent_status: boolean;
         has_patient_history: boolean;
         created_at: Date;
       } | null,
       error: '',
+      message: '',
       gd: globalData,
     };
   },
@@ -120,7 +123,18 @@ export default defineComponent({
     },
   },
 
-    beforeRouteEnter(
+  async requestAssociation(patientId: number) {
+    try {
+      await axios.post('http://localhost:5000/doctor-patient', { patient_id: patientId }, {
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+      });
+      this.message = 'Request sent successfully.';
+    } catch (err) {
+      this.error = `Error when trying send request: ${err}`;
+    }
+  },
+
+  beforeRouteEnter(
     to: RouteLocationNormalized,
     from: RouteLocationNormalized,
     next: NavigationGuardNext) {

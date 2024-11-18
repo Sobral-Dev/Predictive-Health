@@ -1,0 +1,47 @@
+<template>
+  <div>
+    <h2>Pacientes Associados</h2>
+    <ul>
+      <li v-for="patient in patients" :key="patient.id" @click.prevent="this.$router.push(`/patients/${patient.id}`)" style="cursor: pointer;">
+        {{ patient.name }} - {{ patient.birth_date }}
+      </li>
+    </ul>
+
+    <p v-if="error" class="error">{{ error }}</p>
+  </div>
+</template>
+
+<script>
+import axios from 'axios';
+import globalData from '../globalData';
+
+export default {
+  data() {
+    return {
+      patients: [],
+      gd: globalData,
+      error: '',
+    };
+  },
+
+  mounted() {
+    this.fetchPatients();
+  },
+
+  methods: {
+
+    async fetchPatients() {
+      try {
+        const response = await axios.get(`http://localhost:5000/doctor/${globalData.user_id}/patients`, {
+          headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+        });
+        this.patients = response.data;
+      } catch (err) {
+        this.error = `An error occured when trying fetch Doctor patients: ${err}`;
+      }
+    },
+    
+  },
+
+};
+</script>

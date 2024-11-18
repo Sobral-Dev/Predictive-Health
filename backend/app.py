@@ -6,11 +6,14 @@ from flask_mail import Mail, Message
 from flask_cors import CORS
 from flask_migrate import Migrate
 from sqlalchemy.exc import IntegrityError
+from pymongo import MongoClient
 import uuid
 import logging
 import joblib
 from auth import validate_login, role_required, add_audit_log, revoke_token
 from config import db
+from datetime import datetime
+from helpers.calculate_age_helper import calculate_age
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgre:853211@localhost:5432/PatientSystem'
@@ -32,6 +35,19 @@ CORS(app)
 # Conectando ao banco Postgre
 db.init_app(app)
 migrate = Migrate(app, db)
+
+# Configurando MongoDB
+mongo_client = MongoClient("mongodb://localhost:27017/")
+mongo_db = mongo_client["PredictiveHealth"]
+prediction_collection = mongo_db["PredictionData"]
+
+# Criando índices no MongoDB
+def configure_mongo_indexes():
+    try:
+        prediction_collection.create_index("user_id")
+        prediction_collection.create_index("paciente_id")
+    except Exception as e:
+        print(f"Erro ao configurar índices no MongoDB: {e}")
 
 # Configurando ferramentas de criptografia no app
 bcrypt = Bcrypt(app)
@@ -335,7 +351,8 @@ def register_patient():
         age=data['age'],
         medical_conditions=data['medical_conditions'],
         consent_status=data['consent_status'],
-        cpf=data['cpf']
+        cpf=data['cpf'],
+        brith_date=data['birth_date']
     )
 
     # Verifica se há um usuário com o mesmo CPF e define `has_patient_history`
@@ -369,7 +386,7 @@ def get_patient(id):
     patient_data = {
         "id": patient.id,
         "name": patient.name,
-        "age": patient.age,
+        "age": calculate_age(patient.birth_date),
         "medical_conditions": patient.medical_conditions,
         "consent_status": patient.consent_status,
         "created_at": patient.created_at,
@@ -390,8 +407,8 @@ def update_patient(id):
 
     if "name" in data:
         patient.name = data['name']
-    if "age" in data:
-        patient.age = data['age']
+    if "birth_date" in data:
+        patient.birth_date = data['birth_date']
     if "medical_conditions" in data:
         patient.medical_conditions = data['medical_conditions']
     if "consent_status" in data:
@@ -418,6 +435,7 @@ def delete_patient(id):
     patient.medical_conditions = "Removed"
     patient.consent_status = False
     patient.cpf = "Anonymous"
+    patient.birth_date = patient.birth_date.replace(month=1, day=1)
 
     db.session.commit()
     add_audit_log("Patient data anonymized", get_jwt_identity())
@@ -426,20 +444,39 @@ def delete_patient(id):
 # Endpoint 14: Predição de Diabetes
 @app.route('/predict/diabetes', methods=['POST'])
 @jwt_required()
-@role_required(['admin', 'medico', 'paciente'])
+@role_required(['paciente'])
 def predict_diabetes():
+
+    from models import User, Patient
 
     data = request.get_json()
 
+    user_id = get_jwt_identity()
+    user = User.query.filter_by(id=user_id).first()
+    patient = Patient.query.filter_by(cpf=user.cpf).first()
+
+    if not patient:
+        return jsonify({"error": "Patient not found"}), 404
+    
+    input_data =  {
+        "Age": calculate_age(patient.birth_date),
+        "BMI": data.get("BMI"),
+        "HighChol": data.get("HighChol"),
+        "HighBP": data.get("HighBP"),
+        "PhysActivity": data.get("PhysActivity"),
+        "GenHlth": data.get("GenHlth"),
+        "Smoker": data.get("Smoker")
+    }
+
     # Features essenciais para o modelo de diabetes
     required_fields = ['Age', 'BMI', 'HighChol', 'HighBP', 'PhysActivity', 'GenHlth', 'Smoker']
-    missing_fields = [field for field in required_fields if field not in data]
+    missing_fields = [field for field in required_fields if field not in input_data]
 
     if missing_fields:
         return jsonify({"error": "Might Required Fields not totally provided: " + ", ".join(missing_fields)}), 400
 
     # Preparar os dados de entrada para o modelo
-    input_data = [[data[field] for field in required_fields]]
+    input_data = [[input_data[field] for field in required_fields]]
     
     try:
         prediction = diabetes_model.predict(input_data)
@@ -447,7 +484,8 @@ def predict_diabetes():
         add_audit_log("Diabetes prediction made", get_jwt_identity())
         return jsonify({
             "prediction": int(prediction[0]),
-            "probability": round(probability, 2)
+            "probability": round(probability, 2),
+            "input_data": input_data
         }), 200
     
     except Exception as e:
@@ -456,24 +494,47 @@ def predict_diabetes():
 # Endpoint 15: Predição de Hipertensão
 @app.route('/predict/hypertension', methods=['POST'])
 @jwt_required()
-@role_required(['admin', 'medico', 'paciente'])
+@role_required(['paciente'])
 def predict_hypertension():
+
+    from models import User, Patient
 
     data = request.get_json()
 
+    user_id = get_jwt_identity()
+    user = User.query.filter_by(id=user_id).first()
+    patient = Patient.query.filter_by(cpf=user.cpf).first()
+
+    if not patient:
+        return jsonify({"error": "Patient not found"}), 404
+    
+    input_data =  {
+        "age": calculate_age(patient.birth_date),
+        "trestbps": data.get("trestbps"),
+        "chol": data.get("chol"),
+        "thalach": data.get("thalach"),
+        "exang": data.get("exang"),
+        "oldpeak": data.get("oldpeak"),
+        "cp": data.get("cp")
+    }
+
     required_fields = ['age', 'trestbps', 'chol', 'thalach', 'exang', 'oldpeak', 'cp']
-    missing_fields = [field for field in required_fields if field not in data]
+    missing_fields = [field for field in required_fields if field not in input_data]
 
     if missing_fields:
         return jsonify({"error": "Might Required Fields not totally provided: " + ", ".join(missing_fields)}), 400
 
-    input_data = [[data[field] for field in required_fields]]
+    input_data = [[input_data[field] for field in required_fields]]
 
     try:
         prediction = hypertension_model.predict(input_data)
         probability = hypertension_model.predict_proba(input_data)[0][1]
         add_audit_log("Hypertension prediction made", get_jwt_identity())
-        return jsonify({"prediction": int(prediction[0]), "probability": round(probability, 2)}), 200
+        return jsonify({
+            "prediction": int(prediction[0]), 
+            "probability": round(probability, 2),
+            "input_data": input_data
+            }), 200
     
     except Exception as e:
         return jsonify({"error": f"An Error occured when trying predict Hypertension: {str(e)}"}), 500
@@ -481,24 +542,47 @@ def predict_hypertension():
 # Endpoint 16: Predição de AVC
 @app.route('/predict/stroke', methods=['POST'])
 @jwt_required()
-@role_required(['admin', 'medico', 'paciente'])
+@role_required(['paciente'])
 def predict_stroke():
+
+    from models import User, Patient
 
     data = request.get_json()
 
+    user_id = get_jwt_identity()
+    user = User.query.filter_by(id=user_id).first()
+    patient = Patient.query.filter_by(cpf=user.cpf).first()
+
+    if not patient:
+        return jsonify({"error": "Patient not found"}), 404
+    
+    input_data =  {
+        "age": calculate_age(patient.birth_date),
+        "hypertension": data.get("hypertension"),
+        "heart_disease": data.get("heart_disease"),
+        "avg_glucose_level": data.get("avg_glucose_level"),
+        "bmi": data.get("bmi"),
+        "smoking_status": data.get("smoking_status"),
+        "ever_married": data.get("ever_married")
+    }
+
     required_fields = ['age', 'hypertension', 'heart_disease', 'avg_glucose_level', 'bmi', 'smoking_status', 'ever_married']
-    missing_fields = [field for field in required_fields if field not in data]
+    missing_fields = [field for field in required_fields if field not in input_data]
 
     if missing_fields:
         return jsonify({"error": "Might Required Fields not totally provided: " + ", ".join(missing_fields)}), 400
 
-    input_data = [[data[field] for field in required_fields]]
+    input_data = [[input_data[field] for field in required_fields]]
 
     try:
         prediction = stroke_model.predict(input_data)
         probability = stroke_model.predict_proba(input_data)[0][1]
         add_audit_log("Stroke prediction made", get_jwt_identity())
-        return jsonify({"prediction": int(prediction[0]), "probability": round(probability, 2)}), 200
+        return jsonify({
+            "prediction": int(prediction[0]), 
+            "probability": round(probability, 2),
+            "input_data": input_data
+            }), 200
     
     except Exception as e:
         return jsonify({"error": f"An Error occured when trying predict Stroke: {str(e)}"}), 500
@@ -547,7 +631,7 @@ def export_patient_data(id, role):
     export_data = {
         "id": patient.id,
         "name": patient.name,
-        "age": patient.age,
+        "age": calculate_age(patient.birth_date),
         "medical_conditions": patient.medical_conditions,
         "created_at": patient.created_at
     }
@@ -620,7 +704,7 @@ def get_all_patients():
         patient_data = {
             "id": patient.id,
             "name": patient.name,
-            "age": patient.age,
+            "age": calculate_age(patient.birth_date),
             "medical_conditions": patient.medical_conditions,
             "consent_status": patient.consent_status,
             "has_patient_history": True,  
@@ -745,24 +829,7 @@ def get_current_consent():
     add_audit_log("Current patient consent status obtained", get_jwt_identity())
     return jsonify({"consent_status": patient.consent_status}), 200     
 
-# Endpoint 26: Cadastrar uma associação médico/paciente
-@app.route('/doctor-patient', methods=['POST'])
-@jwt_required()
-@role_required(['admin', 'medico'])
-def associate_doctor_patient():
-
-    from models import DoctorPatient
-
-    data = request.get_json()
-    medico_id = data.get("medico_id")
-    paciente_id = data.get("paciente_id")
-    
-    nova_associacao = DoctorPatient(medico_id=medico_id, paciente_id=paciente_id)
-    db.session.add(nova_associacao)
-    db.session.commit()
-    return jsonify({"message": "Médico associado ao paciente com sucesso."}), 201
-
-# Endpoint 27: Listar Pacientes de um Médico
+# Endpoint 26: Listar Pacientes de um Médico
 @app.route('/doctor/<int:doctor_id>/patients', methods=['GET'])
 @jwt_required()
 @role_required(['admin', 'medico'])
@@ -774,7 +841,7 @@ def findAll_doctor_patients(doctor_id):
     
     return jsonify([patients.to_dict() for patient in patients])
 
-# Endpoint 28: Listar Médicos de um Paciente
+# Endpoint 27: Listar Médicos de um Paciente
 @app.route('/patient/<int:patient_id>/doctors', methods=['GET'])
 @jwt_required()
 @role_required(['admin', 'medico'])
@@ -786,40 +853,177 @@ def listar_medicos_paciente(patient_id):
     
     return jsonify([doctors.to_dict() for doctor in doctors])
 
-# Endpoint 29: Salvar Predição
+# Endpoint 28: Salvar Predição
 @app.route('/save-prediction', methods=['POST'])
 @jwt_required()
 def save_prediction():
 
-    from models import PredictionData
+    from models import Patient
+    from mongo_models import PredictionData
+
+    try:
+        data = request.get_json()
+        user_id = get_jwt_identity()
+        prediction_type = data.get("prediction_type")
+        input_data = data.get("input_data")
+        prediction_result = data.get("prediction_result")
+
+        patient = Patient.query.filter_by(id=user_id).first()
+
+        # Armazena a predição no MongoDB
+        new_prediction = {
+            "user_id": user_id,
+            "patient_id": patient.id,
+            "prediction_type": prediction_type,
+            "input_data": input_data,
+            "prediction_result": prediction_result,
+            "timestamp": datetime.utcnow()
+        }
+
+        validated_data = PredictionData(new_prediction)
+        prediction_collection.insert_one(validated_data.dict())
+
+    except Exception as e:
+        return jsonify({f"Error occured when trying save prediction: {str(e)}"}), 400
+
+    return jsonify({"message": "Prediction successfully saved"}), 201
+
+# Endpoint 29: Ver predições feitas pelo próprio usuário paciente autenticado
+@app.route('/user/predictions', methods=['GET'])
+@jwt_required()
+@role_required(['paciente'])
+def get_user_predictions():
+
+    try:
+        user_id = get_jwt_identity()
+        
+        # Buscar predições no MongoDB
+        predictions = list(prediction_collection.find({"user_id": user_id}))
+        for prediction in predictions:
+            prediction["_id"] = str(prediction["_id"])  
+ 
+    except Exception as e:
+        return jsonify({ "message": f"An error occured when trying get your predictions history: {e}" }), 400
+    
+    return jsonify(predictions), 200
+
+# Endpoint 30: Associar um médico a um paciente
+@app.route('/doctor-patient', methods=['POST'])
+@jwt_required()
+@role_required(['medico'])
+def associate_doctor_patient():
+
+    from models import DoctorPatient
 
     data = request.get_json()
-    user_id = get_jwt_identity()
-    prediction_type = data.get("prediction_type")
-    input_data = data.get("input_data")
-    prediction_result = data.get("prediction_result")
+    doctor_id = get_jwt_identity()
+    patient_id = data.get("patient_id")
     
-    new_prediction = PredictionData(
-        user_id=user_id,
-        prediction_type=prediction_type,
-        input_data=input_data,
-        prediction_result=prediction_result
-    )
-    db.session.add(new_prediction)
-    db.session.commit()
+    # Verificar se já existe associação
+    existing_association = DoctorPatient.query.filter_by(doctor_id=doctor_id, patient_id=patient_id).first()
+    if existing_association:
+        return jsonify({"message": "It has an association with this patient already."}), 400
 
-    return jsonify({"message": "Prediction Succesfully Saved"}), 201
+    try:
+        # Criar nova associação
+        new_association = DoctorPatient(doctor_id=doctor_id, patient_id=patient_id)
+        db.session.add(new_association)
+        db.session.commit()
 
-# Endpoint 30: Listar histórico de Predição de Usuário
-@app.route('/user/<int:user_id>/predictions', methods=['GET'])
+    except Exception as e:
+        return jsonify({"message": f"An error occured when trying create association: {e}"})
+
+    return jsonify({"message": "Created association successfully."}), 201
+
+# Endpoint 31: Listar Pacientes Associados a um Médico
+@app.route('/doctor/<int:doctor_id>/patients', methods=['GET'])
 @jwt_required()
-def listar_predicoes_usuario(user_id):
+@role_required(['medico'])
+def list_doctor_patients(doctor_id):
 
-    from models import PredictionData
+    from models import DoctorPatient, Patient
 
-    predictions = PredictionData.query.filter_by(user_id=user_id).all()
+    associations = DoctorPatient.query.filter_by(doctor_id=doctor_id).all()
+    patients = [Patient.query.get(assoc.patient_id).to_dict() for assoc in associations]
+
+    return jsonify(patients), 200
+
+# Endpoint 32: Listar Médicos Associados a um Paciente
+@app.route('/patient/<int:patient_id>/doctors', methods=['GET'])
+@jwt_required()
+@role_required(['paciente'])
+def list_patient_doctors(patient_id):
+
+    from models import DoctorPatient, User
+
+    associations = DoctorPatient.query.filter_by(patient_id=patient_id).all()
+    doctors = [User.query.get(assoc.doctor_id).to_dict() for assoc in associations]
+
+    return jsonify(doctors), 200
+
+# Endpoint 33: Ver predições de um paciente associado a um médico
+@app.route('/doctor/<int:doctor_id>/patient/<int:patient_id>/predictions', methods=['GET'])
+@jwt_required()
+@role_required(['medico'])
+def get_patient_predictions(doctor_id, patient_id):
+
+    from models import DoctorPatient
+
+    try:
+
+        # Verificar associação entre médico e paciente
+        association = DoctorPatient.query.filter_by(doctor_id=doctor_id, patient_id=patient_id).first()
+        if not association:
+            return jsonify({"error": "You are not associate to this patient. Access refused."}), 403
+
+        # Buscar predições no MongoDB
+        predictions = list(prediction_collection.find({"user_id": patient_id}))
+        for prediction in predictions:
+            prediction["_id"] = str(prediction["_id"])  
     
-    return jsonify([predictions.to_dict() for prediction in predictions])
+    except Exception as e:
+        return jsonify({ "message": f"An error occured when trying get patient predictions history: {e}" }), 400
+
+    return jsonify(predictions), 200
+
+# Endpoint 34: Ver predições de todos os pacientes associado a um médico
+@app.route('/doctor/<int:doctor_id>/predictions', methods=['GET'])
+@jwt_required()
+@role_required(['medico'])
+def get_doctor_patient_predictions(doctor_id):
+    
+    from models import DoctorPatient
+
+    try:
+        # Verificar associação e consentimento
+        associations = DoctorPatient.query.filter_by(doctor_id=doctor_id).all()
+        patient_ids = [assoc.patient_id for assoc in associations]
+
+        predictions = list(prediction_collection.find({"user_id": {"$in": patient_ids}}))
+        for prediction in predictions:
+            prediction["_id"] = str(prediction["_id"])
+    
+    except Exception as e:
+        return jsonify({ "message": f"An error occured when trying get patients predictions history: {e}" }), 400
+
+    return jsonify(predictions), 200
+
+# Endpoint 35: Ver predições de todos os pacientes de maneira anonimizada (para admins)
+@app.route('/admin/predictions', methods=['GET'])
+@jwt_required()
+@role_required(['admin'])
+def get_all_predictions():
+
+    try:
+        predictions = list(prediction_collection.find({}, {"user_id": 1, "prediction_type": 1, "result": 1, "probability": 1, "timestamp": 1}))
+        for prediction in predictions:
+            prediction["_id"] = str(prediction["_id"])
+
+    except Exception as e:
+        return jsonify({ "message": f"An error occured when trying get patients predictions history: {e}" }), 400
+
+    return jsonify(predictions), 200
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    configure_mongo_indexes()
+    app.run(debug=True, port=5001)

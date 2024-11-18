@@ -12,6 +12,10 @@ import ShowPatients from '../views/ShowPatients.vue';
 import UserProfile from '../views/UserProfile.vue';
 import UsersManagement from '../views/UsersManagement.vue';
 import UserRegistration from '../views/UserRegistration.vue';
+import DoctorPatientList from '../views/DoctorPatientList.vue';
+import DoctorPredictions from '../views/DoctorPredictions.vue';
+import AdminPredictions from '../views/AdminPredictions.vue';
+import UserPredictions from '../views/UserPredictions.vue';
 
 // Helper function to check if user is authenticated
 const isAuthenticated = (): boolean => {
@@ -81,6 +85,30 @@ const routes: Array<RouteRecordRaw> = [
     name: 'RegisterPatient',
     component: RegisterPatient,
     meta: { requiresAuth: true, allowedRoles: ['medico', 'admin'] },
+  },
+  {
+    path: '/doctor-patient-list',
+    name: 'DoctorPatientList',
+    component: DoctorPatientList,
+    meta: { requiresAuth: true, allowedRoles: ['medico'] },
+  },
+  {
+    path: '/doctor-predictions',
+    name: 'DoctorPredictions',
+    component: DoctorPredictions,
+    meta: { requiresAuth: true, allowedRoles: ['medico'] },
+  },
+  {
+    path: '/admin-predictions',
+    name: 'AdminPredictions',
+    component: AdminPredictions,
+    meta: { requiresAuth: true, allowedRoles: ['admin'] },
+  },
+  {
+    path: '/user-predictions',
+    name: 'UserPredictions',
+    component: UserPredictions,
+    meta: { requiresAuth: true, allowedRoles: ['paciente'] },
   },
   {
     path: '/patients',

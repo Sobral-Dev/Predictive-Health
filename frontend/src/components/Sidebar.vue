@@ -22,7 +22,14 @@
         height="50px"
         /> 
         Audit Logs</RouterLink>
-      <RouterLink to="/health-prediction" v-if="this.gd.user_id !== null">
+      <RouterLink to="/doctor-patient-list" v-if="this.gd.user_role === 'medico' && this.gd.user_id !== null">
+        <img
+        src="../assets/icons/dashboard.png"
+        class="icon_img"
+        height="50px"
+        /> 
+        Your Patients</RouterLink>
+      <RouterLink to="/health-prediction" v-if="this.gd.user_role === 'paciente' && this.gd.user_id !== null">
         <img
         src="../assets/icons/health-prediction.png"
         class="icon_img"
@@ -30,6 +37,30 @@
         style="margin-left: 2px; margin-right: 2px;"
         /> 
         Predictions</RouterLink>
+      <RouterLink to="/admin-predictions" v-if="this.gd.user_role === 'admin' && this.gd.user_id !== null">
+        <img
+        src="../assets/icons/health-prediction.png"
+        class="icon_img"
+        height="45px"
+        style="margin-left: 2px; margin-right: 2px;"
+        /> 
+        Predictions</RouterLink>
+      <RouterLink to="/doctor-predictions" v-if="this.gd.user_role === 'medico' && this.gd.user_id !== null">
+        <img
+        src="../assets/icons/health-prediction.png"
+        class="icon_img"
+        height="45px"
+        style="margin-left: 2px; margin-right: 2px;"
+        /> 
+        Predictions</RouterLink>
+      <RouterLink to="/user-predictions" v-if="this.gd.user_role === 'paciente' && this.gd.user_id !== null">
+        <img
+        src="../assets/icons/audit-logs.png"
+        class="icon_img"
+        height="45px"
+        style="margin-left: 2px; margin-right: 2px;"
+        /> 
+        Your History</RouterLink>
       <RouterLink to="/patients/:id" v-if="this.gd.user_id !== null">
         <img
         src="../assets/icons/patient-details.png"

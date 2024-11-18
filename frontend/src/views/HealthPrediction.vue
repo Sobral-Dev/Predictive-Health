@@ -3,6 +3,8 @@
     <h1 class="page-title">Health Prediction</h1>
 
     <section class="prediction-section">
+
+      <button class="choose-language" @click.prevent="english = !english"><i class="fa-solid fa-language">{{ !english ? 'PT-Br' : 'EN' }}</i></button>
       
       <!-- Select para escolher o tipo de predição -->
       <label for="predictionType">Escolha o tipo de predição: </label>
@@ -14,14 +16,7 @@
       </select>
 
       <!-- Formulário para predição de Diabetes -->
-      <form v-if="selectedPrediction === 'diabetes'" @submit.prevent="predictDiabetes">
-        <label>
-          Idade: <input v-model="formData.Age" type="number" required />
-            <span class="tooltip">i
-              <span v-if="!english" class="tooltiptext">Idade do paciente, fator de risco importante para o desenvolvimento de diabetes tipo 2. A idade avançada está associada ao aumento da resistência à insulina.</span>
-              <span v-else class="tooltiptext">Patient's age, a significant risk factor for type 2 diabetes. Advanced age is associated with increased insulin resistance.</span>
-            </span>
-        </label>
+      <form v-if="selectedPrediction === 'diabetes' && this.gd.user_role === 'paciente'" @submit.prevent="predictDiabetes">
         <label>
           Índice de Massa Corporal (IMC): <input v-model="formData.BMI" type="number" required />
             <span class="tooltip">i
@@ -68,14 +63,7 @@
       </form>
 
       <!-- Formulário para predição de Hipertensão -->
-      <form v-if="selectedPrediction === 'hypertension'" @submit.prevent="predictHypertension">
-        <label>
-          Idade: <input v-model="formData.age" type="number" required />
-            <span class="tooltip">i
-              <span v-if="!english" class="tooltiptext">Idade do paciente, associada ao endurecimento arterial e aumento da pressão arterial ao longo dos anos.</span>
-              <span v-else class="tooltiptext">Patient's age, associated with arterial stiffening and increased blood pressure over the years.</span>
-            </span>
-        </label>
+      <form v-if="selectedPrediction === 'hypertension' && this.gd.user_role === 'paciente'" @submit.prevent="predictHypertension">
         <label>
           Pressão Arterial em Repouso (trestbps): <input v-model="formData.trestbps" type="number" required />
             <span class="tooltip">i
@@ -122,14 +110,7 @@
       </form>
 
       <!-- Formulário para predição de AVC -->
-      <form v-if="selectedPrediction === 'stroke'" @submit.prevent="predictStroke">
-        <label>
-          Idade: <input v-model="formData.age" type="number" required />
-            <span class="tooltip">i
-              <span v-if="!english" class="tooltiptext">Idade do paciente. O risco de AVC aumenta com o envelhecimento devido ao endurecimento e obstrução das artérias.</span>
-              <span v-else class="tooltiptext">Patient's age. The risk of stroke increases with age due to arterial stiffening and blockages.</span>
-            </span>
-        </label>
+      <form v-if="selectedPrediction === 'stroke' && this.gd.user_role === 'paciente'" @submit.prevent="predictStroke">
         <label>
           Hipertensão: <input v-model="formData.hypertension" type="checkbox" />
             <span class="tooltip">i
@@ -159,28 +140,39 @@
             </span>
         </label>
         <label>
-          Status de Fumante: <input v-model="formData.smoking_status" type="text" required />
-            <span class="tooltip">i
-              <span v-if="!english" class="tooltiptext">Indica se o paciente fuma, hábito que aumenta o risco de problemas cardiovasculares e AVC.</span>
-              <span v-else class="tooltiptext">Indicates if the patient smokes, a habit that increases cardiovascular issues and stroke risk.</span>
-            </span>
+          {{ !english ? 'Status de Fumante: ' : 'Smoking Status: ' }}
+          <select v-model="formData.smoking_status" required>
+            <option value="" disabled>{{ !english ? 'Selecione...' : 'Select one...' }}</option>
+            <option value="0">{{ !english ? 'Nunca Fumou' : 'Never Smoked' }}</option>
+            <option value="1">{{ !english ? 'Fumou anteriormente' : 'Formerly Smoked' }}</option>
+            <option value="2">{{ !english ? 'Atualmente fuma' : 'Currently Smokes' }}</option>
+          </select>
+          <span class="tooltip">i
+            <span v-if="!english" class="tooltiptext">Indica o status de tabagismo do paciente: Nunca fumou, Fumou anteriormente ou Atualmente fuma.</span>
+            <span v-else class="tooltiptext">Indicates the smoking status of the patient: Never smoked, Formerly smoked, or Currently smokes.</span>
+          </span>
         </label>
         <label>
-          Já foi Casado(a): <input v-model="formData.ever_married" type="checkbox" />
-            <span class="tooltip">i
-              <span v-if="!english" class="tooltiptext">Indica se o paciente já foi casado(a). Estudos associam fatores socioeconômicos com a saúde cardiovascular.</span>
-              <span v-else class="tooltiptext">Indicates if the patient has ever been married. Socioeconomic factors have been associated with cardiovascular health.</span>
-            </span>
+            {{ !english ? 'Já foi Casado(a): ' : 'Have your ever married: ' }}
+          <select v-model="formData.ever_married" required>
+            <option value="" disabled>{{ !english ? 'Selecione...' : 'Select one...' }}</option>
+            <option value="0">{{ !english ? 'Não' : 'Not' }}</option>
+            <option value="1">{{ !english ? 'Sim' : 'Yes' }}</option>
+          </select>
+          <span class="tooltip">i
+            <span v-if="!english" class="tooltiptext">Indica se o paciente já foi casado(a). Estudos associam fatores socioeconômicos com a saúde cardiovascular.</span>
+            <span v-else class="tooltiptext">Indicates if the patient has ever been married. Socioeconomic factors have been associated with cardiovascular health.</span>
+          </span>
         </label>
-        <button type="submit" :disabled="!hasConsent">Prever AVC</button>
+        <button type="submit" :disabled="!hasConsent">{{ !english ? 'Prever AVC' : 'Predict Stroke' }}</button>
       </form>
 
       <!-- Mensagem de consentimento -->
       <p v-if="!hasConsent" style="color: red;">Consentimento necessário para realizar predições.</p>
 
-      <div v-if="predictionResult" class="result-section">
+      <div v-if="predictionResult && this.gd.user_role === 'paciente'" class="result-section">
         <h2 class="result-title">Prediction Result</h2>
-        <p><strong>Risk:</strong> {{ predictionResult.prediction }}</p>
+        <p><strong>Risk:</strong> {{ predictionResult.risk }}</p>
         <p><strong>Probability:</strong> {{ predictionResult.probability }}</p>
       </div>
 
@@ -193,7 +185,8 @@
 import { defineComponent, watch, ComponentPublicInstance } from 'vue';
 import axios from 'axios';
 import { useRouter, RouteLocationNormalized, NavigationGuardNext} from 'vue-router';
-import globalData from '../globalData'
+import globalData from '../globalData';
+import eventBus from '../eventBus';
 
 export default defineComponent({
   name: 'HealthPrediction',
@@ -206,9 +199,11 @@ export default defineComponent({
         age: '', trestbps: '', chol: '', thalach: '', exang: '', oldpeak: '', cp: '',         // Hipertensão
         hypertension: '', heart_disease: '', avg_glucose_level: '', bmi: '', smoking_status: '', ever_married: '' // AVC
       },
-      predictionResult: null as { prediction: number; probability: number } | null,
+      predictionResult: null as { risk: number; probability: number } | null,
+      last_input_data: '',
       error: '',
       gd: globalData,
+      english: false,
     };
   },
 
@@ -238,11 +233,15 @@ export default defineComponent({
         const response = await axios.post('http://localhost:5000/predict/diabetes', this.formData, {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         });
-        this.predictionResult = response.data;
+        this.predictionResult.risk = response.data.prediction;
+        this.predictionResult.probability = response.data.probability;
+        this.last_input_data = response.data.input_data;
         this.error = '';
+        this.submitPrediction(this.predictionResult, this.last_input_data, this.selectedPrediction);
       } catch (err) {
         this.error = err.response?.data.error || `Failed to make prediction: ${err}`;
         this.predictionResult = null;
+        this.last_input_data = null;
       }
     },
 
@@ -252,11 +251,15 @@ export default defineComponent({
         const response = await axios.post('http://localhost:5000/predict/hypertension', this.formData, {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         });
-        this.predictionResult = response.data;
+        this.predictionResult.risk = response.data.prediction;
+        this.predictionResult.probability = response.data.probability;
+        this.last_input_data = response.data.input_data;
         this.error = '';
+        this.submitPrediction(this.predictionResult, this.last_input_data, this.selectedPrediction);
       } catch (err) {
-         this.error = err.response?.data.error || `Failed to make prediction: ${err}`;
+        this.error = err.response?.data.error || `Failed to make prediction: ${err}`;
         this.predictionResult = null;
+        this.last_input_data = null;
       }
     },
     
@@ -266,13 +269,38 @@ export default defineComponent({
         const response = await axios.post('http://localhost:5000/predict/stroke', this.formData, {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         });
-        this.predictionResult = response.data;
+        this.predictionResult.risk = response.data.prediction;
+        this.predictionResult.probability = response.data.probability;
+        this.last_input_data = response.data.input_data;
         this.error = '';
+        this.submitPrediction(this.predictionResult, this.last_input_data, this.selectedPrediction);
       } catch (err) {
-         this.error = err.response?.data.error || `Failed to make prediction: ${err}`;
+        this.error = err.response?.data.error || `Failed to make prediction: ${err}`;
         this.predictionResult = null;
+        this.last_input_data = null;
       }
     },
+  },
+
+  async submitPrediction(predict: any, input_data: any, selectedPrediction: string) {
+    const predictionData = {
+      prediction_type: selectedPrediction,
+      input_data: input_data,
+      prediction_result: { risk: predict.risk, probability: predict.probability }
+    };
+
+    try {
+
+      await axios.post('http://localhost:5000/save-prediction', predictionData, {
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+      });
+
+      eventBus.predictionSaved = true;
+      this.last_input_data = null;
+
+    } catch (err) {
+      this.error = err.response?.data.error || `Error occured when trying save prediction: ${err}`;
+    }
   },
   
 });
