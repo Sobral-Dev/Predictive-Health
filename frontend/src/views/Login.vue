@@ -1,56 +1,61 @@
 <template>
-  <div class="login">
-    <h1 class="page-title">Login</h1>
+  <main>
+    <transition name="fade" mode="out-in">
 
-    <section class="login-section">
-      <form v-if="!emailSender" @submit.prevent="loginUser">
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input 
-            type="email" 
-            id="email" 
-            v-model="email" 
-            required 
-            class="form-control"
-          />
-        </div>
+      <div class="login">
+        <h1 class="page-title">Login</h1>
 
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input 
-            type="password" 
-            id="password" 
-            v-model="password" 
-            required 
-            class="form-control"
-          />
-        </div>
+        <section class="login-section">
+          <form v-if="!emailSender" @submit.prevent="loginUser">
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input 
+                type="email" 
+                id="email" 
+                v-model="email" 
+                required 
+                class="form-control"
+              />
+            </div>
 
-        <button type="submit" class="submit-button">Login</button>
-      </form>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input 
+                type="password" 
+                id="password" 
+                v-model="password" 
+                required 
+                class="form-control"
+              />
+            </div>
 
-      <form v-if="emailSender" @submit.prevent="this.requestPasswordReset">
-        <div class="form-group">
-            <label for="password">Your Email</label>
-            <input 
-              type="password" 
-              id="password" 
-              v-model="emailToResetPassword" 
-              required 
-              class="form-control"
-            />
-          </div>
+            <button type="submit" class="submit-button">Login</button>
+          </form>
 
-          <button type="submit" class="submit-button">Submit</button>
-          <button class="submit-button" @click="this.emailSender = false; this.emailToResetPassword = '';">Return</button>
-      </form>
-      
-      <button v-if="!emailSender" @click="this.emailSender = true;" class="submit-button">Forgot Password</button>
+          <form v-if="emailSender" @submit.prevent="this.requestPasswordReset">
+            <div class="form-group">
+                <label for="password">Your Email</label>
+                <input 
+                  type="password" 
+                  id="password" 
+                  v-model="emailToResetPassword" 
+                  required 
+                  class="form-control"
+                />
+              </div>
 
-      <p v-if="message" class="message">{{ message }}</p>
-      <p v-if="error" class="error">{{ error }}</p>
-    </section>
-  </div>
+              <button type="submit" class="submit-button">Submit</button>
+              <button class="submit-button" @click="this.emailSender = false; this.emailToResetPassword = '';">Return</button>
+          </form>
+          
+          <button v-if="!emailSender" @click="this.emailSender = true;" class="submit-button">Forgot Password</button>
+
+          <p v-if="message" class="message">{{ message }}</p>
+          <p v-if="error" class="error">{{ error }}</p>
+        </section>
+      </div>
+    </transition>
+  </main>  
 </template>
 
 <script lang="ts">
@@ -91,7 +96,7 @@ export default defineComponent({
   methods: {
     async loginUser() {
       try {
-        const response = await axios.post('http://localhost:5001/login', {
+        const response = await axios.post('http://localhost:5000/login', {
           email: this.email,
           password: this.password,
         });

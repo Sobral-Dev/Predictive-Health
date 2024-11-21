@@ -25,15 +25,15 @@ predictions = db["PredictionData"]
 
 # Carregando os modelos
 try:
-    diabetes_model = joblib.load(r'C:\Users\felip\OneDrive\Documentos\FATEC\Predictive-Health\models\diabetes_model.pkl')
+    diabetes_model = joblib.load(r'C:\Users\felip\OneDrive\Downloads\Predictive-Health\models\diabetes_model.pkl')
 except Exception as e:
     print(f"Erro ao carregar o modelo de Diabetes: {e}")
 try:
-    hypertension_model = joblib.load(r'C:\Users\felip\OneDrive\Documentos\FATEC\Predictive-Health\models\hypertension_model.pkl')
+    hypertension_model = joblib.load(r'C:\Users\felip\OneDrive\Downloads\Predictive-Health\models\hypertension_model.pkl')
 except Exception as e:
     print(f"Erro ao carregar o modelo de Hipertensão: {e}")
 try:
-    stroke_model = joblib.load(r'C:\Users\felip\OneDrive\Documentos\FATEC\Predictive-Health\models\stroke_model.pkl')
+    stroke_model = joblib.load(r'C:\Users\felip\OneDrive\Downloads\Predictive-Health\models\stroke_model.pkl')
 except Exception as e:
     print(f"Erro ao carregar o modelo de AVC: {e}")
 
@@ -53,7 +53,7 @@ for patient_id, birth_date in patients:
             missing_fields = [field for field in required_fields if field not in input_data]
 
             if missing_fields:
-                print(f"Might Required Fields not totally provided: {", ".join(missing_fields)}")
+                print(f"Might Required Fields not totally provided")
 
             input_data = {
                 "Age": age,
@@ -70,7 +70,7 @@ for patient_id, birth_date in patients:
             missing_fields = [field for field in required_fields if field not in input_data]
 
             if missing_fields:
-                print(f"Might Required Fields not totally provided: {", ".join(missing_fields)}")
+                print(f"Might Required Fields not totally provided")
 
             input_data = {
                 "age": age,
@@ -87,7 +87,7 @@ for patient_id, birth_date in patients:
             missing_fields = [field for field in required_fields if field not in input_data]
 
             if missing_fields:
-                print(f"Might Required Fields not totally provided: {", ".join(missing_fields)}")
+                print(f"Might Required Fields not totally provided")
 
             input_data = {
                 "age": age,

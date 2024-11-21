@@ -1,28 +1,33 @@
 <template>
-  <div class="user-predictions">
-    <h2 v-if="this.gd.user_role === 'paciente'">Your Prediction History</h2>
-    <table v-if="predictions.length && this.gd.user_role === 'paciente'">
-      <thead>
-        <tr>
-          <th>Type</th>
-          <th>Result</th>
-          <th>Probability</th>
-          <th>Date</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="prediction in predictions" :key="prediction._id">
-          <td>{{ prediction.prediction_type }}</td>
-          <td>{{ prediction.result }}</td>
-          <td>{{ prediction.probability }}</td>
-          <td>{{ formatDate(prediction.timestamp) }}</td>
-        </tr>
-      </tbody>
-    </table>
+  <main>
+    <transition name="fade" mode="out-in">
 
-    <p v-if="!predictions.length && this.gd.user_role === 'paciente'">No predictions made by you were found.</p>
-    <p v-if="error" class="error">{{ error }}</p>
-  </div>
+      <div class="user-predictions">
+        <h2 v-if="this.gd.user_role === 'paciente'">Your Prediction History</h2>
+        <table v-if="predictions.length && this.gd.user_role === 'paciente'">
+          <thead>
+            <tr>
+              <th>Type</th>
+              <th>Result</th>
+              <th>Probability</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="prediction in predictions" :key="prediction._id">
+              <td>{{ prediction.prediction_type }}</td>
+              <td>{{ prediction.result }}</td>
+              <td>{{ prediction.probability }}</td>
+              <td>{{ formatDate(prediction.timestamp) }}</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p v-if="!predictions.length && this.gd.user_role === 'paciente'">No predictions made by you were found.</p>
+        <p v-if="error" class="error">{{ error }}</p>
+      </div>
+    </transition>
+  </main>
 </template>
 
 <script lang="ts">

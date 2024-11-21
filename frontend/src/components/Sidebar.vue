@@ -177,7 +177,6 @@ export default {
       globalData.isAuthenticated = false;
       globalData.user_consent = null;
       globalData.has_patient_history = null;
-
       this.router.push({ name: 'Login' });
     },
 
@@ -218,7 +217,6 @@ export default {
 }
 
 .logo {
-  display: absolute;
   background-color: transparent;
   height: auto;
   width: auto;
@@ -256,7 +254,7 @@ export default {
 }
 
 .links a {
-  transform: all 0.5s;
+  transition: all 0.5s;
   color: var(--verde-contraste-0-8);
   text-decoration: none;
   display: flex;

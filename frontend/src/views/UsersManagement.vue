@@ -1,87 +1,92 @@
 <template>
-  <div class="users-management">
-    <h1 class="page-title">Users Management</h1>
+  <main>
+    <transition name="fade" mode="out-in">
 
-    <section class="users-section">
-      <table class="users-table">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Role</th>
-            <th>Consent Status</th>
-            <th>Created At</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="user in users" :key="user.id">
-            <td>{{ user.id }}</td>
-            <td>{{ user.name }}</td>
-            <td>{{ user.email }}</td>
-            <td>{{ user.role }}</td>
-            <td>
-              {{
-                user.consent_status === true
-                  ? 'Given'
-                  : user.consent_status === false
-                  ? 'Revoked'
-                  : "Hasn't got a patient history yet"
-              }}
-            </td>
-            <td>{{ user.created_at }}</td>
-            <td>
-              <button @click="editUser(user)" class="action-button">Edit</button>
-              <button @click="deleteUser(user.id)" class="action-button">Delete</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
+      <div class="users-management">
+        <h1 class="page-title">Users Management</h1>
 
-    <section v-if="isEditing" class="edit-user-section">
-      <h2>Edit User</h2>
-      <form @submit.prevent="updateUser">
-        <div class="form-group">
-          <label for="edit-name">Name</label>
-          <input 
-            type="text" 
-            id="edit-name" 
-            v-model="selectedUser.name" 
-            required 
-            class="form-control"
-          />
-        </div>
+        <section class="users-section">
+          <table class="users-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Consent Status</th>
+                <th>Created At</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="user in users" :key="user.id">
+                <td>{{ user.id }}</td>
+                <td>{{ user.name }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.role }}</td>
+                <td>
+                  {{
+                    user.consent_status === true
+                      ? 'Given'
+                      : user.consent_status === false
+                      ? 'Revoked'
+                      : "Hasn't got a patient history yet"
+                  }}
+                </td>
+                <td>{{ user.created_at }}</td>
+                <td>
+                  <button @click="editUser(user)" class="action-button">Edit</button>
+                  <button @click="deleteUser(user.id)" class="action-button">Delete</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
 
-        <div class="form-group">
-          <label for="edit-email">Email</label>
-          <input 
-            type="email" 
-            id="edit-email" 
-            v-model="selectedUser.email" 
-            required 
-            class="form-control"
-          />
-        </div>
+        <section v-if="isEditing" class="edit-user-section">
+          <h2>Edit User</h2>
+          <form @submit.prevent="updateUser">
+            <div class="form-group">
+              <label for="edit-name">Name</label>
+              <input 
+                type="text" 
+                id="edit-name" 
+                v-model="selectedUser.name" 
+                required 
+                class="form-control"
+              />
+            </div>
 
-        <div class="form-group">
-          <label for="edit-role">Role</label>
-          <select id="edit-role" v-model="selectedUser.role" class="form-control" required>
-            <option value="admin">Admin</option>
-            <option value="medico">Medico</option>
-            <option value="paciente">Paciente</option>
-          </select>
-        </div>
+            <div class="form-group">
+              <label for="edit-email">Email</label>
+              <input 
+                type="email" 
+                id="edit-email" 
+                v-model="selectedUser.email" 
+                required 
+                class="form-control"
+              />
+            </div>
 
-        <button type="submit" class="submit-button">Save Changes</button>
-        <button @click="cancelEdit" class="cancel-button">Cancel</button>
-      </form>
-    </section>
+            <div class="form-group">
+              <label for="edit-role">Role</label>
+              <select id="edit-role" v-model="selectedUser.role" class="form-control" required>
+                <option value="admin">Admin</option>
+                <option value="medico">Medico</option>
+                <option value="paciente">Paciente</option>
+              </select>
+            </div>
 
-    <p v-if="error" class="error">{{ error }}</p>
-    <p v-if="message" class="message">{{ message }}</p>
-  </div>
+            <button type="submit" class="submit-button">Save Changes</button>
+            <button @click="cancelEdit" class="cancel-button">Cancel</button>
+          </form>
+        </section>
+
+        <p v-if="error" class="error">{{ error }}</p>
+        <p v-if="message" class="message">{{ message }}</p>
+      </div>
+    </transition>
+  </main>
 </template>
 
 <script lang="ts">

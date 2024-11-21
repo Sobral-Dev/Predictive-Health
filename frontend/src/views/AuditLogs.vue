@@ -1,28 +1,32 @@
 <template>
-  <div class="audit-logs">
-    <h1 class="page-title">Audit Logs</h1>
+  <main>
+    <transition name="fade" mode="out-in">
+      <div class="audit-logs">
+        <h1 class="page-title">Audit Logs</h1>
 
-    <section class="logs-section">
-      <table class="logs-table">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>User ID</th>
-            <th>Action</th>
-            <th>Timestamp</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="log in logs" :key="log.id">
-            <td>{{ log.id }}</td>
-            <td>{{ log.user_id }}</td>
-            <td>{{ log.action }}</td>
-            <td>{{ log.timestamp }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-  </div>
+        <section class="logs-section">
+          <table class="logs-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>User ID</th>
+                <th>Action</th>
+                <th>Timestamp</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="log in logs" :key="log.id">
+                <td>{{ log.id }}</td>
+                <td>{{ log.user_id }}</td>
+                <td>{{ log.action }}</td>
+                <td>{{ log.timestamp }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </section> 
+      </div>
+    </transition>
+  </main>
 </template>
 
 <script lang="ts">

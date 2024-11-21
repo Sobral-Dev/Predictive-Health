@@ -1,18 +1,49 @@
 <template>
-  <div class="personal-data-export">
-    <h1 class="page-title">Export Personal Data</h1>
+  <main>
+    <transition name="fade" mode="out-in">
 
-    <section class="export-section">
-      <p>Select a format to export your data:</p>
-      
-      <div class="export-options">
-        <button @click="exportData('json')" class="export-button">Export as JSON</button>
-        <button @click="exportData('csv')" class="export-button">Export as CSV</button>
+      <div class="personal-data-export">
+        <h1 class="page-title">Export Personal Data</h1>
+
+        <section v-if="this.gd.user_role === 'paciente'" class="checkbox-section">
+          <p>Which information do you want?</p>
+
+          <div class="select-data">
+            <input type="radio" id="user" v-model="userData" @value="true" @change="!patientData">
+            <label for="user">Your User Data</label><br>
+            <input type="radio" id="patient" v-model="patientData" @value="true" @change="!userData">
+            <label for="patient">Your Prediction History</label><br>
+          </div>
+        </section>
+
+        <section class="export-section">
+          <p>Select a format to export your data:</p>
+          
+          <div class="export-options">
+            <button 
+            v-if="this.gd.user_role === 'paciente' ? 
+            userData !== false || patientData !== false : 
+            this.gd.user_id !== null" 
+            @click="exportData('json')" 
+            class="export-button">
+            Export as JSON
+            </button>
+            
+            <button
+            v-if="this.gd.user_role === 'paciente' ? 
+            userData !== false || patientData !== false : 
+            this.gd.user_id !== null"  
+            @click="exportData('csv')" 
+            class="export-button">
+            Export as CSV
+            </button>
+          </div>
+        </section>
+
+        <p v-if="error" class="error">{{ error }}</p>
       </div>
-    </section>
-
-    <p v-if="error" class="error">{{ error }}</p>
-  </div>
+    </transition>
+  </main>
 </template>
 
 <script lang="ts">
@@ -27,6 +58,8 @@ export default defineComponent({
     return {
       error: '',
       gd: globalData,
+      userData: true, 
+      patientData: false,
     };
   },
 
@@ -41,28 +74,57 @@ export default defineComponent({
 
   methods: {
     async exportData(format: string) {
-      try {
 
-        const response = await axios.get(`http://localhost:5000/patients/export/
-          ${globalData.user_role === 'paciente' ? `${globalData.user_id}?format=${format}/${globalData.user_role}` : `${this.$route.params.id}?format=${format}/${globalData.user_role}`}`, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
-          },
-          responseType: 'blob',
-        });
+      if (this.userData) {
 
-        // Create a URL for the downloaded data
-        const url = window.URL.createObjectURL(new Blob([response.data]));
-        const link = document.createElement('a');
-        link.href = url;
-        link.setAttribute('download', `patient_data.${format}`);
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
+        try {
 
-        this.error = '';
-      } catch (err) {
-        this.error = err.response?.data.error || 'Failed to export data.';
+          const response = await axios.get(`http://localhost:5000/user/export?format=${format}`, {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
+            responseType: 'blob',
+          });
+
+          // Create a URL for the downloaded data
+          const url = window.URL.createObjectURL(new Blob([response.data]));
+          const link = document.createElement('a');
+          link.href = url;
+          link.setAttribute('download', `patient_data.${format}`);
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+
+          this.error = '';
+        } catch (err) {
+          this.error = err.response?.data.error || 'Failed to export data.';
+        }
+
+      } else if(globalData.user_role === 'paciente' && this.patientData) {
+      
+        try {
+
+          const response = await axios.get(`http://localhost:5000/patient/export?format=${format}`, {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
+            responseType: 'blob',
+          });
+
+          // Create a URL for the downloaded data
+          const url = window.URL.createObjectURL(new Blob([response.data]));
+          const link = document.createElement('a');
+          link.href = url;
+          link.setAttribute('download', `patient_data.${format}`);
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+
+          this.error = '';
+        } catch (err) {
+          this.error = err.response?.data.error || 'Failed to export data.';
+        }
+
       }
     },
   },

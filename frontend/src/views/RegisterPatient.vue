@@ -1,69 +1,74 @@
 <template>
-  <div class="register-patient">
-    <h1 class="page-title">Register New Patient</h1>
+  <main>
+    <transition name="fade" mode="out-in">
+      <div class="register-patient">
+      
+        <h1 class="page-title">Register New Patient</h1>
 
-    <section class="form-section">
-      <form @submit.prevent="registerPatient">
-        <div class="form-group">
-          <label for="name">Name</label>
-          <input 
-            type="text" 
-            id="name" 
-            v-model="form.name" 
-            required 
-            class="form-control"
-          />
-        </div>
+        <section class="form-section">
+          <form @submit.prevent="registerPatient">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input 
+                type="text" 
+                id="name" 
+                v-model="form.name" 
+                required 
+                class="form-control"
+              />
+            </div>
 
-        <div class="form-group">
-          <label for="age">Birth Date</label>
-          <input 
-            type="date" 
-            id="age" 
-            v-model="form.age" 
-            required 
-            class="form-control"
-          />
-        </div>
+            <div class="form-group">
+              <label for="age">Birth Date</label>
+              <input 
+                type="date" 
+                id="age" 
+                v-model="form.age" 
+                required 
+                class="form-control"
+              />
+            </div>
 
-        <div class="form-group">
-          <label for="medical-conditions">Medical Conditions</label>
-          <textarea 
-            id="medical-conditions" 
-            v-model="form.medical_conditions" 
-            required 
-            class="form-control"
-          ></textarea>
-        </div>
+            <div class="form-group">
+              <label for="medical-conditions">Medical Conditions</label>
+              <textarea 
+                id="medical-conditions" 
+                v-model="form.medical_conditions" 
+                required 
+                class="form-control"
+              ></textarea>
+            </div>
 
-        <div class="form-group">
-          <label for="consent-status">Consent Status</label>
-          <select id="consent-status" v-model="form.consent_status" class="form-control" required>
-            <option value="true">Given</option>
-            <option value="false">Revoked</option>
-          </select>
-        </div>        
-        
-        <div class="form-group">
-          <label for="cpf">CPF</label>
-          <input 
-            type="text" 
-            id="cpf" 
-            v-model="form.cpf" 
-            required
-            @input="formatCPF"
-            placeholder="000.000.000-00" 
-            class="form-control"
-          />
-        </div>
+            <div class="form-group">
+              <label for="consent-status">Consent Status</label>
+              <select id="consent-status" v-model="form.consent_status" class="form-control" required>
+                <option value="true">Given</option>
+                <option value="false">Revoked</option>
+              </select>
+            </div>        
+            
+            <div class="form-group">
+              <label for="cpf">CPF</label>
+              <input 
+                type="text" 
+                id="cpf" 
+                v-model="form.cpf" 
+                required
+                @input="formatCPF"
+                placeholder="000.000.000-00" 
+                class="form-control"
+              />
+            </div>
 
-        <button type="submit" class="submit-button">Register Patient</button>
-      </form>
+            <button type="submit" class="submit-button">Register Patient</button>
+          </form>
 
-      <p v-if="message" class="message">{{ message }}</p>
-      <p v-if="error" class="error">{{ error }}</p>
-    </section>
-  </div>
+          <p v-if="message" class="message">{{ message }}</p>
+          <p v-if="error" class="error">{{ error }}</p>
+        </section>
+      </div>
+    </transition>
+  </main>
 </template>
 
 <script lang="ts">

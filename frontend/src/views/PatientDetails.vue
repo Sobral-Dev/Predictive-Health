@@ -1,55 +1,69 @@
 <template>
-  <div class="patient-details">
-    <h1 class="page-title">Patient Details</h1>
+  <transition name="fade" mode="out-in">
+    <main>
+      <div class="patient-details">
+        <h1 class="page-title">Patient Details</h1>
 
-    <section class="details-section" v-if="patient">
-      <div class="detail-item">
-        <label>Name: </label>
-        <span>{{ patient.name }}</span>
+        <section class="details-section" v-if="patient">
+          <div class="detail-item">
+            <label>Name: </label>
+            {{ !editPatient ? `<span>` : `<input type="text" @placeholder="${patient.name}" v-model="${updateValues.name}">`}} {{ patient.name }} {{ !editPatient ? `</span>` : ``}}
+          </div>
+
+          <div class="detail-item">
+            <label>Age: </label>
+            {{ !editPatient ? `<span>` : `<input type="date" @placeholder="${patient.birth_date}" v-model="${updateValues.birth_date}">`}} {{ patient.birth_date }} {{ !editPatient ? `</span>` : ``}}
+          </div>
+
+          <div class="detail-item">
+            <label>Medical Conditions: </label>
+            {{ !editPatient ? `<span>` : `<input type="text" @placeholder="${patient.medical_conditions}"> v-model="${updateValues.medical_conditions}"`}} {{ patient.medical_conditions }} {{ !editPatient ? `</span>` : ``}}
+          </div>
+
+          <div class="detail-item">
+            <label>Consent Status: </label>
+            <span>{{ patient.consent_status ? 'Given' : 'Revoked' }}</span>
+          </div>
+
+          <div class="profile-item">
+            <label>With Patient History: </label>
+            <span>
+              {{
+                patient.has_patient_history === true
+                  ? 'Yes'
+                  : patient.has_patient_history === false
+                  ? 'No'
+                  : "Hasn't got a patient history yet"
+              }}
+            </span>
+          </div>
+
+          <div class="profile-item">
+            <label>Created At: </label>
+            <span>
+              {{ patient.created_at }}
+            </span>
+          </div>       
+
+          <button v-if="this.gd.user_role === 'medico'" @click="requestAssociation(this.$router.params.id)">Request association with <b>{{ patient.name }}</b></button>
+          <button v-if="this.gd.user_role === 'medico' && !editPatient" @click="editPatient = true">Update Information of <b>{{ patient.name }}</b></button>
+
+          <button v-if="this.gd.user_role === 'medico' && editPatient && updateValues" @click="updatePatient(this.$router.params.id)">Update</button>
+
+          <button @click="goBack" class="back-button">Back to Patients List</button>
+        </section>
+
+        <section class="details-section" v-if="predictions && this.gd.user_role === 'medico'">
+          <div class="detail-item" v-for="prediction in predictions" :key="prediction._id">
+            <p>{{ prediction }}</p>
+          </div>
+        </section>
+        
+        <p v-if="message" class="message">{{ message }}</p>
+        <p v-if="error" class="error">{{ error }}</p>
       </div>
-
-      <div class="detail-item">
-        <label>Age: </label>
-        <span>{{ patient.birth_date }}</span>
-      </div>
-
-      <div class="detail-item">
-        <label>Medical Conditions: </label>
-        <span>{{ patient.medical_conditions }}</span>
-      </div>
-
-      <div class="detail-item">
-        <label>Consent Status: </label>
-        <span>{{ patient.consent_status ? 'Given' : 'Revoked' }}</span>
-      </div>
-
-      <div class="profile-item">
-        <label>With Patient History: </label>
-        <span>
-          {{
-            patient.has_patient_history === true
-              ? 'Yes'
-              : patient.has_patient_history === false
-              ? 'No'
-              : "Hasn't got a patient history yet"
-          }}
-        </span>
-      </div>
-
-      <div class="profile-item">
-        <label>Created At: </label>
-        <span>
-          {{ patient.created_at }}
-        </span>
-      </div>       
-
-      <button v-if="this.gd.user_role === 'medico'" @click="requestAssociation(this.$router.params.id)">Request association with <b>{{ patient.name }}</b></button>
-      <button @click="goBack" class="back-button">Back to Patients List</button>
-    </section>
-    
-    <p v-if="message" class="message">{{ message }}</p>
-    <p v-if="error" class="error">{{ error }}</p>
-  </div>
+    </main>
+  </transition>
 </template>
 
 <script lang="ts">
@@ -74,6 +88,13 @@ export default defineComponent({
       error: '',
       message: '',
       gd: globalData,
+      editPatient: false,
+      updateValues: {
+        name: null,
+        birth_date: null,
+        medical_conditions: null
+      },
+      predictions: {},
     };
   },
 
@@ -93,6 +114,7 @@ export default defineComponent({
 
   mounted() {
     this.fetchPatientDetails();
+    this.fetchPredictionsHistory();
 
      watch(
       () => eventBus.patientsUpdated, 
@@ -108,7 +130,7 @@ export default defineComponent({
   methods: {
     async fetchPatientDetails() {
       try {
-        const response = await axios.get(`http://localhost:5000/patients/${this.$route.params.id}`, {
+        const response = await axios.get(`http://localhost:5000/patients/${this.$route.params.id}/${globalData.user_role}`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`,
           },
@@ -131,6 +153,44 @@ export default defineComponent({
       this.message = 'Request sent successfully.';
     } catch (err) {
       this.error = `Error when trying send request: ${err}`;
+    }
+  },
+
+  async updatePatient(patientId: number) {
+
+    try {
+      await axios.put(`http://localhost:5000/patients/${patientId}`, {
+        name: this.updateValues.name,
+        birth_date: this.updateValues.birth_date,
+        medical_conditions: this.updateValues.medical_conditions
+      }, {
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+      });
+      this.editPatient = false;
+      this.updateValues = {};
+      this.message = 'Update made successfully.';
+    } catch (err) {
+      this.error = `Error when trying update Patient Information: ${err}`;
+    }
+
+  },
+
+  async fetchPredictionsHistory() {
+
+    if (globalData.user_role !== 'medico') {
+      return this.predictions = {};
+    }
+
+    try {
+      const response = await axios.get(`http://localhost:5000/doctor/${globalData.user_id}/patient/${this.$router.params.id}/predictions`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      });
+      this.predictions = response.data;
+    } catch (err) {
+      this.error = err.response?.data.error || 'Failed to fetch predictions history.';
+      this.predictions = {};
     }
   },
 

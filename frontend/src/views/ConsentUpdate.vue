@@ -1,37 +1,41 @@
 <template>
-  <div class="consent-update">
-    <h1 class="page-title">Update Consent</h1>
+  <main>
+    <transition name="fade" mode="out-in">
+      <div class="consent-update">
+        <h1 class="page-title">Update Consent</h1>
 
-    <section class="consent-section">
+        <section class="consent-section">
 
-      <p v-if="$route.name === 'ConsentUpdate'">Current State: 
-        <b :style="this.gd.user_consent ? 'color: blue;' : 'color: red;' ">
-        {{ this.gd.user_consent ? 'Given' : 'Revoked' }}
-        </b>
-      </p>
+          <p v-if="$route.name === 'ConsentUpdate'">Current State: 
+            <b :style="this.gd.user_consent ? 'color: blue;' : 'color: red;' ">
+            {{ this.gd.user_consent ? 'Given' : 'Revoked' }}
+            </b>
+          </p>
 
-      <p v-else class="initial-consent">
-        We respect your privacy, so we need your consent for your data to be used to make health predictions. <br> 
-        <b>Don't worry, you can change your consent status at any time and deleting your account will automatically anonymize your personal information.</b>
-      </p> 
+          <p v-else class="initial-consent">
+            We respect your privacy, so we need your consent for your data to be used to make health predictions. <br> 
+            <b>Don't worry, you can change your consent status at any time and deleting your account will automatically anonymize your personal information.</b>
+          </p> 
 
-      <form @submit.prevent="updateConsent">
-        <div class="form-group">
-          <label for="consent-status">Switch to:</label>
-          <select id="consent-status" v-model="consentStatus" class="form-control" required>
-            <option value="null" disabled>Choose one...</option>
-            <option value="true">Given</option>
-            <option value="false">Revoked</option>
-          </select>
-        </div>
+          <form @submit.prevent="updateConsent">
+            <div class="form-group">
+              <label for="consent-status">Switch to:</label>
+              <select id="consent-status" v-model="consentStatus" class="form-control" required>
+                <option value="null" disabled>Choose one...</option>
+                <option value="true">Given</option>
+                <option value="false">Revoked</option>
+              </select>
+            </div>
 
-        <button type="submit" class="submit-button">Update Consent</button>
-      </form>
+            <button type="submit" class="submit-button">Update Consent</button>
+          </form>
 
-      <p v-if="message" class="message">{{ message }}</p>
-      <p v-if="error && error !== 'No Patient'" class="error">{{ error }}</p>
-    </section>
-  </div>
+          <p v-if="message" class="message">{{ message }}</p>
+          <p v-if="error && error !== 'No Patient'" class="error">{{ error }}</p>
+        </section>
+      </div>
+    </transition>
+  </main>  
 </template>
 
 <script lang="ts">

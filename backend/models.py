@@ -33,7 +33,7 @@ class AuditLog(db.Model):
     user_id = Column(Integer, ForeignKey('Users.id', ondelete='CASCADE'), nullable=False)
     action = Column(String(255), nullable=False)
     timestamp = Column(TIMESTAMP, server_default=func.now())
-    user = relationship('Users')
+    user = relationship('User')
 
 class RevokedToken(db.Model):
     __tablename__ = 'RevokedToken'
@@ -46,6 +46,6 @@ class Doctorpatient(db.Model):
     id = Column(Integer, primary_key=True)
     doctor_id = Column(Integer, ForeignKey('Users.id', ondelete='CASCADE'), nullable=False)
     patient_id = Column(Integer, ForeignKey('Patient.id', ondelete='CASCADE'), nullable=False)
-    doctor = relationship('Users')
+    doctor = relationship('User')
     patient = relationship('Patient')
     created_at = Column(TIMESTAMP, server_default=func.now())

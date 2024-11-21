@@ -1,92 +1,131 @@
-<template>
-  <div class="user-profile">
-    <h1 class="page-title">User Profile</h1>
+<template> 
+  <transition name="fade" mode="out-in">
+    <main>
+      <div class="user-profile">
+        <h1 class="page-title">User Profile</h1>
 
-    <section class="profile-section" v-if="user">
-      <div class="profile-item">
-        <label>Name:</label>
-        <span>{{ user.name }}</span>
+        <section class="profile-section" v-if="user">
+          <div class="profile-item">
+            <label>Name:</label>
+            <span>{{ user.name }}</span>
+          </div>
+
+          <div class="profile-item">
+            <label>Email:</label>
+            <span>{{ user.email }}</span>
+          </div>
+
+          <div class="profile-item">
+            <label>Role:</label>
+            <span>{{ user.role }}</span>
+          </div>
+
+          <div class="profile-item">
+            <label>Consent Status:</label>
+            <span>
+              {{
+                user.consent_status === true
+                  ? 'Given'
+                  : user.consent_status === false
+                  ? 'Revoked'
+                  : "Hasn't got a patient history yet"
+              }}
+            </span>
+          </div>
+
+          <div class="profile-item">
+            <label>With Patient History:</label>
+            <span>
+              {{
+                user.has_patient_history === true
+                  ? 'Yes'
+                  : user.has_patient_history === false
+                  ? 'No'
+                  : "Hasn't got a patient history yet"
+              }}
+            </span>
+          </div>
+
+          <div class="profile-item">
+            <label>Created At:</label>
+            <span>
+              {{ user.created_at }}
+            </span>
+          </div>      
+
+          <button @click="editProfile" class="edit-button">Edit Profile</button>
+        </section>
+
+        <section class="edit-section" v-if="isEditing">
+          <h2>Edit Profile</h2>
+          <form @submit.prevent="updateProfile">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input 
+                type="text" 
+                id="name" 
+                v-model="user.name" 
+                required 
+                class="form-control"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input 
+                type="email" 
+                id="email" 
+                v-model="user.email" 
+                required 
+                class="form-control"
+              />
+            </div>
+
+            <button type="submit" class="submit-button">Save Changes</button>
+            <button @click="cancelEdit" class="cancel-button">Cancel</button>
+          </form>
+        </section>
+
+        <section class="profile-section" v-if="patient && this.gd.user_role === 'paciente'">
+
+          <h2>Patient Profile</h2>
+
+          <div class="profile-item">          
+            <label>Name: </label>
+            <span>{{ patient.name }}</span>
+          </div>
+
+          <div class="profile-item">
+            <label>Age: </label>
+            <span>{{ patient.age }}</span>
+          </div>
+
+          <div class="profile-item">
+            <label>Role: </label>
+            <span>{{ patient.medical_conditions }}</span>
+          </div>
+
+          <div class="profile-item">
+            <label>Role: </label>
+            <span>{{ patient.created_at }}</span>
+          </div>
+        </section>
+
+        <section v-if="doctors && this.gd.user_role === 'paciente'" class="profile-section">
+
+          <h2>Associate Doctors</h2>
+
+          <ul v-for="doctor in doctors" :key="doctor.id">
+            <li>• Dr(a) {{ doctor.name }}</li>
+          </ul>
+
+        </section>
+
+        <p v-if="error" class="error">{{ error }}</p>
+        <p v-if="message" class="message">{{ message }}</p>
       </div>
-
-      <div class="profile-item">
-        <label>Email:</label>
-        <span>{{ user.email }}</span>
-      </div>
-
-      <div class="profile-item">
-        <label>Role:</label>
-        <span>{{ user.role }}</span>
-      </div>
-
-      <div class="profile-item">
-        <label>Consent Status:</label>
-        <span>
-          {{
-            user.consent_status === true
-              ? 'Given'
-              : user.consent_status === false
-              ? 'Revoked'
-              : "Hasn't got a patient history yet"
-          }}
-        </span>
-      </div>
-
-      <div class="profile-item">
-        <label>With Patient History:</label>
-        <span>
-          {{
-            user.has_patient_history === true
-              ? 'Yes'
-              : user.has_patient_history === false
-              ? 'No'
-              : "Hasn't got a patient history yet"
-          }}
-        </span>
-      </div>
-
-      <div class="profile-item">
-        <label>Created At:</label>
-        <span>
-          {{ user.created_at }}
-        </span>
-      </div>      
-
-      <button @click="editProfile" class="edit-button">Edit Profile</button>
-    </section>
-
-    <section class="edit-section" v-if="isEditing">
-      <h2>Edit Profile</h2>
-      <form @submit.prevent="updateProfile">
-        <div class="form-group">
-          <label for="name">Name</label>
-          <input 
-            type="text" 
-            id="name" 
-            v-model="user.name" 
-            required 
-            class="form-control"
-          />
-        </div>
-
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input 
-            type="email" 
-            id="email" 
-            v-model="user.email" 
-            required 
-            class="form-control"
-          />
-        </div>
-
-        <button type="submit" class="submit-button">Save Changes</button>
-        <button @click="cancelEdit" class="cancel-button">Cancel</button>
-      </form>
-    </section>
-
-    <p v-if="error" class="error">{{ error }}</p>
-    <p v-if="message" class="message">{{ message }}</p>
-  </div>
+    </main>
+  </transition>
 </template>
 
 <script lang="ts">
@@ -111,11 +150,20 @@ export default defineComponent({
       error: '',
       message: '',
       gd: globalData,
+      patient: {
+        name: '',
+        age: '',
+        medical_conditions: '',
+        created_at: '',
+      },
+      doctors: []
     };
   },
 
   mounted() {
     this.fetchUserProfile();
+    this.fetchPatientProfile();
+    this.fetchPatientDoctors();
   },
 
   created() {
@@ -162,6 +210,45 @@ export default defineComponent({
       this.isEditing = false;
       this.fetchUserProfile();
     },
+
+    async fetchPatientProfile() {
+
+      if (globalData.user_role !== 'paciente') {
+        return this.patient = {};
+      } else {
+        try {
+          const response = await axios.get(`http://localhost:5000/patients/${globalData.user_id}/paciente`, {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
+          });
+          this.user = response.data;
+        } catch (err) {
+          this.error = err.response?.data.error || 'Failed to fetch patient profile.';
+        }
+      };
+     
+    },
+
+    async fetchPatientDoctors() {
+
+      if (globalData.user_role !== 'paciente') {
+        return this.doctors = {};
+      } else {
+        try {
+          const response = await axios.get(`http://localhost:5000/${globalData.user_id}/doctors`, {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
+          });
+          this.doctors = response.data;
+        } catch (err) {
+          this.error = err.response?.data.error || 'Failed to fetch user associate doctors.';
+          this.doctors = {};
+        }
+      };
+    },
+  
   },
 
   beforeRouteEnter(

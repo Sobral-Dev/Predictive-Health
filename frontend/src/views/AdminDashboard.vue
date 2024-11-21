@@ -1,28 +1,32 @@
 <template>
-  <div class="admin-dashboard">
-    <h1 class="dashboard-title">Admin Dashboard</h1>
-    
-    <section class="stats-section">
-      <h2 class="section-title">Overview</h2>
-      <div class="stats">
-        <div class="stat-item">
-          <h3 class="stat-title">Total Users</h3>
-          <p class="stat-value">{{ totalUsers }}</p>
-        </div>
-        <div class="stat-item">
-          <h3 class="stat-title">Total Patients</h3>
-          <p class="stat-value">{{ totalPatients }}</p>
-        </div>
-      </div>
-    </section>
+  <main>
+    <transition name="fade" mode="out-in">
+      <div class="admin-dashboard"> 
+        <h1 class="dashboard-title">Admin Dashboard</h1>
+        
+        <section class="stats-section">
+          <h2 class="section-title">Overview</h2>
+          <div class="stats">
+            <div class="stat-item">
+              <h3 class="stat-title">Total Users</h3>
+              <p class="stat-value">{{ totalUsers }}</p>
+            </div>
+            <div class="stat-item">
+              <h3 class="stat-title">Total Patients</h3>
+              <p class="stat-value">{{ totalPatients }}</p>
+            </div>
+          </div>
+        </section>
 
-    <section class="actions-section">
-      <h2 class="section-title">Actions</h2>
-      <button @click="goToUsersManagement" class="action-button">Manage Users</button>
-      <button @click="goToPatientsManagement" class="action-button">Manage Patients</button>
-      <button @click="goToAuditLogs" class="action-button">View Audit Logs</button>
-    </section>
-  </div>
+        <section class="actions-section">
+          <h2 class="section-title">Actions</h2>
+          <button @click="goToUsersManagement" class="action-button">Manage Users</button>
+          <button @click="goToPatientsManagement" class="action-button">Manage Patients</button>
+          <button @click="goToAuditLogs" class="action-button">View Audit Logs</button>
+        </section>
+      </div>
+    </transition>
+  </main>
 </template>
 
 <script lang="ts">

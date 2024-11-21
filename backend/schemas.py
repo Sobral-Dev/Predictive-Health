@@ -8,4 +8,4 @@ class UserSchema(Schema):
     cpf = fields.Int(required=True, validate=validate.Length(max=11))
 
 class ConsentSchema(Schema):
-    consent_status = fields.Boolean(required=True)
+    consent_status = fields.Boolean(required=True, error_messages={"required": "Consent status is required"})

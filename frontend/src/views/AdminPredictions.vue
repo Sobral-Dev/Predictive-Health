@@ -1,14 +1,17 @@
 <template>
-  <div>
-    <h2>Patients Predictions History (Anonymized)</h2>
-    <ul v-if="this.gd.user_role === 'admin'">
-      <li v-for="prediction in predictions" :key="prediction._id">
-        User ID: {{ prediction.user_id }} - Type: {{ prediction.prediction_type }} - Result: {{ prediction.result }} - Probability: {{ prediction.probability }}
-      </li>
-    </ul>
-  </div>
-
-  <p v-if="error" class="error">{{ error }}</p>
+  <main>
+    <transition name="fade" mode="out-in">
+      <div>
+        <h2>Patients Predictions History (Anonymized)</h2>
+        <ul v-if="this.gd.user_role === 'admin'">
+          <li v-for="prediction in predictions" :key="prediction._id">
+            User ID: {{ prediction.user_id }} - Type: {{ prediction.prediction_type }} - Result: {{ prediction.result }} - Probability: {{ prediction.probability }}
+          </li>
+        </ul>
+        <p v-if="error" class="error">{{ error }}</p>
+      </div>
+    </transition>
+  </main>
 </template>
 
 <script>

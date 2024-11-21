@@ -14,11 +14,16 @@ from auth import validate_login, role_required, add_audit_log, revoke_token
 from config import db
 from datetime import datetime
 from helpers.calculate_age_helper import calculate_age
+from werkzeug.serving import WSGIRequestHandler
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgre:853211@localhost:5432/PatientSystem'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['JWT_SECRET_KEY'] = 'super-secret-key'
+app.config['JWT_SECRET_KEY'] = '$hinigami*40Seg*=Death' 
+app.config['JWT_ACCESS_TOKEN_EXPIRES'] = timedelta(hours=1)
+app.config['JWT_TOKEN_LOCATION'] = ['headers']
+app.config['JWT_HEADER_NAME'] = 'Authorization'
+app.config['JWT_HEADER_TYPE'] = 'Bearer'
 
 # Configuração de email usando Mailtrap
 app.config['MAIL_SERVER']= 'sandbox.smtp.mailtrap.io'
@@ -56,8 +61,15 @@ jwt = JWTManager(app)
 # Configuração de email
 mail = Mail(app)
 
-# Configurando o Logging
+# Habilitar logs detalhados do Werkzeug
 logging.basicConfig(filename='app.log', level=logging.DEBUG, format='%(asctime)s %(message)s')
+WSGIRequestHandler.protocol_version = "HTTP/1.1"
+
+# Configurando o Logging
+app.config['PROPAGATE_EXCEPTIONS'] = True
+app.config['DEBUG'] = True
+app.config['TESTING'] = True
+
 
 # Carregamento dos modelos de IA na inicialização
 diabetes_model = None
@@ -72,15 +84,15 @@ def load_models():
     global diabetes_model, hypertension_model, stroke_model
     if not first_request_executed:
         try:
-            diabetes_model = joblib.load(r'C:\Users\felip\OneDrive\Documentos\FATEC\Predictive-Health\models\diabetes_model.pkl')
+            diabetes_model = joblib.load(r'C:\Users\felip\OneDrive\Downloads\Predictive-Health\models\diabetes_model.pkl')
         except Exception as e:
             print(f"Erro ao carregar o modelo de Diabetes: {e}")
         try:
-            hypertension_model = joblib.load(r'C:\Users\felip\OneDrive\Documentos\FATEC\Predictive-Health\models\hypertension_model.pkl')
+            hypertension_model = joblib.load(r'C:\Users\felip\OneDrive\Downloads\Predictive-Health\models\hypertension_model.pkl')
         except Exception as e:
             print(f"Erro ao carregar o modelo de Hipertensão: {e}")
         try:
-            stroke_model = joblib.load(r'C:\Users\felip\OneDrive\Documentos\FATEC\Predictive-Health\models\stroke_model.pkl')
+            stroke_model = joblib.load(r'C:\Users\felip\OneDrive\Downloads\Predictive-Health\models\stroke_model.pkl')
         except Exception as e:
             print(f"Erro ao carregar o modelo de AVC: {e}")
         first_request_executed = True
@@ -97,7 +109,17 @@ def check_if_token_revoked(jwt_header, jwt_payload):
 @app.errorhandler(Exception)
 def handle_exception(e):
     app.logger.error(f"Error: {str(e)}", exc_info=True)
-    return jsonify({"error": "An internal error occurred"}), 500
+    return jsonify({"error": f"An internal error occurred: {str(e)}"}), 500
+
+@app.before_request
+def log_request_data():
+    if request.method in ['POST', 'PUT', 'PATCH']:
+        app.logger.debug(f"Headers: {request.headers}")
+        app.logger.debug(f"Body: {request.get_data()}")
+
+@app.before_request
+def log_mime_type():
+    app.logger.debug(f"Content-Type: {request.content_type}")
 
 # Rota Raíz
 @app.route('/')
@@ -106,6 +128,7 @@ def home():
 
 # Endpoint 1: Registro de Usuário
 @app.route('/register_user', methods=['POST'])
+@role_required(['admin'])
 def register_user():
 
     from models import User, Patient
@@ -142,16 +165,17 @@ def register_user():
 @app.route('/consent-initial', methods=['POST'])
 @jwt_required()
 def consent_initial():
+    
     from models import User, Patient
-    from schemas import ConsentSchema
 
-    user_id = get_jwt_identity()
+    try:
+        user_id = get_jwt_identity()  
+        app.logger.debug(f"JWT validado com sucesso. User ID: {user_id}")
+    except Exception as e:
+        app.logger.error(f"Erro ao validar JWT: {str(e)}")
+        return jsonify({"error": "Token inválido ou expirado", "details": str(e)}), 401
+
     data = request.get_json()
-    consent_schema = ConsentSchema()
-    errors = consent_schema.validate(data)
-
-    if errors:
-        return jsonify(errors), 400
 
     try:
         user = User.query.get(user_id)
@@ -186,7 +210,7 @@ def login():
     if not user:
         return jsonify({"error": "Invalid email or password"}), 401
 
-    access_token = create_access_token(identity=user.id, expires_delta=timedelta(hours=1))
+    access_token = create_access_token(identity=str(user.id), expires_delta=timedelta(hours=1))
     add_audit_log("User logged in", user.id)
 
     return jsonify({
@@ -374,12 +398,18 @@ def register_patient():
         return jsonify({"error": "Database error"}), 500
 
 # Endpoint 11: Obter Dados do Paciente
-@app.route('/patients/<int:id>', methods=['GET'])
+@app.route('/patients/<int:id>/<string:role>', methods=['GET'])
 @jwt_required()
-@role_required(['admin', 'medico'])
-def get_patient(id):
-    from models import Patient
-    patient = Patient.query.get(id)
+@role_required(['admin', 'medico', 'paciente'])
+def get_patient(id, role):
+    from models import Patient, User
+
+    if role == 'paciente':
+        user = User.query.get(id)
+        patient = Patient.query.filter_by(cpf=user.cpf).first()
+    else:
+        patient = Patient.query.get(id)
+    
     if not patient:
         return jsonify({"error": "Patient not found"}), 404
 
@@ -397,7 +427,7 @@ def get_patient(id):
 # Endpoint 12: Atualizar Dados do Paciente
 @app.route('/patients/<int:id>', methods=['PUT'])
 @jwt_required()
-@role_required(['admin', 'medico'])
+@role_required(['medico'])
 def update_patient(id):
     from models import Patient
     data = request.get_json()
@@ -411,8 +441,6 @@ def update_patient(id):
         patient.birth_date = data['birth_date']
     if "medical_conditions" in data:
         patient.medical_conditions = data['medical_conditions']
-    if "consent_status" in data:
-        patient.consent_status = data['consent_status']
 
     db.session.commit()
     add_audit_log("Patient data updated", get_jwt_identity())
@@ -606,19 +634,16 @@ def get_audit_log():
     return jsonify(log_list), 200
 
 # Endpoint 18: Exportar Dados de um Paciente
-@app.route('/patients/export/<int:id>/<string:role>', methods=['GET'])
+@app.route('/patient/export', methods=['GET'])
 @jwt_required()
-@role_required(['admin', 'medico', 'paciente'])
-def export_patient_data(id, role):
-    from models import Patient
-    from models import User
+@role_required(['paciente'])
+def export_patient_data():
 
-    if role != 'paciente':
-        patient = Patient.query.get(id)
-
-    else:
-        user = User.query.get(id)
-        patient = Patient.query.filter_by(cpf=user.cpf).first()
+    from models import Patient, User
+    
+    user_id = get_jwt_identity()
+    user = User.query.filter_by(id=user_id).first()
+    patient = Patient.query.filter_by(cpf=user.cpf).first()
 
     if not patient:
         return jsonify({"error": "Patient not found"}), 404
@@ -647,7 +672,13 @@ def update_consent():
     from models import Patient
     from models import User
     
-    user_id = get_jwt_identity()
+    try:
+        user_id = get_jwt_identity()  
+        app.logger.debug(f"JWT validado com sucesso. User ID: {user_id}")
+    except Exception as e:
+        app.logger.error(f"Erro ao validar JWT: {str(e)}")
+        return jsonify({"error": "Token inválido ou expirado", "details": str(e)}), 401
+    
     data = request.get_json()
 
     if 'consent_status' not in data:
@@ -783,30 +814,7 @@ def change_password():
     add_audit_log("User password changed", user_id)
     return jsonify({"message": "Password changed successfully"}), 200
 
-# Endpoint 24: Atualizar Informações de Usuário
-@app.route('/users/<int:id>', methods=['PUT'])
-@jwt_required()
-@role_required(['admin'])
-def update_user(id):
-    from models import User
-    data = request.get_json()
-
-    user = User.query.get(id)
-    if not user:
-        return jsonify({"error": "User not found"}), 404
-
-    if "name" in data:
-        user.name = data['name']
-    if "email" in data:
-        user.email = data['email']
-    if "role" in data:
-        user.role = data['role']
-
-    db.session.commit()
-    add_audit_log("User data updated", get_jwt_identity())
-    return jsonify({"message": "User updated successfully"}), 200
-
-# Endpoint 25: Obter o estado atual de Consentimento do Usuário Logado
+# Endpoint 24: Obter o estado atual de Consentimento do Usuário Logado
 @app.route('/patients/consent/current', methods=['GET'])
 @jwt_required()
 def get_current_consent():
@@ -829,31 +837,7 @@ def get_current_consent():
     add_audit_log("Current patient consent status obtained", get_jwt_identity())
     return jsonify({"consent_status": patient.consent_status}), 200     
 
-# Endpoint 26: Listar Pacientes de um Médico
-@app.route('/doctor/<int:doctor_id>/patients', methods=['GET'])
-@jwt_required()
-@role_required(['admin', 'medico'])
-def findAll_doctor_patients(doctor_id):
-    
-    from models import DoctorPatient, Patient
-    
-    patients = db.session.query(Patient).join(DoctorPatient).filter(DoctorPatient.doctor_id == doctor_id).all()
-    
-    return jsonify([patients.to_dict() for patient in patients])
-
-# Endpoint 27: Listar Médicos de um Paciente
-@app.route('/patient/<int:patient_id>/doctors', methods=['GET'])
-@jwt_required()
-@role_required(['admin', 'medico'])
-def listar_medicos_paciente(patient_id):
-
-    from models import DoctorPatient, User
-
-    doctors = db.session.query(User).join(DoctorPatient).filter(DoctorPatient.patient_id == patient_id).all()
-    
-    return jsonify([doctors.to_dict() for doctor in doctors])
-
-# Endpoint 28: Salvar Predição
+# Endpoint 25: Salvar Predição
 @app.route('/save-prediction', methods=['POST'])
 @jwt_required()
 def save_prediction():
@@ -888,7 +872,7 @@ def save_prediction():
 
     return jsonify({"message": "Prediction successfully saved"}), 201
 
-# Endpoint 29: Ver predições feitas pelo próprio usuário paciente autenticado
+# Endpoint 26: Ver predições feitas pelo próprio usuário/paciente autenticado
 @app.route('/user/predictions', methods=['GET'])
 @jwt_required()
 @role_required(['paciente'])
@@ -907,7 +891,7 @@ def get_user_predictions():
     
     return jsonify(predictions), 200
 
-# Endpoint 30: Associar um médico a um paciente
+# Endpoint 27: Associar um médico a um paciente
 @app.route('/doctor-patient', methods=['POST'])
 @jwt_required()
 @role_required(['medico'])
@@ -935,10 +919,10 @@ def associate_doctor_patient():
 
     return jsonify({"message": "Created association successfully."}), 201
 
-# Endpoint 31: Listar Pacientes Associados a um Médico
+# Endpoint 28: Listar Pacientes Associados a um Médico
 @app.route('/doctor/<int:doctor_id>/patients', methods=['GET'])
 @jwt_required()
-@role_required(['medico'])
+@role_required(['medico', 'admin'])
 def list_doctor_patients(doctor_id):
 
     from models import DoctorPatient, Patient
@@ -948,20 +932,25 @@ def list_doctor_patients(doctor_id):
 
     return jsonify(patients), 200
 
-# Endpoint 32: Listar Médicos Associados a um Paciente
-@app.route('/patient/<int:patient_id>/doctors', methods=['GET'])
+# Endpoint 29: Listar Médicos Associados a um Paciente
+@app.route('/patient/doctors', methods=['GET'])
 @jwt_required()
 @role_required(['paciente'])
-def list_patient_doctors(patient_id):
+def list_patient_doctors():
 
-    from models import DoctorPatient, User
+    from models import DoctorPatient, User, Patient
 
-    associations = DoctorPatient.query.filter_by(patient_id=patient_id).all()
+    user_id = get_jwt_identity()
+
+    user = User.query.filter_by(id=user_id).first()
+    patient = Patient.query.filter_by(cpf=user.cpf).first()
+
+    associations = DoctorPatient.query.filter_by(patient_id=patient.id).all()
     doctors = [User.query.get(assoc.doctor_id).to_dict() for assoc in associations]
 
     return jsonify(doctors), 200
 
-# Endpoint 33: Ver predições de um paciente associado a um médico
+# Endpoint 30: Ver predições de um paciente associado a um médico
 @app.route('/doctor/<int:doctor_id>/patient/<int:patient_id>/predictions', methods=['GET'])
 @jwt_required()
 @role_required(['medico'])
@@ -986,7 +975,7 @@ def get_patient_predictions(doctor_id, patient_id):
 
     return jsonify(predictions), 200
 
-# Endpoint 34: Ver predições de todos os pacientes associado a um médico
+# Endpoint 31: Ver predições de todos os pacientes associado a um médico
 @app.route('/doctor/<int:doctor_id>/predictions', methods=['GET'])
 @jwt_required()
 @role_required(['medico'])
@@ -1008,7 +997,7 @@ def get_doctor_patient_predictions(doctor_id):
 
     return jsonify(predictions), 200
 
-# Endpoint 35: Ver predições de todos os pacientes de maneira anonimizada (para admins)
+# Endpoint 32: Ver predições de todos os pacientes de maneira anonimizada (para admins)
 @app.route('/admin/predictions', methods=['GET'])
 @jwt_required()
 @role_required(['admin'])
@@ -1026,4 +1015,4 @@ def get_all_predictions():
 
 if __name__ == '__main__':
     configure_mongo_indexes()
-    app.run(debug=True, port=5001)
+    app.run(debug=True, port=5000)

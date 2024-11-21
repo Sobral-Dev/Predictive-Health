@@ -1,39 +1,44 @@
 <template>
-  <div class="show-patients">
-    <h1 class="page-title">Patients List</h1>
+  <main>
+    <transition name="fade" mode="out-in">
 
-    <section class="patients-section">
-      <table class="patients-table">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Age</th>
-            <th>Medical Conditions</th>
-            <th>Consent Status</th>
-            <th>Created At</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="patient in patients" :key="patient.id">
-            <td>{{ patient.id }}</td>
-            <td>{{ patient.name }}</td>
-            <td>{{ patient.birth_date }}</td>
-            <td>{{ patient.medical_conditions }}</td>
-            <td>{{ patient.consent_status ? 'Given' : 'Revoked' }}</td>
-            <td>{{ patient.created_at }}</td>
-            <td>
-              <button @click="viewPatientDetails(patient.id)" class="action-button">View</button>
-              <button @click="deletePatient(patient.id)" class="action-button">Delete</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
+      <div class="show-patients">
+        <h1 class="page-title">Patients List</h1>
 
-    <p v-if="error" class="error">{{ error }}</p>
-  </div>
+        <section class="patients-section">
+          <table class="patients-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Medical Conditions</th>
+                <th>Consent Status</th>
+                <th>Created At</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="patient in patients" :key="patient.id">
+                <td>{{ patient.id }}</td>
+                <td>{{ patient.name }}</td>
+                <td>{{ patient.birth_date }}</td>
+                <td>{{ patient.medical_conditions }}</td>
+                <td>{{ patient.consent_status ? 'Given' : 'Revoked' }}</td>
+                <td>{{ patient.created_at }}</td>
+                <td>
+                  <button @click="viewPatientDetails(patient.id)" class="action-button">View</button>
+                  <button @click="deletePatient(patient.id)" class="action-button">Delete</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <p v-if="error" class="error">{{ error }}</p>
+      </div>
+    </transition>
+  </main>
 </template>
 
 <script lang="ts">

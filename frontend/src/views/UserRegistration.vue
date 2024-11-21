@@ -1,71 +1,76 @@
 <template>
-  <div class="user-registration">
-    <h1 class="page-title">Register New User</h1>
+  <main>
+    <transition name="fade" mode="out-in">
 
-    <section class="form-section">
-      <form @submit.prevent="registerUser">
-        <div class="form-group">
-          <label for="name">Name</label>
-          <input 
-            type="text" 
-            id="name" 
-            v-model="form.name" 
-            required 
-            class="form-control"
-          />
-        </div>
+      <div class="user-registration">
+        <h1 class="page-title">Register New User</h1>
 
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input 
-            type="email" 
-            id="email" 
-            v-model="form.email" 
-            required 
-            class="form-control"
-          />
-        </div>
+        <section class="form-section">
+          <form @submit.prevent="registerUser">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input 
+                type="text" 
+                id="name" 
+                v-model="form.name" 
+                required 
+                class="form-control"
+              />
+            </div>
 
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input 
-            type="password" 
-            id="password" 
-            v-model="form.password" 
-            required 
-            class="form-control"
-          />
-        </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input 
+                type="email" 
+                id="email" 
+                v-model="form.email" 
+                required 
+                class="form-control"
+              />
+            </div>
 
-        <div class="form-group">
-          <label for="role">Role</label>
-          <select id="role" v-model="form.role" class="form-control" required>
-            <option value="admin">Admin</option>
-            <option value="medico">Medico</option>
-            <option value="paciente">Paciente</option>
-          </select>
-        </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input 
+                type="password" 
+                id="password" 
+                v-model="form.password" 
+                required 
+                class="form-control"
+              />
+            </div>
 
-        <div class="form-group">
-          <label for="cpf">CPF</label>
-          <input 
-            type="text" 
-            id="cpf" 
-            v-model="form.cpf" 
-            required
-            @input="formatCPF"
-            placeholder="000.000.000-00" 
-            class="form-control"
-          />
-        </div>
+            <div class="form-group">
+              <label for="role">Role</label>
+              <select id="role" v-model="form.role" class="form-control" required>
+                <option value="admin">Admin</option>
+                <option value="medico">Medico</option>
+                <option value="paciente">Paciente</option>
+              </select>
+            </div>
 
-        <button type="submit" class="submit-button">Register User</button>
-      </form>
+            <div class="form-group">
+              <label for="cpf">CPF</label>
+              <input 
+                type="text" 
+                id="cpf" 
+                v-model="form.cpf" 
+                required
+                @input="formatCPF"
+                placeholder="000.000.000-00" 
+                class="form-control"
+              />
+            </div>
 
-      <p v-if="message" class="message">{{ message }}</p>
-      <p v-if="error" class="error">{{ error }}</p>
-    </section>
-  </div>
+            <button type="submit" class="submit-button">Register User</button>
+          </form>
+
+          <p v-if="message" class="message">{{ message }}</p>
+          <p v-if="error" class="error">{{ error }}</p>
+        </section>
+      </div>
+    </transition>
+  </main>
 </template>
 
 <script lang="ts">

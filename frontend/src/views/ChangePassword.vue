@@ -1,60 +1,68 @@
 <template>
-  <div class="change-password">
-    <h1 class="page-title">Change Password</h1>
+  <main>
+    <transition name="fade" mode="out-in">
+      
+      <div class="change-password">
+        <h1 class="page-title">Change Password</h1>
 
-    <section class="password-section">
-      <form @submit.prevent="changePassword">
-        <div class="form-group">
-          <label for="old-password">Old Password</label>
-          <input 
-            type="password" 
-            id="old-password" 
-            v-model="oldPassword" 
-            required 
-            class="form-control"
-          />
-        </div>
+        <section class="password-section">
+          <form @submit.prevent="changePassword">
+            <div v-if="!usingResetToken" class="form-group">
+              <label for="old-password">Old Password</label>
+              <input 
+                type="password" 
+                id="old-password" 
+                v-model="oldPassword" 
+                 @required="!usingResetToken" 
+                class="form-control"
+              />
+            </div>
 
-        <div class="form-group">
-          <label for="new-password">New Password</label>
-          <input 
-            type="password" 
-            id="new-password" 
-            v-model="newPassword" 
-            required 
-            class="form-control"
-          />
-        </div>
+            <div v-if="usingResetToken" class="form-group">
+              <label for="reset-token">Enter the Reset Token Received</label>
+              <input 
+                type="password" 
+                id="reset-token" 
+                v-model="resetToken" 
+                @required="usingResetToken" 
+                class="form-control"
+              />
+            </div>
 
-        <div class="form-group">
-          <label for="confirm-password">Confirm New Password</label>
-          <input 
-            type="password" 
-            id="confirm-password" 
-            v-model="confirmPassword" 
-            required 
-            class="form-control"
-          />
-        </div>
+            <p v-if="!usingResetToken">Can't you remember? Use your <b>reset token</b> or <a :href="this.$router.push('/login').data.emailSender = true">request one here.</a></p>
+            <button @click="usingResetToken = !usingResetToken">{{ usingResetToken ? 'Back to Old Password' : 'Use your Reset Token' }}</button>
 
-        <div class="form-group">
-          <label for="reset-token">Enter the Reset Token Received</label>
-          <input 
-            type="text" 
-            id="reset-token" 
-            v-model="resetToken" 
-            required 
-            class="form-control"
-          />
-        </div>
+            <div class="form-group">
+              <label for="new-password">New Password</label>
+              <input 
+                type="password" 
+                id="new-password" 
+                v-model="newPassword" 
+                required 
+                class="form-control"
+              />
+            </div>
 
-        <button type="submit" class="submit-button">Change Password</button>
-      </form>
+            <div class="form-group">
+              <label for="confirm-password">Confirm New Password</label>
+              <input 
+                type="password" 
+                id="confirm-password" 
+                v-model="confirmPassword" 
+                required 
+                class="form-control"
+              />
+            </div>
 
-      <p v-if="message" class="message">{{ message }}</p>
-      <p v-if="error" class="error">{{ error }}</p>
-    </section>
-  </div>
+            <button type="submit" class="submit-button">Change Password</button>
+          </form>
+
+          <p v-if="message" class="message">{{ message }}</p>
+          <p v-if="error" class="error">{{ error }}</p>
+        </section>
+      </div>
+    </transition>
+  </main>
 </template>
 
 <script lang="ts">
@@ -74,6 +82,7 @@ export default defineComponent({
       message: '',
       error: '',
       gd: globalData,
+      usingResetToken: false,
     };
   },
 
@@ -87,33 +96,70 @@ export default defineComponent({
   },
 
   methods: {
+
     async changePassword() {
       if (this.newPassword !== this.confirmPassword) {
         this.error = 'New password and confirm password do not match.';
         return;
       }
 
-      try {
-        const response = await axios.put(
-          'http://localhost:5000/user/change-password',
-          {
-            user_id: globalData.user_id,
-            reset_token: this.resetToken,
-            new_password: this.newPassword,
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem('token')}`,
+      if (this.usingResetToken) {
+
+        try {
+          const response = await axios.post(
+            'http://localhost:5000/password-reset',
+            {
+              user_id: globalData.user_id,
+              reset_token: this.resetToken,
+              new_password: this.newPassword,
             },
-          }
-        );
-        this.message = response.data.message || 'Password changed successfully.';
-        this.error = '';
-      } catch (err) {
-        this.error = err.response.data.error || 'Failed to change password.';
-        this.message = '';
+            {
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+              },
+            }
+          );
+          this.message = response.data.message || 'Password changed successfully.';
+          this.error = '';
+          this.reset_token = '';
+          this.new_password = '';
+          this.old_password = '';
+          this.usingResetToken = false;
+        } catch (err) {
+          this.error = err.response.data.error || 'Failed to change password.';
+          this.message = '';
+        }
+
+      } else {
+
+        try {
+
+          const response = await axios.put(
+            'http://localhost:5000/user/change-password',
+            {
+              old_password: this.oldPassword,
+              new_password: this.newPassword,
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+              },
+            }
+          );
+          this.message = response.data.message || 'Password changed successfully.';
+          this.error = '';
+          this.reset_token = '';
+          this.new_password = '';
+          this.old_password = '';
+          this.usingResetToken = false;
+        } catch (err) {
+          this.error = err.response.data.error || 'Failed to change password.';
+          this.message = '';
+
+        }
       }
     },
+
   },
   
 });
