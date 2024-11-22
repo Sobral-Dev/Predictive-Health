@@ -13,7 +13,7 @@
                 type="password" 
                 id="old-password" 
                 v-model="oldPassword" 
-                 @required="!usingResetToken" 
+                 @required="!usingResetToken ? true : false" 
                 class="form-control"
               />
             </div>
@@ -24,13 +24,13 @@
                 type="password" 
                 id="reset-token" 
                 v-model="resetToken" 
-                @required="usingResetToken" 
+                @required="usingResetToken ? true : false" 
                 class="form-control"
               />
             </div>
 
-            <p v-if="!usingResetToken">Can't you remember? Use your <b>reset token</b> or <a :href="this.$router.push('/login').data.emailSender = true">request one here.</a></p>
-            <button @click="usingResetToken = !usingResetToken">{{ usingResetToken ? 'Back to Old Password' : 'Use your Reset Token' }}</button>
+            <p v-if="!usingResetToken">Can't you remember? Use your <b>reset token</b> or <a @click.prevent="goToLogin" style="cursor: pointer; opacity: 0.6; color: rgba(52, 152, 219, 1);" :hover="'opacity: 1'"><b>request one here.</b></a></p>
+            <button type="button" @click="usingResetToken ? usingResetToken = false : usingResetToken = true">{{ usingResetToken ? 'Back to Old Password' : 'Use your Reset Token' }}</button>
 
             <div class="form-group">
               <label for="new-password">New Password</label>
@@ -38,7 +38,7 @@
                 type="password" 
                 id="new-password" 
                 v-model="newPassword" 
-                required 
+                required
                 class="form-control"
               />
             </div>
@@ -49,7 +49,7 @@
                 type="password" 
                 id="confirm-password" 
                 v-model="confirmPassword" 
-                required 
+                required
                 class="form-control"
               />
             </div>
@@ -121,9 +121,10 @@ export default defineComponent({
           );
           this.message = response.data.message || 'Password changed successfully.';
           this.error = '';
-          this.reset_token = '';
-          this.new_password = '';
-          this.old_password = '';
+          this.resetToken = '';
+          this.newPassword = '';
+          this.oldPassword = '';
+          this.confirmPassword = '';
           this.usingResetToken = false;
         } catch (err) {
           this.error = err.response.data.error || 'Failed to change password.';
@@ -148,9 +149,10 @@ export default defineComponent({
           );
           this.message = response.data.message || 'Password changed successfully.';
           this.error = '';
-          this.reset_token = '';
-          this.new_password = '';
-          this.old_password = '';
+          this.resetToken = '';
+          this.newPassword = '';
+          this.oldPassword = '';
+          this.confirmPassword = '';
           this.usingResetToken = false;
         } catch (err) {
           this.error = err.response.data.error || 'Failed to change password.';
@@ -158,6 +160,13 @@ export default defineComponent({
 
         }
       }
+    },
+
+    goToLogin() {
+      this.$router.push({ 
+        name: 'Login', 
+        query: { emailSender: true } 
+      });
     },
 
   },

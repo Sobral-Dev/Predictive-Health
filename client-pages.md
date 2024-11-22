@@ -6,8 +6,8 @@
 - **Objetivo**: Apresentar uma visão geral das principais funcionalidades administrativas, incluindo gerenciamento de usuários, pacientes e auditoria.
 - **Justificativa**: Centraliza as principais ações de controle e administração do sistema.
 - **Endpoints Utilizados**:
-  - **`GET /users`**: Fornece uma lista dos usuários registrados.
-  - **`GET /patients`**: Lista todos os pacientes para uma visão geral.
+  - **`GET /users` (HTTP `OK`)**: Fornece uma lista dos usuários registrados.
+  - **`GET /patients` (HTTP `OK`)**: Lista todos os pacientes para uma visão geral.
 - **Lógicas Condicionais Dinâmicas do HTML**:
   - **Nenhuma**
 
@@ -19,7 +19,7 @@
 - **Objetivo**: Permitir que administradores visualizem todas as predições realizadas de forma anonimizada (sem dados sensíveis dos pacientes).
 - **Justificativa**: 
 - **Endpoints Utilizados**:
-  - **`GET /admin/predictions`**: Fornece todos as predições persistidas no banco MongoDB, sem divulgar dados sensíveis dos pacientes.
+  - **`GET /admin/predictions` (HTTP `OK`)**: Fornece todos as predições persistidas no banco MongoDB, sem divulgar dados sensíveis dos pacientes.
 - **Lógicas Condicionais Dinâmicas do HTML**:
   - **Nenhuma**
 
@@ -31,7 +31,7 @@
 - **Objetivo**: Permitir que administradores visualizem todos os logs de auditoria registrados.
 - **Justificativa**: Garante a conformidade com a LGPD em relação à transparência e rastreabilidade de ações.
 - **Endpoints Utilizados**:
-  - **`GET /audit-log`**: Fornece uma lista de ações realizadas para monitoramento e auditoria.
+  - **`GET /audit-log` (HTTP `OK`)**: Fornece uma lista de ações realizadas para monitoramento e auditoria.
 - **Lógicas Condicionais Dinâmicas do HTML**:
   - **Nenhuma**
 
@@ -43,8 +43,8 @@
 - **Objetivo**: Permitir que um usuário recupere sua senha por meio de um link enviado para seu e-mail.
 - **Justificativa**: Essencial para segurança e experiência do usuário, atendendo à necessidade de recuperação de acesso.
 - **Endpoints Utilizados**:
-  - **`PUT /user/change-password`**: Permite ao usuário autenticado que recorda sua senha atual a trocá-la sem necessidade do uso de um reset token.
-  - **`POST /password-reset`**: Permite ao usuário autenticado trocar a senha fornecendo o reset token recebido por email.
+  - **`PUT /user/change-password` (HTTP `OK`)**: Permite ao usuário autenticado que recorda sua senha atual a trocá-la sem necessidade do uso de um reset token.
+  - **`POST /password-reset` (HTTP `OK`)**: Permite ao usuário autenticado trocar a senha fornecendo o reset token recebido por email.
 - **Lógicas Condicionais Dinâmicas do HTML**:
   - **`v-if="!usingResetToken"`**: variável que permite que os inputs sejam dinâmicos, a depender se o usuário utilizará o reset token ou não.
   - **`<a :href="this.$router.push('/login').data.emailSender = true">`**: Redireciona o usuário para a tela onde há o envio do reset token, com a variável emailSender recebendo `true` para redirecionar ao formulário de requisição.
@@ -57,9 +57,9 @@
 - **Objetivo**: Permitir que médicos e administradores atualizem o status de consentimento de um paciente.
 - **Justificativa**: Atende ao requisito de atualização de consentimento conforme LGPD.
 - **Endpoints Utilizados**:
-  - **`POST /update-consent`**: Atualiza o status de consentimento de um paciente.
-  - **`GET /patients/consent/current`**: Obtém o status atual de consentimento do usuário autenticado.
-  - **`POST /consent-initial`**: Permite o usuário dar o consentimento inicial, quando o consentimento ainda não foi aceito ou revogado.
+  - **`POST /update-consent` (HTTP `OK`)**: Atualiza o status de consentimento de um paciente.
+  - **`GET /patients/consent/current` (HTTP `OK`)**: Obtém o status atual de consentimento do usuário autenticado.
+  - **`POST /consent-initial` (HTTP `OK`)**: Permite o usuário dar o consentimento inicial, quando o consentimento ainda não foi aceito ou revogado.
 - **Lógicas Condicionais Dinâmicas do HTML**:
   - **`$route.name === 'ConsentUpdate`**: A depender se é o primeiro acesso ou se já há um valor definido pelo usuário de aceito ou revogação do consentimento, alguns componentes do HTML podem serem omitidos, assim como o endpoint de mudança de consentimento alterar de `/consent-initial` para `update-consent`.
 
@@ -71,7 +71,7 @@
 - **Objetivo**: Permitir que os médicos possam visualizar todos os pacientes nos quais ele está associado.
 - **Justificativa**: 
 - **Endpoints Utilizados**:
-  - **`GET /doctor/${globalData.user_id}/patients`**: Fornece uma lista com todos os pacientes associados ao médico autenticado.
+  - **`GET /doctor/${globalData.user_id}/patients` (HTTP ``)**: Fornece uma lista com todos os pacientes associados ao médico autenticado.
 - **Lógicas Condicionais Dinâmicas do HTML**:
   - **`@click.prevent="this.$router.push(`/patients/${patient.id}`)`**: Ao clicar em qualquer paciente listado, o usuário médico consegue acessar as informações desse paciente sendo redirecionado para a página de detalhes dos pacientes (`PatientDetails.vue`).
 
@@ -83,7 +83,7 @@
 - **Objetivo**: Permitir que os médicos possam visualizar todas as predições realizadas anteriormente pelos pacientes nos quais ele está associado.
 - **Justificativa**: 
 - **Endpoints Utilizados**:
-  - **`GET /doctor/${globalData.user_id}/predictions`**: Fornece uma lista com todos as predições realizadas pelos pacientes associados ao médico autenticado.
+  - **`GET /doctor/${globalData.user_id}/predictions` (HTTP ``)**: Fornece uma lista com todos as predições realizadas pelos pacientes associados ao médico autenticado.
 - **Lógicas Condicionais Dinâmicas do HTML**:
   - **Nenhuma**
 
@@ -95,10 +95,10 @@
 - **Objetivo**: Criar formulários de predição de saúde para médicos, com base nos modelos de IA disponíveis.
 - **Justificativa**: Atende à funcionalidade de predição de riscos de saúde para dar suporte à tomada de decisões médicas.
 - **Endpoints Utilizados**:
-  - **`POST /predict/diabetes`**: Prediz risco de diabetes para um paciente.
-  - **`POST /predict/hypertension`**: Prediz risco de hipertensão para um paciente.
-  - **`POST /predict/stroke`**: Prediz risco de AVC para um paciente.
-  - **`POST /save-prediction`**: Armazena no banco MongoDB as features e o resultado das predições realizadas assim que elas são terminadas.
+  - **`POST /predict/diabetes` (HTTP ``)**: Prediz risco de diabetes para um paciente.
+  - **`POST /predict/hypertension` (HTTP ``)**: Prediz risco de hipertensão para um paciente.
+  - **`POST /predict/stroke` (HTTP ``)**: Prediz risco de AVC para um paciente.
+  - **`POST /save-prediction` (HTTP ``)**: Armazena no banco MongoDB as features e o resultado das predições realizadas assim que elas são terminadas.
 - **Lógicas Condicionais Dinâmicas do HTML**:
   - **`<button class="choose-language" @click.prevent="english = !english"><i class="fa-solid fa-language">{{ !english ? 'PT-Br' : 'EN' }}</i></button>`**: Altera o idioma da página entre inglês e português.
   - **`<select v-model="selectedPrediction" @change="resetForm">
@@ -116,8 +116,8 @@
 - **Objetivo**: Autenticar o usuário e conceder acesso ao sistema de acordo com seu papel (admin, médico, paciente).
 - **Justificativa**: É a porta de entrada da aplicação, garantindo autenticação segura e gerenciamento de acesso.
 - **Endpoints Utilizados**:
-  - **`POST /login`**: Realiza a autenticação e retorna o token JWT e dados necessários a serem armazenados para a sessão no `localStorage` e no `globalData`.
-  - **`POST /password-reset-request`**: Solicita a alteração de senha, enviando ao email do usuário um token que permite a alteração de forma segura. 
+  - **`POST /login` (HTTP `OK`)**: Realiza a autenticação e retorna o token JWT e dados necessários a serem armazenados para a sessão no `localStorage` e no `globalData`.
+- **`POST /password-reset-request` (HTTP `OK`)**: Solicita a alteração de senha, enviando ao email do usuário um token que permite a alteração de forma segura. 
 - **Lógicas Condicionais Dinâmicas do HTML**:
   - **Nenhuma**
 
@@ -129,10 +129,10 @@
 - **Objetivo**: Exibir os detalhes completos de um paciente específico, incluindo informações pessoais, condições médicas e consentimento.
 - **Justificativa**: Fornece uma visão detalhada e individual dos pacientes para médicos e administradores.
 - **Endpoints Utilizados**:
-  - **`GET /patients/${this.$route.params.id}/${globalData.user_role}`**: Exibe detalhes de um paciente específico.
-  - **`POST /doctor-patient`**: Permite o médico requisitar uma associação a um paciente, para poder acompanhar seu histórico de predições e acompanhar seu quadro médico.
-  - **`PUT /patients/{patientId}`**: Atualiza os dados do paciente pelo médico consentido que o acompanha.
-  - **`GET /doctor/${globalData.user_id}/patient/${this.$router.params.id}/predictions`**: Obtém o histórico de predições do paciente acompanhado pelo médico autenticado e que recebeu consentimento para tal. 
+  - **`GET /patients/${this.$route.params.id}/${globalData.user_role}` (HTTP `OK`)**: Exibe detalhes de um paciente específico.
+  - **`POST /doctor-patient` (HTTP ``)**: Permite o médico requisitar uma associação a um paciente, para poder acompanhar seu histórico de predições e acompanhar seu quadro médico.
+  - **`PUT /patients/{patientId}` (HTTP ``)**: Atualiza os dados do paciente pelo médico consentido que o acompanha.
+  - **`GET /doctor/${globalData.user_id}/patient/${this.$router.params.id}/predictions` (HTTP ``)**: Obtém o histórico de predições do paciente acompanhado pelo médico autenticado e que recebeu consentimento para tal. 
 - **Lógicas Condicionais Dinâmicas do HTML**:
   - **` {{ !editPatient ? `<span>` : `<input type="text" @placeholder="${patient.name}" v-model="${updateValues.name}">`}}`**: lógica para transformar o elemento HTML de forma dinâmica, caso o usuário médico queira editar informações de seu paciente.
 
@@ -144,8 +144,8 @@
 - **Objetivo**: Permitir que usuários exportem seus dados pessoais e médicos em formato JSON ou CSV.
 - **Justificativa**: Atende ao direito de portabilidade de dados conforme LGPD.
 - **Endpoints Utilizados**:
-  - **`GET /user/export`**: Exporta dados do usuário autenticado.
-  - **`GET /patient/export`**: Exporta dados do paciente autenticado.
+  - **`GET /user/export` (HTTP `OK`)**: Exporta dados do usuário autenticado.
+  - **`GET /patient/export` (HTTP ``)**: Exporta dados do paciente autenticado.
 - **Lógicas Condicionais Dinâmicas do HTML**:
   - **`this.gd.user_role === 'paciente'`**: Condicional para aparecer a `<section>` de classe `checkbox-section`.
   - **`v-if="this.gd.user_role === 'paciente' ? 
@@ -160,7 +160,7 @@
 - **Objetivo**: Permitir que médicos e administradores registrem novos pacientes no sistema.
 - **Justificativa**: Atende à necessidade de registro de pacientes para futuras predições e gestão de dados clínicos.
 - **Endpoints Utilizados**:
-  - **`POST /register_patient`**: Cria um novo registro de paciente.
+  - **`POST /register_patient` (HTTP ``)**: Cria um novo registro de paciente.
 - **Lógicas Condicionais Dinâmicas do HTML**:
   - **Nenhuma**
 
@@ -172,9 +172,8 @@
 - **Objetivo**: Exibir uma lista completa de pacientes com funcionalidades para visualizar, editar e excluir os registros.
 - **Justificativa**: Facilita o acesso centralizado e a manipulação de dados dos pacientes para médicos e administradores.
 - **Endpoints Utilizados**:
-  - **`GET /patients`**: Lista todos os pacientes.
-  - **`GET /doctor/${globalData.user_id}/patients`**: Listar todos os pacientes associados a um médico.
-  - **`DELETE /patients/${patientId}`**: Permite fazer a remoção lógica do registro de um paciente (Anonimização).
+  - **`GET /patients` (HTTP `OK`)**: Lista todos os pacientes.
+  - **`DELETE /patients/${patientId}` (HTTP `OK`)**: Permite fazer a remoção lógica do registro de um paciente (Anonimização).
 - **Lógicas Condicionais Dinâmicas do HTML**:
   - **Nenhuma**
 
@@ -186,7 +185,7 @@
 - **Objetivo**: Permitir que os pacientes possam visualizar todas as predições realizadas anteriormente por ele mesmo.
 - **Justificativa**: 
 - **Endpoints Utilizados**:
-  - **`GET /user/predictions`**: Fornece uma lista com todos as predições realizadas anteriormente pelo paciente.
+  - **`GET /user/predictions` (HTTP ``)**: Fornece uma lista com todos as predições realizadas anteriormente pelo paciente.
 - **Lógicas Condicionais Dinâmicas do HTML**:
   - **Nenhuma**
 
@@ -198,10 +197,11 @@
 - **Objetivo**: Permitir que cada usuário visualize e edite seus dados pessoais, como nome, e-mail, etc.
 - **Justificativa**: Atende ao direito de correção de dados conforme LGPD.
 - **Endpoints Utilizados**:
-  - **`GET /user/me`**: Exibe os dados pessoais do usuário autenticado.
-  - **`PUT /user/me`**: Atualiza os dados pessoais do usuário autenticado.
-  - **`GET /patients/${globalData.user_id}/paciente`**: Recebe os dados de histórico de paciente do usuário autenticado.
-  - **`GET /patient/doctors`**: Lista os médicos associados ao paciente autenticado.
+  - **`GET /user/me` (HTTP `OK`)**: Exibe os dados pessoais do usuário autenticado.
+- **`PUT /user/me` (HTTP `OK`)**: Atualiza os dados pessoais do usuário autenticado.
+  - **`GET /patients/${globalData.user_id}/paciente` (HTTP ``)**: Recebe os dados de histórico de paciente do usuário autenticado.
+  - **`GET /patient/doctors` (HTTP ``)**: Lista os médicos associados ao paciente autenticado.
+  - **`GET /doctor/${globalData.user_id}/patients` (HTTP ``)**: Listar todos os pacientes associados ao médico autenticado.
 - **Lógicas Condicionais Dinâmicas do HTML**:
   - **` <section class="profile-section" v-if="patient && this.gd.user_role === 'paciente'">
 `**: Caso o usuário autenticado seja um paciente, essa seção da página que mostra os dados de perfil do paciente é renderizado.
@@ -214,7 +214,7 @@
 - **Objetivo**: Permitir a criação de novos usuários no sistema, definindo seu papel (admin, médico, paciente).
 - **Justificativa**: Facilita o registro de novos usuários e a administração contínua.
 - **Endpoints Utilizados**:
-  - **`POST /register_user`**: Cria um novo usuário.
+  - **`POST /register_user` (HTTP `OK`)**: Cria um novo usuário.
 - **Lógicas Condicionais Dinâmicas do HTML**:
   - **Nenhuma**
 
@@ -226,9 +226,9 @@
 - **Objetivo**: CRUD completo para gerenciar usuários, permitindo que administradores criem, atualizem, visualizem e excluam usuários.
 - **Justificativa**: Necessário para controle seguro de usuários e para a expansão e manutenção do sistema.
 - **Endpoints Utilizados**:
-  - **`GET /users`**: Lista os usuários registrados no sistema.
-  - **`PUT /user/me`**: Atualiza os dados de um usuário.
-  - **`DELETE /users/${userId}`**: Anonimiza ou desativa um usuário.
+  - **`GET /users` (HTTP `OK`)**: Lista os usuários registrados no sistema.
+  - **`PUT /user/me` (HTTP ``)**: Atualiza os dados de um usuário.
+  - **`DELETE /users/${userId}` (HTTP `OK`)**: Anonimiza ou desativa um usuário.
 - **Lógicas Condicionais Dinâmicas do HTML**:
   - **Nenhuma**
 

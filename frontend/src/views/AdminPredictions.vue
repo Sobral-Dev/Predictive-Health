@@ -1,15 +1,30 @@
 <template>
   <main>
     <transition name="fade" mode="out-in">
-      <div>
-        <h2>Patients Predictions History (Anonymized)</h2>
-        <ul v-if="this.gd.user_role === 'admin'">
-          <li v-for="prediction in predictions" :key="prediction._id">
-            User ID: {{ prediction.user_id }} - Type: {{ prediction.prediction_type }} - Result: {{ prediction.result }} - Probability: {{ prediction.probability }}
-          </li>
-        </ul>
+      <section class="predictions-section">
+        <h2>Patients Predictions History (Anonymized)</h2> <br>
+        <table v-if="this.gd.user_role === 'admin'" class="predictions-table">
+          <thead>
+            <tr>
+              <th>Patient ID</th>
+              <th>Type</th>
+              <th>Risk</th>
+              <th>Probability</th>
+              <th>Timestamp</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="prediction in predictions" :key="prediction._id">
+              <td>{{ prediction.user_id }}</td>
+              <td>{{ prediction.prediction_type }}</td>
+              <td>{{ prediction.prediction_result.risk === 0 ? 'Moderate' : 'High' }}</td>
+              <td>{{ prediction.prediction_result.probability }}</td>
+              <td>{{ prediction.timestamp }}</td>
+            </tr>
+          </tbody>
+        </table>
         <p v-if="error" class="error">{{ error }}</p>
-      </div>
+      </section>
     </transition>
   </main>
 </template>
@@ -44,3 +59,40 @@ export default {
   }
 };
 </script>
+
+<style>
+@import '../assets/css/base.css';
+
+.predictions-section {
+  margin-top: 20px;
+}
+
+.predictions-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.predictions-table th,
+.predictions-table td {
+  padding: 12px;
+  border: 1px solid #ccc;
+}
+
+.predictions-table th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+.predictions-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.action-button {
+  margin: 0 5px;
+}
+
+.error {
+  color: red;
+  margin-top: 10px;
+}
+</style>

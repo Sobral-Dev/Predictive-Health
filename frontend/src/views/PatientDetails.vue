@@ -7,17 +7,20 @@
         <section class="details-section" v-if="patient">
           <div class="detail-item">
             <label>Name: </label>
-            {{ !editPatient ? `<span>` : `<input type="text" @placeholder="${patient.name}" v-model="${updateValues.name}">`}} {{ patient.name }} {{ !editPatient ? `</span>` : ``}}
+            <span v-if="!editPatient">{{ patient.name }}</span>
+            <input v-else type="text" :placeholder="patient.name" v-model="updateValues.name">
           </div>
 
           <div class="detail-item">
             <label>Age: </label>
-            {{ !editPatient ? `<span>` : `<input type="date" @placeholder="${patient.birth_date}" v-model="${updateValues.birth_date}">`}} {{ patient.birth_date }} {{ !editPatient ? `</span>` : ``}}
+            <span v-if="!editPatient">{{ patient.age }} anos</span>
+            <input v-else type="date" :placeholder="patient.age" v-model="updateValues.birth_date">
           </div>
 
           <div class="detail-item">
             <label>Medical Conditions: </label>
-            {{ !editPatient ? `<span>` : `<input type="text" @placeholder="${patient.medical_conditions}"> v-model="${updateValues.medical_conditions}"`}} {{ patient.medical_conditions }} {{ !editPatient ? `</span>` : ``}}
+            <span v-if="!editPatient">{{ patient.medical_conditions }}</span>
+            <input v-else type="text" :placeholder="patient.medical_conditions" v-model="updateValues.medical_conditions">
           </div>
 
           <div class="detail-item">
@@ -25,7 +28,7 @@
             <span>{{ patient.consent_status ? 'Given' : 'Revoked' }}</span>
           </div>
 
-          <div class="profile-item">
+          <div class="detail-item">
             <label>With Patient History: </label>
             <span>
               {{
@@ -38,7 +41,7 @@
             </span>
           </div>
 
-          <div class="profile-item">
+          <div class="detail-item">
             <label>Created At: </label>
             <span>
               {{ patient.created_at }}
@@ -78,12 +81,14 @@ export default defineComponent({
   data() {
     return {
       patient: null as {
-        name: string;
-        birth_date: number;
-        medical_conditions: string;
+        age: number;
         consent_status: boolean;
-        has_patient_history: boolean;
         created_at: Date;
+        has_patient_history: boolean;
+        id: number;
+        medical_conditions: string;
+        name: string;
+        
       } | null,
       error: '',
       message: '',
@@ -143,55 +148,56 @@ export default defineComponent({
     goBack() {
       this.router.push({ name: 'ShowPatients' });
     },
-  },
 
-  async requestAssociation(patientId: number) {
-    try {
-      await axios.post('http://localhost:5000/doctor-patient', { patient_id: patientId }, {
-        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
-      });
-      this.message = 'Request sent successfully.';
-    } catch (err) {
-      this.error = `Error when trying send request: ${err}`;
-    }
-  },
+    async requestAssociation(patientId: number) {
+      try {
+        await axios.post('http://localhost:5000/doctor-patient', { patient_id: patientId }, {
+          headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+        });
+        this.message = 'Request sent successfully.';
+      } catch (err) {
+        this.error = `Error when trying send request: ${err}`;
+      }
+    },
 
-  async updatePatient(patientId: number) {
+    async updatePatient(patientId: number) {
 
-    try {
-      await axios.put(`http://localhost:5000/patients/${patientId}`, {
-        name: this.updateValues.name,
-        birth_date: this.updateValues.birth_date,
-        medical_conditions: this.updateValues.medical_conditions
-      }, {
-        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
-      });
-      this.editPatient = false;
-      this.updateValues = {};
-      this.message = 'Update made successfully.';
-    } catch (err) {
-      this.error = `Error when trying update Patient Information: ${err}`;
-    }
+      try {
+        await axios.put(`http://localhost:5000/patients/${patientId}`, {
+          name: this.updateValues.name,
+          birth_date: this.updateValues.birth_date,
+          medical_conditions: this.updateValues.medical_conditions
+        }, {
+          headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+        });
+        this.editPatient = false;
+        this.updateValues = {};
+        this.message = 'Update made successfully.';
+      } catch (err) {
+        this.error = `Error when trying update Patient Information: ${err}`;
+      }
 
-  },
+    },
 
-  async fetchPredictionsHistory() {
+    async fetchPredictionsHistory() {
 
-    if (globalData.user_role !== 'medico') {
-      return this.predictions = {};
-    }
+      if (globalData.user_role !== 'medico') {
+        return this.predictions = {};
+      }
 
-    try {
-      const response = await axios.get(`http://localhost:5000/doctor/${globalData.user_id}/patient/${this.$router.params.id}/predictions`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
-        },
-      });
-      this.predictions = response.data;
-    } catch (err) {
-      this.error = err.response?.data.error || 'Failed to fetch predictions history.';
-      this.predictions = {};
-    }
+      try {
+        const response = await axios.get(`http://localhost:5000/doctor/${globalData.user_id}/patient/${this.$router.params.id}/predictions`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+        });
+        this.predictions = response.data;
+      } catch (err) {
+        this.error = err.response?.data.error || 'Failed to fetch predictions history.';
+        this.predictions = {};
+      }
+    },
+
   },
 
   beforeRouteEnter(

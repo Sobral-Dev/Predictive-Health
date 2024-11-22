@@ -4,7 +4,7 @@
 
 - **Objetivo**: Registrar um novo usuário no sistema com nome, e-mail, senha, papel (role) e CPF.
 - **Justificativa**: Permite o gerenciamento de usuários e o controle de acesso com base em papéis. Essencial para adicionar novos administradores, médicos ou pacientes ao sistema.
-- **Status de Funcionamento**: `Falta Testar`
+- **Status de Funcionamento**: `OK`
 - **Roles**: `admin`
 - **Requisições em**:
     - `UserRegistration.vue`
@@ -15,7 +15,7 @@
 
 - **Objetivo**: Solicitar e registrar o consentimento inicial de um usuário após o registro.
 - **Justificativa**: Atende ao requisito de consentimento explícito conforme a LGPD, garantindo que os usuários forneçam consentimento antes do uso completo do sistema.
-- **Status de Funcionamento**: `Falta Testar`
+- **Status de Funcionamento**: `OK`
 - **Roles**: `Nenhum`
 - **Requisições em**:
     - `ConsentUpdate.vue`
@@ -48,7 +48,7 @@
 
 - **Objetivo**: Obter informações básicas sobre um usuário específico.
 - **Justificativa**: Permite que administradores e médicos visualizem detalhes de usuários cadastrados para gerenciamento e controle.
-- **Status de Funcionamento**: `Falta Testar`
+- **Status de Funcionamento**: `OK`
 - **Roles**: `Nenhum`
 - **Requisições em**:
     - `UserProfile.vue`
@@ -59,7 +59,7 @@
 
 - **Objetivo**: Atualizar informações do usuário autenticado.
 - **Justificativa**: Atende ao direito de correção de dados conforme a LGPD, permitindo que usuários atualizem seus dados.
-- **Status de Funcionamento**: `Falta Testar`
+- **Status de Funcionamento**: `OK`
 - **Roles**: `paciente`, `admin`
 - **Requisições em**:
     - `UserProfile.vue`
@@ -71,7 +71,7 @@
 
 - **Objetivo**: Exportar os dados do usuário autenticado.
 - **Justificativa**: Atende ao direito de portabilidade de dados conforme a LGPD, permitindo que dados pessoais sejam exportados em formato padrão.
-- **Status de Funcionamento**: `Falta Testar`
+- **Status de Funcionamento**: `OK`
 - **Roles**: `Nenhum`
 - **Requisições em**:
     - `PersonalDataExport.vue`
@@ -82,7 +82,7 @@
 
 - **Objetivo**: Solicitar a recuperação de senha enviando um e-mail ao usuário.
 - **Justificativa**: Fornece uma maneira segura para que usuários recuperem o acesso às suas contas em caso de perda de senha.
-- **Status de Funcionamento**: `Falta Testar`
+- **Status de Funcionamento**: `OK`
 - **Roles**: `Nenhum`
 - **Requisições em**:
     - `Login.vue`
@@ -93,7 +93,7 @@
 
 - **Objetivo**: Permitir a redefinição de senha após validação do token de recuperação.
 - **Justificativa**: Garante a segurança e a usabilidade do sistema, permitindo que usuários redefinam suas senhas com um processo seguro.
-- **Status de Funcionamento**: `Falta Testar`
+- **Status de Funcionamento**: `OK`
 - **Roles**: `Nenhum`
 - **Requisições em**:
     - `ChangePassword.vue`
@@ -138,7 +138,7 @@
 
 - **Objetivo**: Anonimizar ou excluir logicamente os dados de um paciente específico.
 - **Justificativa**: Atende ao direito de exclusão ou anonimização de dados conforme a LGPD, garantindo a proteção da privacidade do paciente.
-- **Status de Funcionamento**: `Falta Testar`
+- **Status de Funcionamento**: `OK`
 - **Roles**: `admin`
 - **Requisições em**:
     - `ShowPatients.vue`
@@ -182,7 +182,7 @@
 
 - **Objetivo**: Visualizar os logs de auditoria do sistema.
 - **Justificativa**: Garante a transparência e a conformidade com a LGPD em relação ao registro e monitoramento de ações críticas no sistema.
-- **Status de Funcionamento**: `Falta Testar`
+- **Status de Funcionamento**: `OK`
 - **Roles**: `admin`
 - **Requisições em**:
     - ` AuditLogs.vue`
@@ -204,7 +204,7 @@
 
 - **Objetivo**: Atualizar o status de consentimento de um usuário.
 - **Justificativa**: Permite o controle explícito de consentimento conforme a LGPD, garantindo que o consentimento possa ser revogado ou fornecido conforme necessário.
-- **Status de Funcionamento**: `Falta Testar`
+- **Status de Funcionamento**: `OK`
 - **Roles**: `Nenhum`
 - **Requisições em**:
     - `ConsentUpdate.vue`
@@ -215,7 +215,7 @@
 
 - **Objetivo**: Obter a lista de todos os pacientes cadastrados. Administradores podem visualizar todos os pacientes (sem dados sensíveis) e os médicos podem visualizar os dados de seus pacientes.
 - **Justificativa**: Permite visualizar todos os pacientes registrados no banco.
-- **Status de Funcionamento**: `Falta Testar`
+- **Status de Funcionamento**: `OK`
 - **Roles**: `admin`, `medico`
 - **Requisições em**:
     - `AdminDashboard.vue`
@@ -227,7 +227,7 @@
 
 - **Objetivo**: Obter a lista de todos os usuários cadastrados. Apenas os Administradores podem visualizar todos os usuários (sem dados sensíveis).
 - **Justificativa**: Permite visualizar todos os usuários registrados no banco.
-- **Status de Funcionamento**: `Falta Testar`
+- **Status de Funcionamento**: `OK`
 - **Roles**: `admin`
 - **Requisições em**:
     - `AdminDashboard.vue`
@@ -239,7 +239,7 @@
 
 - **Objetivo**: Anonimizar ou excluir logicamente um usuário específico. Apenas o Administrador pode realizar essa operação.
 - **Justificativa**: Atende ao direito de exclusão ou anonimização de dados conforme a LGPD, garantindo a proteção da privacidade do usuário.
-- **Status de Funcionamento**: `Falta Testar`
+- **Status de Funcionamento**: `OK`
 - **Roles**: `admin`
 - **Requisições em**:
     - `UsersManagement.vue`
@@ -250,7 +250,7 @@
 
 - **Objetivo**: Trocar a senha do usuário autenticado.
 - **Justificativa**: .
-- **Status de Funcionamento**: `Falta Testar`
+- **Status de Funcionamento**: `OK`
 - **Roles**: `Nenhum`
 - **Requisições em**:
     - `ChangePassword.vue`
@@ -261,7 +261,7 @@
 
 - **Objetivo**: Obter o estado atual de Consentimento do Usuário autenticado.
 - **Justificativa**: Permite obrigar o usuário a conceder o consentimento inicial, além de fazer uma consulta rápida para qualquer alteração do status de consentimento, evitando qualquer infração do direito de aceite do usuário.
-- **Status de Funcionamento**: `Falta Testar`
+- **Status de Funcionamento**: `OK`
 - **Roles**: `Nenhum`
 - **Requisições em**:
     - `ConsentUpdate.vue`
@@ -306,10 +306,10 @@
 - **Objetivo**: Obter a lista de pacientes associados a um médico.
 - **Justificativa**: Transparência das relações entre os usuários para os administradores, da mesma forma que aplica um regra de negócio onde o médico só pode visualizar dados pessoais de seus pacientes, dos quais deram consentimento prévio.
 - **Status de Funcionamento**: `Falta Testar`
-- **Roles**: `medico`, `admin`
+- **Roles**: `medico`
 - **Requisições em**:
     - `DoctorPatientList.vue`
-    - `ShowPatients.vue`
+    - `UserProfile.vue`
     
 ---
 
@@ -350,7 +350,7 @@
 
 - **Objetivo**: Ver predições de todos os pacientes, por usuários Administradores, de maneira anonimizada.
 - **Justificativa**: Possibilita que os usuários Administradores possam visualizar o histórico de predições de todos os pacientes cadastrados, respeitando seus dados sensíveis, permitindo assim que o administrador possa acompanhar o uso da aplicação sem expor dados que possam apontar para um paciente em específico, do qual tem o direito de ser o único a ter ciência de suas predições, além do médico que o acompanha, caso o consentimento seja dado.
-- **Status de Funcionamento**: `Falta Testar`
+- **Status de Funcionamento**: `OK`
 - **Roles**: `admin`
 - **Requisições em**:
     - `AdminPredictions.vue`

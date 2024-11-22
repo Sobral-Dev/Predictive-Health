@@ -3,10 +3,10 @@
     <transition name="fade" mode="out-in">
 
       <div class="login">
-        <h1 class="page-title">Login</h1>
+        <h1 class="page-title">{{ emailSender || this.$route.query.emailSender === 'true' ? 'Send Reset Token' : 'Login' }}</h1>
 
         <section class="login-section">
-          <form v-if="!emailSender" @submit.prevent="loginUser">
+          <form v-if="!emailSender && this.$route.query.emailSender !== 'true'" @submit.prevent="loginUser">
             <div class="form-group">
               <label for="email">Email</label>
               <input 
@@ -14,16 +14,32 @@
                 id="email" 
                 v-model="email" 
                 required 
+                placeholder="Type your email..."
                 class="form-control"
               />
             </div>
 
             <div class="form-group">
-              <label for="password">Password</label>
+              <select v-model="authWay" 
+              style="color: rgba(39, 174, 96, 1); 
+                    font-optical-sizing: auto;
+                    font-weight: 400;
+                    font-style: normal;
+                    font-size: 21px;
+                    background-color: transparent;
+                    line-height: 1;
+                    text-rendering: optimizeLegibility;
+                    text-align: initial;
+                    vertical-align: super;"
+                    >
+                <option value="password" style="color: rgba(39, 174, 96, 1);">Password</option>
+                <option value="reset_token" style="color: rgba(39, 174, 96, 1);">Reset Token</option>
+              </select>
               <input 
                 type="password" 
-                id="password" 
+                :id="authWay === 'password' ? 'password' : 'reset_token'" 
                 v-model="password" 
+                :placeholder="authWay === 'password' ? 'Type your password...' : 'Type your reset token...'" 
                 required 
                 class="form-control"
               />
@@ -32,12 +48,12 @@
             <button type="submit" class="submit-button">Login</button>
           </form>
 
-          <form v-if="emailSender" @submit.prevent="this.requestPasswordReset">
+          <form v-if="emailSender || this.$route.query.emailSender === 'true'" @submit.prevent="requestPasswordReset">
             <div class="form-group">
-                <label for="password">Your Email</label>
+                <label for="emailReset">Your Email</label>
                 <input 
-                  type="password" 
-                  id="password" 
+                  type="email" 
+                  id="emailReset" 
                   v-model="emailToResetPassword" 
                   required 
                   class="form-control"
@@ -45,10 +61,10 @@
               </div>
 
               <button type="submit" class="submit-button">Submit</button>
-              <button class="submit-button" @click="this.emailSender = false; this.emailToResetPassword = '';">Return</button>
+              <button type="button" class="submit-button" @click.prevent="resetForm">Return</button>
           </form>
           
-          <button v-if="!emailSender" @click="this.emailSender = true;" class="submit-button">Forgot Password</button>
+          <button type="button" v-if="!emailSender && this.$route.query.emailSender !== 'true'" @click.prevent="this.emailSender = true;" class="submit-button">Forgot Password</button>
 
           <p v-if="message" class="message">{{ message }}</p>
           <p v-if="error" class="error">{{ error }}</p>
@@ -76,6 +92,7 @@ export default defineComponent({
       emailToResetPassword: '',
       gd: globalData,
       emailSender: false,
+      authWay: 'password',
     };
   },
 
@@ -133,19 +150,31 @@ export default defineComponent({
         return this.router.push({ name: 'UserProfile' });
       }
     },
-  },
 
-  async requestPasswordReset() {
+    async requestPasswordReset() {
       try {
         const response = await axios.post('http://localhost:5000/password-reset-request', { email: this.emailToResetPassword });
-        this.emailSender = false;
         this.emailToResetPassword = '';
         this.message = response.data.message;
       } catch (error) {
         this.message = error.response?.data.error || 'Error during password reset request';
       }
     },
-  
+
+    resetForm() {
+      this.emailSender = false;
+      this.emailToResetPassword = '';
+      this.message = '';
+      this.error = '';
+      if (this.$route.query.emailSender === 'true') {
+        this.$router.push('/change-password');
+      } else {
+        this.$router.push('/');
+      };
+    },
+
+  },
+
 });
 </script>
 

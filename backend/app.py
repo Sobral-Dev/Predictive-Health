@@ -205,22 +205,50 @@ def consent_initial():
 @app.route('/login', methods=['POST'])
 def login():
 
+    from models import User
+
     data = request.get_json()
-    user = validate_login(data['email'], data['password'])
+    email = data.get('email')
+    password_or_token = data.get('password')
+
+    user = User.query.filter_by(email=email).first()
     if not user:
         return jsonify({"error": "Invalid email or password"}), 401
 
-    access_token = create_access_token(identity=str(user.id), expires_delta=timedelta(hours=1))
-    add_audit_log("User logged in", user.id)
+    # Caso 1: Autenticação com senha
+    if bcrypt.check_password_hash(user.password, password_or_token):
 
-    return jsonify({
-        "access_token": access_token,
-        "user_name": user.name,
-        "user_id": user.id,
-        "user_role": user.role,
-        "consent_status": user.consent_status,
-        "has_patient_history": user.has_patient_history
-    }), 200
+        access_token = create_access_token(identity=str(user.id), expires_delta=timedelta(hours=1))
+        add_audit_log("User logged in", user.id)
+
+        return jsonify({
+            "access_token": access_token,
+            "user_name": user.name,
+            "user_id": user.id,
+            "user_role": user.role,
+            "consent_status": user.consent_status,
+            "has_patient_history": user.has_patient_history
+        }), 200
+
+    # Caso 2: Autenticação com reset token
+    if user.reset_token == password_or_token:
+        
+        user.reset_token = None
+        db.session.commit()
+
+        access_token = create_access_token(identity=str(user.id), expires_delta=timedelta(hours=1))
+        add_audit_log("User logged in using reset token", user.id)
+        
+        return jsonify({
+            "access_token": access_token,
+            "user_name": user.name,
+            "user_id": user.id,
+            "user_role": user.role,
+            "consent_status": user.consent_status,
+            "has_patient_history": user.has_patient_history
+        }), 200
+
+    return jsonify({"error": "Invalid email or password/reset token"}), 401
 
 # Endpoint 4: Logout de Usuário
 @app.route('/logout', methods=['POST'])
@@ -777,12 +805,15 @@ def delete_user(id):
         return jsonify({"error": "User not found"}), 404
 
     # Exclusão lógica: Anonimizar o usuário
-    user.id = id
-    user.name = "Deleted User"
-    user.email = "Deleted User"
-    user.password = "Deleted User"
-    user.role = "Deleted User"
-    user.cpf = "Deleted User"
+    user.name = f"Deleted_{user.id}"[:50]  
+    user.email = f"deleted_{user.id}@anon.com"[:120] 
+    user.password = "DeletedPassword" 
+    user.role = "deleted" 
+    user.cpf = f"deleted{user.id}"[:11] 
+    user.consent_status = None
+    user.reset_token = None
+    user.has_patient_history = False
+
     db.session.commit()
     
     add_audit_log("User anonymized", get_jwt_identity())
@@ -922,7 +953,7 @@ def associate_doctor_patient():
 # Endpoint 28: Listar Pacientes Associados a um Médico
 @app.route('/doctor/<int:doctor_id>/patients', methods=['GET'])
 @jwt_required()
-@role_required(['medico', 'admin'])
+@role_required(['medico'])
 def list_doctor_patients(doctor_id):
 
     from models import DoctorPatient, Patient
@@ -1004,7 +1035,7 @@ def get_doctor_patient_predictions(doctor_id):
 def get_all_predictions():
 
     try:
-        predictions = list(prediction_collection.find({}, {"user_id": 1, "prediction_type": 1, "result": 1, "probability": 1, "timestamp": 1}))
+        predictions = list(prediction_collection.find({}, {"user_id": 1, "prediction_type": 1, "prediction_result": 1, "timestamp": 1}))
         for prediction in predictions:
             prediction["_id"] = str(prediction["_id"])
 

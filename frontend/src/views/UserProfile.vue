@@ -6,22 +6,22 @@
 
         <section class="profile-section" v-if="user">
           <div class="profile-item">
-            <label>Name:</label>
+            <label><b>Name: </b></label>
             <span>{{ user.name }}</span>
           </div>
 
           <div class="profile-item">
-            <label>Email:</label>
+            <label><b>Email: </b></label>
             <span>{{ user.email }}</span>
           </div>
 
           <div class="profile-item">
-            <label>Role:</label>
+            <label><b>Role: </b></label>
             <span>{{ user.role }}</span>
           </div>
 
           <div class="profile-item">
-            <label>Consent Status:</label>
+            <label><b>Consent Status: </b></label>
             <span>
               {{
                 user.consent_status === true
@@ -34,7 +34,7 @@
           </div>
 
           <div class="profile-item">
-            <label>With Patient History:</label>
+            <label><b>With Patient History: </b></label>
             <span>
               {{
                 user.has_patient_history === true
@@ -47,7 +47,7 @@
           </div>
 
           <div class="profile-item">
-            <label>Created At:</label>
+            <label><b>Created At: </b></label>
             <span>
               {{ user.created_at }}
             </span>
@@ -60,7 +60,7 @@
           <h2>Edit Profile</h2>
           <form @submit.prevent="updateProfile">
             <div class="form-group">
-              <label for="name">Name</label>
+              <label for="name"><b>Name </b></label>
               <input 
                 type="text" 
                 id="name" 
@@ -71,7 +71,7 @@
             </div>
 
             <div class="form-group">
-              <label for="email">Email</label>
+              <label for="email"><b>Email </b></label>
               <input 
                 type="email" 
                 id="email" 
@@ -91,32 +91,32 @@
           <h2>Patient Profile</h2>
 
           <div class="profile-item">          
-            <label>Name: </label>
+            <label><b>Name: </b></label>
             <span>{{ patient.name }}</span>
           </div>
 
           <div class="profile-item">
-            <label>Age: </label>
+            <label><b>Age: </b></label>
             <span>{{ patient.age }}</span>
           </div>
 
           <div class="profile-item">
-            <label>Role: </label>
+            <label><b>Role: </b></label>
             <span>{{ patient.medical_conditions }}</span>
           </div>
 
           <div class="profile-item">
-            <label>Role: </label>
+            <label><b>Role: </b></label>
             <span>{{ patient.created_at }}</span>
           </div>
         </section>
 
-        <section v-if="doctors && this.gd.user_role === 'paciente'" class="profile-section">
+        <section v-if="doctors && (this.gd.user_role === 'paciente' || this.gd.user_role === 'medico')" class="profile-section">
 
-          <h2>Associate Doctors</h2>
+          <h2>Associate {{ this.gd.user_role === 'paciente' ? 'Doctors' : 'Patients' }}</h2>
 
           <ul v-for="doctor in doctors" :key="doctor.id">
-            <li>• Dr(a) {{ doctor.name }}</li>
+            <li><b>• {{ this.gd.user_role === 'paciente' ? 'D' : 'S' }}r(a)</b> {{ doctor.name }}</li>
           </ul>
 
         </section>
@@ -233,10 +233,26 @@ export default defineComponent({
     async fetchPatientDoctors() {
 
       if (globalData.user_role !== 'paciente') {
-        return this.doctors = {};
+       
+        if (globalData.user_role === 'medico') {
+
+          try {
+            const response = await axios.get(`http://localhost:5000/doctor/${globalData.user_id}/patients`, {
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+              },
+            });
+            this.doctors = response.data;
+          } catch (err) {
+            this.error = err.response?.data.error || 'Failed to fetch user associate patients.';
+            this.doctors = {};
+          }
+        } else {
+          return this.doctors = {};
+        };
       } else {
         try {
-          const response = await axios.get(`http://localhost:5000/${globalData.user_id}/doctors`, {
+          const response = await axios.get(`http://localhost:5000/patient/doctors`, {
             headers: {
               Authorization: `Bearer ${localStorage.getItem('token')}`,
             },
