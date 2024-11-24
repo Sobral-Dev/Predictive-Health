@@ -95,10 +95,10 @@
 - **Objetivo**: Criar formulários de predição de saúde para médicos, com base nos modelos de IA disponíveis.
 - **Justificativa**: Atende à funcionalidade de predição de riscos de saúde para dar suporte à tomada de decisões médicas.
 - **Endpoints Utilizados**:
-  - **`POST /predict/diabetes` (HTTP ``)**: Prediz risco de diabetes para um paciente.
-  - **`POST /predict/hypertension` (HTTP ``)**: Prediz risco de hipertensão para um paciente.
-  - **`POST /predict/stroke` (HTTP ``)**: Prediz risco de AVC para um paciente.
-  - **`POST /save-prediction` (HTTP ``)**: Armazena no banco MongoDB as features e o resultado das predições realizadas assim que elas são terminadas.
+  - **`POST /predict/diabetes` (HTTP `OK`)**: Prediz risco de diabetes para um paciente.
+  - **`POST /predict/hypertension` (HTTP `OK`)**: Prediz risco de hipertensão para um paciente.
+  - **`POST /predict/stroke` (HTTP `OK`)**: Prediz risco de AVC para um paciente.
+  - **`POST /save-prediction` (HTTP `OK`)**: Armazena no banco MongoDB as features e o resultado das predições realizadas assim que elas são terminadas.
 - **Lógicas Condicionais Dinâmicas do HTML**:
   - **`<button class="choose-language" @click.prevent="english = !english"><i class="fa-solid fa-language">{{ !english ? 'PT-Br' : 'EN' }}</i></button>`**: Altera o idioma da página entre inglês e português.
   - **`<select v-model="selectedPrediction" @change="resetForm">
@@ -145,7 +145,7 @@
 - **Justificativa**: Atende ao direito de portabilidade de dados conforme LGPD.
 - **Endpoints Utilizados**:
   - **`GET /user/export` (HTTP `OK`)**: Exporta dados do usuário autenticado.
-  - **`GET /patient/export` (HTTP ``)**: Exporta dados do paciente autenticado.
+  - **`GET /patient/export` (HTTP `ERROR`)**: Exporta dados do paciente autenticado.
 - **Lógicas Condicionais Dinâmicas do HTML**:
   - **`this.gd.user_role === 'paciente'`**: Condicional para aparecer a `<section>` de classe `checkbox-section`.
   - **`v-if="this.gd.user_role === 'paciente' ? 
@@ -185,7 +185,7 @@
 - **Objetivo**: Permitir que os pacientes possam visualizar todas as predições realizadas anteriormente por ele mesmo.
 - **Justificativa**: 
 - **Endpoints Utilizados**:
-  - **`GET /user/predictions` (HTTP ``)**: Fornece uma lista com todos as predições realizadas anteriormente pelo paciente.
+  - **`GET /user/predictions` (HTTP `OK`)**: Fornece uma lista com todos as predições realizadas anteriormente pelo paciente.
 - **Lógicas Condicionais Dinâmicas do HTML**:
   - **Nenhuma**
 
@@ -199,8 +199,8 @@
 - **Endpoints Utilizados**:
   - **`GET /user/me` (HTTP `OK`)**: Exibe os dados pessoais do usuário autenticado.
 - **`PUT /user/me` (HTTP `OK`)**: Atualiza os dados pessoais do usuário autenticado.
-  - **`GET /patients/${globalData.user_id}/paciente` (HTTP ``)**: Recebe os dados de histórico de paciente do usuário autenticado.
-  - **`GET /patient/doctors` (HTTP ``)**: Lista os médicos associados ao paciente autenticado.
+  - **`GET /patients/${globalData.user_id}/paciente` (HTTP `OK`)**: Recebe os dados de histórico de paciente do usuário autenticado.
+  - **`GET /patient/doctors` (HTTP `OK`)**: Lista os médicos associados ao paciente autenticado.
   - **`GET /doctor/${globalData.user_id}/patients` (HTTP ``)**: Listar todos os pacientes associados ao médico autenticado.
 - **Lógicas Condicionais Dinâmicas do HTML**:
   - **` <section class="profile-section" v-if="patient && this.gd.user_role === 'paciente'">
@@ -227,7 +227,7 @@
 - **Justificativa**: Necessário para controle seguro de usuários e para a expansão e manutenção do sistema.
 - **Endpoints Utilizados**:
   - **`GET /users` (HTTP `OK`)**: Lista os usuários registrados no sistema.
-  - **`PUT /user/me` (HTTP ``)**: Atualiza os dados de um usuário.
+  - **`PUT /user/me` (HTTP `OK`)**: Atualiza os dados de um usuário.
   - **`DELETE /users/${userId}` (HTTP `OK`)**: Anonimiza ou desativa um usuário.
 - **Lógicas Condicionais Dinâmicas do HTML**:
   - **Nenhuma**

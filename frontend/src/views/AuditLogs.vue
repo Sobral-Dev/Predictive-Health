@@ -32,8 +32,7 @@
 <script lang="ts">
 import { defineComponent, watch, ComponentPublicInstance } from 'vue';
 import axios from 'axios';
-import { useRouter, RouteLocationNormalized, NavigationGuardNext} from 'vue-router';
-import globalData from '../globalData';
+import { RouteLocationNormalized, NavigationGuardNext} from 'vue-router';
 
 export default defineComponent({
   name: 'AuditLogs',
@@ -45,21 +44,11 @@ export default defineComponent({
         action: string;
         timestamp: string;
       }>,
-      gd: globalData,
     };
   },
 
   mounted() {
     this.fetchAuditLogs();
-  },
-
-  created() {
-    watch(
-      () => globalData.user_consent,
-      (newConsent) => {
-        this.gd.user_consent = newConsent;
-      }
-    );
   },
 
   methods: {

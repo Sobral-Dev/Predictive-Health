@@ -77,9 +77,8 @@
 <script lang="ts">
 import { defineComponent, watch, ComponentPublicInstance } from 'vue';
 import axios from 'axios';
-import { useRouter, RouteLocationNormalized, NavigationGuardNext} from 'vue-router';
+import { useRouter } from 'vue-router';
 import globalData from '../globalData';
-import eventBus from '../eventBus';
 
 export default defineComponent({
   name: 'Login',
@@ -90,7 +89,7 @@ export default defineComponent({
       error: '',
       message: '',
       emailToResetPassword: '',
-      gd: globalData,
+      globalData: globalData,
       emailSender: false,
       authWay: 'password',
     };
@@ -103,9 +102,10 @@ export default defineComponent({
 
   created() {
     watch(
-      () => globalData.user_consent,
+      () => this.globalData.user_consent,
       (newConsent) => {
-        this.gd.user_consent = newConsent;
+        this.globalData.user_consent = newConsent;
+        localStorage.setItem('gd.user_consent', this.globalData.user_consent)
       }
     );
   },
@@ -122,12 +122,19 @@ export default defineComponent({
         localStorage.setItem('token', response.data.access_token);
 
         // Save response data for succeed login in a global variable
-        globalData.user_id = response.data.user_id;
-        globalData.user_role = response.data.user_role;
-        globalData.user_name = response.data.user_name;
-        globalData.isAuthenticated = true;
-        globalData.user_consent = response.data.consent_status
-        globalData.has_patient_history = response.data.has_patient_history
+        this.globalData.user_id = response.data.user_id;
+        this.globalData.user_role = response.data.user_role;
+        this.globalData.user_name = response.data.user_name;
+        this.globalData.isAuthenticated = true;
+        this.globalData.user_consent = response.data.consent_status
+        this.globalData.has_patient_history = response.data.has_patient_history
+
+        localStorage.setItem('gd.user_id', this.globalData.user_id);
+        localStorage.setItem('gd.user_role', this.globalData.user_role);
+        localStorage.setItem('gd.user_name', this.globalData.user_name);
+        localStorage.setItem('gd.isAuthenticated', this.globalData.isAuthenticated);
+        localStorage.setItem('gd.user_consent', this.globalData.user_consent);
+        localStorage.setItem('gd.has_patient_history', this.globalData.has_patient_history);
 
         // Navigate to the appropriate page based on user role
         this.navigateToDashboard(response.data.user_role, response.data.consent_status, response.data.user_id);

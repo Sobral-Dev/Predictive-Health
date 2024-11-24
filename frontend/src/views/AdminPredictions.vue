@@ -3,7 +3,7 @@
     <transition name="fade" mode="out-in">
       <section class="predictions-section">
         <h2>Patients Predictions History (Anonymized)</h2> <br>
-        <table v-if="this.gd.user_role === 'admin'" class="predictions-table">
+        <table v-if="localStorage.getItem('gd.user_role') === 'admin'" class="predictions-table">
           <thead>
             <tr>
               <th>Patient ID</th>
@@ -31,14 +31,12 @@
 
 <script>
 import axios from 'axios';
-import globalData from '../globalData';
 
 export default {
   data() {
     return {
       predictions: [],
       error: '',
-      gd: globalData,
     };
   },
   created() {

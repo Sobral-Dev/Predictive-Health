@@ -19,7 +19,7 @@
           </select>
 
           <!-- Formulário para predição de Diabetes -->
-          <form v-if="selectedPrediction === 'diabetes' && this.gd.user_role === 'paciente'" @submit.prevent="predictDiabetes">
+          <form v-if="selectedPrediction === 'diabetes' && this.globalData.user_role === 'paciente'" @submit.prevent="predictDiabetes">
             <label>
               Índice de Massa Corporal (IMC): <input v-model="formData.BMI" type="number" required />
                 <span class="tooltip">i
@@ -66,7 +66,7 @@
           </form>
 
           <!-- Formulário para predição de Hipertensão -->
-          <form v-if="selectedPrediction === 'hypertension' && this.gd.user_role === 'paciente'" @submit.prevent="predictHypertension">
+          <form v-if="selectedPrediction === 'hypertension' && this.globalData.user_role === 'paciente'" @submit.prevent="predictHypertension">
             <label>
               Pressão Arterial em Repouso (trestbps): <input v-model="formData.trestbps" type="number" required />
                 <span class="tooltip">i
@@ -113,7 +113,7 @@
           </form>
 
           <!-- Formulário para predição de AVC -->
-          <form v-if="selectedPrediction === 'stroke' && this.gd.user_role === 'paciente'" @submit.prevent="predictStroke">
+          <form v-if="selectedPrediction === 'stroke' && this.globalData.user_role === 'paciente'" @submit.prevent="predictStroke">
             <label>
               Hipertensão: <input v-model="formData.hypertension" type="checkbox" />
                 <span class="tooltip">i
@@ -173,10 +173,10 @@
           <!-- Mensagem de consentimento -->
           <p v-if="!hasConsent" style="color: red;">Consentimento necessário para realizar predições.</p>
 
-          <div v-if="predictionResult && this.gd.user_role === 'paciente'" class="result-section">
+          <div v-if="(this.risk !== null && this.probability !== null) && this.globalData.user_role === 'paciente'" class="result-section">
             <h2 class="result-title">Prediction Result</h2>
-            <p><strong>Risk:</strong> {{ predictionResult.risk }}</p>
-            <p><strong>Probability:</strong> {{ predictionResult.probability }}</p>
+            <p><strong>Risk:</strong> {{ this.risk }}</p>
+            <p><strong>Probability:</strong> {{ this.probability }}</p>
           </div>
 
           <p v-if="error" class="error">{{ error }}</p>
@@ -187,10 +187,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, watch, ComponentPublicInstance } from 'vue';
+import { defineComponent } from 'vue';
 import axios from 'axios';
-import { useRouter, RouteLocationNormalized, NavigationGuardNext} from 'vue-router';
-import globalData from '../globalData';
 import eventBus from '../eventBus';
 
 export default defineComponent({
@@ -198,27 +196,21 @@ export default defineComponent({
   data() {
     return {
       selectedPrediction: '', 
-      hasConsent: globalData.user_consent, 
+      hasConsent: localStorage.getItem('gd.user_consent'), 
       formData: { 
         Age: '', BMI: '', HighChol: '', HighBP: '', PhysActivity: '', GenHlth: '', Smoker: '', // Diabetes
         age: '', trestbps: '', chol: '', thalach: '', exang: '', oldpeak: '', cp: '',         // Hipertensão
         hypertension: '', heart_disease: '', avg_glucose_level: '', bmi: '', smoking_status: '', ever_married: '' // AVC
       },
-      predictionResult: null as { risk: number; probability: number } | null,
+      risk: null, 
+      probability: null,
       last_input_data: '',
       error: '',
-      gd: globalData,
+      globalData: {
+        user_role: localStorage.getItem('gd.user_role')
+      },
       english: false,
     };
-  },
-
-  created() {
-    watch(
-      () => globalData.user_consent,
-      (newConsent) => {
-        this.gd.user_consent = newConsent;
-      }
-    );
   },
 
   methods: {
@@ -229,7 +221,8 @@ export default defineComponent({
         age: '', trestbps: '', chol: '', thalach: '', exang: '', oldpeak: '', cp: '',
         hypertension: '', heart_disease: '', avg_glucose_level: '', bmi: '', smoking_status: '', ever_married: ''
       };
-      this.predictionResult = null;
+      this.risk = null;
+      this.probability = null;
     },
     
     async predictDiabetes() {
@@ -238,14 +231,15 @@ export default defineComponent({
         const response = await axios.post('http://localhost:5000/predict/diabetes', this.formData, {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         });
-        this.predictionResult.risk = response.data.prediction;
-        this.predictionResult.probability = response.data.probability;
+        this.risk = response.data.prediction;
+        this.probability = response.data.probability;
         this.last_input_data = response.data.input_data;
         this.error = '';
-        this.submitPrediction(this.predictionResult, this.last_input_data, this.selectedPrediction);
+        this.submitPrediction(this.risk, this.probability, this.last_input_data, this.selectedPrediction);
       } catch (err) {
         this.error = err.response?.data.error || `Failed to make prediction: ${err}`;
-        this.predictionResult = null;
+        this.risk = null;
+        this.probability = null;
         this.last_input_data = null;
       }
     },
@@ -256,14 +250,15 @@ export default defineComponent({
         const response = await axios.post('http://localhost:5000/predict/hypertension', this.formData, {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         });
-        this.predictionResult.risk = response.data.prediction;
-        this.predictionResult.probability = response.data.probability;
+        this.risk = response.data.prediction;
+        this.probability = response.data.probability;
         this.last_input_data = response.data.input_data;
         this.error = '';
-        this.submitPrediction(this.predictionResult, this.last_input_data, this.selectedPrediction);
+        this.submitPrediction(this.risk, this.probability, this.last_input_data, this.selectedPrediction);
       } catch (err) {
         this.error = err.response?.data.error || `Failed to make prediction: ${err}`;
-        this.predictionResult = null;
+        this.risk = null;
+        this.probability = null;
         this.last_input_data = null;
       }
     },
@@ -274,38 +269,43 @@ export default defineComponent({
         const response = await axios.post('http://localhost:5000/predict/stroke', this.formData, {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         });
-        this.predictionResult.risk = response.data.prediction;
-        this.predictionResult.probability = response.data.probability;
+        this.risk = response.data.prediction;
+        this.probability = response.data.probability;
         this.last_input_data = response.data.input_data;
         this.error = '';
-        this.submitPrediction(this.predictionResult, this.last_input_data, this.selectedPrediction);
+        this.submitPrediction(this.risk, this.probability, this.last_input_data, this.selectedPrediction);
       } catch (err) {
         this.error = err.response?.data.error || `Failed to make prediction: ${err}`;
-        this.predictionResult = null;
+        this.risk = null;
+        this.probability = null;
         this.last_input_data = null;
       }
     },
-  },
 
-  async submitPrediction(predict: any, input_data: any, selectedPrediction: string) {
-    const predictionData = {
-      prediction_type: selectedPrediction,
-      input_data: input_data,
-      prediction_result: { risk: predict.risk, probability: predict.probability }
-    };
+    async submitPrediction(risk: any, probability: any, input_data: any, selectedPrediction: string) {
+      const predictionData = {
+        prediction_type: selectedPrediction,
+        input_data: input_data,
+        prediction_result: { 
+          risk: risk, 
+          probability: probability 
+        }
+      };
 
-    try {
+      try {
 
-      await axios.post('http://localhost:5000/save-prediction', predictionData, {
-        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
-      });
+        await axios.post('http://localhost:5000/save-prediction', predictionData, {
+          headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+        });
 
-      eventBus.predictionSaved = true;
-      this.last_input_data = null;
+        eventBus.predictionSaved = true;
+        this.last_input_data = null;
 
-    } catch (err) {
-      this.error = err.response?.data.error || `Error occured when trying save prediction: ${err}`;
-    }
+      } catch (err) {
+        this.error = err.response?.data.error || `Error occured when trying save prediction: ${err}`;
+      }
+    },
+  
   },
   
 });

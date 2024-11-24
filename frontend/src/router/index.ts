@@ -28,6 +28,11 @@ const routes: Array<RouteRecordRaw> = [
     name: 'Login',
     component: Login,
   },
+    {
+    path: '/login',
+    name: 'Login2',
+    component: Login,
+  },
   {
     path: '/dashboard',
     name: 'AdminDashboard',

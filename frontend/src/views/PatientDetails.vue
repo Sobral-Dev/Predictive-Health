@@ -48,15 +48,15 @@
             </span>
           </div>       
 
-          <button v-if="this.gd.user_role === 'medico'" @click="requestAssociation(this.$router.params.id)">Request association with <b>{{ patient.name }}</b></button>
-          <button v-if="this.gd.user_role === 'medico' && !editPatient" @click="editPatient = true">Update Information of <b>{{ patient.name }}</b></button>
+          <button v-if="this.globalData.user_role === 'medico'" @click="requestAssociation(this.$router.params.id)">Request association with <b>{{ patient.name }}</b></button>
+          <button v-if="this.globalData.user_role === 'medico' && !editPatient" @click="editPatient = true">Update Information of <b>{{ patient.name }}</b></button>
 
-          <button v-if="this.gd.user_role === 'medico' && editPatient && updateValues" @click="updatePatient(this.$router.params.id)">Update</button>
+          <button v-if="this.globalData.user_role === 'medico' && editPatient && updateValues" @click="updatePatient(this.$router.params.id)">Update</button>
 
           <button @click="goBack" class="back-button">Back to Patients List</button>
         </section>
 
-        <section class="details-section" v-if="predictions && this.gd.user_role === 'medico'">
+        <section class="details-section" v-if="predictions && this.globalData.user_role === 'medico'">
           <div class="detail-item" v-for="prediction in predictions" :key="prediction._id">
             <p>{{ prediction }}</p>
           </div>
@@ -74,7 +74,6 @@ import { defineComponent, watch, ComponentPublicInstance } from 'vue';
 import axios from 'axios';
 import { useRouter, RouteLocationNormalized, NavigationGuardNext} from 'vue-router';
 import eventBus from '../eventBus';
-import globalData from '../globalData';
 
 export default defineComponent({
   name: 'PatientDetails',
@@ -92,7 +91,10 @@ export default defineComponent({
       } | null,
       error: '',
       message: '',
-      gd: globalData,
+      globalData: {
+        user_id: localStorage.getItem('gd.user_id'),
+        user_role: localStorage.getItem('gd.user_role')
+      },
       editPatient: false,
       updateValues: {
         name: null,
@@ -106,15 +108,6 @@ export default defineComponent({
     setup() {
       const router = useRouter();
       return { router };
-  },
-
-  created() {
-    watch(
-      () => globalData.user_consent,
-      (newConsent) => {
-        this.gd.user_consent = newConsent;
-      }
-    );
   },
 
   mounted() {
@@ -135,7 +128,7 @@ export default defineComponent({
   methods: {
     async fetchPatientDetails() {
       try {
-        const response = await axios.get(`http://localhost:5000/patients/${this.$route.params.id}/${globalData.user_role}`, {
+        const response = await axios.get(`http://localhost:5000/patients/${this.$route.params.id}/${this.globalData.user_role}`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`,
           },
@@ -181,12 +174,12 @@ export default defineComponent({
 
     async fetchPredictionsHistory() {
 
-      if (globalData.user_role !== 'medico') {
+      if (this.globalData.user_role !== 'medico') {
         return this.predictions = {};
       }
 
       try {
-        const response = await axios.get(`http://localhost:5000/doctor/${globalData.user_id}/patient/${this.$router.params.id}/predictions`, {
+        const response = await axios.get(`http://localhost:5000/doctor/${this.globalData.user_id}/patient/${this.$router.params.id}/predictions`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`,
           },

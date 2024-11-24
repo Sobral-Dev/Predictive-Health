@@ -8,28 +8,28 @@
     </div>
 
     <nav class="links">
-      <RouterLink to="/dashboard" v-if="this.gd.user_role === 'admin' && this.gd.user_id !== null">
+      <RouterLink to="/dashboard" v-if="this.globalData.user_role === 'admin' && this.globalData.user_id !== null">
       <img
         src="../assets/icons/dashboard.png"
         class="icon_img"
         height="50px"
       />  
       Dashboard</RouterLink>
-      <RouterLink to="/audit-logs" v-if="this.gd.user_role === 'admin' && this.gd.user_id !== null">
+      <RouterLink to="/audit-logs" v-if="this.globalData.user_role === 'admin' && this.globalData.user_id !== null">
         <img
         src="../assets/icons/audit-logs.png"
         class="icon_img"
         height="50px"
         /> 
         Audit Logs</RouterLink>
-      <RouterLink to="/doctor-patient-list" v-if="this.gd.user_role === 'medico' && this.gd.user_id !== null">
+      <RouterLink to="/doctor-patient-list" v-if="this.globalData.user_role === 'medico' && this.globalData.user_id !== null">
         <img
         src="../assets/icons/dashboard.png"
         class="icon_img"
         height="50px"
         /> 
         Your Patients</RouterLink>
-      <RouterLink to="/health-prediction" v-if="this.gd.user_role === 'paciente' && this.gd.user_id !== null">
+      <RouterLink to="/health-prediction" v-if="this.globalData.user_role === 'paciente' && this.globalData.user_id !== null">
         <img
         src="../assets/icons/health-prediction.png"
         class="icon_img"
@@ -37,7 +37,7 @@
         style="margin-left: 2px; margin-right: 2px;"
         /> 
         Predictions</RouterLink>
-      <RouterLink to="/admin-predictions" v-if="this.gd.user_role === 'admin' && this.gd.user_id !== null">
+      <RouterLink to="/admin-predictions" v-if="this.globalData.user_role === 'admin' && this.globalData.user_id !== null">
         <img
         src="../assets/icons/health-prediction.png"
         class="icon_img"
@@ -45,7 +45,7 @@
         style="margin-left: 2px; margin-right: 2px;"
         /> 
         Predictions</RouterLink>
-      <RouterLink to="/doctor-predictions" v-if="this.gd.user_role === 'medico' && this.gd.user_id !== null">
+      <RouterLink to="/doctor-predictions" v-if="this.globalData.user_role === 'medico' && this.globalData.user_id !== null">
         <img
         src="../assets/icons/health-prediction.png"
         class="icon_img"
@@ -53,7 +53,7 @@
         style="margin-left: 2px; margin-right: 2px;"
         /> 
         Predictions</RouterLink>
-      <RouterLink to="/user-predictions" v-if="this.gd.user_role === 'paciente' && this.gd.user_id !== null">
+      <RouterLink to="/user-predictions" v-if="this.globalData.user_role === 'paciente' && this.globalData.user_id !== null">
         <img
         src="../assets/icons/audit-logs.png"
         class="icon_img"
@@ -61,14 +61,7 @@
         style="margin-left: 2px; margin-right: 2px;"
         /> 
         Your History</RouterLink>
-      <RouterLink to="/patients/:id" v-if="this.gd.user_id !== null">
-        <img
-        src="../assets/icons/patient-details.png"
-        class="icon_img"
-        height="50px"
-        > 
-        Your Details</RouterLink>
-      <RouterLink to="/export-data/:id" v-if=" this.gd.user_id !== null">
+      <RouterLink to="/export-data/:id" v-if=" this.globalData.user_id !== null">
         <img
         src="../assets/icons/personal-data-export.png"
         class="icon_img"
@@ -76,14 +69,14 @@
         style="margin-left: 5px; margin-right: 4px;"
         /> 
         Personal Data</RouterLink>
-      <RouterLink to="/register-patient" v-if="(this.gd.user_role === 'admin' || this.gd.user_role === 'medico') && this.gd.user_id !== null">
+      <RouterLink to="/register-patient" v-if="(this.globalData.user_role === 'admin' || this.globalData.user_role === 'medico') && this.globalData.user_id !== null">
         <img
         src="../assets/icons/register-patient.png"
         class="icon_img"
         height="50px"
         /> 
         Register Patient</RouterLink>
-      <RouterLink to="/patients" v-if="(this.gd.user_role === 'admin' || this.gd.user_role === 'medico') && this.gd.user_id !== null">
+      <RouterLink to="/patients" v-if="(this.globalData.user_role === 'admin' || this.globalData.user_role === 'medico') && this.globalData.user_id !== null">
         <img
         src="../assets/icons/show-patients.png"
         class="icon_img"
@@ -91,42 +84,42 @@
         style="margin-right: 4px;"
         /> 
         Patients</RouterLink>
-      <RouterLink to="/profile" v-if="this.gd.user_id !== null">
+      <RouterLink to="/profile" v-if="this.globalData.user_id !== null">
         <img
         src="../assets/icons/profile.png"
         class="icon_img"
         height="50px"
         /> 
         User Profile</RouterLink>
-      <RouterLink to="/manage-users" v-if="this.gd.user_role === 'admin' && this.gd.user_id !== null">
+      <RouterLink to="/manage-users" v-if="this.globalData.user_role === 'admin' && this.globalData.user_id !== null">
         <img
         src="../assets/icons/manage-users.png"
         class="icon_img"
         height="50px"
         /> 
         Manage Users</RouterLink>
-      <RouterLink to="/register-user" v-if="this.gd.user_role === 'admin' && this.gd.user_id !== null">
+      <RouterLink to="/register-user" v-if="this.globalData.user_role === 'admin' && this.globalData.user_id !== null">
         <img
         src="../assets/icons/register-patient.png"
         class="icon_img"
         height="50px"
         /> 
         Register User</RouterLink>
-      <RouterLink to="/change-password" v-if=" this.gd.user_id !== null">
+      <RouterLink to="/change-password" v-if=" this.globalData.user_id !== null">
         <img
         src="../assets/icons/change-password.png"
         class="icon_img"
         height="50px"
         /> 
         Password</RouterLink>
-      <RouterLink to="/consent-update/:id" v-if="this.gd.user_id !== null">
+      <RouterLink to="/consent-update/:id" v-if="this.globalData.user_id !== null">
         <img
         src="../assets/icons/consent-update.png"
         class="icon_img"
         height="50px"
         /> 
         Consent Update</RouterLink>
-      <a @click="logout()" style="cursor: pointer;" v-if="this.gd.user_id !== null">
+      <a @click="logout()" style="cursor: pointer;" v-if="this.globalData.user_id !== null">
         <img
         src="../assets/icons/login.png"
         class="icon_img"
@@ -139,15 +132,15 @@
 
 <script lang="ts">
 import { RouterLink } from 'vue-router';
-import globalData from '../globalData'
 import { useRouter } from 'vue-router';
 import { watch } from 'vue';
+import globalData from '../globalData';
 
 export default {
   data() {
     return {
       animationDelay: false,
-      gd: globalData,
+      globalData: globalData,
     }
   },
 
@@ -160,7 +153,8 @@ export default {
     watch(
       () => globalData.user_role,
       (newRole) => {
-        this.gd.user_role = newRole;
+        this.globalData.user_role = newRole;
+        localStorage.setItem('gd.user_role', this.globalData.user_role)
       }
     );
   },
@@ -171,12 +165,20 @@ export default {
     },
 
     logout() {
-      globalData.user_id = null;
-      globalData.user_role = null;
-      globalData.user_name = null;
-      globalData.isAuthenticated = false;
-      globalData.user_consent = null;
-      globalData.has_patient_history = null;
+      this.globalData.user_id = null;
+      this.globalData.user_role = null;
+      this.globalData.user_name = null;
+      this.globalData.isAuthenticated = false;
+      this.globalData.user_consent = null;
+      this.globalData.has_patient_history = null;
+
+      localStorage.setItem('gd.user_id', this.globalData);
+      localStorage.setItem('gd.user_role', this.globalData.user_role);
+      localStorage.setItem('gd.user_name', this.globalData.user_name);
+      localStorage.setItem('gd.isAuthenticated', this.globalData.isAuthenticated);
+      localStorage.setItem('gd.user_consent', this.globalData.user_consent);
+      localStorage.setItem('gd.has_patient_history', this.globalData.has_patient_history);
+
       this.router.push({ name: 'Login' });
     },
 

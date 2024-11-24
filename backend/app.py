@@ -268,7 +268,7 @@ def get_user_data():
     from models import User
 
     user_id = get_jwt_identity()
-    user = User.query.get(user_id)
+    user = User.query.filter_by(id=user_id).first()
     if not user:
         return jsonify({"error": "User not found"}), 404
 
@@ -433,7 +433,8 @@ def get_patient(id, role):
     from models import Patient, User
 
     if role == 'paciente':
-        user = User.query.get(id)
+        user_id = get_jwt_identity()
+        user = User.query.filter_by(id=user_id).first()
         patient = Patient.query.filter_by(cpf=user.cpf).first()
     else:
         patient = Patient.query.get(id)
@@ -873,8 +874,8 @@ def get_current_consent():
 @jwt_required()
 def save_prediction():
 
-    from models import Patient
-    from mongo_models import PredictionData
+    from models import Patient, User
+    from datetime import datetime
 
     try:
         data = request.get_json()
@@ -883,23 +884,27 @@ def save_prediction():
         input_data = data.get("input_data")
         prediction_result = data.get("prediction_result")
 
-        patient = Patient.query.filter_by(id=user_id).first()
+        user = User.query.filter_by(id=user_id).first()
+        patient = Patient.query.filter_by(cpf=user.cpf).first()
+
+        if not patient:
+            return jsonify({"error": "Patient not found"}), 404
 
         # Armazena a predição no MongoDB
         new_prediction = {
             "user_id": user_id,
             "patient_id": patient.id,
             "prediction_type": prediction_type,
-            "input_data": input_data,
+            "input_data": list(input_data) if isinstance(input_data, set) else input_data, 
             "prediction_result": prediction_result,
-            "timestamp": datetime.utcnow()
+            "timestamp": datetime.utcnow().isoformat()  
         }
 
-        validated_data = PredictionData(new_prediction)
-        prediction_collection.insert_one(validated_data.dict())
+        # Insere no MongoDB
+        prediction_collection.insert_one(new_prediction)
 
     except Exception as e:
-        return jsonify({f"Error occured when trying save prediction: {str(e)}"}), 400
+        return jsonify({"error": f"Error occurred when trying save prediction: {str(e)}"}), 400
 
     return jsonify({"message": "Prediction successfully saved"}), 201
 

@@ -7,8 +7,8 @@
         <section class="consent-section">
 
           <p v-if="$route.name === 'ConsentUpdate'">Current State: 
-            <b :style="this.gd.user_consent ? 'color: blue;' : 'color: red;' ">
-            {{ this.gd.user_consent ? 'Given' : 'Revoked' }}
+            <b :style="this.globalData.user_consent ? 'color: blue;' : 'color: red;' ">
+            {{ this.globalData.user_consent ? 'Given' : 'Revoked' }}
             </b>
           </p>
 
@@ -42,7 +42,6 @@
 import { defineComponent, watch, ComponentPublicInstance } from 'vue';
 import axios from 'axios';
 import { useRouter, RouteLocationNormalized, NavigationGuardNext} from 'vue-router';
-import globalData from '../globalData'
 
 export default defineComponent({
   name: 'ConsentUpdate',
@@ -51,16 +50,19 @@ export default defineComponent({
       consentStatus: null,
       message: '',
       error: '',
-      gd: globalData,
+      globalData: {
+        user_consent: localStorage.getItem('gd.user_consent'),
+        user_role: localStorage.getItem('gd.user_role')
+      },
     };
   },
 
   created() {
     watch(
-      () => globalData.user_consent,
+      () => this.globalData.user_consent,
       (newConsent) => {
-        this.gd.user_consent = newConsent;
-        globalData.user_consent = newConsent;
+        this.globalData.user_consent = newConsent;
+        localStorage.setItem('gd.user_consent', this.globalData.user_consent);
       }
     );
   },
@@ -96,8 +98,8 @@ export default defineComponent({
               },
             }
           );
-          this.gd.user_consent = this.consentStatus === 'true';
-          globalData.user_consent = this.consentStatus === 'true';
+          this.globalData.user_consent = this.consentStatus === 'true';
+          localStorage.setItem('gd.user_consent', this.globalData.user_consent);
           this.getConsentStatus();
           this.message = response.data.message || 'Consent updated successfully.';
           this.error = '';
@@ -148,8 +150,9 @@ export default defineComponent({
           );
           this.message = response.data.message || 'Consent updated successfully.';
           this.error = '';
-          globalData.user_consent = this.consentStatus === 'true';
-          this.router.push(`/consent-update/${globalData.user_id}`)
+          this.globalData.user_consent = this.consentStatus === 'true';
+          localStorage.setItem('gd.user_consent', this.globalData.user_consent);
+          this.router.push(`/consent-update/${localStorage.getItem('gd.user_id')}`)
         } catch (err) {
           this.error = err.response?.data.error || `Failed to update consent: ${err}`;
           this.message = '';

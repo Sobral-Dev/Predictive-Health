@@ -3,8 +3,8 @@
     <transition name="fade" mode="out-in">
 
       <div class="user-predictions">
-        <h2 v-if="this.gd.user_role === 'paciente'">Your Prediction History</h2>
-        <table v-if="predictions.length && this.gd.user_role === 'paciente'">
+        <h2 v-if="this.globalData.user_role === 'paciente'">Your Prediction History</h2>
+        <table v-if="predictions.length && this.globalData.user_role === 'paciente'">
           <thead>
             <tr>
               <th>Type</th>
@@ -23,7 +23,7 @@
           </tbody>
         </table>
 
-        <p v-if="!predictions.length && this.gd.user_role === 'paciente'">No predictions made by you were found.</p>
+        <p v-if="!predictions.length && this.globalData.user_role === 'paciente'">No predictions made by you were found.</p>
         <p v-if="error" class="error">{{ error }}</p>
       </div>
     </transition>
@@ -32,7 +32,6 @@
 
 <script lang="ts">
 import axios from 'axios';
-import globalData from '../globalData';
 
 export default {
   name: 'UserPredictions',
@@ -40,7 +39,10 @@ export default {
     return {
       predictions: [],
       error: '',
-      gd: globalData,
+      globalData: {
+        user_id: localStorage.getItem('gd.user_id'),
+        user_role: localStorage.getItem('gd.user_role')
+      },
     };
   },
 

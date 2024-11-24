@@ -1,9 +1,15 @@
 -- Conectar-se ao Banco de Dados
 \c "PatientSystem";
 
+-- Criação das Sequences para IDs
+CREATE SEQUENCE user_id_seq START 1 INCREMENT BY 10;
+CREATE SEQUENCE patient_id_seq START 1000 INCREMENT BY 15;
+CREATE SEQUENCE auditlog_id_seq START 5000 INCREMENT BY 20;
+CREATE SEQUENCE doctorpatient_id_seq START 10000 INCREMENT BY 25;
+
 -- Criação da Tabela de Usuários
 CREATE TABLE "Users" (
-    id SERIAL PRIMARY KEY,
+    id INT PRIMARY KEY DEFAULT nextval('user_id_seq'),
     name VARCHAR(50) NOT NULL,
     email VARCHAR(120) UNIQUE NOT NULL,
     password VARCHAR(128) NOT NULL,
@@ -11,15 +17,13 @@ CREATE TABLE "Users" (
     consent_status BOOLEAN DEFAULT NULL,
     reset_token VARCHAR(120),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    cpf VARCHAR(11) UNIQUE NOT NULL
+    cpf VARCHAR(11) UNIQUE NOT NULL,
+    has_patient_history BOOLEAN DEFAULT FALSE
 );
-
-ALTER TABLE "Users" ADD COLUMN has_patient_history BOOLEAN DEFAULT FALSE;
-
 
 -- Criação da Tabela de Pacientes
 CREATE TABLE "Patient" (
-    id SERIAL PRIMARY KEY,
+    id INT PRIMARY KEY DEFAULT nextval('patient_id_seq'),
     name VARCHAR(50) NOT NULL,
     age INT,
     medical_conditions TEXT,
@@ -31,11 +35,10 @@ CREATE TABLE "Patient" (
 
 -- Criação da Tabela de Logs de Auditoria
 CREATE TABLE "AuditLog" (
-    id SERIAL PRIMARY KEY,
-    user_id INT NOT NULL,
-    action VARCHAR(255) NOT NULL,
-    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES "Users" (id) ON DELETE CASCADE
+    id INT PRIMARY KEY DEFAULT nextval('auditlog_id_seq'),
+    user_id INT NOT NULL REFERENCES "Users"(id),
+    action TEXT NOT NULL,
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Criação da Tabela de Tokens Revogados
@@ -45,55 +48,15 @@ CREATE TABLE "RevokedToken" (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Criação da Tabela de Associação Medico-Paciente
+-- Criação da Tabela de Relação Médico-Paciente
 CREATE TABLE "DoctorPatient" (
-    id SERIAL PRIMARY KEY,
-    doctor_id INT NOT NULL,
-    patient_id INT NOT NULL,
-    FOREIGN KEY (doctor_id) REFERENCES "Users" (id) ON DELETE CASCADE,
-    FOREIGN KEY (patient_id) REFERENCES "Patient" (id) ON DELETE CASCADE,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    id INT PRIMARY KEY DEFAULT nextval('doctorpatient_id_seq'),
+    doctor_id INT NOT NULL REFERENCES "Users"(id),
+    patient_id INT NOT NULL REFERENCES "Patient"(id),
+    UNIQUE(doctor_id, patient_id)
 );
 
--- Inserir Registros na Tabela Patient
-INSERT INTO "Patient" (name, age, medical_conditions, consent_status, created_at, cpf, birth_date)
-VALUES 
-('Alice Oliveira', 45, 'Diabetes', TRUE, CURRENT_TIMESTAMP, '85732914277', '1985-03-12'),
-('Bruno Silva', 50, 'Hipertensão', FALSE, CURRENT_TIMESTAMP, '41101217103', '1978-05-21'),
-('Carlos Sousa', 60, 'Diabetes e Hipertensão', TRUE, CURRENT_TIMESTAMP, '46662505226', '1990-07-15'),
-('Daniela Costa', 35, 'Hipertensão', TRUE, CURRENT_TIMESTAMP, '55868755197', '1965-11-20'),
-('Eduardo Nascimento', 40, 'Diabetes', FALSE, CURRENT_TIMESTAMP, '85291586524', '2000-02-28'),
-('Fernanda Lima', 55, 'AVC', TRUE, CURRENT_TIMESTAMP, '80888964366', '1982-09-05'),
-('Gustavo Almeida', 30, 'Diabetes', TRUE, CURRENT_TIMESTAMP, '03701224536', '1956-01-10'),
-('Helena Rocha', 48, 'Hipertensão', FALSE, CURRENT_TIMESTAMP, '11111365300', '1995-12-15'),
-('Igor Fernandes', 52, 'Diabetes e AVC', TRUE, CURRENT_TIMESTAMP, '14683194775', '1969-06-25'),
-('Jéssica Ribeiro', 47, 'Hipertensão', TRUE, CURRENT_TIMESTAMP, '05316461819', '1988-04-14'),
-('Kleber Martins', 36, 'Diabetes', FALSE, CURRENT_TIMESTAMP, '49403035005', '1945-08-30'),
-('Larissa Pereira', 39, 'AVC', TRUE, CURRENT_TIMESTAMP, '67847354047', '1974-03-19'),
-('Maurício Carvalho', 41, 'Diabetes e Hipertensão', TRUE, CURRENT_TIMESTAMP, '51399815059', '2005-11-09'),
-('Natália Batista', 58, 'Hipertensão', FALSE, CURRENT_TIMESTAMP, '78544754074', '1992-10-21'),
-('Otávio Farias', 33, 'Diabetes', TRUE, CURRENT_TIMESTAMP, '50763847003', '1980-01-03'),
-('Priscila Moreira', 59, 'AVC', TRUE, CURRENT_TIMESTAMP, '48470862014', '1950-05-13'),
-('Renato Gomes', 42, 'Hipertensão', FALSE, CURRENT_TIMESTAMP, '65665323071', '1998-08-07'),
-('Sabrina Barros', 37, 'Diabetes e AVC', TRUE, CURRENT_TIMESTAMP, '20432901000', '1963-09-30'),
-('Tiago Mendes', 34, 'AVC', FALSE, CURRENT_TIMESTAMP, '68105071088', '2003-12-05'),
-('Vanessa Cunha', 62, 'Diabetes e Hipertensão', TRUE, CURRENT_TIMESTAMP, '67250876040', '1948-02-16');
-
--- Inserindo um usuário administrador padrão
-INSERT INTO "Users" (name, email, password, role, cpf)
-VALUES
-('Felipe Sobral', 'felipesobral_@hotmail.com', '$2b$12$QAbrOTtk1M6Zfda/y3e5ReDxXxMtnwYcVmVAqFbgk/8xe9K6dJvFG', 'admin', '14757791833');
-
--- Inserindo 5 médicos na tabela Users
-INSERT INTO "Users" (name, email, password, role, cpf)
-VALUES
-('Dr. João Costa', 'joaocosta@hospital.com', '$2b$12$QAbrOTtk1M6Zfda/y3e5ReDxXxMtnwYcVmVAqFbgk/8xe9K6dJvFG', 'medico', '75846193048'),
-('Dra. Maria Alves', 'mariaalves@hospital.com', '$2b$12$QAbrOTtk1M6Zfda/y3e5ReDxXxMtnwYcVmVAqFbgk/8xe9K6dJvFG', 'medico', '91327382008'),
-('Dr. Carlos Pereira', 'carlospereira@hospital.com', '$2b$12$QAbrOTtk1M6Zfda/y3e5ReDxXxMtnwYcVmVAqFbgk/8xe9K6dJvFG', 'medico', '10290759056'),
-('Dra. Ana Souza', 'anasouza@hospital.com', '$2b$12$QAbrOTtk1M6Zfda/y3e5ReDxXxMtnwYcVmVAqFbgk/8xe9K6dJvFG', 'medico', '01694513050'),
-('Dr. Pedro Lima', 'pedrolima@hospital.com', '$2b$12$QAbrOTtk1M6Zfda/y3e5ReDxXxMtnwYcVmVAqFbgk/8xe9K6dJvFG', 'medico', '96020108007');
-
--- Inserindo 10 usuários com histórico de paciente
+--- Inserindo 10 usuários com histórico de paciente
 INSERT INTO "Users" (name, email, password, role, cpf)
 VALUES
 ('Carlos Silva', 'carlossilva@hospital.com', '$2b$12$QAbrOTtk1M6Zfda/y3e5ReDxXxMtnwYcVmVAqFbgk/8xe9K6dJvFG', 'paciente', '85732914277'),  
@@ -107,6 +70,41 @@ VALUES
 ('Marta Farias', 'martafarias@hospital.com', '$2b$12$QAbrOTtk1M6Zfda/y3e5ReDxXxMtnwYcVmVAqFbgk/8xe9K6dJvFG', 'paciente', '14683194775'),
 ('Luciana Barbosa', 'lucianabarbosa@hospital.com', '$2b$12$QAbrOTtk1M6Zfda/y3e5ReDxXxMtnwYcVmVAqFbgk/8xe9K6dJvFG', 'paciente', '05316461819');
 
+-- Inserindo 10 pacientes com correspondência exata aos usuários
+INSERT INTO "Patient" (name, age, medical_conditions, consent_status, cpf, birth_date)
+VALUES
+('Carlos Silva', 45, 'Hipertensão', TRUE, '85732914277', '1978-01-12'),
+('Daniel Souza', 38, 'Diabetes Tipo 2', TRUE, '41101217103', '1985-04-08'),
+('Paula Lima', 50, 'Hipertensão e Colesterol Alto', TRUE, '46662505226', '1973-06-20'),
+('João Almeida', 60, 'Cardiopatia', TRUE, '55868755197', '1963-03-15'),
+('Luana Freitas', 29, 'Asma', TRUE, '85291586524', '1994-11-25'),
+('Felipe Gonçalves', 34, 'Nenhuma', TRUE, '80888964366', '1989-09-10'),
+('Clara Ramos', 42, 'Hipotireoidismo', TRUE, '03701224536', '1981-07-05'),
+('Eduardo Martins', 55, 'Diabetes Tipo 1', TRUE, '11111365300', '1968-02-17'),
+('Marta Farias', 37, 'Obesidade', TRUE, '14683194775', '1986-08-09'),
+('Luciana Barbosa', 50, 'Nenhuma', TRUE, '05316461819', '1973-12-01');
+
+-- Inserindo um usuário administrador padrão
+INSERT INTO "Users" (name, email, password, role, cpf)
+VALUES
+('Felipe Sobral', 'felipesobral_@hotmail.com', '$2b$12$QAbrOTtk1M6Zfda/y3e5ReDxXxMtnwYcVmVAqFbgk/8xe9K6dJvFG', 'admin', '14757791833');
+
+-- Inserindo 5 médicos na tabela Users
+INSERT INTO "Users" (name, email, password, role, cpf)
+VALUES
+('Marcos Aurélio', 'marcosaurelio@hospital.com', '$2b$12$QAbrOTtk1M6Zfda/y3e5ReDxXxMtnwYcVmVAqFbgk/8xe9K6dJvFG', 'medico', '70011111111'),
+('Beatriz Farias', 'beatrizfarias@hospital.com', '$2b$12$QAbrOTtk1M6Zfda/y3e5ReDxXxMtnwYcVmVAqFbgk/8xe9K6dJvFG', 'medico', '70022222222'),
+('Carlos Pereira', 'carlospereira@hospital.com', '$2b$12$QAbrOTtk1M6Zfda/y3e5ReDxXxMtnwYcVmVAqFbgk/8xe9K6dJvFG', 'medico', '10290759056'),
+('Ana Souza', 'anasouza@hospital.com', '$2b$12$QAbrOTtk1M6Zfda/y3e5ReDxXxMtnwYcVmVAqFbgk/8xe9K6dJvFG', 'medico', '01694513050'),
+('Pedro Lima', 'pedrolima@hospital.com', '$2b$12$QAbrOTtk1M6Zfda/y3e5ReDxXxMtnwYcVmVAqFbgk/8xe9K6dJvFG', 'medico', '96020108007');
+
+-- Relação Médico-Paciente
+INSERT INTO "DoctorPatient" (doctor_id, patient_id)
+VALUES
+((SELECT id FROM "Users" WHERE name = 'Marcos Aurélio'), (SELECT id FROM "Patient" WHERE name = 'Carlos Silva')),
+((SELECT id FROM "Users" WHERE name = 'Marcos Aurélio'), (SELECT id FROM "Patient" WHERE name = 'Daniel Souza')),
+((SELECT id FROM "Users" WHERE name = 'Beatriz Farias'), (SELECT id FROM "Patient" WHERE name = 'Paula Lima')),
+((SELECT id FROM "Users" WHERE name = 'Beatriz Farias'), (SELECT id FROM "Patient" WHERE name = 'João Almeida'));
 
 -- Function para atualizar os valores de 'has_patient_history' a partir da relação dos inserts iniciais entre paciente e usuários
 CREATE OR REPLACE FUNCTION update_patient_history_status()

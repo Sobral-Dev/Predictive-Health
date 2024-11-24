@@ -76,9 +76,7 @@
 <script lang="ts">
 import { defineComponent, watch, ComponentPublicInstance } from 'vue';
 import axios from 'axios';
-import { useRouter, RouteLocationNormalized, NavigationGuardNext} from 'vue-router';
 import eventBus from '../eventBus';
-import globalData from '../globalData';
 
 export default defineComponent({
   name: 'UserRegistration',
@@ -93,17 +91,7 @@ export default defineComponent({
       },
       message: '',
       error: '',
-      gd: globalData,
     };
-  },
-
-  created() {
-    watch(
-      () => globalData.user_consent,
-      (newConsent) => {
-        this.gd.user_consent = newConsent;
-      }
-    );
   },
 
   methods: {

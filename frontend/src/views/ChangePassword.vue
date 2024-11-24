@@ -66,10 +66,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, watch, ComponentPublicInstance } from 'vue';
+import { defineComponent } from 'vue';
 import axios from 'axios';
-import { useRouter, RouteLocationNormalized, NavigationGuardNext} from 'vue-router';
-import globalData from '../globalData';
 
 export default defineComponent({
   name: 'ChangePassword',
@@ -81,18 +79,8 @@ export default defineComponent({
       resetToken: '',
       message: '',
       error: '',
-      gd: globalData,
       usingResetToken: false,
     };
-  },
-
-  created() {
-    watch(
-      () => globalData.user_consent,
-      (newConsent) => {
-        this.gd.user_consent = newConsent;
-      }
-    );
   },
 
   methods: {
@@ -109,7 +97,7 @@ export default defineComponent({
           const response = await axios.post(
             'http://localhost:5000/password-reset',
             {
-              user_id: globalData.user_id,
+              user_id: localStorage.getItem('gd.user_id'),
               reset_token: this.resetToken,
               new_password: this.newPassword,
             },

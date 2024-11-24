@@ -34,7 +34,6 @@ import { defineComponent, watch, ComponentPublicInstance } from 'vue';
 import axios from 'axios';
 import { useRouter, RouteLocationNormalized, NavigationGuardNext} from 'vue-router';
 import eventBus from '../eventBus';
-import globalData from '../globalData';
 
 export default defineComponent({
   name: 'AdminDashboard',
@@ -42,22 +41,12 @@ export default defineComponent({
     return {
       totalUsers: 0,
       totalPatients: 0,
-      gd: globalData,
     };
   },
 
     setup() {
       const router = useRouter();
       return { router };
-  },
-
-  created() {
-    watch(
-      () => globalData.user_consent,
-      (newConsent) => {
-        this.gd.user_consent = newConsent;
-      }
-    );
   },
 
   mounted() {

@@ -86,37 +86,37 @@
           </form>
         </section>
 
-        <section class="profile-section" v-if="patient && this.gd.user_role === 'paciente'">
+        <section class="patient-section" v-if="patient.name !== '' && this.globalData.user_role === 'paciente'">
 
           <h2>Patient Profile</h2>
 
-          <div class="profile-item">          
+          <div class="patient-item">          
             <label><b>Name: </b></label>
             <span>{{ patient.name }}</span>
           </div>
 
-          <div class="profile-item">
+          <div class="patient-item">
             <label><b>Age: </b></label>
             <span>{{ patient.age }}</span>
           </div>
 
-          <div class="profile-item">
+          <div class="patient-item">
             <label><b>Role: </b></label>
             <span>{{ patient.medical_conditions }}</span>
           </div>
 
-          <div class="profile-item">
+          <div class="patient-item">
             <label><b>Role: </b></label>
             <span>{{ patient.created_at }}</span>
           </div>
         </section>
 
-        <section v-if="doctors && (this.gd.user_role === 'paciente' || this.gd.user_role === 'medico')" class="profile-section">
+        <section v-if="doctors.lenght > 0 && (this.globalData.user_role === 'paciente' || this.globalData.user_role === 'medico')" class="doctor-section">
 
-          <h2>Associate {{ this.gd.user_role === 'paciente' ? 'Doctors' : 'Patients' }}</h2>
+          <h2>Associate {{ this.globalData.user_role === 'paciente' ? 'Doctors' : 'Patients' }}</h2>
 
           <ul v-for="doctor in doctors" :key="doctor.id">
-            <li><b>• {{ this.gd.user_role === 'paciente' ? 'D' : 'S' }}r(a)</b> {{ doctor.name }}</li>
+            <li><b>• {{ this.globalData.user_role === 'paciente' ? 'D' : 'S' }}r(a)</b> {{ doctor.name }}</li>
           </ul>
 
         </section>
@@ -131,8 +131,7 @@
 <script lang="ts">
 import { defineComponent, watch, ComponentPublicInstance } from 'vue';
 import axios from 'axios';
-import { useRouter, RouteLocationNormalized, NavigationGuardNext} from 'vue-router';
-import globalData from '../globalData';
+import { RouteLocationNormalized, NavigationGuardNext} from 'vue-router';
 
 export default defineComponent({
   name: 'UserProfile',
@@ -149,7 +148,10 @@ export default defineComponent({
       isEditing: false,
       error: '',
       message: '',
-      gd: globalData,
+      globalData: {
+        user_id: localStorage.getItem('gd.user_id'),
+        user_role: localStorage.getItem('gd.user_role')
+      },
       patient: {
         name: '',
         age: '',
@@ -160,19 +162,10 @@ export default defineComponent({
     };
   },
 
-  mounted() {
+  OnMounted() {
     this.fetchUserProfile();
     this.fetchPatientProfile();
     this.fetchPatientDoctors();
-  },
-
-  created() {
-    watch(
-      () => globalData.user_consent,
-      (newConsent) => {
-        this.gd.user_consent = newConsent;
-      }
-    );
   },
 
   methods: {
@@ -213,11 +206,11 @@ export default defineComponent({
 
     async fetchPatientProfile() {
 
-      if (globalData.user_role !== 'paciente') {
+      if (this.globalData.user_role !== 'paciente') {
         return this.patient = {};
       } else {
         try {
-          const response = await axios.get(`http://localhost:5000/patients/${globalData.user_id}/paciente`, {
+          const response = await axios.get(`http://localhost:5000/patients/${this.globalData.user_id}/paciente`, {
             headers: {
               Authorization: `Bearer ${localStorage.getItem('token')}`,
             },
@@ -232,12 +225,12 @@ export default defineComponent({
 
     async fetchPatientDoctors() {
 
-      if (globalData.user_role !== 'paciente') {
+      if (this.globalData.user_role !== 'paciente') {
        
-        if (globalData.user_role === 'medico') {
+        if (this.globalData.user_role === 'medico') {
 
           try {
-            const response = await axios.get(`http://localhost:5000/doctor/${globalData.user_id}/patients`, {
+            const response = await axios.get(`http://localhost:5000/doctor/${this.globalData.user_id}/patients`, {
               headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
               },
@@ -293,7 +286,7 @@ export default defineComponent({
   margin-top: 20px;
 }
 
-.profile-item {
+.profile-item, .patient-item {
   margin-bottom: 15px;
 }
 

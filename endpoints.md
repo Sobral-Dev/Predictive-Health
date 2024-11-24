@@ -115,7 +115,7 @@
 
 - **Objetivo**: Obter dados completos de um paciente específico.
 - **Justificativa**: Fornece acesso controlado a dados detalhados dos pacientes para médicos e administradores.
-- **Status de Funcionamento**: `Falta Testar`
+- **Status de Funcionamento**: `OK`
 - **Roles**: `admin`, `medico`, `paciente`
 - **Requisições em**:
     - `PatientDetails.vue`
@@ -149,7 +149,7 @@
 
 - **Objetivo**: Fazer predição de risco de diabetes para um paciente.
 - **Justificativa**: Atende à funcionalidade de suporte à decisão médica, fornecendo predições de risco de saúde personalizadas.
-- **Status de Funcionamento**: `Falta Testar`
+- **Status de Funcionamento**: `OK`
 - **Roles**: `paciente`
 - **Requisições em**:
     - `HealthPredictions.vue`
@@ -160,7 +160,7 @@
 
 - **Objetivo**: Fazer predição de risco de hipertensão para um paciente.
 - **Justificativa**: Atende à funcionalidade de suporte à decisão médica, fornecendo predições de risco de saúde personalizadas.
-- **Status de Funcionamento**: `Falta Testar`
+- **Status de Funcionamento**: `OK`
 - **Roles**: `paciente`
 - **Requisições em**:
     - `HealthPredictions.vue`
@@ -171,7 +171,7 @@
 
 - **Objetivo**: Fazer predição de risco de AVC para um paciente.
 - **Justificativa**: Atende à funcionalidade de suporte à decisão médica, fornecendo predições de risco de saúde personalizadas.
-- **Status de Funcionamento**: `Falta Testar`
+- **Status de Funcionamento**: `OK`
 - **Roles**: `paciente`
 - **Requisições em**:
     - `HealthPredictions.vue`
@@ -193,7 +193,7 @@
 
 - **Objetivo**: Exportar os dados do paciente autenticado.
 - **Justificativa**: Atende ao direito de portabilidade de dados conforme a LGPD, permitindo que dados pessoais sejam exportados em formato padrão.
-- **Status de Funcionamento**: `Falta Testar`
+- **Status de Funcionamento**: `ERROR`
 - **Roles**: `paciente`
 - **Requisições em**:
     - `PersonalDataExport.vue`
@@ -272,7 +272,7 @@
 
 - **Objetivo**: Salvar dados de predições realizadas por usuários no MongoDB.
 - **Justificativa**: Permite que os médicos possam ter um histórico dos resultados obtidos pelos pacientes que acompanha (com o consentimento prévio), o que permite um acompanhamento mais detalhado do quadro clínico do paciente.
-- **Status de Funcionamento**: `Falta Testar`
+- **Status de Funcionamento**: `OK`
 - **Roles**: `Nenhum`
 - **Requisições em**:
     - `HealthPredictions.vue`
@@ -283,7 +283,7 @@
 
 - **Objetivo**: Ver predições feitas pelo usuário autenticado.
 - **Justificativa**: Permite que o próprio usuário possa visualizar o seu histórico de predições realizadas.
-- **Status de Funcionamento**: `Falta Testar`
+- **Status de Funcionamento**: `OK`
 - **Roles**: `paciente`
 - **Requisições em**:
     - `UserPredictions.vue`

@@ -92,9 +92,8 @@
 <script lang="ts">
 import { defineComponent, watch, ComponentPublicInstance } from 'vue';
 import axios from 'axios';
-import { useRouter, RouteLocationNormalized, NavigationGuardNext} from 'vue-router';
+import { RouteLocationNormalized, NavigationGuardNext} from 'vue-router';
 import eventBus from '../eventBus';
-import globalData from '../globalData';
 
 export default defineComponent({
   name: 'UsersManagement',
@@ -118,17 +117,7 @@ export default defineComponent({
       isEditing: false,
       error: '',
       message: '',
-      gd: globalData,
     };
-  },
-
-  created() {
-    watch(
-      () => globalData.user_consent,
-      (newConsent) => {
-        this.gd.user_consent = newConsent;
-      }
-    );
   },
 
   mounted() {

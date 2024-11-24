@@ -5,7 +5,7 @@
       <div class="personal-data-export">
         <h1 class="page-title">Export Personal Data</h1>
 
-        <section v-if="this.gd.user_role === 'paciente'" class="checkbox-section">
+        <section v-if="this.globalData.user_role === 'paciente'" class="checkbox-section">
           <p>Which information do you want?</p>
 
           <div class="select-data">
@@ -21,18 +21,18 @@
           
           <div class="export-options">
             <button 
-            v-if="this.gd.user_role === 'paciente' ? 
+            v-if="this.globalData.user_role === 'paciente' ? 
             userData !== false || patientData !== false : 
-            this.gd.user_id !== null" 
+            this.globalData.user_id !== null" 
             @click="exportData('json')" 
             class="export-button">
             Export as JSON
             </button>
             
             <button
-            v-if="this.gd.user_role === 'paciente' ? 
+            v-if="this.globalData.user_role === 'paciente' ? 
             userData !== false || patientData !== false : 
-            this.gd.user_id !== null"  
+            this.globalData.user_id !== null"  
             @click="exportData('csv')" 
             class="export-button">
             Export as CSV
@@ -49,27 +49,19 @@
 <script lang="ts">
 import { defineComponent, watch, ComponentPublicInstance } from 'vue';
 import axios from 'axios';
-import { useRouter, RouteLocationNormalized, NavigationGuardNext} from 'vue-router';
-import globalData from '../globalData';
 
 export default defineComponent({
   name: 'PersonalDataExport',
   data() {
     return {
       error: '',
-      gd: globalData,
+      globalData: {
+        user_id: localStorage.getItem('gd.user_id'),
+        user_role: localStorage.getItem('gd.user_role')
+      },
       userData: true, 
       patientData: false,
     };
-  },
-
-  created() {
-    watch(
-      () => globalData.user_consent,
-      (newConsent) => {
-        this.gd.user_consent = newConsent;
-      }
-    );
   },
 
   methods: {
@@ -100,7 +92,7 @@ export default defineComponent({
           this.error = err.response?.data.error || 'Failed to export data.';
         }
 
-      } else if(globalData.user_role === 'paciente' && this.patientData) {
+      } else if(this.globalData.user_role === 'paciente' && this.patientData) {
       
         try {
 

@@ -46,7 +46,6 @@ import { defineComponent, watch, ComponentPublicInstance } from 'vue';
 import axios from 'axios';
 import { useRouter, RouteLocationNormalized, NavigationGuardNext} from 'vue-router';
 import eventBus from '../eventBus';
-import globalData from '../globalData';
 
 export default defineComponent({
   name: 'ShowPatients',
@@ -62,22 +61,16 @@ export default defineComponent({
         created_at: Date;
       }>,
       error: '',
-      gd: globalData,
+      globalData: {
+        user_id: localStorage.getItem('gd.user_id'),
+        user_role: localStorage.getItem('gd.user_role')
+      },
     };
   },
 
   setup() {
       const router = useRouter();
       return { router };
-  },
-
-  created() {
-    watch(
-      () => globalData.user_consent,
-      (newConsent) => {
-        this.gd.user_consent = newConsent;
-      }
-    );
   },
 
   mounted() {
@@ -98,15 +91,15 @@ export default defineComponent({
     async fetchPatients() {
       try {
 
-        if (globalData.user_role === 'admin') {
+        if (this.globalData.user_role === 'admin') {
           const response = await axios.get('http://localhost:5000/patients', {
             headers: {
               Authorization: `Bearer ${localStorage.getItem('token')}`,
             },
           });
           this.patients = response.data;
-        } else if (globalData.user_role === 'medico') {
-          const response = await axios.get(`http://localhost:5000/doctor/${globalData.user_id}/patients`, {
+        } else if (this.globalData.user_role === 'medico') {
+          const response = await axios.get(`http://localhost:5000/doctor/${this.globalData.user_id}/patients`, {
             headers: {
               Authorization: `Bearer ${localStorage.getItem('token')}`,
             },

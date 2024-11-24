@@ -18,13 +18,11 @@
 
 <script>
 import axios from 'axios';
-import globalData from '../globalData';
 
 export default {
   data() {
     return {
       patients: [],
-      gd: globalData,
       error: '',
     };
   },
@@ -37,7 +35,7 @@ export default {
 
     async fetchPatients() {
       try {
-        const response = await axios.get(`http://localhost:5000/doctor/${globalData.user_id}/patients`, {
+        const response = await axios.get(`http://localhost:5000/doctor/${localStorage.getItem('gd.user_id')}/patients`, {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
         });
         this.patients = response.data;
