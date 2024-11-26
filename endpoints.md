@@ -104,7 +104,7 @@
 
 - **Objetivo**: Registrar um novo paciente no sistema com nome, idade, condições médicas, status de consentimento, CPF e Data de Nascimento.
 - **Justificativa**: Permite o gerenciamento de pacientes com seus respectivos históricos médicos.
-- **Status de Funcionamento**: `Falta Testar`
+- **Status de Funcionamento**: `OK`
 - **Roles**: `admin`, `medico`
 - **Requisições em**:
     - `RegisterPatient.vue`
@@ -127,7 +127,7 @@
 
 - **Objetivo**: Atualizar informações de um paciente específico.
 - **Justificativa**: Atende ao direito de correção de dados clínicos conforme a LGPD, permitindo a atualização segura de informações de pacientes pelo médico que recebeu consentimento.
-- **Status de Funcionamento**: `Falta Testar`
+- **Status de Funcionamento**: `OK`
 - **Roles**: `medico`
 - **Requisições em**:
     - `PatientDetails.vue`
@@ -193,7 +193,7 @@
 
 - **Objetivo**: Exportar os dados do paciente autenticado.
 - **Justificativa**: Atende ao direito de portabilidade de dados conforme a LGPD, permitindo que dados pessoais sejam exportados em formato padrão.
-- **Status de Funcionamento**: `ERROR`
+- **Status de Funcionamento**: `OK`
 - **Roles**: `paciente`
 - **Requisições em**:
     - `PersonalDataExport.vue`
@@ -305,7 +305,7 @@
 
 - **Objetivo**: Obter a lista de pacientes associados a um médico.
 - **Justificativa**: Transparência das relações entre os usuários para os administradores, da mesma forma que aplica um regra de negócio onde o médico só pode visualizar dados pessoais de seus pacientes, dos quais deram consentimento prévio.
-- **Status de Funcionamento**: `Falta Testar`
+- **Status de Funcionamento**: `OK`
 - **Roles**: `medico`
 - **Requisições em**:
     - `DoctorPatientList.vue`
@@ -317,7 +317,7 @@
 
 - **Objetivo**: Obter a lista de médicos associados a um paciente.
 - **Justificativa**: Transparência das relações entre os usuários para os administradores, da mesma forma que aplica um regra de negócio onde o paciente só pode visualizar a sua lista de médicos associados.
-- **Status de Funcionamento**: `Falta Testar`
+- **Status de Funcionamento**: `OK`
 - **Roles**: `paciente`
 - **Requisições em**:
     - `UserProfile.vue`
@@ -328,7 +328,7 @@
 
 - **Objetivo**: Ver histórico de predições de um paciente associado a um médico.
 - **Justificativa**: Possiblita que o médico que acompanha um paciente em específico, com o consentimento dele, possa visualizar o seu histórico de predições para acompanhar o seu quadro clínico.
-- **Status de Funcionamento**: `Falta Testar`
+- **Status de Funcionamento**: `OK`
 - **Roles**: `medico`
 - **Requisições em**:
     - `PatientDetails.vue`
@@ -339,7 +339,7 @@
 
 - **Objetivo**: Ver predições de todos os pacientes associado a um médico.
 - **Justificativa**: Possibilita que o médico possa, com o consentimento dos usuários, visualizar o histórico de predições de todos os pacientes que ele acompanha.
-- **Status de Funcionamento**: `Falta Testar`
+- **Status de Funcionamento**: `OK`
 - **Roles**: `medico`
 - **Requisições em**:
     - `DoctorPredictions.vue`

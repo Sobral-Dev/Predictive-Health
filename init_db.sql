@@ -25,7 +25,6 @@ CREATE TABLE "Users" (
 CREATE TABLE "Patient" (
     id INT PRIMARY KEY DEFAULT nextval('patient_id_seq'),
     name VARCHAR(50) NOT NULL,
-    age INT,
     medical_conditions TEXT,
     consent_status BOOLEAN DEFAULT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -53,7 +52,8 @@ CREATE TABLE "DoctorPatient" (
     id INT PRIMARY KEY DEFAULT nextval('doctorpatient_id_seq'),
     doctor_id INT NOT NULL REFERENCES "Users"(id),
     patient_id INT NOT NULL REFERENCES "Patient"(id),
-    UNIQUE(doctor_id, patient_id)
+    UNIQUE(doctor_id, patient_id),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 --- Inserindo 10 usuários com histórico de paciente
@@ -71,18 +71,18 @@ VALUES
 ('Luciana Barbosa', 'lucianabarbosa@hospital.com', '$2b$12$QAbrOTtk1M6Zfda/y3e5ReDxXxMtnwYcVmVAqFbgk/8xe9K6dJvFG', 'paciente', '05316461819');
 
 -- Inserindo 10 pacientes com correspondência exata aos usuários
-INSERT INTO "Patient" (name, age, medical_conditions, consent_status, cpf, birth_date)
+INSERT INTO "Patient" (name, medical_conditions, consent_status, cpf, birth_date)
 VALUES
-('Carlos Silva', 45, 'Hipertensão', TRUE, '85732914277', '1978-01-12'),
-('Daniel Souza', 38, 'Diabetes Tipo 2', TRUE, '41101217103', '1985-04-08'),
-('Paula Lima', 50, 'Hipertensão e Colesterol Alto', TRUE, '46662505226', '1973-06-20'),
-('João Almeida', 60, 'Cardiopatia', TRUE, '55868755197', '1963-03-15'),
-('Luana Freitas', 29, 'Asma', TRUE, '85291586524', '1994-11-25'),
-('Felipe Gonçalves', 34, 'Nenhuma', TRUE, '80888964366', '1989-09-10'),
-('Clara Ramos', 42, 'Hipotireoidismo', TRUE, '03701224536', '1981-07-05'),
-('Eduardo Martins', 55, 'Diabetes Tipo 1', TRUE, '11111365300', '1968-02-17'),
-('Marta Farias', 37, 'Obesidade', TRUE, '14683194775', '1986-08-09'),
-('Luciana Barbosa', 50, 'Nenhuma', TRUE, '05316461819', '1973-12-01');
+('Carlos Silva', 'Hipertensão', TRUE, '85732914277', '1978-01-12'),
+('Daniel Souza', 'Diabetes Tipo 2', TRUE, '41101217103', '1985-04-08'),
+('Paula Lima', 'Hipertensão e Colesterol Alto', TRUE, '46662505226', '1973-06-20'),
+('João Almeida', 'Cardiopatia', TRUE, '55868755197', '1963-03-15'),
+('Luana Freitas', 'Asma', TRUE, '85291586524', '1994-11-25'),
+('Felipe Gonçalves', 'Nenhuma', TRUE, '80888964366', '1989-09-10'),
+('Clara Ramos', 'Hipotireoidismo', TRUE, '03701224536', '1981-07-05'),
+('Eduardo Martins', 'Diabetes Tipo 1', TRUE, '11111365300', '1968-02-17'),
+('Marta Farias', 'Obesidade', TRUE, '14683194775', '1986-08-09'),
+('Luciana Barbosa', 'Nenhuma', TRUE, '05316461819', '1973-12-01');
 
 -- Inserindo um usuário administrador padrão
 INSERT INTO "Users" (name, email, password, role, cpf)

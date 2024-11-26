@@ -22,16 +22,36 @@ class User(db.Model):
     cpf = Column(String(11), unique=True, nullable=False)
     has_patient_history = Column(Boolean, default=False)
 
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "email": self.email,
+            "role": self.role,
+            "consent_status": self.consent_status,
+            "created_at": self.created_at.strftime('%Y-%m-%d %H:%M:%S') if self.created_at else None
+        }
+
 class Patient(db.Model):
     __tablename__ = 'Patient'
     id = Column(Integer, patient_id_seq, primary_key=True, server_default=patient_id_seq.next_value())
     name = Column(String(50), nullable=False)
-    age = Column(Integer)
     medical_conditions = Column(Text)
     consent_status = Column(Boolean, default=None)
     created_at = Column(TIMESTAMP, server_default=func.now())
     cpf = Column(String(11), unique=True, nullable=False)
     birth_date = Column(DATE, nullable=False)
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "medical_conditions": self.medical_conditions,
+            "consent_status": self.consent_status,
+            "created_at": self.created_at.strftime('%Y-%m-%d %H:%M:%S') if self.created_at else None,
+            "cpf": self.cpf,
+            "birth_date": self.birth_date.strftime('%Y-%m-%d') if self.birth_date else None
+        }
 
 class AuditLog(db.Model):
     __tablename__ = 'AuditLog'
@@ -41,11 +61,26 @@ class AuditLog(db.Model):
     timestamp = Column(TIMESTAMP, server_default=func.now())
     user = relationship('User')
 
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "action": self.action,
+            "timestamp": self.timestamp.strftime('%Y-%m-%d %H:%M:%S') if self.timestamp else None
+        }
+
 class RevokedToken(db.Model):
     __tablename__ = 'RevokedToken'
     id = Column(Integer, primary_key=True)
     jti = Column(String(120), nullable=False)
     created_at = Column(TIMESTAMP, server_default=func.now())
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "jti": self.jti,
+            "created_at": self.created_at.strftime('%Y-%m-%d %H:%M:%S') if self.created_at else None
+        }
 
 class DoctorPatient(db.Model):
     __tablename__ = 'DoctorPatient'
@@ -55,3 +90,13 @@ class DoctorPatient(db.Model):
     created_at = Column(TIMESTAMP, server_default=func.now())
     doctor = relationship('User', foreign_keys=[doctor_id])
     patient = relationship('Patient', foreign_keys=[patient_id])
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "doctor_id": self.doctor_id,
+            "patient_id": self.patient_id,
+            "created_at": self.created_at.strftime('%Y-%m-%d %H:%M:%S') if self.created_at else None,
+            "doctor": self.doctor.to_dict() if self.doctor else None,
+            "patient": self.patient.to_dict() if self.patient else None
+        }

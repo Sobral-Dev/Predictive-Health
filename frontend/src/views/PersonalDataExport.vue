@@ -9,10 +9,11 @@
           <p>Which information do you want?</p>
 
           <div class="select-data">
-            <input type="radio" id="user" v-model="userData" @value="true" @change="!patientData">
-            <label for="user">Your User Data</label><br>
-            <input type="radio" id="patient" v-model="patientData" @value="true" @change="!userData">
-            <label for="patient">Your Prediction History</label><br>
+            <select style="position: absolute; margin-left: 40px; margin-top: 10px;" v-model="dataSelected">
+              <option value="user">User Data</option>
+              <option v-if="this.globalData.user_role === 'paciente'" value="patient">Patient Data</option>
+            </select>
+            <br style="margin-bottom: 20px;">
           </div>
         </section>
 
@@ -21,18 +22,12 @@
           
           <div class="export-options">
             <button 
-            v-if="this.globalData.user_role === 'paciente' ? 
-            userData !== false || patientData !== false : 
-            this.globalData.user_id !== null" 
             @click="exportData('json')" 
             class="export-button">
             Export as JSON
             </button>
             
             <button
-            v-if="this.globalData.user_role === 'paciente' ? 
-            userData !== false || patientData !== false : 
-            this.globalData.user_id !== null"  
             @click="exportData('csv')" 
             class="export-button">
             Export as CSV
@@ -59,15 +54,14 @@ export default defineComponent({
         user_id: localStorage.getItem('gd.user_id'),
         user_role: localStorage.getItem('gd.user_role')
       },
-      userData: true, 
-      patientData: false,
+      dataSelected: 'user',
     };
   },
 
   methods: {
     async exportData(format: string) {
 
-      if (this.userData) {
+      if (this.dataSelected === 'user') {
 
         try {
 
@@ -82,7 +76,7 @@ export default defineComponent({
           const url = window.URL.createObjectURL(new Blob([response.data]));
           const link = document.createElement('a');
           link.href = url;
-          link.setAttribute('download', `patient_data.${format}`);
+          link.setAttribute('download', `user${this.globalData.user_id}_data.${format}`);
           document.body.appendChild(link);
           link.click();
           document.body.removeChild(link);
@@ -92,7 +86,7 @@ export default defineComponent({
           this.error = err.response?.data.error || 'Failed to export data.';
         }
 
-      } else if(this.globalData.user_role === 'paciente' && this.patientData) {
+      } else if(this.globalData.user_role === 'paciente' && this.dataSelected === 'patient') {
       
         try {
 
@@ -107,7 +101,7 @@ export default defineComponent({
           const url = window.URL.createObjectURL(new Blob([response.data]));
           const link = document.createElement('a');
           link.href = url;
-          link.setAttribute('download', `patient_data.${format}`);
+          link.setAttribute('download', `patient${this.globalData.user_id + '000'}_data.${format}`);
           document.body.appendChild(link);
           link.click();
           document.body.removeChild(link);

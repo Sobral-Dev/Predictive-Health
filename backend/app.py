@@ -400,11 +400,10 @@ def register_patient():
     data = request.get_json()
     new_patient = Patient(
         name=data['name'],
-        age=data['age'],
+        birth_date=data['birth_date'],
         medical_conditions=data['medical_conditions'],
-        consent_status=data['consent_status'],
-        cpf=data['cpf'],
-        brith_date=data['birth_date']
+        consent_status = False,
+        cpf=data['cpf']
     )
 
     # Verifica se há um usuário com o mesmo CPF e define `has_patient_history`
@@ -691,7 +690,10 @@ def export_patient_data():
     }
     add_audit_log("Patient data exported", get_jwt_identity())
 
-    return jsonify(export_data), 200
+    response = jsonify(export_data)
+    response.headers['Patient-ID'] = patient.id
+
+    return response, 200
 
 # Endpoint 19: Atualizar Consentimento Usuário/Paciente
 @app.route('/update-consent', methods=['POST'])

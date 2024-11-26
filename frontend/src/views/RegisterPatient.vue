@@ -38,14 +38,6 @@
                 class="form-control"
               ></textarea>
             </div>
-
-            <div class="form-group">
-              <label for="consent-status">Consent Status</label>
-              <select id="consent-status" v-model="form.consent_status" class="form-control" required>
-                <option value="true">Given</option>
-                <option value="false">Revoked</option>
-              </select>
-            </div>        
             
             <div class="form-group">
               <label for="cpf">CPF</label>
@@ -84,7 +76,7 @@ export default defineComponent({
         name: '',
         age: null as number | null,
         medical_conditions: '',
-        consent_status: null,
+        consent_status: false,
         cpf: '',
       },
       message: '',
@@ -101,7 +93,6 @@ export default defineComponent({
             name: this.form.name,
             birth_date: this.form.age,
             medical_conditions: this.form.medical_conditions,
-            consent_status: this.form.consent_status === 'true',
             cpf: this.form.cpf.replace(/\D/g, '')
           },
           {
@@ -127,7 +118,6 @@ export default defineComponent({
       this.form.consent_status = null;
       this.form.cpf = '';
     },
-  },
 
     formatCPF() {
       // Remove qualquer caractere que não seja número
@@ -144,6 +134,8 @@ export default defineComponent({
         this.form.cpf = this.form.cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{1,2})/, '$1.$2.$3-$4');
       }
     },  
+
+  },
   
 });
 </script>

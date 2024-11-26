@@ -71,7 +71,7 @@
 - **Objetivo**: Permitir que os médicos possam visualizar todos os pacientes nos quais ele está associado.
 - **Justificativa**: 
 - **Endpoints Utilizados**:
-  - **`GET /doctor/${globalData.user_id}/patients` (HTTP ``)**: Fornece uma lista com todos os pacientes associados ao médico autenticado.
+  - **`GET /doctor/${globalData.user_id}/patients` (HTTP `OK`)**: Fornece uma lista com todos os pacientes associados ao médico autenticado.
 - **Lógicas Condicionais Dinâmicas do HTML**:
   - **`@click.prevent="this.$router.push(`/patients/${patient.id}`)`**: Ao clicar em qualquer paciente listado, o usuário médico consegue acessar as informações desse paciente sendo redirecionado para a página de detalhes dos pacientes (`PatientDetails.vue`).
 
@@ -83,7 +83,7 @@
 - **Objetivo**: Permitir que os médicos possam visualizar todas as predições realizadas anteriormente pelos pacientes nos quais ele está associado.
 - **Justificativa**: 
 - **Endpoints Utilizados**:
-  - **`GET /doctor/${globalData.user_id}/predictions` (HTTP ``)**: Fornece uma lista com todos as predições realizadas pelos pacientes associados ao médico autenticado.
+  - **`GET /doctor/${globalData.user_id}/predictions` (HTTP `OK`)**: Fornece uma lista com todos as predições realizadas pelos pacientes associados ao médico autenticado.
 - **Lógicas Condicionais Dinâmicas do HTML**:
   - **Nenhuma**
 
@@ -131,8 +131,8 @@
 - **Endpoints Utilizados**:
   - **`GET /patients/${this.$route.params.id}/${globalData.user_role}` (HTTP `OK`)**: Exibe detalhes de um paciente específico.
   - **`POST /doctor-patient` (HTTP ``)**: Permite o médico requisitar uma associação a um paciente, para poder acompanhar seu histórico de predições e acompanhar seu quadro médico.
-  - **`PUT /patients/{patientId}` (HTTP ``)**: Atualiza os dados do paciente pelo médico consentido que o acompanha.
-  - **`GET /doctor/${globalData.user_id}/patient/${this.$router.params.id}/predictions` (HTTP ``)**: Obtém o histórico de predições do paciente acompanhado pelo médico autenticado e que recebeu consentimento para tal. 
+  - **`PUT /patients/{patientId}` (HTTP `OK`)**: Atualiza os dados do paciente pelo médico consentido que o acompanha.
+  - **`GET /doctor/${globalData.user_id}/patient/${this.$route.params.id}/predictions` (HTTP `OK`)**: Obtém o histórico de predições do paciente acompanhado pelo médico autenticado e que recebeu consentimento para tal. 
 - **Lógicas Condicionais Dinâmicas do HTML**:
   - **` {{ !editPatient ? `<span>` : `<input type="text" @placeholder="${patient.name}" v-model="${updateValues.name}">`}}`**: lógica para transformar o elemento HTML de forma dinâmica, caso o usuário médico queira editar informações de seu paciente.
 
@@ -145,7 +145,7 @@
 - **Justificativa**: Atende ao direito de portabilidade de dados conforme LGPD.
 - **Endpoints Utilizados**:
   - **`GET /user/export` (HTTP `OK`)**: Exporta dados do usuário autenticado.
-  - **`GET /patient/export` (HTTP `ERROR`)**: Exporta dados do paciente autenticado.
+  - **`GET /patient/export` (HTTP `OK`)**: Exporta dados do paciente autenticado.
 - **Lógicas Condicionais Dinâmicas do HTML**:
   - **`this.gd.user_role === 'paciente'`**: Condicional para aparecer a `<section>` de classe `checkbox-section`.
   - **`v-if="this.gd.user_role === 'paciente' ? 
@@ -160,7 +160,7 @@
 - **Objetivo**: Permitir que médicos e administradores registrem novos pacientes no sistema.
 - **Justificativa**: Atende à necessidade de registro de pacientes para futuras predições e gestão de dados clínicos.
 - **Endpoints Utilizados**:
-  - **`POST /register_patient` (HTTP ``)**: Cria um novo registro de paciente.
+  - **`POST /register_patient` (HTTP `OK`)**: Cria um novo registro de paciente.
 - **Lógicas Condicionais Dinâmicas do HTML**:
   - **Nenhuma**
 
@@ -201,7 +201,7 @@
 - **`PUT /user/me` (HTTP `OK`)**: Atualiza os dados pessoais do usuário autenticado.
   - **`GET /patients/${globalData.user_id}/paciente` (HTTP `OK`)**: Recebe os dados de histórico de paciente do usuário autenticado.
   - **`GET /patient/doctors` (HTTP `OK`)**: Lista os médicos associados ao paciente autenticado.
-  - **`GET /doctor/${globalData.user_id}/patients` (HTTP ``)**: Listar todos os pacientes associados ao médico autenticado.
+  - **`GET /doctor/${globalData.user_id}/patients` (HTTP `OK`)**: Listar todos os pacientes associados ao médico autenticado.
 - **Lógicas Condicionais Dinâmicas do HTML**:
   - **` <section class="profile-section" v-if="patient && this.gd.user_role === 'paciente'">
 `**: Caso o usuário autenticado seja um paciente, essa seção da página que mostra os dados de perfil do paciente é renderizado.

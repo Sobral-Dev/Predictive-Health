@@ -48,10 +48,10 @@
             </span>
           </div>       
 
-          <button v-if="this.globalData.user_role === 'medico'" @click="requestAssociation(this.$router.params.id)">Request association with <b>{{ patient.name }}</b></button>
+          <button v-if="this.globalData.user_role === 'medico'" @click="requestAssociation(this.$route.params.id)">Request association with <b>{{ patient.name }}</b></button>
           <button v-if="this.globalData.user_role === 'medico' && !editPatient" @click="editPatient = true">Update Information of <b>{{ patient.name }}</b></button>
 
-          <button v-if="this.globalData.user_role === 'medico' && editPatient && updateValues" @click="updatePatient(this.$router.params.id)">Update</button>
+          <button v-if="this.globalData.user_role === 'medico' && editPatient && updateValues" @click="updatePatient(this.$route.params.id)">Update</button>
 
           <button @click="goBack" class="back-button">Back to Patients List</button>
         </section>
@@ -134,6 +134,7 @@ export default defineComponent({
           },
         });
         this.patient = response.data;
+        this.updateValues = response.data;
       } catch (err) {
         this.error = err.response?.data.error || 'Failed to fetch patient details.';
       }
@@ -179,7 +180,7 @@ export default defineComponent({
       }
 
       try {
-        const response = await axios.get(`http://localhost:5000/doctor/${this.globalData.user_id}/patient/${this.$router.params.id}/predictions`, {
+        const response = await axios.get(`http://localhost:5000/doctor/${this.globalData.user_id}/patient/${this.$route.params.id}/predictions`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`,
           },

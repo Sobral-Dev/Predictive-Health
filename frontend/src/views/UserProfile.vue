@@ -86,9 +86,11 @@
           </form>
         </section>
 
-        <section class="patient-section" v-if="patient.name !== '' && this.globalData.user_role === 'paciente'">
+        <section class="patient-section" v-if="patient && this.globalData.user_role === 'paciente'">
 
-          <h2>Patient Profile</h2>
+          <h1 class="page-title">Patient Profile</h1>
+          
+          <br>
 
           <div class="patient-item">          
             <label><b>Name: </b></label>
@@ -111,12 +113,14 @@
           </div>
         </section>
 
-        <section v-if="doctors.lenght > 0 && (this.globalData.user_role === 'paciente' || this.globalData.user_role === 'medico')" class="doctor-section">
+        <section v-if="doctors.length > 0 && (this.globalData.user_role === 'paciente' || this.globalData.user_role === 'medico')" class="doctor-section">
 
-          <h2>Associate {{ this.globalData.user_role === 'paciente' ? 'Doctors' : 'Patients' }}</h2>
+          <h1 class="page-title">Associate {{ this.globalData.user_role === 'paciente' ? 'Doctors' : 'Patients' }}</h1>
+
+          <br>
 
           <ul v-for="doctor in doctors" :key="doctor.id">
-            <li><b>• {{ this.globalData.user_role === 'paciente' ? 'D' : 'S' }}r(a)</b> {{ doctor.name }}</li>
+            <li><b>{{ this.globalData.user_role === 'paciente' ? 'D' : 'S' }}r(a)</b> {{ doctor.name }}</li>
           </ul>
 
         </section>
@@ -152,17 +156,12 @@ export default defineComponent({
         user_id: localStorage.getItem('gd.user_id'),
         user_role: localStorage.getItem('gd.user_role')
       },
-      patient: {
-        name: '',
-        age: '',
-        medical_conditions: '',
-        created_at: '',
-      },
+      patient: [],
       doctors: []
     };
   },
 
-  OnMounted() {
+  mounted() {
     this.fetchUserProfile();
     this.fetchPatientProfile();
     this.fetchPatientDoctors();
@@ -215,7 +214,7 @@ export default defineComponent({
               Authorization: `Bearer ${localStorage.getItem('token')}`,
             },
           });
-          this.user = response.data;
+          this.patient = response.data;
         } catch (err) {
           this.error = err.response?.data.error || 'Failed to fetch patient profile.';
         }

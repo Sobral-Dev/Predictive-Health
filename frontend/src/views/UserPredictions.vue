@@ -8,7 +8,7 @@
           <thead>
             <tr>
               <th>Type</th>
-              <th>Result</th>
+              <th>Risk</th>
               <th>Probability</th>
               <th>Date</th>
             </tr>
@@ -16,8 +16,8 @@
           <tbody>
             <tr v-for="prediction in predictions" :key="prediction._id">
               <td>{{ prediction.prediction_type }}</td>
-              <td>{{ prediction.result }}</td>
-              <td>{{ prediction.probability }}</td>
+              <td><i style="font-style: normal;" :style="prediction.prediction_result.risk === 1 ? 'color: rgba(231, 76, 60, 1);' : 'color: rgba(241, 196, 15, 1);'">{{ prediction.prediction_result.risk === 1 ? 'High' : 'Moderate'  }}</i></td>
+              <td>{{ (prediction.prediction_result.probability * 100).toFixed(0) }}%</td>
               <td>{{ formatDate(prediction.timestamp) }}</td>
             </tr>
           </tbody>
@@ -75,6 +75,8 @@ export default {
 </script>
 
 <style scoped>
+@import '../assets/css/base.css';
+
 .user-predictions {
   padding: 20px;
 }
