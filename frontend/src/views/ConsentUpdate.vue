@@ -2,35 +2,62 @@
   <main>
     <transition name="fade" mode="out-in">
       <div class="consent-update">
-        <h1 class="page-title">Update Consent</h1>
+        <h1 class="page-title" style="padding-bottom: 25px;">Update Consent</h1>
 
         <section class="consent-section">
 
-          <p v-if="$route.name === 'ConsentUpdate'">Current State: 
-            <b :style="this.globalData.user_consent ? 'color: blue;' : 'color: red;' ">
-            {{ this.globalData.user_consent ? 'Given' : 'Revoked' }}
-            </b>
+          <div 
+          class="form-group" 
+          v-for="term in terms" :key="term.id" 
+          style="padding: 15px; background-color: darkslategrey; border-radius: 10px; margin: 20px"
+          >
+          
+          <label :for="'consent-status-' + term.id">{{ term.name }}</label>
+          
+          <h5>Status: 
+            <b :style="term.status === true ? 'color: green' : term.status === false ? 'color: red' : 'color: gray'">
+              {{ term.status === true ? 'Given' : term.status === false ? 'Revoked' : 'Pending' }}
+            </b> - 
+            (<b :style="term.mandatory === true ? 'color: blue' : ''">
+              {{ term.mandatory === true ? 'Mandatory' : 'Optional' }}
+            </b>)
+          </h5>
+
+          <p style="font-size: smaller;">• {{ term.term_description }}</p>
+
+          <h6 v-if="term.version > 1"
+              style="font-size: 12pt; padding-top: 10px; cursor: pointer; display: flex; align-items: center;"
+              @click="showDescription[term.id] = !showDescription[term.id]"
+          >
+            <span style="margin-right: 5px; font-size: 12pt;">
+              {{ !showDescription[term.id] ? '▶' : '▼'}} <!-- Ícone de dropdown -->
+            </span> 
+            <b>New Version (v{{ term.version }})</b>
+            
+          </h6>
+
+          <p v-if="term.version > 1 && showDescription[term.id]" style="font-size: 14pt; padding-left: 15px;">
+            • {{ term.version_description }}
           </p>
 
-          <p v-else class="initial-consent">
-            We respect your privacy, so we need your consent for your data to be used to make health predictions. <br> 
-            <b>Don't worry, you can change your consent status at any time and deleting your account will automatically anonymize your personal information.</b>
-          </p> 
+          <select 
+            :id="'consent-status-' + term.id" 
+            v-model="selectedConsents[term.id]" 
+            class="form-control" 
+            style="width: 80%;"
+            required
+          >
+            <option :value="null"></option>
+            <option v-if="term.status !== true" :value="true">Given</option>
+            <option v-if="term.status !== false" :value="false">Revoked</option>
+          </select>
+        </div>
 
-          <form @submit.prevent="updateConsent">
-            <div class="form-group">
-              <label for="consent-status">Switch to:</label>
-              <select id="consent-status" v-model="consentStatus" class="form-control" required>
-                <option value="null" disabled>Choose one...</option>
-                <option value="true">Given</option>
-                <option value="false">Revoked</option>
-              </select>
-            </div>
+        <button @click="updateConsent()" class="submit-button">Update Consent</button>
 
-            <button type="submit" class="submit-button">Update Consent</button>
-          </form>
-
-          <p v-if="message" class="message">{{ message }}</p>
+          <p v-if="message" class="message">
+            {{ message }} <br> 
+          </p>
           <p v-if="error && error !== 'No Patient'" class="error">{{ error }}</p>
         </section>
       </div>
@@ -42,29 +69,22 @@
 import { defineComponent, watch, ComponentPublicInstance } from 'vue';
 import axios from 'axios';
 import { useRouter, RouteLocationNormalized, NavigationGuardNext} from 'vue-router';
+import Swal from 'sweetalert2';
 
 export default defineComponent({
   name: 'ConsentUpdate',
   data() {
     return {
-      consentStatus: null,
       message: '',
       error: '',
       globalData: {
         user_consent: localStorage.getItem('gd.user_consent'),
         user_role: localStorage.getItem('gd.user_role')
       },
+      terms: [],
+      selectedConsents: {},
+      showDescription: {},
     };
-  },
-
-  created() {
-    watch(
-      () => this.globalData.user_consent,
-      (newConsent) => {
-        this.globalData.user_consent = newConsent;
-        localStorage.setItem('gd.user_consent', this.globalData.user_consent);
-      }
-    );
   },
 
   setup() {
@@ -74,47 +94,106 @@ export default defineComponent({
 
   mounted() {
     this.getConsentStatus();
+    window.addEventListener("force-consent-refresh", this.getConsentStatus);
+  },
+
+  beforeUnmount() {
+    window.removeEventListener("force-consent-refresh", this.getConsentStatus);
   },
 
   methods: {
-    
-    async updateConsent() {
 
-      if (this.$route.name !== 'ConsentUpdate') {
-        
-        return this.initialConsent();
-      
-      } else {
-
-        try {
-          const response = await axios.post(
-            `http://localhost:5000/update-consent`,
-            {
-              consent_status: this.consentStatus === 'true',
-            },
-            {
-              headers: {
-                Authorization: `Bearer ${localStorage.getItem('token')}`,
-              },
-            }
-          );
-          this.globalData.user_consent = this.consentStatus === 'true';
-          localStorage.setItem('gd.user_consent', this.globalData.user_consent);
-          this.getConsentStatus();
-          this.message = response.data.message || 'Consent updated successfully.';
-          this.error = '';
-        } catch (err) {
-          this.error = err.response?.data.error || 'Failed to update consent.';
-          this.message = '';
-        }
-
-      };
-
+    setMessage(msg: string) {
+      this.message = msg;
+      setTimeout(() => {
+        this.message = ""; 
+      }, 5000);
     },
 
-    async getConsentStatus() {
+    setError(err: string) {
+      this.error = err;
+      setTimeout(() => {
+        this.error = ""; 
+      }, 5000);
+    },
+    
+    async updateConsent() {
+     
+      const updatedConsents = this.terms
+          .filter(term => this.selectedConsents[term.id] !== null) 
+          .map(term => ({
+              term_id: term.id,
+              consent_status: this.selectedConsents[term.id] === true || this.selectedConsents[term.id] === false 
+                              ? this.selectedConsents[term.id] : null,
+              version: term.version,
+              mandatory: term.mandatory
+          }));
 
-      if (this.$route.name === 'ConsentUpdate') {
+      if (updatedConsents.length === 0) {
+          this.setMessage("No changes made.");
+          return;
+      }
+
+      // Verifica se algum termo obrigatório está sendo revogado
+      const mandatoryRevoked = updatedConsents.some((consent) => consent.mandatory && consent.consent_status === false);
+
+      if (mandatoryRevoked) {
+        Swal.fire({
+          title: "Are you sure?",
+          text: "Revoking a mandatory consent will prevent you from using the system.",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#d33",
+          cancelButtonColor: "#3085d6",
+          confirmButtonText: "Yes, revoke it",
+          cancelButtonText: "Cancel",
+          reverseButtons: true,
+          allowOutsideClick: false,
+        }).then((result) => {
+          if (!result.isConfirmed) {
+            console.log("Revocation cancelled. Consent update aborted.");
+            return; 
+          }
+
+          // Se o usuário confirmou, prossegue com a requisição
+          this.sendConsentUpdate(updatedConsents);
+        });
+
+        return; // Impede que o código continue enquanto o Swal não for resolvido
+      }
+
+      // Se nenhum termo obrigatório foi revogado, envia a atualização normalmente
+      this.sendConsentUpdate(updatedConsents);
+    
+    },
+
+    async sendConsentUpdate(updatedConsents: any) {
+
+        try {
+            const response = await axios.post(
+                `http://localhost:5000/update-consent`,
+                { consents: updatedConsents },
+                {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem('token')}`,
+                    },
+                }
+            );
+
+            console.log("Enviando request para `http://localhost:5000/update-consent`")
+
+            this.setMessage(response.data.message);
+            this.error = '';
+
+            this.getConsentStatus();
+
+        } catch (err) {
+            this.setError(err.response?.data.error || `Failed to update consent ${err}`);
+            this.message = '';
+        }
+    },
+      
+    async getConsentStatus() {
         
         try {
           const response = await axios.get(
@@ -126,37 +205,12 @@ export default defineComponent({
             }
           );
 
-          this.current_consent = response.data.current_consent;
+          this.terms = response.data.consents;
 
         } catch (err) {
-          this.error = 'No Patient';
+          this.setError(`Failed to get user consent status: ${err}`);
         }
 
-      };
-    },
-
-    async initialConsent() {
-        try {
-          const response = await axios.post(
-            `http://localhost:5000/consent-initial`,
-            {
-              consent_status: this.consentStatus === 'true',
-            },
-            {
-              headers: {
-                Authorization: `Bearer ${localStorage.getItem('token')}`,
-              },
-            }
-          );
-          this.message = response.data.message || 'Consent updated successfully.';
-          this.error = '';
-          this.globalData.user_consent = this.consentStatus === 'true';
-          localStorage.setItem('gd.user_consent', this.globalData.user_consent);
-          this.router.push(`/consent-update/${localStorage.getItem('gd.user_id')}`)
-        } catch (err) {
-          this.error = err.response?.data.error || `Failed to update consent: ${err}`;
-          this.message = '';
-        }
     },
 
     beforeRouteEnter(

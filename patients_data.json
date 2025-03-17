@@ -1,0 +1,293 @@
+[
+    {
+        "name": "David Cortez",
+        "medical_conditions": [
+            "Diabetes Tipo 2"
+        ],
+        "created_at": "2025-03-12T14:25:18.041651",
+        "cpf_encrypted": "gAAAAABn0ZS8_MD2AtfsYRz3MrRFwoj_oYolNVEUtUN8MT-ElZpjRJcJ5nHnqOrGwtjbdkBiETV1awfepzG9O4dvQhRfoCFoWw==",
+        "birth_date": "1996-03-19T11:25:18.041651"
+    },
+    {
+        "name": "Daniel Hogan",
+        "medical_conditions": [
+            "Hipertensão",
+            "AVC"
+        ],
+        "created_at": "2025-03-12T14:25:18.041651",
+        "cpf_encrypted": "gAAAAABn0ZS8UKHMXMyEW7cjxAEW5KInJAHwuPK0pvef6diKe5hJb2ujSVPf8__7hKj7scbtyjNwa2eTayRAMrD4MwI9dBZ2Cg==",
+        "birth_date": "1969-03-26T11:25:18.041651"
+    },
+    {
+        "name": "Tanner Powell",
+        "medical_conditions": [
+            "Diabetes Tipo 2",
+            "Hipertensão"
+        ],
+        "created_at": "2025-03-12T14:25:18.041651",
+        "cpf_encrypted": "gAAAAABn0ZS8qOOKhyWHtn1pqKX5KqpXo7ZEsDowRalugKtQXKBGeDS9j6U6f0Y8V1gLvnKMUSpZZPP_7GwqluDbnM0klg5R9Q==",
+        "birth_date": "2005-03-17T11:25:18.041651"
+    },
+    {
+        "name": "Joshua Clarke",
+        "medical_conditions": [
+            "Diabetes Tipo 2"
+        ],
+        "created_at": "2025-03-12T14:25:18.041651",
+        "cpf_encrypted": "gAAAAABn0ZS9Wwaer1ZRx9efd7UBr7muUMMK860iknFNvsHp31sEzKscoBcjEdk0evPyE5rYcQaf8P4Bvoolf--C3FXXlDdZ5w==",
+        "birth_date": "1993-03-20T11:25:18.041651"
+    },
+    {
+        "name": "Jody Harmon",
+        "medical_conditions": [
+            "Hipertensão"
+        ],
+        "created_at": "2025-03-12T14:25:18.041651",
+        "cpf_encrypted": "gAAAAABn0ZS9YYveJe00b91mloUFXCtjcZDECnSNxmPYukLzihwJalhVPXLLx4ZzsTmMP9Xg4JqvBUytehyfVrY6dXf1H3Spew==",
+        "birth_date": "1969-03-26T11:25:18.041651"
+    },
+    {
+        "name": "Dawn Roth",
+        "medical_conditions": [
+            "Hipertensão",
+            "AVC"
+        ],
+        "created_at": "2025-03-12T14:25:18.041651",
+        "cpf_encrypted": "gAAAAABn0ZS93hNn16Ya6BF_LVvG7licvUhuNI82PXSY5nv5c6J5TbdB8N9tKgHF5dMB_Am7i1dm8ArqlocQe6nv7bYvhSNUJg==",
+        "birth_date": "1982-03-23T11:25:18.041651"
+    },
+    {
+        "name": "David Lane",
+        "medical_conditions": [
+            "Diabetes Tipo 1",
+            "AVC"
+        ],
+        "created_at": "2025-03-12T14:25:18.041651",
+        "cpf_encrypted": "gAAAAABn0ZS9X0ThZ7P98xbzlkv7RsTbCFATXlZMWGmznvOY5bcghLOO54kaq-28Y2ozQ5SSX6Mnkh8bAHXKoCnXoaED72yCOA==",
+        "birth_date": "1980-03-23T11:25:18.041651"
+    },
+    {
+        "name": "Stephanie Bowen",
+        "medical_conditions": [
+            "Diabetes Tipo 1",
+            "AVC"
+        ],
+        "created_at": "2025-03-12T14:25:18.041651",
+        "cpf_encrypted": "gAAAAABn0ZS-XMyKGdtofe0_agJ0UJNHGzNLXt27sCGAl_R9E1imAbjfqbiswi4Prqqwg8WbrFHYmmUZvYytYTDlhJZst-9wag==",
+        "birth_date": "1939-04-03T11:25:18.041651"
+    },
+    {
+        "name": "James Gomez",
+        "medical_conditions": [
+            "Diabetes Tipo 1",
+            "Hipertensão",
+            "AVC"
+        ],
+        "created_at": "2025-03-12T14:25:18.041651",
+        "cpf_encrypted": "gAAAAABn0ZS-SSxu5qne10fkZKfLwc5brmYybbFExIlPzXYGfy2AdD6QHvWhYASGP0SNkoeoEOFpT9dcHVV60fXEH5w6GsSoRg==",
+        "birth_date": "1963-03-28T11:25:18.041651"
+    },
+    {
+        "name": "Laurie Smith",
+        "medical_conditions": [
+            "Diabetes Tipo 2"
+        ],
+        "created_at": "2025-03-12T14:25:18.041651",
+        "cpf_encrypted": "gAAAAABn0ZS-hMWoOdLx0--TcEyATqKj2sqnjlWB3YeX1AVu33VfaYqObaio_uVRcjJXLXfsDUdENN_gRMpNfhufbGJa73Q4cA==",
+        "birth_date": "1947-04-01T11:25:18.041651"
+    },
+    {
+        "name": "Bailey Mitchell",
+        "medical_conditions": [
+            "Hipertensão"
+        ],
+        "created_at": "2025-03-12T14:25:18.041651",
+        "cpf_encrypted": "gAAAAABn0ZS-3UuxO50oaATx9wFUZPDG3KdMl3hu44FCzpn7rLach_YYeiZyMiq-WyEPe9Y1pH73W_3mMmRZjPRojWRGT0yeMQ==",
+        "birth_date": "1968-03-26T11:25:18.041651"
+    },
+    {
+        "name": "Jacob Frazier",
+        "medical_conditions": [
+            "Diabetes Tipo 1"
+        ],
+        "created_at": "2025-03-12T14:25:18.041651",
+        "cpf_encrypted": "gAAAAABn0ZS_WZwlj286xhPIx5RFF5_9n8Rb576Z-x7LhS45BIYw5IrQT1Oand_3vDIMAw4L7oXcj8NCno1adr9xD5YIV2a31w==",
+        "birth_date": "2002-03-18T11:25:18.041651"
+    },
+    {
+        "name": "Gary Klein",
+        "medical_conditions": [
+            "Diabetes Tipo 1"
+        ],
+        "created_at": "2025-03-12T14:25:18.041651",
+        "cpf_encrypted": "gAAAAABn0ZS_rwtCzQXsY4oBquZIXSEHpIKuwJ3o3xx_K4sIq33b0MovG4xxB-sFETnRe4H6ZtlWjGGYT5QIDZDKYsqx1B7kWQ==",
+        "birth_date": "1959-03-29T11:25:18.041651"
+    },
+    {
+        "name": "Denise Ruiz",
+        "medical_conditions": [
+            "Diabetes Tipo 2"
+        ],
+        "created_at": "2025-03-12T14:25:18.041651",
+        "cpf_encrypted": "gAAAAABn0ZS_38IHFGMblDMrMPDSziHYXvnSUv77pvK4AhK7epXM2U09g_MvscHL4UcAhFWdRIx6euctQXChzR5MnSnjYfmZog==",
+        "birth_date": "1982-03-23T11:25:18.041651"
+    },
+    {
+        "name": "Maria Berg",
+        "medical_conditions": [
+            "Diabetes Tipo 1"
+        ],
+        "created_at": "2025-03-12T14:25:18.041651",
+        "cpf_encrypted": "gAAAAABn0ZS_Stn9F7sLiJCJuFo0UfDFB7B3Fj2EtVo17tSkJAG-1DlccKoYAfL72MJ12shseA7OPzqlPoOq_-g0fbIi2wtVLg==",
+        "birth_date": "1961-03-28T11:25:18.041651"
+    },
+    {
+        "name": "Suzanne Griffin",
+        "medical_conditions": [
+            "Diabetes Tipo 1",
+            "Hipertensão",
+            "AVC"
+        ],
+        "created_at": "2025-03-12T14:25:18.041651",
+        "cpf_encrypted": "gAAAAABn0ZTApTvolH_mkcImmKZ7bnrX31BQpBaZ48hYZ7R0bAk2N89UMz4v088CUDg2q7ycaP6X2OyHUB1GDcLIo3XPuHXB1g==",
+        "birth_date": "1943-04-02T11:25:18.041651"
+    },
+    {
+        "name": "Patricia Brown",
+        "medical_conditions": [
+            "Diabetes Tipo 2",
+            "Hipertensão"
+        ],
+        "created_at": "2025-03-12T14:25:18.041651",
+        "cpf_encrypted": "gAAAAABn0ZTA__hZDo_81c55o2UJQoUTSFT3w0AgbKal6YBCprUNtl4EljLMWmptKWsZXgWqgxeCBsIxTBUj6Yc9lCZ4xU89tA==",
+        "birth_date": "1991-03-21T11:25:18.041651"
+    },
+    {
+        "name": "Alexis Winters",
+        "medical_conditions": [
+            "Hipertensão"
+        ],
+        "created_at": "2025-03-12T14:25:18.041651",
+        "cpf_encrypted": "gAAAAABn0ZTAdjKISik7-o-NyIa5t3_K481bIhFeKRCgjoZGwIL3ejc2OGsXmve92pGRgCeFBDlJnkmx2Kd4BzuGZIqpTR_fJg==",
+        "birth_date": "1964-03-27T11:25:18.041651"
+    },
+    {
+        "name": "Derrick Burke",
+        "medical_conditions": [
+            "Hipertensão",
+            "AVC"
+        ],
+        "created_at": "2025-03-12T14:25:18.051585",
+        "cpf_encrypted": "gAAAAABn0ZTA7-sP9cbQfnAVLBH4rMvWSVotMTzEBBNBVSvY4cjILOWqwghpSE-AGqLypbUzQVaOsjiXcAzgomeriT90vyYh3Q==",
+        "birth_date": "1958-03-29T11:25:18.041651"
+    },
+    {
+        "name": "Karen Scott",
+        "medical_conditions": [
+            "Diabetes Tipo 2",
+            "Hipertensão"
+        ],
+        "created_at": "2025-03-12T14:25:18.051585",
+        "cpf_encrypted": "gAAAAABn0ZTBcVfswBIIpRTifUpUkLBLusw41MOa6YRVjPWiCsy0JOveaih1O1JobzlwGMOngvmi17A6CtwCNIxGHOY1AWAlQA==",
+        "birth_date": "1946-04-01T11:25:18.041651"
+    },
+    {
+        "name": "Aaron Jacobs",
+        "medical_conditions": [
+            "Diabetes Tipo 2"
+        ],
+        "created_at": "2025-03-12T14:25:18.051585",
+        "cpf_encrypted": "gAAAAABn0ZTBheEWT5TJZBNPgvZDWaWe7FBA4c_-iFYJqxsIYJ1PRhreco4MsoPKOW3rw0rHjPO832RRe834s3Xcw7SFHsQfuw==",
+        "birth_date": "1950-03-31T11:25:18.041651"
+    },
+    {
+        "name": "Angela Villa",
+        "medical_conditions": [
+            "Diabetes Tipo 1",
+            "Hipertensão",
+            "AVC"
+        ],
+        "created_at": "2025-03-12T14:25:18.051585",
+        "cpf_encrypted": "gAAAAABn0ZTBO6C0sM2Gl_TuEWOLqpibgN_SFi61uq5Yxeq59NONzSyjBNmTVCdbNORMauOkVSPNTKJdG8x1OAB1Gct2lOdrSA==",
+        "birth_date": "1943-04-02T11:25:18.041651"
+    },
+    {
+        "name": "Kaitlyn Montes",
+        "medical_conditions": [
+            "Diabetes Tipo 1",
+            "AVC"
+        ],
+        "created_at": "2025-03-12T14:25:18.051585",
+        "cpf_encrypted": "gAAAAABn0ZTCjnSHZlSvX_XMVLilDRY_2lrIm_AzrxVyP64xjXYZbMqjoCB0K0-dmbv0pSpCMKHvapm1WBIVYTrRTUXR3f5isQ==",
+        "birth_date": "1962-03-28T11:25:18.041651"
+    },
+    {
+        "name": "Anita Garcia",
+        "medical_conditions": [
+            "Diabetes Tipo 1",
+            "Hipertensão",
+            "AVC"
+        ],
+        "created_at": "2025-03-12T14:25:18.051585",
+        "cpf_encrypted": "gAAAAABn0ZTC-bd6oKhmvG0csQMS3k-CgK5wzpOsjseR3FRudZ1DfGvJXU5xHgTO3SewwVSEQoJcNKFppMgAw_W1wR5Q9VGc_Q==",
+        "birth_date": "1943-04-02T11:25:18.041651"
+    },
+    {
+        "name": "Courtney Fox",
+        "medical_conditions": [
+            "AVC"
+        ],
+        "created_at": "2025-03-12T14:25:18.051585",
+        "cpf_encrypted": "gAAAAABn0ZTCJv5gj50-o1UJ8Gtk8MqAi32bG2DzeNYrnn6qeeYZKyTMuq7gqJXiHj8tVpm86qR-Nny2IAgNPA8pf4ArvQOzpg==",
+        "birth_date": "1961-03-28T11:25:18.041651"
+    },
+    {
+        "name": "Victoria Ramirez",
+        "medical_conditions": [
+            "Diabetes Tipo 1",
+            "Hipertensão",
+            "AVC"
+        ],
+        "created_at": "2025-03-12T14:25:18.051585",
+        "cpf_encrypted": "gAAAAABn0ZTCFbEFYC8gkH5gPM9NVUe2uIzGGHh5L-FRuqDIV5w5KdLDiDt8Ih5jf7UCBFfMU3m6UbaiFrLXq53GHzmWCwGhfg==",
+        "birth_date": "1966-03-27T11:25:18.041651"
+    },
+    {
+        "name": "Grant Smith",
+        "medical_conditions": [
+            "Hipertensão",
+            "AVC"
+        ],
+        "created_at": "2025-03-12T14:25:18.051585",
+        "cpf_encrypted": "gAAAAABn0ZTD9_cM4Qt2aj03V9_KjY9ZjOBfq0Wz_XOdEJ5YVm_aj_cvt8OTF44j8sCg148Tst_6x0OeW8A8lsKHyuurLEo-pA==",
+        "birth_date": "1946-04-01T11:25:18.041651"
+    },
+    {
+        "name": "Denise Perez",
+        "medical_conditions": [
+            "Diabetes Tipo 1"
+        ],
+        "created_at": "2025-03-12T14:25:18.051585",
+        "cpf_encrypted": "gAAAAABn0ZTDqAB-3YP2gfzYUaMGEt3Fmxsm-6AH3YxdRO7dL85PDCEC-T9AVTsJ_wPU6Mf364KqASLQeQCLN_xBddVFogLdyw==",
+        "birth_date": "1979-03-24T11:25:18.041651"
+    },
+    {
+        "name": "Susan Marquez",
+        "medical_conditions": [
+            "Hipertensão"
+        ],
+        "created_at": "2025-03-12T14:25:18.051585",
+        "cpf_encrypted": "gAAAAABn0ZTDs8hKYiCFJNJBao_MpQlOSCzFZ6eAgTcgoCvaA-1GATztFRbq1fHWHgNzl0Vx_Kj5HNlfcCvPcOXOzXetd5ET_A==",
+        "birth_date": "1960-03-28T11:25:18.041651"
+    },
+    {
+        "name": "David Horne",
+        "medical_conditions": [
+            "Hipertensão",
+            "AVC"
+        ],
+        "created_at": "2025-03-12T14:25:18.051585",
+        "cpf_encrypted": "gAAAAABn0ZTDA7WqEHN7AR-Vumn8VOX-EbcFOliEiW3yJnDLOP-QCo7lXowEWGJ_CXoFHVTYTFF3muYHdfVxFv4H6leroDnfhA==",
+        "birth_date": "1984-03-22T11:25:18.041651"
+    }
+]

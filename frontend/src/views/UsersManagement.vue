@@ -9,33 +9,20 @@
           <table class="users-table">
             <thead>
               <tr>
-                <th>ID</th>
                 <th>Name</th>
                 <th>Email</th>
                 <th>Role</th>
-                <th>Consent Status</th>
                 <th>Created At</th>
                 <th>Actions</th>
               </tr>
             </thead>
             <tbody>
-              <tr v-for="user in users" :key="user.id">
-                <td>{{ user.id }}</td>
+              <tr v-for="user in paginated" :key="user.id" :title="`id: ${user.id}`">
                 <td>{{ user.name }}</td>
                 <td>{{ user.email }}</td>
                 <td>{{ user.role }}</td>
+                <td>{{ new Date(user.created_at).toLocaleString("pt-BR") }}</td>
                 <td>
-                  {{
-                    user.consent_status === true
-                      ? 'Given'
-                      : user.consent_status === false
-                      ? 'Revoked'
-                      : "Hasn't got a patient history yet"
-                  }}
-                </td>
-                <td>{{ user.created_at }}</td>
-                <td>
-                  <button @click="editUser(user)" class="action-button">Edit</button>
                   <button @click="deleteUser(user.id)" class="action-button">Delete</button>
                 </td>
               </tr>
@@ -43,44 +30,11 @@
           </table>
         </section>
 
-        <section v-if="isEditing" class="edit-user-section">
-          <h2>Edit User</h2>
-          <form @submit.prevent="updateUser">
-            <div class="form-group">
-              <label for="edit-name">Name</label>
-              <input 
-                type="text" 
-                id="edit-name" 
-                v-model="selectedUser.name" 
-                required 
-                class="form-control"
-              />
-            </div>
-
-            <div class="form-group">
-              <label for="edit-email">Email</label>
-              <input 
-                type="email" 
-                id="edit-email" 
-                v-model="selectedUser.email" 
-                required 
-                class="form-control"
-              />
-            </div>
-
-            <div class="form-group">
-              <label for="edit-role">Role</label>
-              <select id="edit-role" v-model="selectedUser.role" class="form-control" required>
-                <option value="admin">Admin</option>
-                <option value="medico">Medico</option>
-                <option value="paciente">Paciente</option>
-              </select>
-            </div>
-
-            <button type="submit" class="submit-button">Save Changes</button>
-            <button @click="cancelEdit" class="cancel-button">Cancel</button>
-          </form>
-        </section>
+        <div class="pagination">
+            <button @click="prevPage" :disabled="currentPage === 1">Anterior</button>
+            <span>Página {{ currentPage }} de {{ totalPages }}</span>
+            <button @click="nextPage" :disabled="currentPage === totalPages">Próxima</button>
+        </div>
 
         <p v-if="error" class="error">{{ error }}</p>
         <p v-if="message" class="message">{{ message }}</p>
@@ -90,10 +44,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, watch, ComponentPublicInstance } from 'vue';
+import { defineComponent, ComponentPublicInstance } from 'vue';
 import axios from 'axios';
 import { RouteLocationNormalized, NavigationGuardNext} from 'vue-router';
-import eventBus from '../eventBus';
 
 export default defineComponent({
   name: 'UsersManagement',
@@ -108,33 +61,19 @@ export default defineComponent({
         consent_status: boolean,
         created_at: Date,
       }>,
-      selectedUser: {
-        id: 0,
-        name: '',
-        email: '',
-        role: '',
-      },
-      isEditing: false,
       error: '',
       message: '',
+      currentPage: 1, 
+      perPage: 10,
     };
   },
 
   mounted() {
     this.fetchUsers();
-
-    watch(
-      () => eventBus.usersUpdated, 
-      (newValue) => {
-        if (newValue) {
-          this.fetchUsers();
-          eventBus.usersUpdated = false;
-        }
-      }
-    );
   },
 
   methods: {
+
     async fetchUsers() {
       try {
         const response = await axios.get('http://localhost:5000/users', {
@@ -142,31 +81,12 @@ export default defineComponent({
             Authorization: `Bearer ${localStorage.getItem('token')}`,
           },
         });
-        this.users = response.data;
+        this.users = response.data.users;
       } catch (err) {
         this.error = err.response?.data.error || 'Failed to fetch users list.';
       }
     },
-    editUser(user: { id: number; name: string; email: string; role: string }) {
-      this.selectedUser = { ...user };
-      this.isEditing = true;
-    },
-    async updateUser() {
-      try {
-        const response = await axios.put(`http://localhost:5000/users/${this.selectedUser.id}`, this.selectedUser, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
-          },
-        });
-        this.message = response.data.message || 'User updated successfully.';
-        this.error = '';
-        this.isEditing = false;
-        eventBus.usersUpdated = true;
-      } catch (err) {
-        this.error = err.response?.data.error || 'Failed to update user.';
-        this.message = '';
-      }
-    },
+   
     async deleteUser(userId: number) {
       try {
         await axios.delete(`http://localhost:5000/users/${userId}`, {
@@ -174,15 +94,35 @@ export default defineComponent({
             Authorization: `Bearer ${localStorage.getItem('token')}`,
           },
         });
-        eventBus.usersUpdated = true;
+        this.fetchUsers();
       } catch (err) {
         this.error = err.response?.data.error || 'Failed to delete user.';
       }
     },
-    cancelEdit() {
-      this.isEditing = false;
-      this.selectedUser = { id: 0, name: '', email: '', role: '' };
+
+    nextPage() {
+      if (this.currentPage < this.totalPages) {
+        this.currentPage++;
+      }
     },
+
+    prevPage() {
+      if (this.currentPage > 1) {
+        this.currentPage--;
+      }
+    },
+
+  },
+
+  computed: {
+    paginated() {
+      const start = (this.currentPage - 1) * this.perPage;
+      const end = start + this.perPage;
+      return this.users.slice(start, end);
+    },
+    totalPages() {
+      return Math.ceil(this.users.length / this.perPage);
+    }
   },
 
   beforeRouteEnter(

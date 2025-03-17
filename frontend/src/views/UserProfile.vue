@@ -4,6 +4,10 @@
       <div class="user-profile">
         <h1 class="page-title">User Profile</h1>
 
+        <br>
+
+        <PopUp v-if="this.globalData.user_role === 'paciente'" style="margin-left: 4px; border-color: rgba(88, 101, 242, 1);" />
+
         <section class="profile-section" v-if="user">
           <div class="profile-item">
             <label><b>Name: </b></label>
@@ -18,32 +22,6 @@
           <div class="profile-item">
             <label><b>Role: </b></label>
             <span>{{ user.role }}</span>
-          </div>
-
-          <div class="profile-item">
-            <label><b>Consent Status: </b></label>
-            <span>
-              {{
-                user.consent_status === true
-                  ? 'Given'
-                  : user.consent_status === false
-                  ? 'Revoked'
-                  : "Hasn't got a patient history yet"
-              }}
-            </span>
-          </div>
-
-          <div class="profile-item">
-            <label><b>With Patient History: </b></label>
-            <span>
-              {{
-                user.has_patient_history === true
-                  ? 'Yes'
-                  : user.has_patient_history === false
-                  ? 'No'
-                  : "Hasn't got a patient history yet"
-              }}
-            </span>
           </div>
 
           <div class="profile-item">
@@ -92,25 +70,16 @@
           
           <br>
 
-          <div class="patient-item">          
-            <label><b>Name: </b></label>
-            <span>{{ patient.name }}</span>
-          </div>
-
           <div class="patient-item">
             <label><b>Age: </b></label>
             <span>{{ patient.age }}</span>
           </div>
 
           <div class="patient-item">
-            <label><b>Role: </b></label>
-            <span>{{ patient.medical_conditions }}</span>
+            <label><b>Medical Conditions: </b></label>
+            <span v-for="(medical_condition, index) in patient.medical_conditions">{{ medical_condition }}{{ index < patient.medical_conditions.length - 1 ? ', ' : '' }}</span>
           </div>
 
-          <div class="patient-item">
-            <label><b>Role: </b></label>
-            <span>{{ patient.created_at }}</span>
-          </div>
         </section>
 
         <section v-if="doctors.length > 0 && (this.globalData.user_role === 'paciente' || this.globalData.user_role === 'medico')" class="doctor-section">
@@ -120,7 +89,7 @@
           <br>
 
           <ul v-for="doctor in doctors" :key="doctor.id">
-            <li><b>{{ this.globalData.user_role === 'paciente' ? 'D' : 'S' }}r(a)</b> {{ doctor.name }}</li>
+            <li><b>{{ this.globalData.user_role === 'paciente' ? 'D' : 'S' }}r(a)</b> {{ this.globalData.user_role === 'paciente' ? doctor.name.split("Dr. ")[1] : doctor.name}}</li>
           </ul>
 
         </section>
@@ -136,6 +105,7 @@
 import { defineComponent, watch, ComponentPublicInstance } from 'vue';
 import axios from 'axios';
 import { RouteLocationNormalized, NavigationGuardNext} from 'vue-router';
+import PopUp from '../components/PopUp.vue';
 
 export default defineComponent({
   name: 'UserProfile',
@@ -165,6 +135,11 @@ export default defineComponent({
     this.fetchUserProfile();
     this.fetchPatientProfile();
     this.fetchPatientDoctors();
+    window.addEventListener("force-fetchPatientDoctors-refresh", this.fetchPatientDoctors);
+  },
+
+  beforeUnmount() {
+    window.removeEventListener("force-fetchPatientDoctors-refresh", this.fetchPatientDoctors);
   },
 
   methods: {
@@ -205,11 +180,11 @@ export default defineComponent({
 
     async fetchPatientProfile() {
 
-      if (this.globalData.user_role !== 'paciente') {
+      if (localStorage.getItem('gd.user_role') !== 'paciente') {
         return this.patient = {};
       } else {
         try {
-          const response = await axios.get(`http://localhost:5000/patients/${this.globalData.user_id}/paciente`, {
+          const response = await axios.get(`http://localhost:5000/patients/${localStorage.getItem('gd.user_id')}/paciente`, {
             headers: {
               Authorization: `Bearer ${localStorage.getItem('token')}`,
             },
@@ -234,7 +209,7 @@ export default defineComponent({
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
               },
             });
-            this.doctors = response.data;
+            this.doctors = response.data.patients_accepted;
           } catch (err) {
             this.error = err.response?.data.error || 'Failed to fetch user associate patients.';
             this.doctors = {};
@@ -267,6 +242,10 @@ export default defineComponent({
       next((vm) => {
         (vm as ComponentPublicInstance & { fetchUserProfile: () => void }).fetchUserProfile();
       });
+  },
+
+  components: {
+    PopUp
   },
 
 });

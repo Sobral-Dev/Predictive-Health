@@ -60,10 +60,9 @@
 - **Objetivo**: Atualizar informações do usuário autenticado.
 - **Justificativa**: Atende ao direito de correção de dados conforme a LGPD, permitindo que usuários atualizem seus dados.
 - **Status de Funcionamento**: `OK`
-- **Roles**: `paciente`, `admin`
+- **Roles**: `paciente`, `medico`, `admin`
 - **Requisições em**:
     - `UserProfile.vue`
-    - `UsersManagement.vue`
     
 ---
 
@@ -273,7 +272,7 @@
 - **Objetivo**: Salvar dados de predições realizadas por usuários no MongoDB.
 - **Justificativa**: Permite que os médicos possam ter um histórico dos resultados obtidos pelos pacientes que acompanha (com o consentimento prévio), o que permite um acompanhamento mais detalhado do quadro clínico do paciente.
 - **Status de Funcionamento**: `OK`
-- **Roles**: `Nenhum`
+- **Roles**: `paciente`
 - **Requisições em**:
     - `HealthPredictions.vue`
     
@@ -294,7 +293,7 @@
 
 - **Objetivo**: Associar um médico a um paciente.
 - **Justificativa**: Permite que um médico possa se associar a um paciente usuário para acompanhá-lo e ter acessos aos seus dados de predições com o consentimento prévio.
-- **Status de Funcionamento**: `Falta Testar`
+- **Status de Funcionamento**: `OK`
 - **Roles**: `medico`
 - **Requisições em**:
     - `PatientDetails.vue`
@@ -354,70 +353,3 @@
 - **Roles**: `admin`
 - **Requisições em**:
     - `AdminPredictions.vue`
-    
----
-
-# Endpoint 33: ****
-
-- **Objetivo**: 
-- **Justificativa**: 
-- **Status de Funcionamento**: `Falta Testar`
-- **Roles**: ``
-- **Requisições em**:
-    - `None`
-    
----
-
-# Endpoint 34: ****
-
-- **Objetivo**: 
-- **Justificativa**: 
-- **Status de Funcionamento**: `Falta Testar`
-- **Roles**: ``
-- **Requisições em**:
-    - `None`
-    
----
-
-# Endpoint 35: ****
-
-- **Objetivo**: 
-- **Justificativa**: 
-- **Status de Funcionamento**: `Falta Testar`
-- **Roles**: ``
-- **Requisições em**:
-    - `None`
-    
----
-
-# Endpoint 36: ****
-
-- **Objetivo**: 
-- **Justificativa**: 
-- **Status de Funcionamento**: `Falta Testar`
-- **Roles**: ``
-- **Requisições em**:
-    - `None`
-    
----
-
-# Endpoint 37: ****
-
-- **Objetivo**: 
-- **Justificativa**: 
-- **Status de Funcionamento**: `Falta Testar`
-- **Roles**: ``
-- **Requisições em**:
-    - `None`
-    
----
-
-# Endpoint 38: ****
-
-- **Objetivo**: 
-- **Justificativa**: 
-- **Status de Funcionamento**: `Falta Testar`
-- **Roles**: ``
-- **Requisições em**:
-    - `None`
-    

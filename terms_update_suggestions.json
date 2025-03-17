@@ -1,0 +1,62 @@
+[
+    {
+        "name": "Data Sharing",
+        "description": "Agora inclui compartilhamento de dados apenas com instituições certificadas, garantindo maior segurança e privacidade."
+    },
+    {
+        "name": "Data Sharing",
+        "description": "Usuários podem revisar e revogar permissões de compartilhamento a qualquer momento diretamente pelo painel de privacidade."
+    },
+    {
+        "name": "Data Sharing",
+        "description": "Os dados compartilhados serão limitados ao estritamente necessário para cada finalidade específica."
+    },
+    {
+        "name": "Marketing Emails",
+        "description": "Emails promocionais agora incluem a opção de personalização de conteúdo com base em preferências do usuário."
+    },
+    {
+        "name": "Marketing Emails",
+        "description": "Os usuários podem optar por receber apenas comunicações essenciais e evitar campanhas promocionais."
+    },
+    {
+        "name": "Marketing Emails",
+        "description": "Emails de marketing agora serão enviados no máximo uma vez por semana, reduzindo o volume de mensagens."
+    },
+    {
+        "name": "Notificações Por Email",
+        "description": "Agora inclui opção de escolher quais tipos de notificações o usuário deseja receber."
+    },
+    {
+        "name": "Notificações Por Email",
+        "description": "Os usuários podem pausar notificações a qualquer momento e definir horários preferenciais para recebê-las."
+    },
+    {
+        "name": "Notificações Por Email",
+        "description": "As notificações incluirão um link para gerenciar rapidamente as preferências de comunicação."
+    },
+    {
+        "name": "Consentimento para Armazenamento de Dados de Saúde",
+        "description": "Os dados armazenados terão maior transparência, permitindo que os usuários visualizem registros e histórico de acessos."
+    },
+    {
+        "name": "Consentimento para Armazenamento de Dados de Saúde",
+        "description": "Agora inclui proteção adicional com criptografia reforçada para aumentar a segurança dos dados."
+    },
+    {
+        "name": "Consentimento para Armazenamento de Dados de Saúde",
+        "description": "O usuário poderá definir um período de retenção dos dados antes da exclusão automática."
+    },
+    {
+        "name": "Uso de Dados para Treinamento de Inteligência Artificial",
+        "description": "Os usuários agora poderão visualizar relatórios sobre como seus dados anonimizados estão contribuindo para melhorias nos modelos preditivos."
+    },
+    {
+        "name": "Uso de Dados para Treinamento de Inteligência Artificial",
+        "description": "Agora há opção de exclusão retroativa dos dados usados para IA caso o usuário revogue o consentimento."
+    },
+    {
+        "name": "Uso de Dados para Treinamento de Inteligência Artificial",
+        "description": "Melhoria na anonimização dos dados para garantir que nenhuma informação pessoal possa ser reidentificada."
+    }
+]

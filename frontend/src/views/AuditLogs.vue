@@ -8,21 +8,25 @@
           <table class="logs-table">
             <thead>
               <tr>
-                <th>ID</th>
                 <th>User ID</th>
                 <th>Action</th>
                 <th>Timestamp</th>
               </tr>
             </thead>
             <tbody>
-              <tr v-for="log in logs" :key="log.id">
-                <td>{{ log.id }}</td>
+              <tr v-for="log in paginatedLogs" :key="log.id">
                 <td>{{ log.user_id }}</td>
                 <td>{{ log.action }}</td>
-                <td>{{ log.timestamp }}</td>
+                <td>{{ new Date(log.timestamp).toLocaleString("pt-BR") }}</td>
               </tr>
             </tbody>
           </table>
+
+          <div class="pagination">
+            <button @click="prevPage" :disabled="currentPage === 1">Anterior</button>
+            <span>Página {{ currentPage }} de {{ totalPages }}</span>
+            <button @click="nextPage" :disabled="currentPage === totalPages">Próxima</button>
+          </div>
         </section> 
       </div>
     </transition>
@@ -38,12 +42,9 @@ export default defineComponent({
   name: 'AuditLogs',
   data() {
     return {
-      logs: [] as Array<{
-        id: number;
-        user_id: number;
-        action: string;
-        timestamp: string;
-      }>,
+      logs: [],
+      currentPage: 1, 
+      logsPerPage: 10,
     };
   },
 
@@ -59,11 +60,35 @@ export default defineComponent({
             Authorization: `Bearer ${localStorage.getItem('token')}`,
           },
         });
-        this.logs = response.data;
+        this.logs = response.data.logs;
       } catch (error) {
         console.error('Failed to fetch audit logs:', error);
       }
     },
+
+    nextPage() {
+      if (this.currentPage < this.totalPages) {
+        this.currentPage++;
+      }
+    },
+
+    prevPage() {
+      if (this.currentPage > 1) {
+        this.currentPage--;
+      }
+    },
+
+  },
+
+  computed: {
+    paginatedLogs() {
+      const start = (this.currentPage - 1) * this.logsPerPage;
+      const end = start + this.logsPerPage;
+      return this.logs.slice(start, end);
+    },
+    totalPages() {
+      return Math.ceil(this.logs.length / this.logsPerPage);
+    }
   },
 
   beforeRouteEnter(

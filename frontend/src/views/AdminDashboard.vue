@@ -93,8 +93,8 @@ export default defineComponent({
           },
         });
 
-        this.totalUsers = usersResponse.data.length;
-        this.totalPatients = patientsResponse.data.length;
+        this.totalUsers = usersResponse.data.users.length;
+        this.totalPatients = patientsResponse.data.patients.length;
       } catch (error) {
         console.error('Failed to fetch dashboard data:', error);
       }

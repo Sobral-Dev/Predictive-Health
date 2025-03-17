@@ -3,10 +3,9 @@
     <transition name="fade" mode="out-in">
       <section class="predictions-section">
         <h2>Patients Predictions History (Anonymized)</h2> <br>
-        <table v-if="localStorage.getItem('gd.user_role') === 'admin'" class="predictions-table">
+        <table v-if="user_role === 'admin'" class="predictions-table">
           <thead>
             <tr>
-              <th>Patient ID</th>
               <th>Type</th>
               <th>Risk</th>
               <th>Probability</th>
@@ -14,15 +13,21 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="prediction in predictions" :key="prediction._id">
-              <td>{{ prediction.user_id }}</td>
+            <tr v-for="prediction in paginated" :key="prediction._id" :title="`id: ${prediction._id}`">
               <td>{{ prediction.prediction_type }}</td>
-              <td>{{ prediction.prediction_result.risk === 0 ? 'Moderate' : 'High' }}</td>
-              <td>{{ prediction.prediction_result.probability }}</td>
-              <td>{{ prediction.timestamp }}</td>
+              <td><i style="font-style: normal;" :style="prediction.prediction_result.risk === 1 ? 'color: rgba(231, 76, 60, 1);' : 'color: rgba(241, 196, 15, 1);'">{{ prediction.prediction_result.risk === 1 ? 'High' : 'Moderate'  }}</i></td>
+              <td>{{ (prediction.prediction_result.probability * 100).toFixed(0) }}%</td>
+              <td>{{ new Date(prediction.timestamp).toLocaleString("pt-BR") }}</td>
             </tr>
           </tbody>
         </table>
+
+        <div class="pagination">
+            <button @click="prevPage" :disabled="currentPage === 1">Anterior</button>
+            <span>Página {{ currentPage }} de {{ totalPages }}</span>
+            <button @click="nextPage" :disabled="currentPage === totalPages">Próxima</button>
+        </div>
+
         <p v-if="error" class="error">{{ error }}</p>
       </section>
     </transition>
@@ -37,6 +42,9 @@ export default {
     return {
       predictions: [],
       error: '',
+      user_role: localStorage.getItem('gd.user_role'),
+      currentPage: 1, 
+      perPage: 10,
     };
   },
   created() {
@@ -53,8 +61,33 @@ export default {
       } catch (err) {
         this.error = `An error occured when trying get predictions: ${err}`;
       }
+    },
+  
+    nextPage() {
+      if (this.currentPage < this.totalPages) {
+        this.currentPage++;
+      }
+    },
+
+    prevPage() {
+      if (this.currentPage > 1) {
+        this.currentPage--;
+      }
+    },
+
+  },
+
+  computed: {
+    paginated() {
+      const start = (this.currentPage - 1) * this.perPage;
+      const end = start + this.perPage;
+      return this.predictions.slice(start, end);
+    },
+    totalPages() {
+      return Math.ceil(this.predictions.length / this.perPage);
     }
-  }
+  },
+
 };
 </script>
 

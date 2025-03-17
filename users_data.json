@@ -1,0 +1,371 @@
+[
+    {
+        "name": "David Cortez",
+        "email": "davidcortez@paciente.com",
+        "password": "$2b$12$dQPumjbLs3duWNihL.uKl.TK4hqlk.Pc0/RRLd5drznrIOLdLCcx2",
+        "role": "paciente",
+        "reset_token": null,
+        "created_at": "2025-03-12T14:05:48.297397",
+        "cpf_encrypted": "gAAAAABn0ZS8_MD2AtfsYRz3MrRFwoj_oYolNVEUtUN8MT-ElZpjRJcJ5nHnqOrGwtjbdkBiETV1awfepzG9O4dvQhRfoCFoWw=="
+    },
+    {
+        "name": "Daniel Hogan",
+        "email": "danielhogan@paciente.com",
+        "password": "$2b$12$.RzOq2KSNCDD8KZROFX6V.dBz.WOPhsGC/poyQtS8/WU3Gd7RrCyy",
+        "role": "paciente",
+        "reset_token": null,
+        "created_at": "2025-03-12T14:05:48.548415",
+        "cpf_encrypted": "gAAAAABn0ZS8UKHMXMyEW7cjxAEW5KInJAHwuPK0pvef6diKe5hJb2ujSVPf8__7hKj7scbtyjNwa2eTayRAMrD4MwI9dBZ2Cg=="
+    },
+    {
+        "name": "Tanner Powell",
+        "email": "tannerpowell@paciente.com",
+        "password": "$2b$12$7itCzIRzGkHVCUu.6TZX4uhyvVb7azHPRYR1qE1/w8CcsOo/fN9wa",
+        "role": "paciente",
+        "reset_token": null,
+        "created_at": "2025-03-12T14:05:48.812917",
+        "cpf_encrypted": "gAAAAABn0ZS8qOOKhyWHtn1pqKX5KqpXo7ZEsDowRalugKtQXKBGeDS9j6U6f0Y8V1gLvnKMUSpZZPP_7GwqluDbnM0klg5R9Q=="
+    },
+    {
+        "name": "Joshua Clarke",
+        "email": "joshuaclarke@paciente.com",
+        "password": "$2b$12$htSCQppv0tqk9Sb8cPi14.pbF7bOVQWySRAC3R6yJFyoYu.geZbuq",
+        "role": "paciente",
+        "reset_token": null,
+        "created_at": "2025-03-12T14:05:49.065544",
+        "cpf_encrypted": "gAAAAABn0ZS9Wwaer1ZRx9efd7UBr7muUMMK860iknFNvsHp31sEzKscoBcjEdk0evPyE5rYcQaf8P4Bvoolf--C3FXXlDdZ5w=="
+    },
+    {
+        "name": "Jody Harmon",
+        "email": "jodyharmon@paciente.com",
+        "password": "$2b$12$UUI6BvUyEbR.flDZo92nbuwpH.BspcyKcvpcqYVFjU2xFsxR/WdL.",
+        "role": "paciente",
+        "reset_token": null,
+        "created_at": "2025-03-12T14:05:49.329836",
+        "cpf_encrypted": "gAAAAABn0ZS9YYveJe00b91mloUFXCtjcZDECnSNxmPYukLzihwJalhVPXLLx4ZzsTmMP9Xg4JqvBUytehyfVrY6dXf1H3Spew=="
+    },
+    {
+        "name": "Dawn Roth",
+        "email": "dawnroth@paciente.com",
+        "password": "$2b$12$GI0Y6mUdWNXizz3xZhGXO.dmbY4UkrSqzvfqmEY88ztsz0cLqQmDC",
+        "role": "paciente",
+        "reset_token": null,
+        "created_at": "2025-03-12T14:05:49.581440",
+        "cpf_encrypted": "gAAAAABn0ZS93hNn16Ya6BF_LVvG7licvUhuNI82PXSY5nv5c6J5TbdB8N9tKgHF5dMB_Am7i1dm8ArqlocQe6nv7bYvhSNUJg=="
+    },
+    {
+        "name": "David Lane",
+        "email": "davidlane@paciente.com",
+        "password": "$2b$12$7MappTXlQcZR4UmbbHNak.kCD4sW32jxQBwCzcL4tNCaawEX3zSta",
+        "role": "paciente",
+        "reset_token": null,
+        "created_at": "2025-03-12T14:05:49.843919",
+        "cpf_encrypted": "gAAAAABn0ZS9X0ThZ7P98xbzlkv7RsTbCFATXlZMWGmznvOY5bcghLOO54kaq-28Y2ozQ5SSX6Mnkh8bAHXKoCnXoaED72yCOA=="
+    },
+    {
+        "name": "Stephanie Bowen",
+        "email": "stephaniebowen@paciente.com",
+        "password": "$2b$12$2Ftz0AzD2LKl8TTftnz2M.70AX1krL78XsQmcwfRvAg5pi2PYtVp6",
+        "role": "paciente",
+        "reset_token": null,
+        "created_at": "2025-03-12T14:05:50.096165",
+        "cpf_encrypted": "gAAAAABn0ZS-XMyKGdtofe0_agJ0UJNHGzNLXt27sCGAl_R9E1imAbjfqbiswi4Prqqwg8WbrFHYmmUZvYytYTDlhJZst-9wag=="
+    },
+    {
+        "name": "James Gomez",
+        "email": "jamesgomez@paciente.com",
+        "password": "$2b$12$eLIjB4MX/cyEB/DYVyyKfe3zNXzCtI/F7ZViFfTo6zkk/wu4xOXbO",
+        "role": "paciente",
+        "reset_token": null,
+        "created_at": "2025-03-12T14:05:50.348041",
+        "cpf_encrypted": "gAAAAABn0ZS-SSxu5qne10fkZKfLwc5brmYybbFExIlPzXYGfy2AdD6QHvWhYASGP0SNkoeoEOFpT9dcHVV60fXEH5w6GsSoRg=="
+    },
+    {
+        "name": "Laurie Smith",
+        "email": "lauriesmith@paciente.com",
+        "password": "$2b$12$tda2Qd2rHQXOn.WhiL.uUOv6fZwosRFot0XSWx1jSJ9FirqxkP1DO",
+        "role": "paciente",
+        "reset_token": null,
+        "created_at": "2025-03-12T14:05:50.612114",
+        "cpf_encrypted": "gAAAAABn0ZS-hMWoOdLx0--TcEyATqKj2sqnjlWB3YeX1AVu33VfaYqObaio_uVRcjJXLXfsDUdENN_gRMpNfhufbGJa73Q4cA=="
+    },
+    {
+        "name": "Bailey Mitchell",
+        "email": "baileymitchell@paciente.com",
+        "password": "$2b$12$9fyo8GyRN2AgZmozy29xQuW63XASHE5VCDI88YXArjC9k/wEeJLBS",
+        "role": "paciente",
+        "reset_token": null,
+        "created_at": "2025-03-12T14:05:50.865317",
+        "cpf_encrypted": "gAAAAABn0ZS-3UuxO50oaATx9wFUZPDG3KdMl3hu44FCzpn7rLach_YYeiZyMiq-WyEPe9Y1pH73W_3mMmRZjPRojWRGT0yeMQ=="
+    },
+    {
+        "name": "Jacob Frazier",
+        "email": "jacobfrazier@paciente.com",
+        "password": "$2b$12$t9d81TNeeR2kU5GDufQ6be.4Ubs.qMlMgi3pMcePkyC2neTtZ7KfK",
+        "role": "paciente",
+        "reset_token": null,
+        "created_at": "2025-03-12T14:05:51.127137",
+        "cpf_encrypted": "gAAAAABn0ZS_WZwlj286xhPIx5RFF5_9n8Rb576Z-x7LhS45BIYw5IrQT1Oand_3vDIMAw4L7oXcj8NCno1adr9xD5YIV2a31w=="
+    },
+    {
+        "name": "Gary Klein",
+        "email": "garyklein@paciente.com",
+        "password": "$2b$12$UoyKCD98NSOKcLy964iXR.Ic.NjVHLl5iaVQHOW/DjZkYpbaDtZeG",
+        "role": "paciente",
+        "reset_token": null,
+        "created_at": "2025-03-12T14:05:51.383793",
+        "cpf_encrypted": "gAAAAABn0ZS_rwtCzQXsY4oBquZIXSEHpIKuwJ3o3xx_K4sIq33b0MovG4xxB-sFETnRe4H6ZtlWjGGYT5QIDZDKYsqx1B7kWQ=="
+    },
+    {
+        "name": "Denise Ruiz",
+        "email": "deniseruiz@paciente.com",
+        "password": "$2b$12$qRl0emGGkE0uOlydcTcUtepVQNgCq.o.HfnAWxTUZRYX9w8L7Ma..",
+        "role": "paciente",
+        "reset_token": null,
+        "created_at": "2025-03-12T14:05:51.645500",
+        "cpf_encrypted": "gAAAAABn0ZS_38IHFGMblDMrMPDSziHYXvnSUv77pvK4AhK7epXM2U09g_MvscHL4UcAhFWdRIx6euctQXChzR5MnSnjYfmZog=="
+    },
+    {
+        "name": "Maria Berg",
+        "email": "mariaberg@paciente.com",
+        "password": "$2b$12$IQJVMvp/RAexwllfPY3lp.Sm.4L3eeJ68s5Lvk.oAx1149o3xNMgG",
+        "role": "paciente",
+        "reset_token": null,
+        "created_at": "2025-03-12T14:05:51.900260",
+        "cpf_encrypted": "gAAAAABn0ZS_Stn9F7sLiJCJuFo0UfDFB7B3Fj2EtVo17tSkJAG-1DlccKoYAfL72MJ12shseA7OPzqlPoOq_-g0fbIi2wtVLg=="
+    },
+    {
+        "name": "Suzanne Griffin",
+        "email": "suzannegriffin@paciente.com",
+        "password": "$2b$12$WA2wYpgqOV/JZzeCBjlwXOly0gr5IKYG2ubKP1SN.6Dkq7ufkeCBG",
+        "role": "paciente",
+        "reset_token": null,
+        "created_at": "2025-03-12T14:05:52.167033",
+        "cpf_encrypted": "gAAAAABn0ZTApTvolH_mkcImmKZ7bnrX31BQpBaZ48hYZ7R0bAk2N89UMz4v088CUDg2q7ycaP6X2OyHUB1GDcLIo3XPuHXB1g=="
+    },
+    {
+        "name": "Patricia Brown",
+        "email": "patriciabrown@paciente.com",
+        "password": "$2b$12$nCg6XRSV.dLhzqFxkN1SF.jkan0.R.rMNOQ6ALyuPAcCbnL4Bs/5G",
+        "role": "paciente",
+        "reset_token": null,
+        "created_at": "2025-03-12T14:05:52.439296",
+        "cpf_encrypted": "gAAAAABn0ZTA__hZDo_81c55o2UJQoUTSFT3w0AgbKal6YBCprUNtl4EljLMWmptKWsZXgWqgxeCBsIxTBUj6Yc9lCZ4xU89tA=="
+    },
+    {
+        "name": "Alexis Winters",
+        "email": "alexiswinters@paciente.com",
+        "password": "$2b$12$.0C2IuILwc7B/yJz87YUw.kTr/ygdwD6M2pM7fAO2KT8eLH0c/gaK",
+        "role": "paciente",
+        "reset_token": null,
+        "created_at": "2025-03-12T14:05:52.693012",
+        "cpf_encrypted": "gAAAAABn0ZTAdjKISik7-o-NyIa5t3_K481bIhFeKRCgjoZGwIL3ejc2OGsXmve92pGRgCeFBDlJnkmx2Kd4BzuGZIqpTR_fJg=="
+    },
+    {
+        "name": "Derrick Burke",
+        "email": "derrickburke@paciente.com",
+        "password": "$2b$12$2dz0pJIgSdQiUSbk3RhsWuGF75nruQAptZNX.ytGQ.lhDoZCjL.GK",
+        "role": "paciente",
+        "reset_token": null,
+        "created_at": "2025-03-12T14:05:52.966301",
+        "cpf_encrypted": "gAAAAABn0ZTA7-sP9cbQfnAVLBH4rMvWSVotMTzEBBNBVSvY4cjILOWqwghpSE-AGqLypbUzQVaOsjiXcAzgomeriT90vyYh3Q=="
+    },
+    {
+        "name": "Karen Scott",
+        "email": "karenscott@paciente.com",
+        "password": "$2b$12$oQPS/Tx1moCB3MGLX34RJ.yWKxFVwnNv36fCnZjhCBp2AxBY0QbSi",
+        "role": "paciente",
+        "reset_token": null,
+        "created_at": "2025-03-12T14:05:53.238447",
+        "cpf_encrypted": "gAAAAABn0ZTBcVfswBIIpRTifUpUkLBLusw41MOa6YRVjPWiCsy0JOveaih1O1JobzlwGMOngvmi17A6CtwCNIxGHOY1AWAlQA=="
+    },
+    {
+        "name": "Aaron Jacobs",
+        "email": "aaronjacobs@paciente.com",
+        "password": "$2b$12$H.5RXVGjNAzXWipRomAF4OGizWzZsxjeGY36tLqpueX.KWcMTIkPy",
+        "role": "paciente",
+        "reset_token": null,
+        "created_at": "2025-03-12T14:05:53.486261",
+        "cpf_encrypted": "gAAAAABn0ZTBheEWT5TJZBNPgvZDWaWe7FBA4c_-iFYJqxsIYJ1PRhreco4MsoPKOW3rw0rHjPO832RRe834s3Xcw7SFHsQfuw=="
+    },
+    {
+        "name": "Angela Villa",
+        "email": "angelavilla@paciente.com",
+        "password": "$2b$12$0wQfL7bynHvECmdfyfFk9Or2ntvxoaxhw59sAdamAAwmoDsjKMB.e",
+        "role": "paciente",
+        "reset_token": null,
+        "created_at": "2025-03-12T14:05:53.741748",
+        "cpf_encrypted": "gAAAAABn0ZTBO6C0sM2Gl_TuEWOLqpibgN_SFi61uq5Yxeq59NONzSyjBNmTVCdbNORMauOkVSPNTKJdG8x1OAB1Gct2lOdrSA=="
+    },
+    {
+        "name": "Kaitlyn Montes",
+        "email": "kaitlynmontes@paciente.com",
+        "password": "$2b$12$HvCHqiUDNPMTQP3mPidNxuK63520gALOszBsO2GF11WwbS9v61gJO",
+        "role": "paciente",
+        "reset_token": null,
+        "created_at": "2025-03-12T14:05:54.016570",
+        "cpf_encrypted": "gAAAAABn0ZTCjnSHZlSvX_XMVLilDRY_2lrIm_AzrxVyP64xjXYZbMqjoCB0K0-dmbv0pSpCMKHvapm1WBIVYTrRTUXR3f5isQ=="
+    },
+    {
+        "name": "Anita Garcia",
+        "email": "anitagarcia@paciente.com",
+        "password": "$2b$12$hLWzHk2woJyj3DYI3cd3E.3ON.eaV0C717344COTY3Gr3aruEQ8SO",
+        "role": "paciente",
+        "reset_token": null,
+        "created_at": "2025-03-12T14:05:54.270637",
+        "cpf_encrypted": "gAAAAABn0ZTC-bd6oKhmvG0csQMS3k-CgK5wzpOsjseR3FRudZ1DfGvJXU5xHgTO3SewwVSEQoJcNKFppMgAw_W1wR5Q9VGc_Q=="
+    },
+    {
+        "name": "Courtney Fox",
+        "email": "courtneyfox@paciente.com",
+        "password": "$2b$12$ElpNdHmeOyl7EXfGbcRHTek92J31tKAqakgZjA8rq3KVTekkN51Ki",
+        "role": "paciente",
+        "reset_token": null,
+        "created_at": "2025-03-12T14:05:54.540235",
+        "cpf_encrypted": "gAAAAABn0ZTCJv5gj50-o1UJ8Gtk8MqAi32bG2DzeNYrnn6qeeYZKyTMuq7gqJXiHj8tVpm86qR-Nny2IAgNPA8pf4ArvQOzpg=="
+    },
+    {
+        "name": "Victoria Ramirez",
+        "email": "victoriaramirez@paciente.com",
+        "password": "$2b$12$Qs64zPpjTS29eEHWlxlVAuEFX733QhGNFTLjj7CoYab0ngmSCgypC",
+        "role": "paciente",
+        "reset_token": null,
+        "created_at": "2025-03-12T14:05:54.795398",
+        "cpf_encrypted": "gAAAAABn0ZTCFbEFYC8gkH5gPM9NVUe2uIzGGHh5L-FRuqDIV5w5KdLDiDt8Ih5jf7UCBFfMU3m6UbaiFrLXq53GHzmWCwGhfg=="
+    },
+    {
+        "name": "Grant Smith",
+        "email": "grantsmith@paciente.com",
+        "password": "$2b$12$ng5O7Pciv6MhCMoDMX7xmuou61zcjfLi4lkg5DpE95pzW0EVriA4G",
+        "role": "paciente",
+        "reset_token": null,
+        "created_at": "2025-03-12T14:05:55.052472",
+        "cpf_encrypted": "gAAAAABn0ZTD9_cM4Qt2aj03V9_KjY9ZjOBfq0Wz_XOdEJ5YVm_aj_cvt8OTF44j8sCg148Tst_6x0OeW8A8lsKHyuurLEo-pA=="
+    },
+    {
+        "name": "Denise Perez",
+        "email": "deniseperez@paciente.com",
+        "password": "$2b$12$D96BdmdlD0WL/bhIDfryBum4GBoCPypknmqYlPS3TVSgsvl1p66N.",
+        "role": "paciente",
+        "reset_token": null,
+        "created_at": "2025-03-12T14:05:55.305714",
+        "cpf_encrypted": "gAAAAABn0ZTDqAB-3YP2gfzYUaMGEt3Fmxsm-6AH3YxdRO7dL85PDCEC-T9AVTsJ_wPU6Mf364KqASLQeQCLN_xBddVFogLdyw=="
+    },
+    {
+        "name": "Susan Marquez",
+        "email": "susanmarquez@paciente.com",
+        "password": "$2b$12$SMoXin9S3ehT0DoxsYDQdew4dFbmez4I3BfkgsqfyWGkUs1VT6/.u",
+        "role": "paciente",
+        "reset_token": null,
+        "created_at": "2025-03-12T14:05:55.567105",
+        "cpf_encrypted": "gAAAAABn0ZTDs8hKYiCFJNJBao_MpQlOSCzFZ6eAgTcgoCvaA-1GATztFRbq1fHWHgNzl0Vx_Kj5HNlfcCvPcOXOzXetd5ET_A=="
+    },
+    {
+        "name": "David Horne",
+        "email": "davidhorne@paciente.com",
+        "password": "$2b$12$jPHSL1Y93v6DNJ9IjXRejuUuzcCYhOAeq3vhFoy6weg/7DxjG.NOO",
+        "role": "paciente",
+        "reset_token": null,
+        "created_at": "2025-03-12T14:05:55.820054",
+        "cpf_encrypted": "gAAAAABn0ZTDA7WqEHN7AR-Vumn8VOX-EbcFOliEiW3yJnDLOP-QCo7lXowEWGJ_CXoFHVTYTFF3muYHdfVxFv4H6leroDnfhA=="
+    },
+    {
+        "name": "Dr. Kathleen Anderson",
+        "email": "dr.kathleenanderson@medico.com",
+        "password": "$2b$12$Vg4FLjOkhh1fUfSbm.diQOU4AmD4kRlnbl3vYyFxqHauXs9l3Rvq.",
+        "role": "medico",
+        "reset_token": null,
+        "created_at": "2025-03-12T14:05:56.084704",
+        "cpf_encrypted": "gAAAAABn0ZTEFUhak5FwfzVBURTaYRrM4os4OnmTUIoZ006CzJd98Z7XB9msV31qcjvwUDIpAKhhm1fpTFpFRzWasnihflI7hg=="
+    },
+    {
+        "name": "Dr. Jay Hendricks",
+        "email": "dr.jayhendricks@medico.com",
+        "password": "$2b$12$8eH2obJ9HGwm4a.DG7EFKeD4dzGUJPvE4vTwila5zC38CQwkTR1TG",
+        "role": "medico",
+        "reset_token": null,
+        "created_at": "2025-03-12T14:05:56.338114",
+        "cpf_encrypted": "gAAAAABn0ZTEABgVyczGeBADT6StaewAXHBoeR5TcrnrfvfAvBGyG7ngIKbGkLbJwkzpTTgJF2VsJnzM9P9ItyKqs964IZHnxQ=="
+    },
+    {
+        "name": "Dr. Brittany Jones",
+        "email": "dr.brittanyjones@medico.com",
+        "password": "$2b$12$EbRstzD5A7I33xWLObPnG.w9WgVoz0H1iuPKaxyU.orzLFST8iGPe",
+        "role": "medico",
+        "reset_token": null,
+        "created_at": "2025-03-12T14:05:56.600773",
+        "cpf_encrypted": "gAAAAABn0ZTEEldgdmCnC_HQuwT9tj1OKcG4MpNNnSUWHDn-xfGfuyfWsihHEzGfCQLwDzCcd9TlXVhIOHahRps3oCXAnBHEyw=="
+    },
+    {
+        "name": "Dr. Mary Howard",
+        "email": "dr.maryhoward@medico.com",
+        "password": "$2b$12$ub8mAF1ZXbxvRJuxgeRXmOUl/GKaDbuJq5hXljsudJJMp3pJJLTiy",
+        "role": "medico",
+        "reset_token": null,
+        "created_at": "2025-03-12T14:05:56.854142",
+        "cpf_encrypted": "gAAAAABn0ZTE0CTg-AqrVeHh0ibbPfGthcJ813kYhXiLVKETiB2QE9R7IZUyx5jbq5N_clf2LBoW--nlyQytF_Hb6S-ATXycEQ=="
+    },
+    {
+        "name": "Dr. Heather Thomas",
+        "email": "dr.heatherthomas@medico.com",
+        "password": "$2b$12$Qqb8nVu29RZeMTc2/uh1YuQ4Im19IZRpGxNXmFlZt2YN2Su5ymxd2",
+        "role": "medico",
+        "reset_token": null,
+        "created_at": "2025-03-12T14:05:57.118240",
+        "cpf_encrypted": "gAAAAABn0ZTF-LNHX2xq3hOeojGmtr0qXdjwCTf9IO42EhJJM0orTWc1B9tpmmSafscS8Ft4aY893wLMqO_eIOEgAC0EdeJh3Q=="
+    },
+    {
+        "name": "Dr. Wendy Wiggins",
+        "email": "dr.wendywiggins@medico.com",
+        "password": "$2b$12$CC2QzPLQWhrC.vZg3gg7CeucBpb43D5A1ha3VSjE9L5XrcdDnuLIa",
+        "role": "medico",
+        "reset_token": null,
+        "created_at": "2025-03-12T14:05:57.373225",
+        "cpf_encrypted": "gAAAAABn0ZTFfUvR8NxmkujN5QRELEIrh2Xt4fsC3lgwKF5kvniEpPi7babed-kimRolO8NbWaQlP6bwhiVk18P8bBYCFwfvEA=="
+    },
+    {
+        "name": "Dr. Tyler Bridges",
+        "email": "dr.tylerbridges@medico.com",
+        "password": "$2b$12$ZzHkj6ubmSBXOFNPsAX61..5mPrrAjDm1UgnhM5mTWoxv/ajRdj1q",
+        "role": "medico",
+        "reset_token": null,
+        "created_at": "2025-03-12T14:05:57.650814",
+        "cpf_encrypted": "gAAAAABn0ZTFAVvLynEEs_PXUETcAY-R0B7R9tqODZrUfs4ezHk75diGH1dHH8QwyReN4FjuezdSnClAnIogpZPBYtAXNTOodA=="
+    },
+    {
+        "name": "Dr. Yvonne Ellis",
+        "email": "dr.yvonneellis@medico.com",
+        "password": "$2b$12$VokDD8hx6xvSrav7jqWJquitr0T71L9tkf3sAvPDjtIjaBMBdHuES",
+        "role": "medico",
+        "reset_token": null,
+        "created_at": "2025-03-12T14:05:57.892866",
+        "cpf_encrypted": "gAAAAABn0ZTFIHam5KXOnEhgohZ8m1_jVt9ROiezyyGIhjtrlRP6rFzn3SbIBdQGPOJjb_gj-VxZxSI7h4iIXckvUlgJQuJA2A=="
+    },
+    {
+        "name": "Dr. Molly Baxter",
+        "email": "dr.mollybaxter@medico.com",
+        "password": "$2b$12$qZL1KoFC/Zx6AriJsewwMulcYRqbckIcEsXMfih84hbLVmaeMeTIm",
+        "role": "medico",
+        "reset_token": null,
+        "created_at": "2025-03-12T14:05:58.174618",
+        "cpf_encrypted": "gAAAAABn0ZTGVscMbK0_6fNuTHiTKNicvU5b7Rxet0QAFSvbvxuQyAU6AXT6tRj5AR99Q17htsE_03olUXFXOgbz-6DF8EEEgA=="
+    },
+    {
+        "name": "Dr. Beverly Chen",
+        "email": "dr.beverlychen@medico.com",
+        "password": "$2b$12$waPa1VXp9M0ZIz5AUpvXtepzyabcuY/eDhBff2oCyNG3pbhrrVz0G",
+        "role": "medico",
+        "reset_token": null,
+        "created_at": "2025-03-12T14:05:58.436257",
+        "cpf_encrypted": "gAAAAABn0ZTGw0FEJb8Hct_egad3QMO3_famsz7zXij791vpxb4hGsxuJCaxrtRkT8yxwJhDqxazlLJGGwzfTNIOtf4G2_Askw=="
+    },
+    {
+        "name": "Felipe Sobral",
+        "email": "felipesobral_@hotmail.com",
+        "password": "$2b$12$zYMAuMxbaBFd9ucTM9/2QOQt5q.b.a1yZZ8S9praoLUAiRPyvIybu",
+        "role": "admin",
+        "reset_token": null,
+        "created_at": "2025-03-12T14:05:58.694863",
+        "cpf_encrypted": "gAAAAABn0ZTGs_w449isL1s968CgjDtQtZ9T6Mj7gqSiK2fdpCvETxFLaqKb92hzhoN2TDU96qWu5OLYltkGjdEbYSOrgZ2sGw=="
+    }
+]

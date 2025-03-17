@@ -14,41 +14,23 @@
           <div class="detail-item">
             <label>Age: </label>
             <span v-if="!editPatient">{{ patient.age }} anos</span>
-            <input v-else type="date" :placeholder="patient.age" v-model="updateValues.birth_date">
+            <input v-else type="date" v-model="updateValues.birth_date">
           </div>
 
           <div class="detail-item">
             <label>Medical Conditions: </label>
-            <span v-if="!editPatient">{{ patient.medical_conditions }}</span>
+            <span v-if="!editPatient" v-for="(medical_condition, index) in patient.medical_conditions">
+              {{ medical_condition }}{{ index < patient.medical_conditions.length - 1 ? ', ' : '' }}</span>
             <input v-else type="text" :placeholder="patient.medical_conditions" v-model="updateValues.medical_conditions">
-          </div>
-
-          <div class="detail-item">
-            <label>Consent Status: </label>
-            <span>{{ patient.consent_status ? 'Given' : 'Revoked' }}</span>
-          </div>
-
-          <div class="detail-item">
-            <label>With Patient History: </label>
-            <span>
-              {{
-                patient.has_patient_history === true
-                  ? 'Yes'
-                  : patient.has_patient_history === false
-                  ? 'No'
-                  : "Hasn't got a patient history yet"
-              }}
-            </span>
           </div>
 
           <div class="detail-item">
             <label>Created At: </label>
             <span>
-              {{ patient.created_at }}
+              {{ new Date(patient.created_at).toLocaleString("pt-BR") }}
             </span>
           </div>       
 
-          <button v-if="this.globalData.user_role === 'medico'" @click="requestAssociation(this.$route.params.id)">Request association with <b>{{ patient.name }}</b></button>
           <button v-if="this.globalData.user_role === 'medico' && !editPatient" @click="editPatient = true">Update Information of <b>{{ patient.name }}</b></button>
 
           <button v-if="this.globalData.user_role === 'medico' && editPatient && updateValues" @click="updatePatient(this.$route.params.id)">Update</button>
@@ -57,8 +39,30 @@
         </section>
 
         <section class="details-section" v-if="predictions && this.globalData.user_role === 'medico'">
-          <div class="detail-item" v-for="prediction in predictions" :key="prediction._id">
-            <p>{{ prediction }}</p>
+          <h3 style="margin: 10px; padding-left: 1vw;">User Predictions History</h3>
+          <table class="predictions-table">
+            <thead>
+              <tr>
+                <th>Type</th>
+                <th>Risk</th>
+                <th>Probability</th>
+                <th>Timestamp</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="prediction in paginated" :key="prediction._id">
+                <td>{{ prediction.prediction_type }}</td>
+                <td><i style="font-style: normal;" :style="prediction.prediction_result.risk === 1 ? 'color: rgba(231, 76, 60, 1);' : 'color: rgba(241, 196, 15, 1);'">{{ prediction.prediction_result.risk === 1 ? 'High' : 'Moderate'  }}</i></td>
+                <td>{{ (prediction.prediction_result.probability * 100).toFixed(0) }}%</td>
+                <td>{{ new Date(prediction.timestamp).toLocaleString("pt-BR") }}</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="pagination">
+              <button @click="prevPage" :disabled="currentPage === 1">Anterior</button>
+              <span>Página {{ currentPage }} de {{ totalPages }}</span>
+              <button @click="nextPage" :disabled="currentPage === totalPages">Próxima</button>
           </div>
         </section>
         
@@ -81,6 +85,7 @@ export default defineComponent({
     return {
       patient: null as {
         age: number;
+        birth_date: string;
         consent_status: boolean;
         created_at: Date;
         has_patient_history: boolean;
@@ -101,7 +106,9 @@ export default defineComponent({
         birth_date: null,
         medical_conditions: null
       },
-      predictions: {},
+      predictions: [],
+      currentPage: 1, 
+      perPage: 10,
     };
   },
 
@@ -140,18 +147,7 @@ export default defineComponent({
       }
     },
     goBack() {
-      this.router.push({ name: 'ShowPatients' });
-    },
-
-    async requestAssociation(patientId: number) {
-      try {
-        await axios.post('http://localhost:5000/doctor-patient', { patient_id: patientId }, {
-          headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
-        });
-        this.message = 'Request sent successfully.';
-      } catch (err) {
-        this.error = `Error when trying send request: ${err}`;
-      }
+      this.$router.back();
     },
 
     async updatePatient(patientId: number) {
@@ -166,6 +162,7 @@ export default defineComponent({
         });
         this.editPatient = false;
         this.updateValues = {};
+        this.fetchPatientDetails();
         this.message = 'Update made successfully.';
       } catch (err) {
         this.error = `Error when trying update Patient Information: ${err}`;
@@ -192,6 +189,29 @@ export default defineComponent({
       }
     },
 
+    nextPage() {
+      if (this.currentPage < this.totalPages) {
+        this.currentPage++;
+      }
+    },
+
+    prevPage() {
+      if (this.currentPage > 1) {
+        this.currentPage--;
+      }
+    },
+
+  },
+
+  computed: {
+    paginated() {
+      const start = (this.currentPage - 1) * this.perPage;
+      const end = start + this.perPage;
+      return this.predictions.slice(start, end);
+    },
+    totalPages() {
+      return Math.ceil(this.predictions.length / this.perPage);
+    }
   },
 
   beforeRouteEnter(

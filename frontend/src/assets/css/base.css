@@ -302,7 +302,7 @@ form {
 }
 
 table {
-  width: 100%;
+  width: 99% !important;
   border-collapse: collapse;
 }
 
@@ -320,8 +320,12 @@ th {
   background-color: var(--cinza-auxiliar) !important;
 }
 
-td {
-  background-color: var(--azul-acizentado);
+table tr:nth-child(even) {
+    background-color: var(--azul-acizentado) !important;
+}
+
+table tr:nth-child(odd) {
+    background-color: darkslategrey; 
 }
 
 .card {
@@ -349,17 +353,17 @@ a:hover {
 
 h1 {
   padding-left: 1vw;
-  padding-top: 3vh;
+  padding-top: 4vh;
 }
 
 h2 {
   padding-left: 2vw;
-  padding-top: 3vh;
+  padding-top: 4vh;
 }
 
 h3 {
   padding-left: 3vw;
-  padding-top: 3vh;
+  padding-top: 4vh;
 }
 
 p, form {

@@ -1,0 +1,77 @@
+[
+    {
+        "name": "Data Sharing",
+        "description": "Permite o compartilhamento de dados médicos com terceiros, incluindo hospitais, seguradoras e pesquisas médicas e acadêmicas.",
+        "mandatory": false,
+        "created_at": "2025-03-13T14:47:42.485318",
+        "active": true,
+        "versions": [
+            {
+                "version": 1,
+                "description": "Permite o compartilhamento de dados médicos com terceiros, incluindo hospitais, seguradoras e pesquisas médicas e acadêmicas.",
+                "created_at": "2025-03-13T14:47:42.485318",
+                "active": true
+            }
+        ]
+    },
+    {
+        "name": "Marketing Emails",
+        "description": "Permite o envio de e-mails promocionais sobre novos serviços e atualizações. O usuário pode revogar este consentimento a qualquer momento.",
+        "mandatory": false,
+        "created_at": "2025-03-13T14:47:42.504146",
+        "active": true,
+        "versions": [
+            {
+                "version": 1,
+                "description": "Permite o envio de e-mails promocionais sobre novos serviços e atualizações. O usuário pode revogar este consentimento a qualquer momento.",
+                "created_at": "2025-03-13T14:47:42.504146",
+                "active": true
+            }
+        ]
+    },
+    {
+        "name": "Notificações Por Email",
+        "description": "Receber notificações via email sobre solicitações médicas e outras funcionalidades do Predictive Health.",
+        "mandatory": false,
+        "created_at": "2025-03-13T14:47:42.505281",
+        "active": true,
+        "versions": [
+            {
+                "version": 1,
+                "description": "Receber notificações via email sobre solicitações médicas e outras funcionalidades do Predictive Health.",
+                "created_at": "2025-03-13T14:47:42.505281",
+                "active": true
+            }
+        ]
+    },
+    {
+        "name": "Consentimento para Armazenamento de Dados de Saúde",
+        "description": "Permite que o sistema armazene e processe seus dados de histórico médico conforme necessário para a prestação dos serviços de saúde.",
+        "mandatory": true,
+        "created_at": "2025-03-13T14:47:42.507114",
+        "active": true,
+        "versions": [
+            {
+                "version": 1,
+                "description": "Permite que o sistema armazene e processe seus dados de histórico médico conforme necessário para a prestação dos serviços de saúde.",
+                "created_at": "2025-03-13T14:47:42.507114",
+                "active": true
+            }
+        ]
+    },
+    {
+        "name": "Uso de Dados para Treinamento de Inteligência Artificial",
+        "description": "Autoriza o uso de dados anonimizados para aprimorar modelos preditivos de saúde. Nenhum dado pessoal será compartilhado.",
+        "mandatory": true,
+        "created_at": "2025-03-13T14:47:42.508897",
+        "active": true,
+        "versions": [
+            {
+                "version": 1,
+                "description": "Autoriza o uso de dados anonimizados para aprimorar modelos preditivos de saúde. Nenhum dado pessoal será compartilhado.",
+                "created_at": "2025-03-13T14:47:42.508897",
+                "active": true
+            }
+        ]
+    }
+]

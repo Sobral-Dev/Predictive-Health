@@ -95,7 +95,25 @@ export default defineComponent({
   },
 
   methods: {
+
+    validateForm() {
+        const cpfRegex = /^\d{11}$/;
+        if (!cpfRegex.test(this.form.cpf.replace(/\D/g, ''))) {
+            this.error = "Invalid CPF format.";
+            return false;
+        }
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(this.form.email)) {
+            this.error = "Invalid email format.";
+            return false;
+        }
+        return true;
+    },
+
     async registerUser() {
+
+      if (!this.validateForm()) return;
+
       try {
         const response = await axios.post(
           'http://localhost:5000/register_user',
@@ -118,10 +136,17 @@ export default defineComponent({
         this.resetForm();
         eventBus.usersUpdated = true;
       } catch (err) {
-        this.error = err.response?.data.error || 'Failed to register user.';
-        this.message = '';
+        if (err.response?.status === 409) {
+            this.error = "CPF or email already registered.";
+            this.message = '';
+        } else {
+            this.error = "Failed to register user.";
+            this.message = '';
+        }
       }
+
     },
+
     resetForm() {
       this.form.name = '';
       this.form.email = '';

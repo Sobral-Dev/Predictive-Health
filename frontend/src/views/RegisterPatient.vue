@@ -92,7 +92,7 @@ export default defineComponent({
           {
             name: this.form.name,
             birth_date: this.form.age,
-            medical_conditions: this.form.medical_conditions,
+            medical_conditions: [this.form.medical_conditions],
             cpf: this.form.cpf.replace(/\D/g, '')
           },
           {

@@ -75,10 +75,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, watch, ComponentPublicInstance } from 'vue';
+import { defineComponent, watch, ComponentPublicInstance, toRaw } from 'vue';
 import axios from 'axios';
 import { useRouter } from 'vue-router';
 import globalData from '../globalData';
+import { List } from 'cypress/types/lodash';
 
 export default defineComponent({
   name: 'Login',
@@ -133,7 +134,6 @@ export default defineComponent({
         localStorage.setItem('gd.user_role', this.globalData.user_role);
         localStorage.setItem('gd.user_name', this.globalData.user_name);
         localStorage.setItem('gd.isAuthenticated', this.globalData.isAuthenticated);
-        localStorage.setItem('gd.user_consent', this.globalData.user_consent);
         localStorage.setItem('gd.has_patient_history', this.globalData.has_patient_history);
 
         // Navigate to the appropriate page based on user role
@@ -143,11 +143,14 @@ export default defineComponent({
       }
     },
 
-    navigateToDashboard(role: string, consent_status: string | null, id: number) {
+    navigateToDashboard(role: string, consents: any | null, id: number) {
 
-      if (consent_status === null) {
-        return this.router.push(`/initial-consent/${id}`);
-      } 
+      const pendingMandatory = consents.find(term => term.mandatory && term.status !== true);
+      const pendingOptional = consents.find(term => !term.mandatory && term.status === "pending");
+
+      if (pendingMandatory || pendingOptional) {
+        return this.router.push(`/consent-update/${id}`);
+      }
 
       if (role === 'admin') {
         return this.router.push({ name: 'AdminDashboard' });

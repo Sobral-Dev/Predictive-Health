@@ -1,35 +1,35 @@
 <template>
   <!-- Menu lateral -->
   <div class="sidebar">
-    <div class="logo">
+    <div class="logo" :style="user_role === 'admin' ? 'padding-top: 200px;' : user_role === 'medico' ? 'padding-top: 15px;' : null">
       <p class="logo-text">
        PREDICTIVE <br>
        HEALTH</p>
     </div>
 
     <nav class="links">
-      <RouterLink to="/dashboard" v-if="this.globalData.user_role === 'admin' && this.globalData.user_id !== null">
+      <RouterLink to="/dashboard" v-if="user_role === 'admin' && user_id !== null">
       <img
         src="../assets/icons/dashboard.png"
         class="icon_img"
         height="50px"
       />  
       Dashboard</RouterLink>
-      <RouterLink to="/audit-logs" v-if="this.globalData.user_role === 'admin' && this.globalData.user_id !== null">
+      <RouterLink to="/audit-logs" v-if="user_role === 'admin' && user_id !== null">
         <img
         src="../assets/icons/audit-logs.png"
         class="icon_img"
         height="50px"
         /> 
         Audit Logs</RouterLink>
-      <RouterLink to="/doctor-patient-list" v-if="this.globalData.user_role === 'medico' && this.globalData.user_id !== null">
+      <RouterLink to="/doctor-patient-list" v-if="user_role === 'medico' && user_id !== null">
         <img
         src="../assets/icons/dashboard.png"
         class="icon_img"
         height="50px"
         /> 
         Your Patients</RouterLink>
-      <RouterLink to="/health-prediction" v-if="this.globalData.user_role === 'paciente' && this.globalData.user_id !== null">
+      <RouterLink to="/health-prediction" v-if="user_role === 'paciente' && user_id !== null">
         <img
         src="../assets/icons/health-prediction.png"
         class="icon_img"
@@ -37,7 +37,7 @@
         style="margin-left: 2px; margin-right: 2px;"
         /> 
         Predictions</RouterLink>
-      <RouterLink to="/admin-predictions" v-if="this.globalData.user_role === 'admin' && this.globalData.user_id !== null">
+      <RouterLink to="/admin-predictions" v-if="user_role === 'admin' && user_id !== null">
         <img
         src="../assets/icons/health-prediction.png"
         class="icon_img"
@@ -45,7 +45,7 @@
         style="margin-left: 2px; margin-right: 2px;"
         /> 
         Predictions</RouterLink>
-      <RouterLink to="/doctor-predictions" v-if="this.globalData.user_role === 'medico' && this.globalData.user_id !== null">
+      <RouterLink to="/doctor-predictions" v-if="user_role === 'medico' && user_id !== null">
         <img
         src="../assets/icons/health-prediction.png"
         class="icon_img"
@@ -53,7 +53,7 @@
         style="margin-left: 2px; margin-right: 2px;"
         /> 
         Predictions</RouterLink>
-      <RouterLink to="/user-predictions" v-if="this.globalData.user_role === 'paciente' && this.globalData.user_id !== null">
+      <RouterLink to="/user-predictions" v-if="user_role === 'paciente' && user_id !== null">
         <img
         src="../assets/icons/audit-logs.png"
         class="icon_img"
@@ -61,7 +61,7 @@
         style="margin-left: 2px; margin-right: 2px;"
         /> 
         Your History</RouterLink>
-      <RouterLink to="/export-data/:id" v-if=" this.globalData.user_id !== null">
+      <RouterLink to="/export-data/:id" v-if=" user_id !== null">
         <img
         src="../assets/icons/personal-data-export.png"
         class="icon_img"
@@ -69,14 +69,14 @@
         style="margin-left: 5px; margin-right: 4px;"
         /> 
         Personal Data</RouterLink>
-      <RouterLink to="/register-patient" v-if="(this.globalData.user_role === 'admin' || this.globalData.user_role === 'medico') && this.globalData.user_id !== null">
+      <RouterLink to="/register-patient" v-if="(user_role === 'admin' || user_role === 'medico') && user_id !== null">
         <img
         src="../assets/icons/register-patient.png"
         class="icon_img"
         height="50px"
         /> 
         Register Patient</RouterLink>
-      <RouterLink to="/patients" v-if="(this.globalData.user_role === 'admin' || this.globalData.user_role === 'medico') && this.globalData.user_id !== null">
+      <RouterLink to="/patients" v-if="(user_role === 'admin' || user_role === 'medico') && user_id !== null">
         <img
         src="../assets/icons/show-patients.png"
         class="icon_img"
@@ -84,42 +84,42 @@
         style="margin-right: 4px;"
         /> 
         Patients</RouterLink>
-      <RouterLink to="/profile" v-if="this.globalData.user_id !== null">
+      <RouterLink to="/profile" v-if="user_id !== null">
         <img
         src="../assets/icons/profile.png"
         class="icon_img"
         height="50px"
         /> 
         User Profile</RouterLink>
-      <RouterLink to="/manage-users" v-if="this.globalData.user_role === 'admin' && this.globalData.user_id !== null">
+      <RouterLink to="/manage-users" v-if="user_role === 'admin' && user_id !== null">
         <img
         src="../assets/icons/manage-users.png"
         class="icon_img"
         height="50px"
         /> 
         Manage Users</RouterLink>
-      <RouterLink to="/register-user" v-if="this.globalData.user_role === 'admin' && this.globalData.user_id !== null">
+      <RouterLink to="/register-user" v-if="user_role === 'admin' && user_id !== null">
         <img
         src="../assets/icons/register-patient.png"
         class="icon_img"
         height="50px"
         /> 
         Register User</RouterLink>
-      <RouterLink to="/change-password" v-if=" this.globalData.user_id !== null">
+      <RouterLink to="/change-password" v-if=" user_id !== null">
         <img
         src="../assets/icons/change-password.png"
         class="icon_img"
         height="50px"
         /> 
         Password</RouterLink>
-      <RouterLink to="/consent-update/:id" v-if="this.globalData.user_id !== null">
+      <RouterLink to="/consent-update/:id" v-if="user_id !== null">
         <img
         src="../assets/icons/consent-update.png"
         class="icon_img"
         height="50px"
         /> 
         Consent Update</RouterLink>
-      <a @click="logout()" style="cursor: pointer;" v-if="this.globalData.user_id !== null">
+      <a @click="logout(token)" style="cursor: pointer;" v-if="user_id !== null">
         <img
         src="../assets/icons/login.png"
         class="icon_img"
@@ -133,30 +133,48 @@
 <script lang="ts">
 import { RouterLink } from 'vue-router';
 import { useRouter } from 'vue-router';
-import { watch } from 'vue';
-import globalData from '../globalData';
+import { ref, onMounted, onUnmounted } from 'vue';
+import axios from 'axios';
 
 export default {
   data() {
     return {
       animationDelay: false,
-      globalData: globalData,
     }
   },
 
   setup() {
-    const router = useRouter();
-    return { router };
-  },
 
-  created() {
-    watch(
-      () => globalData.user_role,
-      (newRole) => {
-        this.globalData.user_role = newRole;
-        localStorage.setItem('gd.user_role', this.globalData.user_role)
+    // Criando variáveis reativas
+    const user_id = ref(localStorage.getItem("gd.user_id") ?? null);
+    const user_role = ref(localStorage.getItem("gd.user_role") ?? null);
+    const token = ref(localStorage.getItem('token') ?? null);
+
+    let intervalId: number | null = null; 
+    
+    // Verifica o localStorage a cada segundo
+    onMounted(() => {
+      intervalId = setInterval(() => {
+        user_id.value = localStorage.getItem("gd.user_id") ?? null;
+        user_role.value = localStorage.getItem("gd.user_role") ?? null;
+        token.value = localStorage.getItem('token') ?? null;
+      }, 250);
+    });
+
+    // Limpa o intervalo quando o componente for destruído
+    onUnmounted(() => {
+      if (intervalId) {
+        clearInterval(intervalId);
       }
-    );
+    });
+
+    const router = useRouter();
+    return {
+      user_id,
+      user_role,
+      token,
+      router
+    };
   },
 
   methods: {
@@ -164,22 +182,25 @@ export default {
       this.animationDelay = true
     },
 
-    logout() {
-      this.globalData.user_id = null;
-      this.globalData.user_role = null;
-      this.globalData.user_name = null;
-      this.globalData.isAuthenticated = false;
-      this.globalData.user_consent = null;
-      this.globalData.has_patient_history = null;
+    async logout(token: string) {
+    
+        try {
 
-      localStorage.setItem('gd.user_id', this.globalData);
-      localStorage.setItem('gd.user_role', this.globalData.user_role);
-      localStorage.setItem('gd.user_name', this.globalData.user_name);
-      localStorage.setItem('gd.isAuthenticated', this.globalData.isAuthenticated);
-      localStorage.setItem('gd.user_consent', this.globalData.user_consent);
-      localStorage.setItem('gd.has_patient_history', this.globalData.has_patient_history);
+            const response = await axios.post('http://localhost:5000/logout', {}, { headers: { Authorization: `Bearer ${token}` } });
+            
+            console.log(response.data.message); 
 
-      this.router.push({ name: 'Login' });
+        } catch (error) {
+
+            console.error('Logout failed:', error.response.data.error);
+
+        } finally {
+          
+          localStorage.clear();
+          sessionStorage.clear();
+
+          this.router.push('/login');
+        }
     },
 
   },
