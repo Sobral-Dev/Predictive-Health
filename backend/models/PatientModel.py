@@ -15,9 +15,9 @@ class PatientModel(BaseModel):
         return {
             "name": self.name,
             "medical_conditions": self.medical_conditions,
-            "created_at": self.created_at.isoformat(),
+            "created_at": self.created_at.isoformat() if isinstance(self.created_at, datetime) else self.created_at,
             "cpf_encrypted": self.cpf_encrypted,
-            "birth_date": self.birth_date.isoformat()
+            "birth_date": self.birth_date.isoformat() if isinstance(self.birth_date, datetime) else self.birth_date
         }
     
     class Config:

@@ -20,7 +20,7 @@ class UserModel(BaseModel):
             "password": self.password,
             "role": self.role,
             "reset_token": self.reset_token,
-            "created_at": self.created_at.isoformat(),
+            "created_at": self.created_at.isoformat() if isinstance(self.created_at, datetime) else self.created_at,
             "cpf_encrypted": self.cpf_encrypted,
         }
     

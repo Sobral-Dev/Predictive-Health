@@ -1,3 +1,5 @@
+import base64
+import json
 from flask import Flask, request, jsonify
 from flask_bcrypt import Bcrypt
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity, get_jwt
@@ -30,7 +32,8 @@ from models.PatientModel import PatientModel
 from models.PredictionDataModel import PredictionDataModel
 from models.UserModel import UserModel
 from utils.consents_helper import get_terms
-from utils.mongodb_indexes import create_indexes, drop_indexes
+from utils.mongodb_indexes import create_indexes
+from utils.delete_expired_audit_logs import delete_expired_audit_logs
 import os
 from bson import ObjectId
 
@@ -729,8 +732,8 @@ def register_patient():
 
         if user.role == 'medico':
             new_association = DoctorPatientModel(
-                doctor_id=ObjectId(user_id),
-                patient_id=ObjectId(new_patient.id),
+                doctor_id=user_id,
+                patient_id=str(new_patient.id),
                 consent_status='pending'
             )
             DoctorPatientRepository.insert_one(new_association)
@@ -780,7 +783,7 @@ def get_patient(id, role):
         # Verificar associação e consentimento para médicos
         if role == 'medico':
             associations = DoctorPatientRepository.find_all({
-                "patient_id": ObjectId(id), "doctor_id": ObjectId(user_id), "consent_status": "accepted"
+                "patient_id": id, "doctor_id": user_id, "consent_status": "accepted"
             })
 
             if not associations:
@@ -829,7 +832,7 @@ def update_patient(id):
 
         # Verificar associação com consentimento aceito
         associations = DoctorPatientRepository.find_all({
-            "patient_id": ObjectId(id), "doctor_id": ObjectId(user_id), "consent_status": 'accepted'
+            "patient_id": id, "doctor_id": user_id, "consent_status": 'accepted'
         })
 
         if not associations:
@@ -1599,17 +1602,7 @@ def get_user_predictions():
             }
         )
 
-        # Minimizar dados retornados
-        filtered_predictions = [
-            {
-                "prediction_type": prediction.prediction_type,
-                "timestamp": prediction.timestamp,
-                "prediction_result": prediction.prediction_result,
-            }
-            for prediction in predictions
-        ]
-
-        return jsonify(filtered_predictions), 200
+        return jsonify(predictions), 200
 
     except Exception as e:
         return jsonify({"error": f"An error occurred while fetching predictions: {str(e)}"}), 400
@@ -1633,14 +1626,14 @@ def associate_doctor_patient():
             return jsonify({'error': 'Patient not found'}), 404
 
         # Verificar associação existente
-        existing_association = DoctorPatientRepository.find_one({"doctor_id": ObjectId(doctor_id), "patient_id": ObjectId(patient_id)})
+        existing_association = DoctorPatientRepository.find_one({"doctor_id": doctor_id, "patient_id": patient_id})
         if existing_association:
             return jsonify({"message": "Association already exists"}), 400
 
         # Criar nova associação
         new_association = DoctorPatientModel(
-            doctor_id=ObjectId(doctor_id),
-            patient_id=ObjectId(patient_id),
+            doctor_id=doctor_id,
+            patient_id=patient_id,
             consent_status='pending'
         )
         DoctorPatientRepository.insert_one(new_association)
@@ -1675,14 +1668,14 @@ def list_doctor_patients(doctor_id):
             return jsonify({'error': 'Unauthorized access to other doctor\'s data'}), 403
 
         # Filtrar associações por médico
-        associations = DoctorPatientRepository.find_all({"doctor_id": ObjectId(doctor_id)})
+        associations = DoctorPatientRepository.find_all({"doctor_id": doctor_id})
 
         # Separar pacientes aceitos e pendentes
         patients_accepted = []
         patients_pending = []
         
         for assoc in associations:
-            patient = PatientRepository.find_one({"_id": assoc.patient_id})
+            patient = PatientRepository.find_one({"_id": ObjectId(assoc.patient_id)})
 
             if assoc.consent_status == 'accepted':
                 
@@ -1736,18 +1729,22 @@ def list_patient_doctors():
         user = UserRepository.get_by_id(ObjectId(user_id))
         if not user:
             return jsonify({"error": "User not found"}), 404
+        
+        print(user)
 
         patient = PatientRepository.find_one({"cpf_encrypted": user.cpf_encrypted})
         if not patient:
             return jsonify({"error": "Patient not found"}), 404
 
         # Listar associações aceitas
-        associations = DoctorPatientRepository.find_all({"patient_id": patient.id})
+        associations = DoctorPatientRepository.find_all({"patient_id": str(patient.id) })
+
+        print(associations)
 
         doctors = []
         for assoc in associations:
             if assoc.consent_status == 'accepted':
-                doctor = UserRepository.find_one({"_id": assoc.doctor_id})
+                doctor = UserRepository.find_one({"_id": ObjectId(assoc.doctor_id)})
                 doctor = {
                     "id": str(doctor.id),
                     "name": doctor.name,
@@ -1783,7 +1780,7 @@ def get_patient_predictions(doctor_id, patient_id):
         user_id = get_jwt_identity()
 
         # Validar associação entre o médico e o paciente
-        association = DoctorPatientRepository.find_one({"doctor_id": ObjectId(doctor_id), "patient_id": ObjectId(patient_id)})
+        association = DoctorPatientRepository.find_one({"doctor_id": doctor_id, "patient_id": patient_id})
         if not association or association.consent_status != 'accepted':
             return jsonify({"error": "Access denied due to missing association or consent"}), 403
 
@@ -1817,8 +1814,8 @@ def get_doctor_patient_predictions(doctor_id):
         user_id = get_jwt_identity()
 
         # Recuperar associações com consentimento aceito
-        associations = DoctorPatientRepository.find_all({"doctor_id": ObjectId(doctor_id)})
-        patient_ids = [assoc.patient_id for assoc in associations if assoc.consent_status == 'accepted']
+        associations = DoctorPatientRepository.find_all({"doctor_id": doctor_id})
+        patient_ids = [ObjectId(assoc.patient_id) for assoc in associations if assoc.consent_status == 'accepted']
 
         if not patient_ids:
             return jsonify({"message": "No predictions available for associated patients."}), 404
@@ -1937,7 +1934,7 @@ def consent_doctor_patient():
             return jsonify({"error": "Association not found"}), 404
 
         # Verificar se o paciente está autorizado a alterar o consentimento
-        if doctor_patient.patient_id != patient.id:
+        if doctor_patient.patient_id != str(patient.id):
             return jsonify({"error": "You are not authorized to update this association"}), 403
 
         # Atualizar o consentimento ou remover associação
@@ -2008,11 +2005,11 @@ def list_doctor_requests():
             return jsonify({"error": "Patient not found"}), 404
 
         # Buscar todas as associações com o paciente autenticado
-        associations = DoctorPatientRepository.find_all({"patient_id": patient.id})
+        associations = DoctorPatientRepository.find_all({"patient_id": str(patient.id)})
         
         consent_requests = []
         for assoc in associations:
-            doctor = UserRepository.find_one({"_id": assoc.doctor_id})
+            doctor = UserRepository.find_one({"_id": ObjectId(assoc.doctor_id)})
             association = {
                 'id': str(assoc.id),
                 'doctor_name': doctor.name if assoc.doctor_id else "Unknown",
@@ -2039,6 +2036,197 @@ def list_doctor_requests():
     except Exception as e:
         return jsonify({'error': 'An unexpected error occurred', 'details': str(e)}), 500
 
+# Endpoint 36: Permite que o Usuário Possa Excluir Sua Conta (Exclusão Lógica) caso deseje, revogando todos os consentimentos e anonimizando dados pessoais e sensíveis  
+@app.route('/delete-my-account', methods=['DELETE'])
+@jwt_required()
+@role_required(['paciente'])
+def delete_my_account():
+    try:
+        user_id = get_jwt_identity()
+        user = UserRepository.get_by_id(ObjectId(user_id))
+
+        if not user:
+            return jsonify({"error": "User not found"}), 404
+        
+        patient = PatientRepository.find_one({"cpf_encrypted": user.cpf_encrypted}) 
+
+        if patient:      
+            # Deletar todas as associações a médicos
+            associations = DoctorPatientRepository.find_all({"patient_id": str(patient.id)})
+            delete_count = DoctorPatientRepository.delete_many({"patient_id": str(patient.id)})
+
+            # Registro no log de auditoria
+            add_audit_log(
+                action="User Doctor Associations deletion by account deletion",
+                user_id=ObjectId(user_id),
+                details={
+                    "patient_id": str(patient.id),
+                    "associations": [assoc.to_dict() for assoc in associations],
+                    "delete_count": delete_count,
+                    "ip_address": request.remote_addr,
+                    "reason": "User requested deletion",
+                    "endpoint": "/delete-my-account"
+                }
+            )
+        
+            # Deletar Perfil de Paciente (Realiza a anonimização dos dados do paciente)
+            anonymized_name = "Anonymous"
+            anonymized_cpf = cipher_suite.encrypt("Anonymous".encode('utf-8'))
+
+            # Atualiza os campos para anonimizar o paciente
+            PatientRepository.update_many({"_id": patient.id}, 
+                                        
+                                        {
+                                            "name": anonymized_name, 
+                                            "medical_conditions": None,
+                                            "cpf_encrypted": anonymized_cpf,
+                                            "birth_date": patient.birth_date.replace(month=1, day=1) 
+                                        
+                                        }
+                                    
+                                )
+            
+            patient = PatientRepository.find_one({"_id": patient.id})
+
+            # Registro no log de auditoria
+            add_audit_log(
+                action="Patient Profile anonymized by account deletion",
+                user_id=ObjectId(user_id),
+                details={
+                    "patient_id": str(patient.id),
+                    "anonymized_patient_data": {k: list(v) if isinstance(v, set) else str(v) if isinstance(v, ObjectId) else v for k, v in patient.to_dict().items()},
+                    "ip_address": request.remote_addr,
+                    "reason": "User requested deletion",
+                    "endpoint": "/delete-my-account"
+                }
+            )
+
+        # Anonimizar o usuário
+        anonymized_name = f"Deleted_{str(user.id)}"[:50]
+        anonymized_email = f"deleted_{str(user.id)}@anon.com"[:120]
+        anonymized_cpf = cipher_suite.encrypt(f"deleted{str(user.id)}".encode())
+
+        UserRepository.update_many({"_id": ObjectId(user_id)}, {
+            "name": anonymized_name,
+            "email": anonymized_email,
+            "password": "DeletedPassword",
+            "role": "deleted",
+            "cpf_encrypted": anonymized_cpf,
+            "reset_token": None,
+        })
+
+        # Atualizar consentimentos do usuário como revogados
+        UserConsentRepository.update_many(
+            {"user_id": ObjectId(user_id)},
+            {"consents.$[elem].status": False}, 
+            array_filters=[{"elem.status": {"$ne": False}}]  
+        )
+
+        user_consents = UserConsentRepository.find_one({"user_id": ObjectId(user_id)})
+
+        # Registro no log de auditoria
+        add_audit_log(
+            action="User account deletion",
+            user_id=ObjectId(user_id),
+            details={
+                "user_consents": user_consents.to_dict(),
+                "ip_address": request.remote_addr,
+                "reason": "User requested deletion",
+                "endpoint": "/delete-my-account"
+            }
+        )
+    
+        return jsonify({"message": "Account deleted successfully"}), 200
+
+    except Exception as e:
+        return jsonify({"error": "An unexpected error occurred", "details": str(e)}), 500
+
+# Endpoint 37: Transferência de Dados de Usuários por Administradores e Médicos, com consentimento do titular dos dados
+@app.route('/export-patient-data/<string:patient_id>/<string:role>', methods=['GET'])
+@jwt_required()
+@role_required(['medico', 'admin'])
+def export_patient_transfer_data(patient_id, role):
+    try:
+        user_id = get_jwt_identity()
+        patient = PatientRepository.get_by_id(ObjectId(patient_id))
+
+        if not patient:
+            return jsonify({"error": "Patient not found"}), 404
+
+        if role == 'medico':
+            # Verifica se o médico tem consentimento para acessar os dados
+            association = DoctorPatientRepository.find_one({"doctor_id": user_id, "patient_id": patient_id})
+            if not association or association.consent_status != 'accepted':
+                return jsonify({"error": "Access denied due to missing association or consent"}), 403
+
+        # Buscar predições do paciente
+        predictions = PredictionDataRepository.find_all({"patient_id": ObjectId(patient_id)})
+
+        # Formatar os dados para exportação
+        export_data = {
+            "patient_id": str(patient.id),
+            "name": patient.name,
+            "age": calculate_age(patient.birth_date),
+            "medical_conditions": patient.medical_conditions,
+            "predictions": [p.to_dict() for p in predictions]
+        }
+
+        # Criar um JSON criptografado
+        encrypted_data = cipher_suite.encrypt(json.dumps(export_data).encode())
+
+        # Registrar a exportação nos logs de auditoria
+        add_audit_log(
+            action=f"Export patient data by role '{role}'",
+            user_id=ObjectId(user_id),
+            details={
+                "patient_id": patient_id,
+                "ip_address": request.remote_addr,
+                "endpoint": f"/export-patient-data/{patient_id}/{role}"
+            }
+        )
+
+        return jsonify({
+            "patient_id": str(patient.id),
+            "exported_at": datetime.utcnow().isoformat(),
+            "encryption_algorithm": "AES256",
+            "encrypted_data": base64.b64encode(encrypted_data).decode("utf-8")
+        }), 200
+
+    except Exception as e:
+        return jsonify({"error": f"An error occurred: {str(e)}"}), 500
+    
+# Endpoint 38: Exportar Logs de Auditoria referentes ao Usuário autenticado
+@app.route('/export-audit-logs/<string:user_id>', methods=['GET'])
+def export_audit_logs(user_id):
+    try:
+        client_ip = request.remote_addr
+
+        audit_logs = AuditLogRepository.find_all(query={"user_id": ObjectId(user_id)}, sort_field="timestamp", sort_order=-1)
+
+        # Converter os logs para um formato serializável
+        serialized_logs = [serialize_document(log.__dict__) for log in audit_logs]
+
+        # Registrar a exportação nos logs de auditoria
+        add_audit_log(
+            action="Export Audit Logs",
+            user_id=ObjectId(user_id),
+            details={
+                "ip_address": client_ip,
+                "endpoint": "/export-audit-logs"
+            }
+        )
+
+        # Retornar os dados exportados
+        response = jsonify(serialized_logs)
+        response.headers['Content-Disposition'] = f'attachment; filename=logs_auditoria_PredictiveHealth.json'
+        response.headers['Content-Type'] = 'application/json'
+
+        return response, 200
+
+    except Exception as e:
+        return jsonify({"error": f"An error occurred: {str(e)}"}), 500
+
 if __name__ == '__main__':
+    delete_expired_audit_logs()
     create_indexes()
     app.run(debug=True, port=5000)

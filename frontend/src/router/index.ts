@@ -174,7 +174,9 @@ axios.interceptors.request.use(async (config) => {
   const excludedRoutes = [
     "/login", 
     "/logout", 
-    "/update-consent"
+    "/update-consent",
+    "/delete-my-account",
+    "/export-audit-logs"
     ];
 
   if (

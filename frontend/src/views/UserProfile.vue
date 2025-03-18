@@ -35,7 +35,7 @@
         </section>
 
         <section class="edit-section" v-if="isEditing">
-          <h2>Edit Profile</h2>
+          <h2>> Edit Profile</h2>
           <form @submit.prevent="updateProfile">
             <div class="form-group">
               <label for="name"><b>Name </b></label>
@@ -66,7 +66,7 @@
 
         <section class="patient-section" v-if="patient && this.globalData.user_role === 'paciente'">
 
-          <h1 class="page-title">Patient Profile</h1>
+          <h1 class="page-title">> Patient Profile</h1>
           
           <br>
 
@@ -84,7 +84,7 @@
 
         <section v-if="doctors.length > 0 && (this.globalData.user_role === 'paciente' || this.globalData.user_role === 'medico')" class="doctor-section">
 
-          <h1 class="page-title">Associate {{ this.globalData.user_role === 'paciente' ? 'Doctors' : 'Patients' }}</h1>
+          <h1 class="page-title">> Associate {{ this.globalData.user_role === 'paciente' ? 'Doctors' : 'Patients' }}</h1>
 
           <br>
 
@@ -92,6 +92,12 @@
             <li><b>{{ this.globalData.user_role === 'paciente' ? 'D' : 'S' }}r(a)</b> {{ this.globalData.user_role === 'paciente' ? doctor.name.split("Dr. ")[1] : doctor.name}}</li>
           </ul>
 
+        </section>
+
+        <section class="account-management">
+          <h1 class="page-title">> Account Management:</h1>
+
+          <button type="submit" class="submit-button" @click="deleteAccount()" style="background-color: crimson;">Delete My Account</button>
         </section>
 
         <p v-if="error" class="error">{{ error }}</p>
@@ -106,6 +112,7 @@ import { defineComponent, watch, ComponentPublicInstance } from 'vue';
 import axios from 'axios';
 import { RouteLocationNormalized, NavigationGuardNext} from 'vue-router';
 import PopUp from '../components/PopUp.vue';
+import Swal from "sweetalert2";
 
 export default defineComponent({
   name: 'UserProfile',
@@ -181,7 +188,7 @@ export default defineComponent({
     async fetchPatientProfile() {
 
       if (localStorage.getItem('gd.user_role') !== 'paciente') {
-        return this.patient = {};
+        return this.patient = [];
       } else {
         try {
           const response = await axios.get(`http://localhost:5000/patients/${localStorage.getItem('gd.user_id')}/paciente`, {
@@ -212,10 +219,10 @@ export default defineComponent({
             this.doctors = response.data.patients_accepted;
           } catch (err) {
             this.error = err.response?.data.error || 'Failed to fetch user associate patients.';
-            this.doctors = {};
+            this.doctors = [];
           }
         } else {
-          return this.doctors = {};
+          return this.doctors = [];
         };
       } else {
         try {
@@ -227,9 +234,81 @@ export default defineComponent({
           this.doctors = response.data;
         } catch (err) {
           this.error = err.response?.data.error || 'Failed to fetch user associate doctors.';
-          this.doctors = {};
+          this.doctors = [];
         }
       };
+    },
+
+    async deleteAccount() {
+
+      const userId = localStorage.getItem('gd.user_id');
+      
+      try {
+        // Passo 1: Exibir aviso de exclusão
+        const result = await Swal.fire({
+          title: "Tem certeza que deseja excluir sua conta?",
+          text: "Seus dados serão anonimizados, sua conta será removida e os logs de auditoria serão retidos por 5 anos.",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#d33",
+          cancelButtonColor: "#3085d6",
+          confirmButtonText: "Sim, excluir minha conta",
+          cancelButtonText: "Cancelar",
+          reverseButtons: true,
+          allowOutsideClick: false,
+        });
+
+        if (!result.isConfirmed) {
+          return
+        }
+
+        // Passo 2: Realizar requisição DELETE
+        await axios.delete(`http://localhost:5000/delete-my-account`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        });
+
+        // Passo 3: Exibir mensagem final de despedida
+        const farewellResult = await Swal.fire({
+          title: "Conta excluída com sucesso",
+          text: "Seus dados foram anonimizados. Seus logs de auditoria serão mantidos por 5 anos.",
+          icon: "success",
+          confirmButtonColor: "#d33",
+          confirmButtonText: "OK",
+          denyButtonColor: "#2f4f4f",
+          showDenyButton: true,
+          denyButtonText: "Baixar Meus Logs",
+          reverseButtons: true,
+          allowOutsideClick: false,
+        });
+
+        if (farewellResult.isDenied) {
+          // Passo 4: Usuário deseja baixar os logs
+          const logsResponse = await axios.get(`http://localhost:5000/export-audit-logs/${userId}`, {responseType: 'blob'});
+
+          // Criar JSON para download
+          const url = window.URL.createObjectURL(new Blob([logsResponse.data]));
+          const link = document.createElement('a');
+          link.href = url;
+          link.setAttribute('download', `logs_auditoria_PredictiveHealth.json`);
+          document.body.appendChild(link);
+          link.click();
+          
+          await new Promise((resolve) => setTimeout(resolve, 1000));
+          document.body.removeChild(link);
+        }
+
+        // Passo 5: Redirecionar para a página de login removendo o token e limpando o localStorage
+        localStorage.clear();
+        sessionStorage.clear(); 
+        window.location.href = "/login";
+  
+        this.message = '';
+        this.error = '';
+      } catch (err) {
+        this.error = err.response?.data.error || "Falha ao excluir a conta.";
+      }
     },
   
   },
@@ -295,5 +374,15 @@ export default defineComponent({
 .message {
   color: green;
   margin-top: 10px;
+}
+
+.account-management {
+  padding-top: 25px;
+  display: flex;
+  flex-direction: row;
+}
+
+.account-management button {
+  margin-top: 30px !important;
 }
 </style>

@@ -29,7 +29,7 @@ class BaseRepository:
         
         if projection:
             return list(self.collection.find(query, projection))
-            
+                  
         return [self.model(**item) for item in data if item]
 
     def insert_one(self, item: T) -> ObjectId:
@@ -44,6 +44,13 @@ class BaseRepository:
         result = self.collection.delete_one(query)
         return result.deleted_count > 0
     
+    def delete_many(self, query: dict) -> int:
+        if not isinstance(query, dict):  
+            raise ValueError("Query must be a dictionary.")
+        
+        result = self.collection.delete_many(query)
+        return result.deleted_count  
+    
     def update_one(self, query: dict, update_data: Dict) -> bool:
         if not isinstance(query, dict) or not isinstance(update_data, dict):  
             raise ValueError("Query and update_data must be dictionaries.")
@@ -55,13 +62,22 @@ class BaseRepository:
         result = self.collection.update_one(query, {"$set": clean_update})
         return result.modified_count > 0
 
-    def update_many(self, query: dict, update_data: Dict) -> int:
+    def update_many(self, query: dict, update_data: Dict, array_filters: list = None) -> int:
         if not isinstance(query, dict) or not isinstance(update_data, dict):  
             raise ValueError("Query and update_data must be dictionaries.")
         if not update_data:  
             raise ValueError("update_data must not be empty.")
+        
         clean_update = {k: v for k, v in update_data.items() if v is not None}  
         if not clean_update:
             return 0
-        result = self.collection.update_many(query, {"$set": clean_update})
+
+        update_operation = {"$set": clean_update}
+
+        if array_filters:
+            result = self.collection.update_many(query, update_operation, array_filters=array_filters)
+        else:
+            result = self.collection.update_many(query, update_operation)
+
         return result.modified_count
+

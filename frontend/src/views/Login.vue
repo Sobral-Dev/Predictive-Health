@@ -79,7 +79,6 @@ import { defineComponent, watch, ComponentPublicInstance, toRaw } from 'vue';
 import axios from 'axios';
 import { useRouter } from 'vue-router';
 import globalData from '../globalData';
-import { List } from 'cypress/types/lodash';
 
 export default defineComponent({
   name: 'Login',

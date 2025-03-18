@@ -35,7 +35,10 @@
 
           <button v-if="this.globalData.user_role === 'medico' && editPatient && updateValues" @click="updatePatient(this.$route.params.id)">Update</button>
 
-          <button @click="goBack" class="back-button">Back to Patients List</button>
+          <button v-if="(this.globalData.user_role === 'medico' || this.globalData.user_role === 'admin') && !editPatient" @click="exportPatientData(this.$route.params.id)">Export Patient Data</button>
+
+          <button v-if="!editPatient" @click="goBack" class="back-button">Back to Patients List</button>
+          <button v-else @click="editPatient = !editPatient" class="back-button">Cancel</button>
         </section>
 
         <section class="details-section" v-if="predictions && this.globalData.user_role === 'medico'">
@@ -146,6 +149,7 @@ export default defineComponent({
         this.error = err.response?.data.error || 'Failed to fetch patient details.';
       }
     },
+
     goBack() {
       this.$router.back();
     },
@@ -173,7 +177,7 @@ export default defineComponent({
     async fetchPredictionsHistory() {
 
       if (this.globalData.user_role !== 'medico') {
-        return this.predictions = {};
+        return this.predictions = [];
       }
 
       try {
@@ -185,7 +189,42 @@ export default defineComponent({
         this.predictions = response.data;
       } catch (err) {
         this.error = err.response?.data.error || 'Failed to fetch predictions history.';
-        this.predictions = {};
+        this.predictions = [];
+      }
+    },
+
+    async exportPatientData(patientId: number) {
+      try {
+        const response = await axios.get(`http://localhost:5000/export-patient-data/${patientId}/${this.globalData.user_role}`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+        });
+
+        const encryptedData = response.data;
+        const encryptedDataBase64 = response.data.encrypted_data;
+        const encryptedDataBytes = atob(encryptedDataBase64); 
+
+        const blob = new Blob([JSON.stringify({ 
+          patient_id: encryptedData.patient_id,
+          exported_at: encryptedData.exported_at,
+          encryption_algorithm: encryptedData.encryption_algorithm,
+          encrypted_data: encryptedDataBytes
+        }, null, 2)], { type: "application/json" });
+
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = `exported_patient_data_${patientId}.json`;
+
+        // Acionar o clique automaticamente
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        this.message = "Patient data exported successfully.";
+        this.error = "";
+      } catch (err) {
+        this.error = err.response?.data.error || 'Failed to export patient data.';
       }
     },
 
