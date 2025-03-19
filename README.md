@@ -1,2 +1,4 @@
-# Predictive Health
+# 🔍 Predictive Health
 Health management system for patients with a history of diabetes, hypertension and stroke problems, containing an algorithm to predict these types of diseases.
+
+_"**Prediction Health** is a patient management system that enables the registration, monitoring, and predictive analysis of **diabetes, hypertension, and stroke** for clinical control of patients at risk. Patients can view their medical data, update information, and manage access permissions. Doctors can record and review clinical histories, as well as access their patients' predictions to assist in treatment. The system also allows the export of encrypted medical records to professionals authorized by the data owner."_

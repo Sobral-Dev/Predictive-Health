@@ -1,5 +1,4 @@
 app.log
 /logs
 encryption_key.key
-/lgpd
 relations_data.json
